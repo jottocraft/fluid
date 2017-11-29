@@ -5,7 +5,13 @@ fluid = new Object;
 fluid.dark = function() {
     $("body").toggleClass("dark");
 }
-
+/* Loader auto initilization */
+setTimeout(function () {
+try { $("loader").html('<div class="bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div>');
+}
+catch(err) {
+}
+}, );
 
 
 

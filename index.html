@@ -17,17 +17,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="icon" type="image/png" src="fluid.png">
 </head>
-<nav class="right 12">
-    <div id="nav" class="nav-wrapper">
-        <ul id="dropdown1" class="dropdown-content">
-            <li>
-                <a href="#" onclick="setTheme('dark')">Dark</a>
-            </li>
-            <li>
-                <a href="#" onclick="setTheme('light')">Light</a>
-            </li>
-        </ul>
-        <ul id="nav-mobile" class="right">
+<nav class="right">
+    <div class="nav-wrapper">
+        <ul>
             <li>
                 <a href="#"><i class="material-icons left">add</i></a>
             </li>
@@ -76,7 +68,7 @@
   <div class="container center">
       <img style="width:250px;height:250px;" class="center" src="fluid.png"></img>
       <br /><br />
-      <h1>Fluid CSS</h1><font color="red"><h5>coming soon</h5></font>
+      <h1>Fluid UI</h1><font color="red"><h5>coming soon</h5></font>
       <br />
       <h5>
         Easy to use, modern, and powerful CSS based on <a href="https://materializecss.com">Materialize</a>
@@ -105,12 +97,61 @@
         <br /><br />
       <h3>Navigation bar</h3>
       <br />
-      <code>soon</code>
+      <p>
+        Setup a navigation bar easily:
+      </p>
+          <pre>
+          <code>
+&lt;nav class=&quot;right&quot;&gt;
+    &lt;div class=&quot;nav-wrapper&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
+            &lt;/li&gt;
+
+            &lt;li&gt;
+            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;help&lt;/i&gt;&lt;/a&gt;
+            &lt;/li&gt;
+
+            &lt;li&gt;
+            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+  </code>
+</pre>
+<br />
+<p>
+  You can also move it to the left by changing its class:
+</p>
+<pre>
+<code>
+&lt;!-- Left alignment --&gt;
+&lt;nav class=&quot;left&quot;&gt;
+</code>
+</pre>
+<br><br>
+<h2>Easy to use loader</h2>
+<br />
+<p>Setup a loader without having to run initialization code:</p>
+<pre>
+  <code>
+    &lt;loader&gt;&lt;/loader&gt;
+  </code>
+</pre>
+<br />
+Demo:
+<br />
+<loader></loader>
+<br><br>
+
           <br><br>
           <h2>Other</h2>
           <br />
           <p>Everything else that isn't specified here can be found at <a href="https://materializecss.com">Materialize's documentation</a>. Fluid CSS is built off of Materialize 0.100.2.</p>
           <br><br>
+
   </div>
 
 
