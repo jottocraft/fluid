@@ -30,7 +30,8 @@ fluid.cards = function(id) {
         window.scrollTo(0,0);
         if (menuopen) {
           fluid.cards.close();
-          $(".content").removeClass('blur');
+          $(".content").addClass('blur');
+          $("#" + id).removeClass('close');
         } else {
          menuopen = true;
          $("#" + id).removeClass('close');
@@ -39,10 +40,10 @@ fluid.cards = function(id) {
   } else {
     if (menuopen) {
       fluid.cards.close();
-      $("#" + id).toggleClass('close');
+      $("#" + id).removeClass('close');
     } else {
      menuopen = true;
-     $("#" + id).toggleClass('close');
+     $("#" + id).removeClass('close');
     }
   }
 }
