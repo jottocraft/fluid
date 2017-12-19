@@ -12,7 +12,51 @@ try { $("loader").html('<div class="bubblingG"><span id="bubblingG_1"></span><sp
 catch(err) {
 }
 }, );
+fluid.load = function(mode) {
+  if (mode) {
+    $("loader").removeClass("hidden");
+  } else {
+    $("loader").addClass("hidden");
+  }
+}
 
+/* Cards */
+menuopen = false;
+fluid.cards = function(id) {
+  var focus = $("#" + id).hasClass('focus');
+  console.log(focus)
+  if (focus) {
+        $(".content").attr("onclick","fluid.cards.close.focus();");
+        window.scrollTo(0,0);
+        if (menuopen) {
+          fluid.cards.close();
+          $(".content").removeClass('blur');
+        } else {
+         menuopen = true;
+         $("#" + id).removeClass('close');
+         $(".content").addClass('blur');
+        }
+  } else {
+    if (menuopen) {
+      fluid.cards.close();
+      $("#" + id).toggleClass('close');
+    } else {
+     menuopen = true;
+     $("#" + id).toggleClass('close');
+    }
+  }
+}
+
+fluid.cards.close = function() {
+  $(".card").addClass('close');
+  $('.content').removeClass("blur");
+  menuopen = false;
+}
+fluid.cards.close.focus = function() {
+  $(".focus").addClass('close');
+  $('.content').removeClass("blur");
+  menuopen = false;
+}
 
 
 

@@ -15,57 +15,32 @@
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="icon" type="image/png" src="fluid.png">
+  <link rel="icon" type="image/png" src="https://tp.js.org/icons/fluid.png1">
 </head>
 <nav class="right">
     <div class="nav-wrapper">
         <ul>
             <li>
-                <a href="#"><i class="material-icons left">add</i></a>
+            <a href="#"><i class="material-icons left">info</i></a>
             </li>
+
             <li>
-                <a href="#"><i class="material-icons left">edit</i></a>
+            <a href="#"><i class="material-icons left">help</i></a>
             </li>
+
             <li>
-                <a href="#"><i class="material-icons left">menu</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">comment</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">format_paint</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">blur_on</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">info</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">apps</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">all_inclusive</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">backup</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">lock_outline</i></a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons left">help</i></a>
+            <a href="#"><i class="material-icons left">build</i></a>
             </li>
         </ul>
     </div>
 </nav>
 <style>
 </style>
-<body id="bg">
+<body id="bg" style="overflow-x: hidden;">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
   <br /><br /><br /><br /><br /><br /><br /><br /><br />
-  <div class="container center">
+  <div class="container center content">
       <img style="width:250px;height:250px;" class="center" src="fluid.png"></img>
       <br /><br />
       <h1>Fluid UI</h1><font color="red"><h5>coming soon</h5></font>
@@ -76,10 +51,20 @@
       <br /><br /><br /><br />
       </div>
       <div class="container">
+        <br><br>
+        <h3>Input</h3>
+        <br />
+       Fluid UI uses custom-styled text input.
+       <br /><br />
+       <h5>Example</h5>
+        <br />
+        <input placeholder="Demo" type="text" />
+        <br />
+        <br><br>
         <h3>Integrated dark mode</h3>
         <br />
         <p>
-          Websites that use a dark theme usually don't get much respect. Custom CSS and JavaScript are usually required to get a dark mode. Teleport Fluid has this built in out of the box, and super easy to use.
+          Websites that use a dark theme usually don't get much respect. Custom CSS and JavaScript are usually required to get a dark mode. Teleport Fluid has this built in out of the box, and super easy to use. Everything on this page supports dark mode, and will respond to this demo, so try it out with the other demos to see how powerful it is!
         </p>
         <br />
           <h5>1</h5><p>
@@ -135,15 +120,98 @@
 <h2>Easy to use loader</h2>
 <br />
 <p>Setup a loader without having to run initialization code:</p>
-<pre>
   <code>
     &lt;loader&gt;&lt;/loader&gt;
   </code>
-</pre>
-<br />
+  <br />
+  <p>Show the loader (The loader cannot have any display style overrides. Use the hidden class instead to hide by default)</p>
+    <code>
+      fluid.load(true);
+    </code>
+    <br />
+    <p>Hide the loader</p>
+      <code>
+        fluid.load(flase);
+      </code>
+<br /><br />
 Demo:
 <br />
 <loader></loader>
+<br><br>
+
+<br><br>
+<h2>Card UI</h2>
+<br />
+<p>If you don't nessisarily need a full page for content, but you don't want it being part of the page itself, make it a card</p>
+<pre>
+<code>
+  &lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
+  &lt;!-- Card Content --&gt;
+  &lt;/div&gt;
+</code>
+</pre>
+<br />
+<p>
+  Add the "close" class to make the card hidden by default
+</p>
+  <code>
+    &lt;div id=&quot;democard&quot; class=&quot;card close&quot;&gt;
+  </code>
+  <br />  <br />
+  <p>
+    Add the "focus" class to make the card float at the top of the page, scroll the user to the top, and blur the background. Clicking on the background will also close the card!
+  </p>
+    <code>
+      &lt;div id=&quot;democard&quot; class=&quot;card focus close&quot;&gt;
+    </code>
+    <br /><br />
+    <p>
+      Because focus cards blur the background and close the card on click, you will need to create a content div for every part of your page, excluding the focus card (It doesn't matter where the card is)
+    </p>
+    <code>
+      &lt;div  class=&quot;content&quot;&gt;
+    </code>
+    <br />  <br />
+  <p>
+    To show a card:
+  </p>
+    <code>
+      fluid.cards(card-id)
+    </code>
+    <br />  <br />
+    <p>
+      To close all cards:
+    </p>
+      <code>
+        fluid.cards.close();
+      </code>
+      <br />  <br />
+    <p>
+      To close only focus cards:
+    </p>
+      <code>
+        fluid.cards.close.focus();
+      </code>
+<br /><br /><br />
+<br />
+<div class="row">
+<button onclick="fluid.cards('card')" class="btn waves-effect">Card demo</button>
+<button onclick="fluid.cards('focuscard')" class="btn waves-effect">Focus card demo</button>
+</div>
+<br /><br />
+<div id="card" class="card close">
+    <h3>This is a card!</h3>
+    <br />
+    Hello World!
+    <br /><br />
+    <button class="btn waves-effect" onclick="fluid.cards.close();">Go away</button>
+</div>
+<br><br>
+
+<br><br>
+<h2>Open to modifications</h2>
+<br />
+<p>All the files in Fluid are made to be easily modifiable. If you made some cool modification, fork the project on GitHub and send it over to me.</p>
 <br><br>
 
           <br><br>
@@ -153,7 +221,14 @@ Demo:
           <br><br>
 
   </div>
-
-
+<div class="container">
+  <div id="focuscard" class="card close focus">
+      <h3>This is a focus card!</h3>
+      <br />
+      Hello World!
+      <br /><br />
+      <button class="btn waves-effect" onclick="fluid.cards.close();">Go away</button>
+  </div>
+</div>
 </body>
 </html>
