@@ -293,10 +293,6 @@ body.dark .card::after {
     background: #2C2F33;
 }
 
-body:not(.dark) .card::after {
-    background: #f8f9fa;
-}
-
 
 .card {
     border-radius: 1px;
