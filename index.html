@@ -10,12 +10,12 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Fluid CSS</title>
+  <title>Fluid UI</title>
 <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="icon" type="image/png" src="https://tp.js.org/icons/fluid.png1">
+  <link rel="icon" type="image/png" src="https://fluid.js.org/icon.png">
 </head>
 <nav class="right">
     <div class="nav-wrapper">
@@ -48,6 +48,7 @@
         </ul>
     </div>
 </nav>
+
 <style>
 </style>
 <body id="bg" style="overflow-x: hidden;">
@@ -57,12 +58,17 @@
   <div class="container center content">
       <img style="width:250px;height:250px;" class="center" src="icon.png"></img>
       <br /><br />
-      <h1>Fluid UI</h1><h5><a href="https://github.com/jottocraft/fluid/releases" style="color:orange;">beta 1 rev 1</a></h5>
+      <h1>Fluid UI</h1><h5><a href="https://github.com/jottocraft/fluid/releases" style="color:orange;">beta 1 rev 2</a></h5>
       <br />
       <h5>
         Easy to use, modern, and powerful addons to <a href="https://materializecss.com">Materialize</a>
       </h5>
       <br /><br /><br /><br />
+
+
+
+
+      <!-- <br /><br /><br /><br /> -->
       </div>
       <div class="container">
         <br><br>
@@ -82,7 +88,7 @@
         <h3>Integrated dark mode</h3>
         <br />
         <p>
-          Websites that use a dark theme usually don't get much respect. Custom CSS and JavaScript are usually required to get a dark mode. Teleport Fluid has this built in out of the box, and super easy to use. Everything on this page supports dark mode, and will respond to this demo, so try it out with the other demos to see how powerful it is!
+          Fluid supports a dark mode, which you can enable with only one line of code. Dark mode currently only supports components from Materialize in the CSS and Components tab. The final release will allow all components from Materialize. For additional compatibility notes, read the bottom of the page.
         </p>
         <br />
           <h5>1</h5><p>
@@ -102,7 +108,7 @@
       <h3>Navigation bar</h3>
       <br />
       <p>
-        Setup a navigation bar easily:
+        Setup a navigation bar easily (Other Materialize navbar styles may not work as expected):
       </p>
           <pre>
           <code>
@@ -201,6 +207,13 @@ Demo:
     </code>
     <br />  <br />
     <p>
+      To close a card (where card is #id, .class, etc.):
+    </p>
+      <code>
+        fluid.card.close("card");
+      </code>
+    <br />  <br />
+    <p>
       To close all cards:
     </p>
       <code>
@@ -225,7 +238,7 @@ Demo:
     <br />
     Hello World!
     <br /><br />
-    <button class="btn waves-effect" onclick="fluid.cards.close();">Go away</button>
+    <button class="btn waves-effect" onclick="fluid.card.close('#card');">Go away</button>
 </div>
 <br><br>
 
@@ -252,6 +265,7 @@ Demo:
           <br />
           <ul style="list-style-type:none">
           <li>Materialize input labels</li>
+          <li>Materialize's cards</li>
           <li>Textareas (Will be ready by the final release)</li>
           <li>Dark theme for Materialize components not on this page (I'll be supporting more components before the release)</li>
           </ul>
@@ -264,6 +278,8 @@ Demo:
           <li>Materialize input icon prefixes</li>
           <li>Materialize input messages</li>
           <li>Materialize input character counter</li>
+          <li>Materialize chip Javascript input plugin</li>
+          <li>Please remove all of the text color classes when using the Materialize footer.</li>
           </ul>
           </div>
           <br><br>
@@ -275,9 +291,12 @@ Demo:
       <br />
       Hello World!
       <br /><br />
-      <button class="btn waves-effect" onclick="fluid.cards.close();">Go away</button>
+      <button class="btn waves-effect" onclick="fluid.card.close('#focuscard')">Go away</button>
   </div>
 
+
+
 </div>
+
 </body>
 </html>

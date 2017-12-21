@@ -47,7 +47,12 @@ fluid.cards = function(id) {
     }
   }
 }
-
+fluid.card = function() {}
+fluid.card.close = function(cardid) {
+  $(cardid).addClass('close');
+  $('.content').removeClass("blur");
+  menuopen = false;
+}
 fluid.cards.close = function() {
   $(".card").addClass('close');
   $('.content').removeClass("blur");
