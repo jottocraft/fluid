@@ -1,6 +1,8 @@
 /*!
-Fluid Modules
+Fluid JS Modules
+by jottocraft
  */
+
 fluid = new Object;
 fluid.dark = function() {
     $("body").toggleClass("dark");
@@ -18,6 +20,12 @@ fluid.load = function(mode) {
   } else {
     $("loader").addClass("hidden");
   }
+}
+setTimeout(function () {
+try { init() } catch(err) {}
+}, 0);
+function init() {
+  $("button:not(.override)").addClass("waves-effect btn");
 }
 
 /* Cards */

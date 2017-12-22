@@ -1,9 +1,27 @@
 /*!
-Fluid CSS by jottocraft
+Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v0.0.1.1
+v1
  */
+
+
+ /* Custom dark elements */
+
+/* Syntax
+
+Light mode
+body:not(.dark) *element(s)* {
+
+}
+
+Dark mode
+body.dark *element(s)* {
+
+}
+*/
+
+
 
 /*Page dark mode */
 

@@ -41,7 +41,7 @@
             </li>
 
             <li>
-            <a href="#modify"><i class="material-icons left">developer_board</i></a>
+            <a href="#notes"><i class="material-icons left">note</i></a>
             </li>
 
             <li>
@@ -62,13 +62,14 @@
   <div class="container center content">
       <img style="width:250px;height:250px;" class="center" src="icon.png"></img>
       <br /><br />
-      <h1>Fluid UI</h1><h5><a href="https://github.com/jottocraft/fluid/releases" style="color:orange;">download beta 2</a></h5>
+      <h1>Fluid UI</h1><h5><a href="#install">v1.0.0</a></h5>
       <br />
       <h5>
         Easy to use, modern, and powerful addons to <a href="https://materializecss.com">Materialize</a>
       </h5>
       </div>
       <div class="container">
+        <!-- jottocraft's playground -->
       <!--  <br /><br /><br /><br />
 
 
@@ -81,6 +82,7 @@
          <br /><br /><br /><br />
        -->
         <br><br>
+        <div class="card">
         <a name="input"></a>
         <h3>Input</h3>
         <br />
@@ -99,6 +101,15 @@
         <br />
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br><br>
+        <h5>Automatic button classes</h5>
+        <p>Buttons will automatically get the btn and waves-effect class. To override this, just add the override class.</p>
+        <br>
+        <button>Hello!</button>
+        <br><br>
+        <code>&lt;button class=&quot;btn&quot;&gt;Hello!&lt;/button&gt;</code>
+      </div>
+      <br><br>
+      <div class="card">
         <a name="dark"></a>
         <h3>Integrated dark mode</h3>
         <br />
@@ -118,7 +129,9 @@
           </p>
           <code>&lt;body class=&quot;dark&quot;&gt;</code>
           <br>
-        <br /><br />
+      </div>
+              <br /><br />
+      <div class="card">
         <a name="nav"></a>
       <h3>Navigation bar</h3>
       <br />
@@ -156,7 +169,9 @@
 &lt;nav class=&quot;left&quot;&gt;
 </code>
 </pre>
+</div>
 <br><br>
+<div class="card">
 <a name="load"></a>
 <h2>Easy to use loader</h2>
 <br />
@@ -178,9 +193,9 @@
 Demo:
 <br />
 <loader></loader>
+</div>
 <br><br>
-
-<br><br>
+<div class="card">
 <a name="cards"></a>
 <h2>Card UI</h2>
 <br />
@@ -245,7 +260,7 @@ Demo:
 <br />
 <div class="row">
 <button onclick="fluid.cards('card')" class="btn waves-effect">Card demo</button>
-<button onclick="fluid.cards('focuscard')" class="btn waves-effect">Focus card demo</button>
+<button onclick="fluid.cards('focuscard')" class="btn waves-effect">Focused card demo</button>
 </div>
 <br /><br />
 <div id="card" class="card close">
@@ -255,26 +270,26 @@ Demo:
     <br /><br />
     <button class="btn waves-effect" onclick="fluid.card.close('#card');">Go away</button>
 </div>
+</div>
 <br><br>
-
-<br><br>
-<a name="modify"></a>
-<h2>Open to modifications</h2>
+<div class="card">
+<a name="notes"></a>
+<h2>Notes</h2>
 <br />
 <p>All the files in Fluid are made to be easily modifiable. If you made some cool modification, fork the project on GitHub and send it over to me.</p>
 <br>
-
-          <br><br>
-          <h2>Other</h2>
+          <h5>Other Elements</h5>
           <br />
           <p>Everything else that isn't specified here can be found at <a href="https://materializecss.com">Materialize's documentation</a>. Fluid CSS is built off of Materialize 0.100.2.</p>
           <br />
-          <h5>Additional notes about Materialize</h5>
-          <br />
           <p>
-            Most things should work as expected from Materialize's code. However, some things may be unstable, or not work altogether. Note that Fluid is still in beta, so this may be inaccurate. Email jotto3053@gmail.com with any issues you think should be added to this list.
+            Most things should work as expected from Materialize's code. However, some things may be unstable, or not work altogether. Note that Fluid is still in beta, so this may be inaccurate. Contact me with any issues you think should be added to this list.
           </p>
           <br />
+          <br>
+          <h5>About / Contact</h5>
+          <p>Email jotto3053@gmail.com for anything you want to ask. Fluid cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
+          <br>
           <h3 style="color:red;">Unsupported</h3>
           <ul style="list-style-type:none">
           <li>Materialize input labels</li>
@@ -282,25 +297,83 @@ Demo:
           <li>Materialize input character counter (only works in textareas)</li>
           <li>Materialize input Error or Sucess messages</li>
           </ul>
-          <br><br><a name="install"></a>
-            <h3>Install Fluid</h3>
-            <br />
-            <p>
-              For instructions on installing Fluid, please go <a href="https://github.com/jottocraft/fluid/releases">here</a>
-            </p>
+          </div>
+          <br><br>
+          <div class="card">
+          <a name="install"></a>
+          <div class="center">
+          <img style="width:150px;height:150px;" src="icon.png"></img>
+          <br>
+          <h2>Install Fluid</h2>
+          <a href="https://github.com/jottocraft/fluid/releases/download/v1.0.0/fluid.zip">download</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">v1.0.0</a>
+        </div>
+            <br /><br>
+          <h5>Install using Fluid's files</h5>
+          <p>Download Fluid's files to guarentee availability, and make sure your site is optimized before updates.</p>
+          <pre>
+          <code>
+&lt;!-- Fluid UI --&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;fluid/fluid.js&quot;&gt;&lt;/script&gt;
+          </code>
+        </pre>
+          <br><br>
+          <h5>Install using the CDN</h5>
+          <p>Install using Fluid's CDN if you do not want to store Fluid's files on your website. This method will update automatically, and availability is not guarenteed. This method is not recommended.</p>
+          <pre>
+          <code>
+&lt;!-- Fluid UI --&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://cdn.rawgit.com/jottocraft/fluid/master/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.rawgit.com/jottocraft/fluid/master/fluid.js&quot;&gt;&lt;/script&gt;
+          </code>
+        </pre>
+          </div>
           <br /><br />
 
   </div>
 <div class="container">
   <div id="focuscard" class="card close focus">
-      <h3>This is a focus card!</h3>
+      <h3>This is a focused card!</h3>
       <br />
       Hello World!
       <br /><br />
       <button class="btn waves-effect" onclick="fluid.card.close('#focuscard')">Go away</button>
   </div>
 
-
+  <div id="vmodal" class="modal">
+    <div class="modal-content">
+      <h4>Fluid UI v1.0.0</h4>
+      <b>Changelog</b>
+      <br>
+      <ul>
+        <li>Not pre-release</li>
+        <li>Website redesign</li>
+        <li>Automatic btn and waves-effect classes on buttons (override class disables this)</li>
+        <li>BUGFIXES YAY</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="https://github.com/jottocraft/fluid/releases" class="waves-effect btn-flat">Releases</a>
+      <a class="modal-action modal-close waves-effect btn-flat">Ok</a>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+  // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+  $('.modal').modal();
+});
+  </script>
+  <style>
+  body {
+    overflow-x:hidden;
+  }
+  </style>
 
 </div>
 
