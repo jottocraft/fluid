@@ -13,7 +13,7 @@ body.dark {
 }
 /* Materialize dark theme patches */
 body.dark table.striped > tbody > tr:nth-child(odd) {
-    background-color: #272728;
+    background-color: #23272A;
 }
 body:not(.dark) table.striped > tbody > tr:nth-child(odd) {
     background-color: #f2f2f2;
@@ -23,7 +23,7 @@ body:not(.dark) table.highlight > tbody > tr:hover {
     background-color: #f2f2f2;
 }
 body.dark table.highlight > tbody > tr:hover {
-    background-color: #272728;
+    background-color: #23272A;
 }
 body.dark .btn-flat {
   color:white;
@@ -34,7 +34,7 @@ body:not(.dark) .chip {
 }
 body.dark .chip {
     color: #FFFFFF;
-    background-color: #272728;
+    background-color: #23272A;
 }
 body:not(.dark) .collection .collection-item {
   background-color: #FFFFFF;
@@ -42,29 +42,29 @@ body:not(.dark) .collection .collection-item {
   color: black;
 }
 body.dark .collection .collection-item {
-  background-color:#333538;
-  border-bottom: 1px solid #1e1e1e;
+  background-color:#23272A;
+  border-bottom: 1px solid #161616;
   color: white;
 }
 body:not(.dark) .collection {
   border: 1px solid #e0e0e0
 }
 body.dark .collection {
-  border: 1px solid #1e1e1e
+  border: 1px solid #161616
 }
 body:not(.dark) .collection a.collection-item:not(.active):hover {
     background-color: #ddd
 }
 body.dark .collection a.collection-item:not(.active):hover {
-    background-color: #272728
+    background-color: #16181a
 }
 body:not(.dark) .collection.with-header .collection-header {
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
 }
 body.dark .collection.with-header .collection-header {
-    background-color:#333538;
-    border-bottom: 1px solid #1e1e1e;
+    background-color:#23272A;
+    border-bottom: 1px solid #161616;
 }
 body:not(.dark) .page-footer {
     color: black;
@@ -72,10 +72,10 @@ body:not(.dark) .page-footer {
 }
 body.dark .page-footer {
     color: white;
-    background-color: #333538;
+    background-color: #23272A;
 }
 body.dark .page-footer .footer-copyright {
-  background-color: #272728;
+  background-color: #16181a;
 }
 body:not(.dark) .page-footer .footer-copyright {
   background-color: #e0e0e0;
@@ -86,6 +86,86 @@ body:not(.dark) .pagination li:not(.active) a {
 body.dark .pagination li a {
     color: #FFFFFF;
 }
+.body:not(.dark) .collapsible-header {
+    background-color: #fff;
+    border-bottom: 1px solid #272728;
+}
+.body.dark .collapsible-header {
+    background-color: #23272A;
+    border-bottom: 1px solid #161616;
+}
+body:not(.dark) .dropdown-content {
+background-color:#FFFFFF;
+color: #000000;
+}
+body.dark .dropdown-content {
+color: #FFFFFF;
+background-color:#23272A;
+}
+body:not(.dark) .dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+    background-color: #eee
+}
+
+body:not(.dark) .dropdown-content li.active.selected {
+    background-color: #e1e1e1
+}
+body.dark .dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+    background-color: #16181a
+}
+
+body.dark .dropdown-content li.active.selected {
+    background-color: #16181a
+}
+body:not(.dark) .tap-target {
+  background-color:#f2f2f2;
+  color:black;
+}
+body.dark .tap-target {
+  background-color:#23272A;
+  color:white;
+}
+body:not(.dark)  .tap-target-wave::before, .tap-target-wave::after {
+background-color: #FFFFFF;
+}
+body.dark  .tap-target-wave::before, .tap-target-wave::after {
+background-color: #16181a;
+}
+body:not(.dark) .modal {
+    background-color: #fafafa;
+}
+body.dark .modal {
+    background-color: #23272A;
+}
+body:not(.dark) .side-nav {
+  color:black;
+  background-color: #FFFFFF;
+}
+body.dark .side-nav {
+  color:white;
+  background-color:#23272A;
+}
+body:not(.dark) .side-nav li.active, body:not(.dark) .side-nav li > a:hover {
+    background-color: rgba(0,0,0,0.05)
+}
+
+body:not(.dark) .side-nav li > a {
+    color: rgba(0,0,0,0.87);
+}
+body.dark .side-nav li.active, body.dark .side-nav li > a:hover {
+    background-color: #16181a;
+}
+
+body.dark .side-nav li > a {
+    color: #FFFFFF;
+}
+body:not(.dark) .tabs {
+    background-color: #f2f2f2;
+}
+body.dark .tabs {
+    background-color: #23272A;
+}
+
+
 
 /* Nav light (Default) */
 nav {
@@ -123,14 +203,14 @@ body:not(.dark) code {
  }
   body.dark code {
     background: #23272A;
-    border: 1px solid #040405;
+    border: 1px solid #16181a;
   }
 pre > code {
   display: block;
   padding: 1rem 1.5rem;
   white-space: pre; }
 
-input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]) {
+input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), textarea {
   width: 400px;
   margin-bottom: 30px;
   border-radius: 3px;
@@ -144,12 +224,19 @@ input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]
   -webkit-transition: all 0.1s;
   transition: all 0.1s
 }
-body:not(.dark) input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]) {
+textarea {
+  padding:10px;
+  overflow:hidden;
+}
+.white-text {
+  color:white;
+}
+body:not(.dark) textarea, body:not(.dark) input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]) {
     background-color:#f2f2f2;
     color: black;
 }
-body.dark input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]) {
-    background-color:#333538;
+body.dark textarea, body.dark input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]) {
+    background-color:#23272A;
     color: white;
 }
 body:not(.dark) .chips {
@@ -157,12 +244,13 @@ body:not(.dark) .chips {
     color: black;
 }
 body.dark .chips {
-    background-color:#4b5359;
+    background-color:#23272A;
     color: white;
 }
 .chips {
   text-align:left;
 }
+
 
   /* Fluid Loader */
   .bubblingG {
@@ -2691,9 +2779,6 @@ legend {
     padding: 0
 }
 
-textarea {
-    overflow: auto
-}
 
 optgroup {
     font-weight: bold
@@ -5080,9 +5165,8 @@ small {
     overflow-y: hidden;
     height: 48px;
     width: 100%;
-    background-color: #fff;
     margin: 0 auto;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
     .tabs.tabs-transparent {
@@ -5479,7 +5563,6 @@ button.btn-floating {
 }
 
 .dropdown-content {
-    background-color: #fff;
     margin: 0;
     display: none;
     min-width: 100px;
@@ -5493,7 +5576,6 @@ button.btn-floating {
 
     .dropdown-content li {
         clear: both;
-        color: rgba(0,0,0,0.87);
         cursor: pointer;
         min-height: 50px;
         line-height: 1.5rem;
@@ -5502,13 +5584,6 @@ button.btn-floating {
         text-transform: none
     }
 
-        .dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
-            background-color: #eee
-        }
-
-            .dropdown-content li.active.selected {
-                background-color: #e1e1e1
-            }
 
         .dropdown-content li.divider {
             min-height: 0;
@@ -5673,14 +5748,13 @@ button.btn-floating {
     position: fixed;
     left: 0;
     right: 0;
-    background-color: #fafafa;
     padding: 0;
     max-height: 70%;
     width: 55%;
     margin: auto;
     overflow-y: auto;
     border-radius: 2px;
-    will-change: top, opacity
+    will-change: top, opacity;
 }
 
 @media only screen and (max-width: 992px) {
@@ -5703,7 +5777,6 @@ button.btn-floating {
 
 .modal .modal-footer {
     border-radius: 0 0 2px 2px;
-    background-color: #fafafa;
     padding: 4px 6px;
     height: 56px;
     width: 100%;
@@ -5758,9 +5831,6 @@ button.btn-floating {
 }
 
 .collapsible {
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-left: 1px solid #ddd;
     margin: .5rem 0 1rem 0
 }
 
@@ -5768,13 +5838,11 @@ button.btn-floating {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
+    border-bottom: 0px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     line-height: 1.5;
     padding: 1rem;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd
 }
 
     .collapsible-header i {
@@ -5787,7 +5855,6 @@ button.btn-floating {
 
 .collapsible-body {
     display: none;
-    border-bottom: 1px solid #ddd;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 2rem
@@ -5836,10 +5903,10 @@ button.btn-floating {
 
     .collapsible.popout > li {
         -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        /* box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); */
         margin: 0 24px;
         -webkit-transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
         .collapsible.popout > li.active {
@@ -6967,14 +7034,13 @@ input[type=range] {
     height: calc(100% + 60px);
     height: -moz-calc(100%);
     padding-bottom: 60px;
-    background-color: #fff;
     z-index: 999;
     overflow-y: auto;
     will-change: transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: translateX(-105%);
-    transform: translateX(-105%)
+    transform: translateX(-105%);
 }
 
     .side-nav.right-aligned {
@@ -6995,12 +7061,9 @@ input[type=range] {
         line-height: 48px
     }
 
-        .side-nav li.active {
-            background-color: rgba(0,0,0,0.05)
-        }
+
 
         .side-nav li > a {
-            color: rgba(0,0,0,0.87);
             display: block;
             font-size: 14px;
             font-weight: 500;
@@ -7009,9 +7072,6 @@ input[type=range] {
             padding: 0 32px
         }
 
-            .side-nav li > a:hover {
-                background-color: rgba(0,0,0,0.05)
-            }
 
             .side-nav li > a.btn, .side-nav li > a.btn-large, .side-nav li > a.btn-large, .side-nav li > a.btn-flat, .side-nav li > a.btn-floating {
                 margin: 10px 15px
@@ -7039,7 +7099,6 @@ input[type=range] {
                 line-height: 48px;
                 margin: 0 32px 0 0;
                 width: 24px;
-                color: rgba(0,0,0,0.54)
             }
 
     .side-nav .divider {
@@ -7896,7 +7955,6 @@ input[type=range] {
     position: absolute;
     font-size: 1rem;
     border-radius: 50%;
-    background-color: #ee6e73;
     -webkit-box-shadow: 0 20px 20px 0 rgba(0,0,0,0.14),0 10px 50px 0 rgba(0,0,0,0.12),0 30px 10px -20px rgba(0,0,0,0.2);
     box-shadow: 0 20px 20px 0 rgba(0,0,0,0.14),0 10px 50px 0 rgba(0,0,0,0.12),0 30px 10px -20px rgba(0,0,0,0.2);
     width: 100%;
@@ -7928,7 +7986,6 @@ input[type=range] {
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-color: #ffffff
     }
 
     .tap-target-wave::before {
