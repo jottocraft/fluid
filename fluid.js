@@ -21,11 +21,13 @@ fluid.load = function(mode) {
     $("loader").addClass("hidden");
   }
 }
+
+/* Button auto effect class */
 setTimeout(function () {
 try { init() } catch(err) {}
 }, 0);
 function init() {
-  $("button:not(.override)").addClass("waves-effect btn");
+  $(".btn:not(.override)").addClass("waves-effect");
 }
 
 /* Cards */

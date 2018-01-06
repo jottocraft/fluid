@@ -183,6 +183,22 @@ body.dark .tabs {
     background-color: #23272A;
 }
 
+/* Buttons */
+body:not(.dark) .btn, .btn-large {
+    color: #000;
+    background-color: #f2f2f2;
+}
+body:not(.dark) .btn:hover, .btn-large:hover {
+    background-color: #dddddd
+}
+body.dark .btn, .btn-large {
+    color: #fff;
+    background-color: #23272A;
+}
+body.dark .btn:hover, .btn-large:hover {
+    background-color: #16181a
+}
+
 
 
 /* Nav light (Default) */
@@ -482,6 +498,9 @@ body.dark .chips {
 
 body.dark .card::after {
     background: #2C2F33;
+}
+body.dark .card {
+  background-color:#2a2d32;
 }
 
 
@@ -5353,18 +5372,12 @@ small {
 
 .btn, .btn-large {
     text-decoration: none;
-    color: #fff;
-    background-color: #26a69a;
     text-align: center;
     letter-spacing: .5px;
     -webkit-transition: .2s ease-out;
     transition: .2s ease-out;
     cursor: pointer
 }
-
-    .btn:hover, .btn-large:hover {
-        background-color: #2bbbad
-    }
 
 .btn-floating {
     display: inline-block;
