@@ -502,6 +502,10 @@ body.dark .card::after {
 body.dark .card {
   background-color:#2a2d32;
 }
+body:not(.dark) .card {
+  background-color:#FFFFFF;
+}
+
 
 
 .card {
