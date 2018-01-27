@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules 1.1
+Fluid JS Modules 1.1.1
 by jottocraft
  */
 

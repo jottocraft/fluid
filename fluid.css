@@ -2,7 +2,7 @@
 Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v1.1
+v1.1.1
  */
 
 
@@ -32,10 +32,10 @@ body.dark {
 
 /* Sweetalert dark mode */
 body.dark .swal-icon--success:after, body.dark .swal-icon--success:before, body.dark .swal-icon--success__hide-corners {
-  background: #fff !important;
+  background: #23272A !important;
 }
 body.dark .swal-title, body.dark .swal-text {
-  color: #000;
+  color: #FFF;
 }
 body.dark .swal-modal {
   background-color: #23272A;
