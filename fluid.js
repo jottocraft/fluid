@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules
+Fluid JS Modules 1.1
 by jottocraft
  */
 
@@ -13,7 +13,7 @@ try { $("loader").html('<div class="bubblingG"><span id="bubblingG_1"></span><sp
 }
 catch(err) {
 }
-}, );
+}, 1);
 fluid.load = function(mode) {
   if (mode) {
     $("loader").removeClass("hidden");

@@ -2,7 +2,7 @@
 Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v1
+v1.1
  */
 
 
@@ -24,10 +24,21 @@ body.dark *element(s)* {
 
 
 /*Page dark mode */
-
+body { overflow-x: hidden; }
 body.dark {
     background-color: #2C2F33;
     color:#FFFFFF;
+}
+
+/* Sweetalert dark mode */
+body.dark .swal-icon--success:after, body.dark .swal-icon--success:before, body.dark .swal-icon--success__hide-corners {
+  background: #fff !important;
+}
+body.dark .swal-title, body.dark .swal-text {
+  color: #000;
+}
+body.dark .swal-modal {
+  background-color: #23272A;
 }
 /* Materialize dark theme patches */
 body.dark table.striped > tbody > tr:nth-child(odd) {
@@ -176,27 +187,33 @@ body.dark .side-nav li.active, body.dark .side-nav li > a:hover {
 body.dark .side-nav li > a {
     color: #FFFFFF;
 }
-body:not(.dark) .tabs {
-    background-color: #f2f2f2;
-}
-body.dark .tabs {
-    background-color: #23272A;
-}
 
 /* Buttons */
-body:not(.dark) .btn, .btn-large {
+body:not(.dark) .btn, .btn-large:not(.btn-flat) {
     color: #000;
     background-color: #f2f2f2;
 }
-body:not(.dark) .btn:hover, .btn-large:hover {
+body:not(.dark) .btn:hover, .btn-large:hover:not(.btn-flat) {
     background-color: #dddddd
 }
-body.dark .btn, .btn-large {
+body.dark .btn, .btn-large:not(.btn-flat) {
     color: #fff;
     background-color: #23272A;
 }
-body.dark .btn:hover, .btn-large:hover {
+body.dark .btn:hover, .btn-large:hover:not(.btn-flat) {
     background-color: #16181a
+}
+body.dark .tabs .indicator {
+    background-color: #FFFFFF;
+}
+body.dark .tabs .tab a:hover, body.dark .tabs .tab a.active, body.dark .tabs .tab a {
+    color: #FFFFFF
+}
+body:not(.dark) .tabs .indicator {
+    background-color: #000000;
+}
+body:not(.dark) .tabs .tab a:hover, body:not(.dark) .tabs .tab a.active, body:not(.dark) .tabs .tab a {
+    color: #000000
 }
 
 
@@ -5251,7 +5268,6 @@ small {
     }
 
         .tabs .tab a {
-            color: rgba(238,110,115,0.7);
             display: block;
             width: 100%;
             height: 100%;
@@ -5265,7 +5281,6 @@ small {
 
             .tabs .tab a:hover, .tabs .tab a.active {
                 background-color: transparent;
-                color: #ee6e73
             }
 
         .tabs .tab.disabled a, .tabs .tab.disabled a:hover {
@@ -5277,7 +5292,6 @@ small {
         position: absolute;
         bottom: 0;
         height: 2px;
-        background-color: #f6b2b5;
         will-change: left, right
     }
 
@@ -6087,7 +6101,7 @@ select:focus {
     outline: 1px solid #c9f3ef
 }
 
-button:focus {
+button:focus:not(.swal-button) {
     outline: none;
     background-color: #2ab7a9
 }
