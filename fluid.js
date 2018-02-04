@@ -43,6 +43,9 @@ fluid.cards = function(id) {
           $("#" + id).removeClass('close');
           setTimeout(function() {$(".content").attr("onclick","fluid.cards.close.focus();");}, 100)
         } else {
+          $(".content").addClass('blur');
+          $("#" + id).removeClass('close');
+          setTimeout(function() {$(".content").attr("onclick","fluid.cards.close.focus();");}, 100)
         }
   } else {
     $(".content").attr("onclick","");
