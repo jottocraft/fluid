@@ -59,13 +59,13 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
   <br /><br /><br /><br /><br /><br /><br /><br /><br />
-  <div class="container center">
+  <div class="container center content">
       <img style="width:250px;height:250px;" class="center" src="icon.png"></img>
       <br /><br />
-      <h1>Fluid UI</h1><h5><a href="#install">v1.1.1</a></h5>
+      <h1>Fluid UI</h1><h5><a href="#install">v1.2</a></h5>
       <br />
       <h5>
-        Easy to use, modern, and powerful addons to <a href="https://materializecss.com">Materialize</a>
+        Materialize mod with a dark mode
       </h5>
       </div>
       <div class="container content">
@@ -290,7 +290,7 @@ Demo:
           <br />
           <br>
           <h5>About / Contact</h5>
-          <p>Email jotto3053@gmail.com for anything you want to ask. Fluid cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
+          <p>If you need support, want to talk, or ask questions, join the <a href="https://discord.gg/4rPDAzb">Discord server</a>. Email jotto3053@gmail.com for anything you want to ask. Fluid cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
           <br>
           <h3 style="color:red;">Unsupported</h3>
           <ul style="list-style-type:none">
@@ -298,6 +298,7 @@ Demo:
           <li>Materialize's cards</li>
           <li>Materialize input character counter (only works in textareas)</li>
           <li>Materialize input Error or Sucess messages</li>
+          <li>Anything not included in Materialize 0.100.2</li>
           </ul>
           </div>
           <br><br>
@@ -307,7 +308,7 @@ Demo:
           <img style="width:150px;height:150px;" src="icon.png"></img>
           <br>
           <h2>Install Fluid</h2>
-          <a href="https://github.com/jottocraft/fluid/releases/download/v1.1.1/fluid.zip">download</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">v1.1.1</a>
+          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">v1.2</a>
         </div>
             <br /><br>
           <h5>Install using Fluid's files</h5>
@@ -343,18 +344,20 @@ Demo:
   <div id="focuscard" class="card close focus">
       <h3>This is a focused card!</h3>
       <br />
-      Hello World!
+      Focus cards are displayed like alerts, but are HTML elements that can include anything you want them to.
       <br /><br />
       <button class="btn waves-effect" onclick="fluid.card.close('#focuscard')">Go away</button>
   </div>
 
   <div id="vmodal" class="modal">
     <div class="modal-content">
-      <h4>Fluid UI v1.1.1</h4>
+      <h4>Fluid UI v1.2</h4>
       <b>Changelog</b>
       <br>
       <ul>
-        <li>Fix sweetalert</li>
+        <li>BUGFIXES!!! Focus cards finally work, fluid JS improvements, and button fixes.</li>
+        <li>Focus cards will be displayed at the current scroll position on the page instead of always at the top</li>
+        <li>Discord server for support! (See Notes section)</li>
       </ul>
     </div>
     <div class="modal-footer">

@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules 1.1.1
+Fluid JS Modules 1.2
 by jottocraft
  */
 
@@ -36,18 +36,16 @@ fluid.cards = function(id) {
   var focus = $("#" + id).hasClass('focus');
   console.log(focus)
   if (focus) {
-        $(".content").attr("onclick","fluid.cards.close.focus();");
-        window.scrollTo(0,0);
+        $("#" + id).css({top: window.scrollY + 200});
         if (menuopen) {
-          fluid.cards.close();
+          fluid.cards.close.focus();
           $(".content").addClass('blur');
           $("#" + id).removeClass('close');
+          setTimeout(function() {$(".content").attr("onclick","fluid.cards.close.focus();");}, 100)
         } else {
-         menuopen = true;
-         $("#" + id).removeClass('close');
-         $(".content").addClass('blur');
         }
   } else {
+    $(".content").attr("onclick","");
     if (menuopen) {
       fluid.cards.close();
       $("#" + id).removeClass('close');
@@ -61,14 +59,17 @@ fluid.card = function() {}
 fluid.card.close = function(cardid) {
   $(cardid).addClass('close');
   $('.content').removeClass("blur");
+  $(".content").attr("onclick","");
   menuopen = false;
 }
 fluid.cards.close = function() {
   $(".card").addClass('close');
   $('.content').removeClass("blur");
+  $(".content").attr("onclick","");
   menuopen = false;
 }
 fluid.cards.close.focus = function() {
+  $(".content").attr("onclick","");
   $(".focus").addClass('close');
   $('.content').removeClass("blur");
   menuopen = false;
