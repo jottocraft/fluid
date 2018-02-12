@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <div class="g-signin2" data-onsuccess="onSignIn" style="display:none"></div>
+  <!--Import Google Icon Font-->
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <link type="text/css" rel="stylesheet" href="fluid-pro.css"  media="screen,projection"/>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Fluid Pro</title>
+<meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="shortcut icon" href="pro.png" type="image/png">
+</head>
+<div class="mdc-theme--background mdc-typography--body2 nav right">
+                  <a href="#pro" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">code</i></a>
+                  <a href="#input" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">keyboard</i></a>
+                  <a href="#dark" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">format_paint</i></a>
+                  <a href="#nav" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">list</i></a>
+                  <a href="#load" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">more_horiz</i></a>
+                  <a href="#cards" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">layers</i></a>
+                  <a href="#notes" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">note</i></a>
+                  <a href="#install" class="mdc-theme--text-secondary-on-background"><i class="material-icons left">cloud_download</i></a>
+                </div>
+
+<style>
+h3, h5 {
+  margin:.82rem 0 .656rem 0;
+}
+h1 {
+  margin:0.67em 0;
+}
+</style>
+<body id="bg" style="overflow-x: hidden;" class="mdc-typography">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="fluid-pro.js"></script>
+
+<style></style>
+
+
+  <br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <div class="container center content">
+      <img style="width:250px;height:250px;" class="center" src="pro.png"></img>
+      <br /><br />
+      <h1 class="mdc-typography--display3">Fluid Pro</h1><h5><a>coming soon</a></h5>
+      <br>
+      <h5>
+        Google Material Web Components with a Dark mode
+      </h5>
+      </div>
+      <div class="container content">
+        <!-- jottocraft's playground -->
+      <!--  <br /><br /><br /><br />
+
+
+
+<br /><br />
+
+
+
+
+         <br /><br /><br /><br />
+       -->
+       <br><br>
+       <div class="card">
+       <a name="pro"></a>
+       <h3>Fluid Pro</h3>
+      <br /><br />
+      <p>Fluid Pro was made as a more advanced version of Fluid UI. It is <i>way</i> more complex than Fluid UI.
+        Before using Fluid Pro, make sure you already know CSS well and are fully familiar with the basics of Material Web Componenets and Fluid UI.</p>
+        <p>Fluid Pro is seperate from Fluid UI because it is not reccommended for most users, is probably more buggy, and will be updated less often.</p>
+     </div>
+        <br><br>
+        <div class="card">
+        <a name="input"></a>
+        <h3>Input</h3>
+       <br /><br />
+       <h5>Example</h5>
+        <br />
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input class="mdc-text-field__input" id="demo-input" type="text">
+        <label class="mdc-text-field__label" for="demo-input">Demo</label>
+        <div class="mdc-text-field__outline">
+          <svg>
+            <path class="mdc-text-field__outline-path"/>
+          </svg>
+        </div>
+        <div class="mdc-text-field__idle-outline"></div>
+      </div>
+        <br />
+        <pre><code>
+&lt;div class=&quot;mdc-text-field mdc-text-field--outlined&quot; data-mdc-auto-init=&quot;MDCTextField&quot;&gt;
+  &lt;input class=&quot;mdc-text-field__input&quot; id=&quot;demo-input&quot; type=&quot;text&quot;&gt;
+  &lt;label class=&quot;mdc-text-field__label&quot; for=&quot;demo-input&quot;&gt;Demo&lt;/label&gt;
+  &lt;div class=&quot;mdc-text-field__outline&quot;&gt;
+  &lt;svg&gt;
+    &lt;path class=&quot;mdc-text-field__outline-path&quot;/&gt;
+  &lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;mdc-text-field__idle-outline&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+        </code></pre>
+        <br /><br />
+        <h5>Textareas</h5>
+        <br />
+        <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--upgraded" data-mdc-auto-init="MDCTextField">
+        <textarea id="textarea" class="mdc-text-field__input"></textarea>
+        <label for="textarea" class="mdc-text-field__label mdc-text-field__label--float-above">Textarea</label>
+      </div>
+        <br />
+        <br />
+        <pre><code>
+&lt;div class=&quot;mdc-text-field mdc-text-field--textarea mdc-text-field--upgraded&quot; data-mdc-auto-init=&quot;MDCTextField&quot;&gt;
+  &lt;textarea id=&quot;textarea&quot; class=&quot;mdc-text-field__input&quot;&gt;&lt;/textarea&gt;
+  &lt;label for=&quot;textarea&quot; class=&quot;mdc-text-field__label mdc-text-field__label--float-above&quot;&gt;Textarea&lt;/label&gt;
+&lt;/div&gt;
+        </code></pre>
+        <br><br>
+        <h5>Buttons</h5>
+        <p>Colorful buttons with icons</p>
+        <br>
+        <button class="mdc-button mdc-button--stroked">
+        <i class="material-icons mdc-button__icon">touch_app</i>
+        Press me!
+        </button>
+        <br><br>
+        <pre>
+        <code>
+&lt;button class=&quot;mdc-button mdc-button--stroked&quot;&gt;
+&lt;i class=&quot;material-icons mdc-button__icon&quot;&gt;touch_app&lt;/i&gt;
+Press me!
+&lt;/button&gt;
+        </code>
+      </pre>
+      </div>
+      <br><br>
+      <div class="card">
+        <a name="dark"></a>
+        <h3>Integrated dark mode</h3>
+        <br />
+        <p>
+          Fluid supports a dark mode, which you can enable with only one line of code. Dark mode only supports elements from Material Web Componenets. To integrate other elements, read the notes section.
+        </p>
+        <br />
+          <h5>1</h5><p>
+              Toggle dark mode with JavaScript
+          </p>
+          <code>fluid.dark();</code>
+          <br /><br>
+          <button onclick="fluid.dark()" class="mdc-button mdc-button--stroked">
+          <i class="material-icons mdc-button__icon">format_paint</i>
+          Enable Dark Mode
+          </button>
+          <br><br>
+          <h5>2</h5><p>
+              Enable dark mode with CSS by adding the dark class to the body
+          </p>
+          <code>&lt;body class=&quot;dark&quot;&gt;</code>
+          <br>
+      </div>
+              <br /><br />
+      <div class="card">
+        <a name="nav"></a>
+      <h3>Navigation bar</h3>
+      <br />
+          <pre>
+          <code>
+&lt;div class=&quot;mdc-theme--background mdc-typography--body2 nav right&quot;&gt;
+
+  &lt;a href=&quot;#&quot; class=&quot;mdc-theme--text-secondary-on-background&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
+
+  &lt;a href=&quot;#&quot; class=&quot;mdc-theme--text-secondary-on-background&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;help&lt;/i&gt;&lt;/a&gt;
+
+  &lt;a href=&quot;#&quot; class=&quot;mdc-theme--text-secondary-on-background&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
+
+&lt;/div&gt;
+  </code>
+</pre>
+<br />
+<p>
+  You can also move it to the left by changing its class:
+</p>
+<pre>
+<code>
+&lt;!-- Left alignment --&gt;
+&lt;div class=&quot;mdc-theme--background mdc-typography--body2 nav left&quot;&gt;
+</code>
+</pre>
+</div>
+<br><br>
+<div class="card">
+<a name="load"></a>
+<h3>Advanced loaders</h3>
+<br />
+<p>Fluid UI Loader</p>
+  <code>
+    &lt;loader&gt;&lt;/loader&gt;
+  </code>
+<loader></loader>
+<br />
+<p>Determinate Loader</p>
+  <pre><code>
+&lt;div role=&quot;progressbar&quot; class=&quot;mdc-linear-progress&quot;&gt;
+  &lt;div class=&quot;mdc-linear-progress__buffer&quot; style=&quot;transform: scaleX(1);&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;mdc-linear-progress__bar mdc-linear-progress__primary-bar&quot; style=&quot;transform: scaleX(0.5);&quot;&gt;
+    &lt;span class=&quot;mdc-linear-progress__bar-inner&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;mdc-linear-progress__bar mdc-linear-progress__secondary-bar&quot;&gt;
+    &lt;span class=&quot;mdc-linear-progress__bar-inner&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  <br><br>
+  <div role="progressbar" class="mdc-linear-progress">
+              <div class="mdc-linear-progress__buffer" style="transform: scaleX(1);"></div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.5);">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+            </div>
+<br /><br>
+<p>Buffer Loader</p>
+  <pre><code>
+&lt;div role=&quot;progressbar&quot; class=&quot;mdc-linear-progress&quot; data-buffer=&quot;true&quot;&gt;
+  &lt;div class=&quot;mdc-linear-progress__buffering-dots&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;mdc-linear-progress__buffer&quot; style=&quot;transform: scaleX(0.75);&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;mdc-linear-progress__bar mdc-linear-progress__primary-bar&quot; style=&quot;transform: scaleX(0.5);&quot;&gt;
+    &lt;span class=&quot;mdc-linear-progress__bar-inner&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;mdc-linear-progress__bar mdc-linear-progress__secondary-bar&quot;&gt;
+    &lt;span class=&quot;mdc-linear-progress__bar-inner&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+  </code></pre>
+  <br>
+  <div role="progressbar" class="mdc-linear-progress" data-buffer="true">
+              <div class="mdc-linear-progress__buffering-dots"></div>
+              <div class="mdc-linear-progress__buffer" style="transform: scaleX(0.75);"></div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.5);">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+              <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                <span class="mdc-linear-progress__bar-inner"></span>
+              </div>
+            </div>
+</div>
+<br><br>
+<div class="card">
+<a name="cards"></a>
+<h3>Card UI</h3>
+<br />
+<p>If you don't nessisarily need a full page for content, but you don't want it being part of the page itself, make it a card</p>
+<pre>
+<code>
+  &lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
+  &lt;!-- Card Content --&gt;
+  &lt;/div&gt;
+</code>
+</pre>
+<br />
+<p>
+  Add the "close" class to make the card hidden by default
+</p>
+  <code>
+    &lt;div id=&quot;democard&quot; class=&quot;card close&quot;&gt;
+  </code>
+  <br />  <br />
+  <p>
+    Add the "focus" class to make the card float at the top of the page, scroll the user to the top, and blur the background. Clicking on the background will also close the card!
+  </p>
+    <code>
+      &lt;div id=&quot;democard&quot; class=&quot;card focus close&quot;&gt;
+    </code>
+    <br /><br />
+    <p>
+      Because focus cards blur the background and close the card on click, you will need to create a content div as the parent for every part of your page, excluding the focus card itself (It doesn't matter where the card is)
+    </p>
+    <code>
+      &lt;div  class=&quot;content&quot;&gt;
+    </code>
+    <br />  <br />
+  <p>
+    To show a card:
+  </p>
+    <code>
+      fluid.cards(card-id)
+    </code>
+    <br />  <br />
+    <p>
+      To close a card (where card is #id, .class, etc.):
+    </p>
+      <code>
+        fluid.card.close("card");
+      </code>
+    <br />  <br />
+    <p>
+      To close all cards:
+    </p>
+      <code>
+        fluid.cards.close();
+      </code>
+      <br />  <br />
+    <p>
+      To close only focus cards:
+    </p>
+      <code>
+        fluid.cards.close.focus();
+      </code>
+<br /><br /><br />
+<br />
+<div class="row">
+  <button onclick="fluid.cards('card')" class="mdc-button mdc-button--stroked">
+  <i class="material-icons mdc-button__icon">layers</i>
+  Card Demo
+  </button>
+  <button onclick="fluid.cards('focuscard')" class="mdc-button mdc-button--stroked">
+  <i class="material-icons mdc-button__icon">blur_on</i>
+  Focused card demo
+  </button>
+</div>
+<br /><br />
+<div id="card" class="card close">
+    <h3>This is a card!</h3>
+    <br />
+    Hello World!
+    <br /><br />
+    <button class="btn waves-effect" onclick="fluid.card.close('#card');">Go away</button>
+</div>
+</div>
+<br><br>
+<div class="card">
+<a name="notes"></a>
+<h3>Notes</h3>
+<br />
+<p>All the files in Fluid are made to be easily modifiable. If you made some cool modification, fork the project on GitHub and send it over to me.</p>
+<br>
+          <h5>Other Elements</h5>
+          <br />
+          <p>Everything else that isn't specified here can be found at <a href="https://material.io/components/web/catalog/">Material's documentation</a>. Fluid Pro is built off of Material Web Componenets 0.30.0.</p>
+          <br />
+          <p>Colors used in Fluid can be found <a href="https://docs.google.com/document/d/1TSCk6cMDy7haPQjfoDdcfHIqu8YPM_mmZ4-XDMZiiak/edit?usp=sharing">here</a>.</p>
+          <br />
+          <p>
+            Everything listed in Material's docs should work as expected in the light theme, however some componenets may need to be manually optimized for the dark theme
+          </p>
+          <br>
+          <pre><code>
+/* Syntax
+
+  Light mode
+  body:not(.dark) *element(s)* {
+    /* Your element's light theme style */
+  }
+
+  Dark mode
+  body.dark *element(s)* {
+    /* Your element's dark theme style */
+  }
+
+*/
+          </code></pre>
+          <br />
+          <br>
+          <h5>About / Contact</h5>
+          <p>If you need support, email <a href="mailto:jotto3053@gmail.com">jotto3053@gmail.com</a> for anything you want to ask. Fluid cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport 2.5.0</a> and wanted to make the design and dark mode easy to use.</p>
+          <br>
+          <h3 style="color:red;">Unsupported</h3>
+          <ul style="list-style-type:none">
+          List coming soon
+          </ul>
+          </div>
+          <br><br>
+          <div class="card">
+          <a name="install"></a>
+          <div class="center">
+          <img style="width:150px;height:150px;" src="pro.png"></img>
+          <br>
+          <h3>Install Fluid Pro</h3>
+          <a href="#">coming soon</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="cursor: pointer;"  onclick="var dialog = new mdc.dialog.MDCDialog(document.querySelector('#vmodal'));dialog.show();" >changelog</a>
+        </div>
+            <br /><br>
+          <pre>
+          <code>
+&lt;!-- Fluid Pro --&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;fluid/fluid-pro.css&quot; media=&quot;screen,projection&quot;/&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;fluid/fluid-pro.js&quot;&gt;&lt;/script&gt;
+          </code>
+        </pre>
+          </div>
+          <br /><br />
+
+  </div>
+<div class="container">
+  <div id="focuscard" class="card close focus">
+      <h3>This is a focused card!</h3>
+      <br />
+      Focus cards are displayed like alerts, but are HTML elements that can include anything you want them to.
+      <br /><br />
+      <button class="btn waves-effect" onclick="fluid.card.close('#focuscard')">Go away</button>
+  </div>
+  <aside id="vmodal"
+    class="mdc-dialog"
+    role="alertdialog"
+    aria-labelledby="my-mdc-dialog-label"
+    aria-describedby="my-mdc-dialog-description">
+    <div class="mdc-dialog__surface">
+      <header class="mdc-dialog__header">
+        <h2  class="mdc-dialog__header__title">
+          Fluid Pro Changelog
+        </h2>
+      </header>
+      <section class="mdc-dialog__body">
+        <ul>
+          <li>Not released yet</li>
+        </ul>
+      </section>
+      <footer class="mdc-dialog__footer">
+        <a href="https://github.com/jottocraft/fluid/releases" type="button" class="mdc-button mdc-dialog__footer__button">Releases</a>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Ok</button>
+      </footer>
+    </div>
+    <div class="mdc-dialog__backdrop"></div>
+  </aside>
+
+
+  <style>
+  body {
+    overflow-x:hidden;
+  }
+  </style>
+
+</div>
+<script> mdc.autoInit()</script>
+</body>
+
+</html>
