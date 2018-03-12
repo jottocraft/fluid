@@ -2,7 +2,7 @@
 Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v1.2
+v2.0 Beta
  */
 
 
@@ -54,9 +54,7 @@ body:not(.dark) table.highlight > tbody > tr:hover {
 body.dark table.highlight > tbody > tr:hover {
     background-color: #23272A;
 }
-body.dark .btn-flat {
-  color:white;
-}
+
 body:not(.dark) .chip {
     color: rgba(0,0,0,0.6);
     background-color: #e4e4e4;
@@ -189,20 +187,58 @@ body.dark .side-nav li > a {
 }
 
 /* Buttons */
-body:not(.dark) .btn, .btn-large:not(.btn-flat) {
-    color: #000;
-    background-color: #f2f2f2;
-}
-body:not(.dark) .btn:hover, .btn-large:hover:not(.btn-flat) {
+button:focus {outline:0;}
+.btn {
+  cursor: pointer;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.4s;
+    user-select: none;
+  }
+  body:not(.dark) .btn:not(.active):hover {
     background-color: #dddddd
-}
-body.dark .btn, .btn-large:not(.btn-flat) {
-    color: #fff;
-    background-color: #23272A;
-}
-body.dark .btn:hover, .btn-large:hover:not(.btn-flat) {
+  }
+  body.dark .btn:not(.active):hover {
     background-color: #16181a
-}
+  }
+  .row:not(.btns) .btn {
+    margin-right: 10px;
+  }
+  body:not(.dark) .btn:not(.active) {
+  background-color: #f2f2f2;
+      color: #333333;
+    }
+    body.dark .btn:not(.active) {
+    background-color: #1c2023;
+        color: white;
+      }
+    .btns .btn:not(.active) {
+      background-color: transparent !important;
+    }
+    body:not(.dark) .btns {
+    background-color: #f2f2f2;
+      }
+      body.dark .btns {
+      background-color: #1f2022;
+        }
+        .btns {
+          width:auto;
+          display: inline-block;
+          padding: 5px;
+          border-radius: 25px;
+        }
+
+  .btn.active {
+  background-color: #207bdf;
+      color: white;
+    }
+
+
 body.dark .tabs .indicator {
     background-color: #FFFFFF;
 }
@@ -218,27 +254,67 @@ body:not(.dark) .tabs .tab a:hover, body:not(.dark) .tabs .tab a.active, body:no
 
 
 
-/* Nav light (Default) */
-nav {
-  margin-top:10px;
-  margin-right:1%;
-  margin-left:1%;
-  margin-bottom:5%;
+/* Nav  */
+.nav {
+padding: 20px;
+display: inline-flex;
+border: 1px solid #f0f0f0;
+margin: 15px;
+border-radius: 10px;
+user-select: none;
 }
-body:not(.dark) nav a {
-  color:#000000;
+.nav li {
+  margin: 0 12px;
+  border-radius: 50%;
+  padding: 12px;
+  transition: all 0.4s;
 }
-body:not(.dark) nav {
-  background-color: #FFFFFF;
+.nav ul {
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
-
-/*Nav Dark */
-
-body.dark nav {
-    background-color: #23272A;
+body.dark .nav {
+  border: 1px solid #23272A;
+  background-color: #23272A;
 }
-body.dark nav a {
-  color:#FFFFFF
+body:not(.dark) .nav a {
+  color:black;
+}
+.nav a i {
+  font-size: 20px;
+  margin:0
+}
+.nav {
+  padding:10px;z-index:99;
+}
+.nav ul {
+  list-style-type: none;padding:0
+}
+.nav ul li {
+    float: left;
+}
+body:not(.dark) .nav li:not(.active) {
+  background-color: #ededed
+}
+body.dark .nav li:not(.active) {
+  background-color: #2c3135
+}
+body:not(.dark) .nav li.active {
+  background-color: #4c4c4c;
+  color: white;
+}
+body.dark .nav li.active {
+  background-color: #ededed;
+  color: black;
+}
+body:not(.dark) .nav li.active i {
+  color: white;
+}
+body.dark .nav li.active i {
+  color: black;
+}
+body.dark .nav a {
+  color: #bababa !important;
 }
 
 /*Code (From Skeleton)*/
@@ -264,9 +340,9 @@ pre > code {
 input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), textarea {
   width: 400px;
   margin-bottom: 30px;
-  border-radius: 3px;
-  padding-left:5px;
-  padding-right:5px;
+  border-radius: 25px;
+  padding-left:7px;
+  padding-right:7px;
   opacity: 0.95;
   border: none;
   outline: none;
@@ -274,6 +350,9 @@ input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]
   margin-bottom: 20px;
   -webkit-transition: all 0.1s;
   transition: all 0.1s
+}
+input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]):not(.noshadow):focus, textarea:not(.noshadow):focus {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 textarea {
   padding:10px;
@@ -2789,21 +2868,16 @@ code, kbd, pre, samp {
     font-size: 1em
 }
 
-button, optgroup, select, textarea {
+optgroup, select, textarea {
     color: inherit;
     font: inherit;
     margin: 0
 }
 
-button {
-    overflow: visible
-}
 
-button, select {
-    text-transform: none
-}
 
-button, html input[type="button"], input[type="reset"], input[type="submit"] {
+
+ html input[type="button"], input[type="reset"], input[type="submit"] {
     -webkit-appearance: button;
     cursor: pointer
 }
@@ -2896,15 +2970,6 @@ a {
     box-shadow: none !important
 }
 
-.z-depth-1, nav, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2)
-}
-
-    .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
-        -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
-        box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2)
-    }
 
 .z-depth-2 {
     -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12),0 2px 4px -1px rgba(0,0,0,0.3);
@@ -4777,16 +4842,6 @@ nav ul {
         cursor: pointer
     }
 
-        nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
-            margin-top: -2px;
-            margin-left: 15px;
-            margin-right: 15px
-        }
-
-            nav ul a.btn > .material-icons, nav ul a.btn-large > .material-icons, nav ul a.btn-large > .material-icons, nav ul a.btn-flat > .material-icons, nav ul a.btn-floating > .material-icons {
-                height: inherit;
-                line-height: inherit
-            }
 
         nav ul a:hover {
             background-color: rgba(0,0,0,0.1)
@@ -5348,117 +5403,7 @@ small {
     visibility: hidden
 }
 
-.btn, .btn-large, .btn-flat {
-    border: none;
-    border-radius: 2px;
-    display: inline-block;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 2rem;
-    text-transform: uppercase;
-    vertical-align: middle;
-    -webkit-tap-highlight-color: transparent
-}
 
-    .btn.disabled, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-flat:disabled, .btn[disabled], [disabled].btn-large, .btn-floating[disabled], .btn-large[disabled], .btn-flat[disabled] {
-        pointer-events: none;
-        background-color: #DFDFDF !important;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        color: #9F9F9F !important;
-        cursor: default
-    }
-
-        .btn.disabled:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn-flat.disabled:hover, .btn:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover, .btn-large:disabled:hover, .btn-flat:disabled:hover, .btn[disabled]:hover, [disabled].btn-large:hover, .btn-floating[disabled]:hover, .btn-large[disabled]:hover, .btn-flat[disabled]:hover {
-            background-color: #DFDFDF !important;
-            color: #9F9F9F !important
-        }
-
-.btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
-    font-size: 1rem;
-    outline: 0
-}
-
-    .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
-        font-size: 1.3rem;
-        line-height: inherit
-    }
-
-    .btn:focus, .btn-large:focus, .btn-floating:focus {
-        background-color: #1d7d74
-    }
-
-.btn, .btn-large {
-    text-decoration: none;
-    text-align: center;
-    letter-spacing: .5px;
-    -webkit-transition: .2s ease-out;
-    transition: .2s ease-out;
-    cursor: pointer
-}
-
-.btn-floating {
-    display: inline-block;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0;
-    background-color: #26a69a;
-    border-radius: 50%;
-    -webkit-transition: .3s;
-    transition: .3s;
-    cursor: pointer;
-    vertical-align: middle
-}
-
-    .btn-floating:hover {
-        background-color: #26a69a
-    }
-
-    .btn-floating:before {
-        border-radius: 0
-    }
-
-    .btn-floating.btn-large {
-        width: 56px;
-        height: 56px
-    }
-
-        .btn-floating.btn-large.halfway-fab {
-            bottom: -28px
-        }
-
-        .btn-floating.btn-large i {
-            line-height: 56px
-        }
-
-    .btn-floating.halfway-fab {
-        position: absolute;
-        right: 24px;
-        bottom: -20px
-    }
-
-        .btn-floating.halfway-fab.left {
-            right: auto;
-            left: 24px
-        }
-
-    .btn-floating i {
-        width: inherit;
-        display: inline-block;
-        text-align: center;
-        color: #fff;
-        font-size: 1.6rem;
-        line-height: 40px
-    }
-
-button.btn-floating {
-    border: none
-}
 
 .fixed-action-btn {
     position: fixed;
@@ -5556,9 +5501,6 @@ button.btn-floating {
             margin-bottom: 15px
         }
 
-        .fixed-action-btn ul a.btn-floating {
-            opacity: 0
-        }
 
     .fixed-action-btn .fab-backdrop {
         position: absolute;
@@ -5573,43 +5515,7 @@ button.btn-floating {
         transform: scale(0)
     }
 
-.btn-flat {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background-color: transparent;
-    color: #343434;
-    cursor: pointer;
-    -webkit-transition: background-color .2s;
-    transition: background-color .2s
-}
 
-    .btn-flat:focus, .btn-flat:hover {
-        -webkit-box-shadow: none;
-        box-shadow: none
-    }
-
-    .btn-flat:focus {
-        background-color: rgba(0,0,0,0.1)
-    }
-
-    .btn-flat.disabled {
-        background-color: transparent !important;
-        color: #b3b2b2 !important;
-        cursor: default
-    }
-
-.btn-large {
-    height: 54px;
-    line-height: 54px
-}
-
-    .btn-large i {
-        font-size: 1.6rem
-    }
-
-.btn-block {
-    display: block
-}
 
 .dropdown-content {
     margin: 0;
@@ -5827,14 +5733,12 @@ button.btn-floating {
 .modal .modal-footer {
     border-radius: 0 0 2px 2px;
     padding: 4px 6px;
-    height: 56px;
+    height: 75px;
     width: 100%;
     text-align: right
 }
 
-    .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
-        margin: 6px 0
-    }
+
 
 .modal-overlay {
     position: fixed;
@@ -6864,11 +6768,6 @@ select:disabled {
         width: 100%
     }
 
-    .file-field .btn, .file-field .btn-large {
-        float: left;
-        height: 3rem;
-        line-height: 3rem
-    }
 
     .file-field span {
         cursor: pointer
@@ -7122,25 +7021,7 @@ input[type=range] {
         }
 
 
-            .side-nav li > a.btn, .side-nav li > a.btn-large, .side-nav li > a.btn-large, .side-nav li > a.btn-flat, .side-nav li > a.btn-floating {
-                margin: 10px 15px
-            }
 
-            .side-nav li > a.btn, .side-nav li > a.btn-large, .side-nav li > a.btn-large, .side-nav li > a.btn-floating {
-                color: #fff
-            }
-
-            .side-nav li > a.btn-flat {
-                color: #343434
-            }
-
-            .side-nav li > a.btn:hover, .side-nav li > a.btn-large:hover, .side-nav li > a.btn-large:hover {
-                background-color: #2bbbad
-            }
-
-            .side-nav li > a.btn-floating:hover {
-                background-color: #26a69a
-            }
 
             .side-nav li > a > i, .side-nav li > a > [class^="mdi-"], .side-nav li > a li > a > [class*="mdi-"], .side-nav li > a > i.material-icons {
                 float: left;
@@ -8064,9 +7945,7 @@ input[type=range] {
     position: absolute !important
 }
 
-    .tap-target-origin:not(.btn):not(.btn-large), .tap-target-origin:not(.btn):not(.btn-large):hover {
-        background: none
-    }
+
 
 @media only screen and (max-width: 600px) {
     .tap-target, .tap-target-wrapper {

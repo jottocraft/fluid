@@ -23,8 +23,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="shortcut icon" href="icon.png" type="image/png">
 </head>
-<nav class="right">
-    <div class="nav-wrapper">
+<div class="nav right" >
         <ul>
             <li>
             <a href="#input"><i class="material-icons left">keyboard</i></a>
@@ -68,11 +67,13 @@
   <div class="container center content">
       <img style="width:250px;height:250px;" class="center" src="icon.png"></img>
       <br /><br />
-      <h1>Fluid UI</h1><h5><a href="#install">v1.2</a></h5>
-      <br />
+      <h1>Fluid UI</h1>
       <h5>
-        Materialize mod with a dark mode
+        Modern Materialize mod with a dark mode
       </h5>
+        <br />
+      <h4><a href="#install">v1.2</a></h4><a style="color:orange" href="#install">v2.0 Beta (Showcased)</a>
+
       </div>
       <div class="container content">
         <!-- jottocraft's playground -->
@@ -99,6 +100,7 @@
         <input placeholder="Demo" />
         <br />
         <code>&lt;input placeholder=&quot;Demo&quot; type=&quot;text&quot; /&gt;</code>
+        <p>Don't want the shadow? Add the "noshadow" class to remove the effect</p>
         <br /><br />
         <h5>Textareas</h5>
         <br />
@@ -107,12 +109,30 @@
         <br />
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br><br>
-        <h5>Simplified buttons</h5>
-        <p>Buttons with the btn class will also get the waves-effect class. To override this, just add the override class. It is still reccommended to manually add the class, in case of a bug or error.</p>
+        <h5>Modern buttons</h5>
+        <p>Buttons now have a modern new look for 2018</p>
         <br>
         <button class="btn">Hello!</button>
         <br><br>
         <code>&lt;button class=&quot;btn&quot;&gt;Hello!&lt;/button&gt;</code>
+        <br><br><br>
+        <h5>Button row</h5>
+        <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional code required! You can add the active class to the default button, and handle the clicks yourself to get the data.</p>
+        <i>Because buttons are inline, if you want to use buttons in a row normally only the row class</i>
+        <br /><br />
+        <div class="btns row">
+        <button class="btn">Option A</button>
+        <button class="btn">Option B</button>
+        <button class="btn">Option C</button>
+      </div>
+<pre>
+<code>&lt;div class=&quot;btns row&quot;&gt;
+&lt;button class=&quot;btn&quot;&gt;Option A&lt;/button&gt;
+&lt;button class=&quot;btn&quot;&gt;Option B&lt;/button&gt;
+&lt;button class=&quot;btn&quot;&gt;Option C&lt;/button&gt;
+&lt;/div&gt;
+</code>
+</pre>
       </div>
       <br><br>
       <div class="card">
@@ -128,7 +148,7 @@
           </p>
           <code>fluid.dark();</code>
           <br /><br>
-          <button onclick="fluid.dark();" class="btn waves-effect">Try</button>
+          <button onclick="fluid.dark();" class="btn ">Try</button>
           <br><br>
           <h5>2</h5><p>
               Enable dark mode with CSS by adding the dark class to the body
@@ -142,14 +162,12 @@
       <h3>Navigation bar</h3>
       <br />
       <p>
-        Setup a navigation bar easily (Other Materialize navbar styles may not work as expected):
+        Fluid UI also offers a simple and modern style navigation bar. You can add the active class to any one of these to show that it is active.
       </p>
           <pre>
-          <code>
-&lt;nav class=&quot;right&quot;&gt;
-    &lt;div class=&quot;nav-wrapper&quot;&gt;
+          <code>&lt;div class=&quot;nav right&quot;&gt;
         &lt;ul&gt;
-            &lt;li&gt;
+            &lt;li class=&quot;active&quot;&gt;
             &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
             &lt;/li&gt;
 
@@ -161,17 +179,14 @@
             &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
             &lt;/li&gt;
         &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-  </code>
+&lt;/div&gt;</code>
 </pre>
 <br />
 <p>
   You can also move it to the left by changing its class:
 </p>
 <pre>
-<code>
-&lt;!-- Left alignment --&gt;
+<code>&lt;!-- Left alignment --&gt;
 &lt;nav class=&quot;left&quot;&gt;
 </code>
 </pre>
@@ -207,8 +222,7 @@ Demo:
 <br />
 <p>If you don't nessisarily need a full page for content, but you don't want it being part of the page itself, make it a card</p>
 <pre>
-<code>
-  &lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
+<code>&lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
   &lt;!-- Card Content --&gt;
   &lt;/div&gt;
 </code>
@@ -265,8 +279,8 @@ Demo:
 <br /><br /><br />
 <br />
 <div class="row">
-<button onclick="fluid.cards('card')" class="btn waves-effect">Card demo</button>
-<button onclick="fluid.cards('focuscard')" class="btn waves-effect">Focused card demo</button>
+<button onclick="fluid.cards('card')" class="btn ">Card demo</button>
+<button onclick="fluid.cards('focuscard')" class="btn ">Focused card demo</button>
 </div>
 <br /><br />
 <div id="card" class="card close">
@@ -274,7 +288,7 @@ Demo:
     <br />
     Hello World!
     <br /><br />
-    <button class="btn waves-effect" onclick="fluid.card.close('#card');">Go away</button>
+    <button class="btn " onclick="fluid.card.close('#card');">Go away</button>
 </div>
 </div>
 <br><br>
@@ -296,10 +310,7 @@ Demo:
           <br />
           <br>
           <h5>About / Contact</h5>
-          <p>If you need support, want to talk, or ask questions, join the <a href="https://discord.gg/4rPDAzb">Discord server</a>. Email jotto3053@gmail.com for anything you want to ask. Fluid UI cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
-          <br>
-          <h3 style="color:green;">Fluid Pro</h3>
-          <p>Know CSS and want to use a more powerful platform? Check out <a href="https://fluid.js.org/pro">Fluid Pro</a></p>
+          <p>Email jotto3053@gmail.com for anything you want to ask. Fluid UI cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
           <br>
           <h3 style="color:red;">Unsupported</h3>
           <ul style="list-style-type:none">
@@ -317,7 +328,9 @@ Demo:
           <img style="width:150px;height:150px;" src="icon.png"></img>
           <br>
           <h2>Install Fluid UI</h2>
-          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">v1.2</a>
+          <i>Many features shown on this site are from the beta version of Fluid UI and are not included in version 1.2</i>
+          <br /><br />
+          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download v1.2</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">changelog</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2.0 beta</a>
         </div>
             <br /><br>
           <h5>Install using Fluid UI's files</h5>
@@ -355,7 +368,7 @@ Demo:
       <br />
       Focus cards are displayed like alerts, but are HTML elements that can include anything you want them to.
       <br /><br />
-      <button class="btn waves-effect" onclick="fluid.card.close('#focuscard')">Go away</button>
+      <button class="btn " onclick="fluid.card.close('#focuscard')">Go away</button>
   </div>
 
   <div id="vmodal" class="modal">
@@ -366,12 +379,27 @@ Demo:
       <ul>
         <li>BUGFIXES!!! Focus cards finally work, fluid JS improvements, and button fixes.</li>
         <li>Focus cards will be displayed at the current scroll position on the page instead of always at the top</li>
-        <li>Discord server for support and bugs! (See Notes section)</li>
       </ul>
     </div>
     <div class="modal-footer">
-      <a href="https://github.com/jottocraft/fluid/releases" class="waves-effect btn-flat">Releases</a>
-      <a class="modal-action modal-close waves-effect btn-flat">Ok</a>
+      <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
+      <a style="" class="modal-action modal-close  btn">Ok</a>
+    </div>
+  </div>
+  <div id="vmodal2" class="modal">
+    <div class="modal-content">
+      <h4>Fluid UI v2.0 Beta</h4>
+      <b>Notes</b>
+      <br>
+      <ul>
+        <li style="color:red;"><b>!! Fluid UI 2 is still in development and may not work as expected. Use at your own risk. !!</b></li>
+        <br />
+        <li>Fluid UI v2.0 does not have a CDN. You must manually download the files by going to the releases page linked below. A changelog will also be listed there.</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
+      <a style="" class="modal-action modal-close  btn">Ok</a>
     </div>
   </div>
   <script>

@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules 1.2
+Fluid JS Modules 2.0 Beta
 by jottocraft
  */
 
@@ -22,13 +22,15 @@ fluid.load = function(mode) {
   }
 }
 
-/* Button auto effect class */
-setTimeout(function () {
-try { init() } catch(err) {}
-}, 0);
-function init() {
-  $(".btn:not(.override)").addClass("waves-effect");
+function rowInit() {
+  $( ".btns .btn" ).click(function(event) {
+  $(this).siblings().removeClass("active")
+  $(this).addClass("active")
+});
 }
+
+window.onload = rowInit
+
 
 /* Cards */
 menuopen = false;
