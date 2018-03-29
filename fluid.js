@@ -27,6 +27,10 @@ function rowInit() {
   $(this).siblings().removeClass("active")
   $(this).addClass("active")
 });
+$( "div.nav.active li" ).click(function(event) {
+$(this).siblings().removeClass("active")
+$(this).addClass("active")
+});
 }
 
 window.onload = rowInit
