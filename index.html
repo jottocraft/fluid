@@ -72,7 +72,7 @@
         Modern Materialize mod with a dark mode
       </h5>
         <br />
-      <h4><a href="#install">v1.2</a></h4><a style="color:orange" href="#install">v2.0 Beta (Showcased here)</a>
+      <h4><a href="#install">v1.2</a></h4><a style="color:orange" href="#install">v2.0 Preview 2 (showcased)</a>
 
       </div>
       <div class="container content">
@@ -89,10 +89,13 @@
          <br /><br /><br /><br />
        -->
         <br><br>
-        <div class="card">
         <a name="input"></a>
-        <h3>Input</h3>
-        <br />
+        <div class="section">
+          <div class="header">
+        <i class="material-icons">keyboard</i>
+        <h4>Input</h4>
+      </div>
+      <div class="body">
        Fluid UI uses custom-styled text input.
        <br /><br />
        <h5>Example</h5>
@@ -133,14 +136,18 @@
 &lt;/div&gt;
 </code>
 </pre>
+</div>
       </div>
       <br><br>
-      <div class="card">
-        <a name="dark"></a>
-        <h3>Integrated dark mode</h3>
-        <br />
+      <a name="dark"></a>
+      <div class="section">
+        <div class="header">
+      <i class="material-icons">format_paint</i>
+      <h4>Dark mode</h4>
+    </div>
+    <div class="body">
         <p>
-          Fluid UI supports a dark mode, which you can enable with only one line of code. Dark mode currently only supports components from Materialize. For additional compatibility notes, read the bottom of the page.
+          Fluid UI ships with a dark mode, which you can toggle easily with only one line of code, or use a CSS class. Dark mode currently only supports components from Materialize. For additional compatibility notes, read the bottom of the page.
         </p>
         <br />
           <h5>1</h5><p>
@@ -155,12 +162,16 @@
           </p>
           <code>&lt;body class=&quot;dark&quot;&gt;</code>
           <br>
+        </div>
       </div>
               <br /><br />
-      <div class="card">
-        <a name="nav"></a>
-      <h3>Navigation bar</h3>
-      <br />
+              <a name="nav"></a>
+              <div class="section">
+                <div class="header">
+              <i class="material-icons">list</i>
+              <h4>Navbar</h4>
+              </div>
+              <div class="body">
       <p>
         Fluid UI also offers a simple and modern style navigation bar. You can add the active class to any one of these to show that it is active. Add the active class to the nav div itself to automatically give buttons the active class.
       </p>
@@ -191,11 +202,15 @@
 </code>
 </pre>
 </div>
+</div>
 <br><br>
-<div class="card">
-<a name="load"></a>
-<h2>Easy to use loader</h2>
-<br />
+<a name="input"></a>
+<div class="section">
+  <div class="header">
+<i class="material-icons">more_horiz</i>
+<h4>Loader</h4>
+</div>
+<div class="body">
 <p>Setup a loader without having to run initialization code:</p>
   <code>
     &lt;loader&gt;&lt;/loader&gt;
@@ -215,11 +230,15 @@ Demo:
 <br />
 <loader></loader>
 </div>
+</div>
 <br><br>
-<div class="card">
-<a name="cards"></a>
-<h2>Card UI</h2>
-<br />
+<a name="input"></a>
+<div class="section">
+  <div class="header">
+<i class="material-icons">layers</i>
+<h4>Card and section UI</h4>
+</div>
+<div class="body">
 <p>If you don't nessisarily need a full page for content, but you don't want it being part of the page itself, make it a card</p>
 <pre>
 <code>&lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
@@ -291,11 +310,15 @@ Demo:
     <button class="btn " onclick="fluid.card.close('#card');">Go away</button>
 </div>
 </div>
+</div>
 <br><br>
-<div class="card">
 <a name="notes"></a>
-<h2>Notes</h2>
-<br />
+<div class="section">
+  <div class="header">
+<i class="material-icons">note</i>
+<h4>Notes</h4>
+</div>
+<div class="body">
 <p>All the files in Fluid UI are made to be easily modifiable. If you made some cool modification, fork the project on GitHub and send it over to me.</p>
 <br>
           <h5>Other Elements</h5>
@@ -313,24 +336,27 @@ Demo:
           <p>Email jotto3053@gmail.com for anything you want to ask. Fluid UI cost nothing to make (excluding my time), and will always be ad-free and open to everyone. I made Fluid after I made <a href="https://tp.js.org">Teleport</a> and wanted to make the design and dark mode easy to use.</p>
           <br>
           <h3 style="color:red;">Unsupported</h3>
+          <i>Because some Fluid UI components override / overlap with Materialize components, some Materialize components aren't functional</i>
           <ul style="list-style-type:none">
-          <li>Materialize input labels</li>
-          <li>Materialize's cards</li>
-          <li>Materialize input character counter (only works in textareas)</li>
-          <li>Materialize input Error or Sucess messages</li>
-          <li>Anything not included in Materialize 0.100.2</li>
+          <li>Materialize input labels, character counters, and error / success messages</li>
+          <li>Materialize cards</li>
+          <li>Materialize sections</li>
+          <li>Anything not included in Materialize v0.100.2</li>
           </ul>
+        </div>
           </div>
           <br><br>
-          <div class="card">
           <a name="install"></a>
+          <div class="section">
+            <div class="header">
+          <i class="material-icons">file_download</i>
+          <h4>Install Fluid UI</h4>
+          </div>
+          <div class="body">
           <div class="center">
-          <img style="width:150px;height:150px;" src="icon.png"></img>
-          <br>
-          <h2>Install Fluid UI</h2>
-          <i>Many features shown on this site are from the beta version of Fluid UI and are not included in version 1.2</i>
+          <i>Many features shown on this site are from the beta version of Fluid UI and are not included in the latest stable version, version 1.2</i>
           <br /><br />
-          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download v1.2</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">changelog</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2.0 beta</a>
+          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download v1.2</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">changelog</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2.0 preview 2</a>
         </div>
             <br /><br>
           <h5>Install Fluid UI</h5>
@@ -346,6 +372,7 @@ Demo:
           </code>
         </pre>
           </div>
+        </div>
           <br /><br />
 
   </div>
@@ -375,11 +402,13 @@ Demo:
   </div>
   <div id="vmodal2" class="modal">
     <div class="modal-content">
-      <h4>Fluid UI 2 Beta</h4>
-      <b>Notes</b>
+      <h4>Fluid UI 2 Preview 2</h4>
+      <b>Changelog</b>
       <br>
       <ul>
         <li style="color:red;"><b>!! Fluid UI 2 is still in development and may not work as expected. Use at your own risk. !!</b></li>
+        <li>Add the section element</li>
+        <li>Bugfixes</li>
       </ul>
     </div>
     <div class="modal-footer">

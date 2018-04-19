@@ -2,7 +2,7 @@
 Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v2.0 Beta
+v2.0 Preview 2
  */
 
 
@@ -231,9 +231,10 @@ button:focus {outline:0;}
           display: inline-block;
           padding: 5px;
           border-radius: 25px;
+          margin-left: 5px;
         }
 
-  .btn.active {
+  .btn.active, .btn.active:hover {
   background-color: #207bdf;
       color: white;
     }
@@ -519,6 +520,45 @@ body.dark .chips {
   display:none !important;
 }
 
+/* Sections */
+.section {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: all 0.5s !important;
+}
+body:not(.dark) .section {
+  background-color:#f2f2f2;
+}
+body.dark .section {
+  background-color:#1c2023;
+}
+.section .header, .section.header {
+  padding: 15px;
+}
+.section .body {
+  padding: 15px;
+}
+body:not(.dark) .section input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), body:not(.dark) .section textarea, body:not(.dark) .section .btn:not(.active), body:not(.dark) .section .btns.row {
+  background-color: #e2e2e2;
+}
+body:not(.dark) .section .btn:not(.active):hover {
+  background-color: #cccccc !important;
+}
+body.dark .section input:not([type=submit]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), body.dark .section textarea, body.dark .section .btn:not(.active), body.dark .section .btns.row {
+  background-color: #121416;
+}
+body.dark .section .btn:not(.active):hover {
+  background-color: #0c0d0f !important;
+}
+
+.section .header i {
+  margin-right: 10px;
+}
+.section .header i, .section .header span, .section .header h1, .section .header h2, .section .header h3, .section .header h4, .section .header h5 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* Cards */
 
 .card {
@@ -592,11 +632,8 @@ body.dark .chips {
     opacity: 0.95;
 }
 
-body.dark .card::after {
-    background: #2C2F33;
-}
 body.dark .card {
-  background-color:#2a2d32;
+  background-color:#2b2e33;
 }
 body:not(.dark) .card {
   background-color:#FFFFFF;
@@ -3751,27 +3788,7 @@ nav ul a span.badge {
     }
 }
 
-.container .row {
-    margin-left: -.75rem;
-    margin-right: -.75rem
-}
 
-.section {
-    padding-top: 1rem;
-    padding-bottom: 1rem
-}
-
-    .section.no-pad {
-        padding: 0
-    }
-
-    .section.no-pad-bot {
-        padding-bottom: 0
-    }
-
-    .section.no-pad-top {
-        padding-top: 0
-    }
 
 .row {
     margin-left: auto;
