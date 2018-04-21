@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules 2.0 Beta
+Fluid JS Modules 2.0 p2 r1
 by jottocraft
  */
 

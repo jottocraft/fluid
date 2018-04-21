@@ -2,7 +2,7 @@
 Fluid UI by jottocraft
 Modified Materialize 0.100.2
 
-v2.0 Preview 2
+v2.0 p2 r1
  */
 
 
@@ -20,6 +20,20 @@ body.dark *element(s)* {
 
 }
 */
+
+/* Product Sans */
+@font-face {
+  font-family: 'Product sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fluid.js.org/product-sans.ttf) format('truetype');
+}
+
+html {
+    line-height: 1.5;
+    font-family: "Product sans", sans-serif;
+    font-weight: normal;
+}
 
 
 
@@ -4964,12 +4978,7 @@ a {
     text-decoration: none
 }
 
-html {
-    line-height: 1.5;
-    font-family: "Roboto", sans-serif;
-    font-weight: normal;
-    /* color: rgba(0,0,0,0.87) */
-}
+
 
 @media only screen and (min-width: 0) {
     html {
