@@ -86,6 +86,30 @@ fluid.cards.close.focus = function() {
   menuopen = false;
 }
 
+/* Force load dark with special thing */
+// a key map of allowed keys
+var allowedKeys = {
+  38: 'up',
+  40: 'down',
+  119: 'f8'
+};
+var darkOverride = ['up', 'up', 'down', 'down', 'f8'];
+var darkOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = allowedKeys[e.keyCode];
+  var requiredKey = darkOverride[darkOverridePosition];
+  if (key == requiredKey) {
+    darkOverridePosition++;
+    if (darkOverridePosition == darkOverride.length) {
+      fluid.dark();
+      darkOverridePosition = 0;
+    }
+  } else {
+    darkOverridePosition = 0;
+  }
+});
+
+
 
 
 
