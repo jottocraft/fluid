@@ -6024,19 +6024,19 @@ label {
 }
 
 ::-webkit-input-placeholder {
-    color: #d1d1d1
+    color: #a5a5a5
 }
 
 ::-moz-placeholder {
-    color: #d1d1d1
+    color: #a5a5a5
 }
 
 :-ms-input-placeholder {
-    color: #d1d1d1
+    color: #a5a5a5
 }
 
 ::placeholder {
-    color: #d1d1d1
+    color: #a5a5a5
 }
 
 
