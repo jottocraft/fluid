@@ -28,13 +28,15 @@ body.dark *element(s)* {
   font-weight: 400;
   src: url(https://fluid.js.org/product-sans.ttf) format('truetype');
 }
-
 html {
-    line-height: 1.5;
-    font-family: "Product sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: normal;
 }
 
+h1, h2, h3, h4, h5, button {
+    font-family: "Product sans", sans-serif;
+    font-weight: normal;
+}
 
 
 /*Page dark mode */
@@ -2816,7 +2818,6 @@ body:not(.dark) .card {
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 html {
-    font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
