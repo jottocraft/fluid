@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <div class="g-signin2" data-onsuccess="onSignIn" style="display:none"></div>
+  <link rel="shortcut icon" href="https://fluid.js.org/icon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="fluid.css"  media="screen,projection"/>
@@ -21,7 +21,6 @@
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="shortcut icon" href="icon.png" type="image/png">
 </head>
 <div class="nav right" >
         <ul>
@@ -60,15 +59,15 @@
 
 <style>
 </style>
-<body id="bg" style="overflow-x: hidden;">
+<body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
   <br /><br /><br /><br /><br /><br /><br /><br /><br />
   <div class="container center content">
-      <img style="width:250px;height:250px;" class="center" src="icon.png"></img>
+      <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a href="#install">v1.2</a></h4><a style="color:orange" href="#install">v2.0 p2 r1 (showcased)</a>
+      <h4><a href="#install">v1.2</a></h4><a style="color:orange" href="#install">v2.0 preview 3 (showcased)</a>
 
       </div>
       <div class="container content">
@@ -92,15 +91,21 @@
         <h4>Input</h4>
       </div>
       <div class="body">
-       Fluid UI uses custom-styled text input.
-       <br /><br />
-       <h5>Demo</h5>
+       <h5>Text input</h5>
         <br />
         <input placeholder="Demo" />
         <br />
         <code>&lt;input placeholder=&quot;Demo&quot; type=&quot;text&quot; /&gt;</code>
         <p>Don't want the shadow? Add the "noshadow" class to remove the effect</p>
-        <br /><br />
+        <br />
+        <h5>Twemoji</h5>
+         <br />
+         <p>Fluid UI automatically parses emoji on your site on load into Twitter emoji 🙂. Add the "notwemoji" class to the body if you want to use native emoji instead.</p>
+         <code>&lt;body class=&quot;notwemoji&quot;&gt;</code>
+         <br /><br />
+         <p>If your site renders emoji after load, tell Twemoji to re-parse</p>
+         <code>twemoji.parse(document.body);</code>
+         <br /><br />
         <h5>Textareas</h5>
         <br />
         <textarea></textarea>
@@ -109,7 +114,6 @@
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br><br>
         <h5>Modern buttons</h5>
-        <p>Buttons now have a modern new look for 2018</p>
         <br>
         <button class="btn">Hello!</button>
         <br><br>
@@ -366,7 +370,7 @@ Demo:
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;
           </code>
         </pre>
