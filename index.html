@@ -60,7 +60,7 @@
 
 <style>
 </style>
-<body>
+<body class="auto">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
   <br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -148,19 +148,30 @@
     </div>
     <div class="body">
         <p>
-          Fluid UI ships with a dark mode, which you can toggle easily with only one line of code, or use a CSS class. Dark mode currently only supports components from Materialize. For additional compatibility notes, read the bottom of the page.
+          Fluid UI ships with a dark mode, which you can toggle easily with only one line of code, or use a CSS class. Dark mode currently only supports components from Materialize. To use your own elements with dark mode, read the instructions in the fluid.css file.
         </p>
-        <br />
-          <h5>JavaScript</h5>
-          <br />
-          <code>fluid.dark();</code>
-          <br /><br>
+        <p>Check if dark theme is enabled</p>
+        <code>fluid.isDark()</code>
+        <br /><br />
+        <h5>Automatically set theme based on time (Reccommended)</h5>
+        <p>Enable with CSS</p>
+        <code>&lt;body class=&quot;auto&quot;&gt;</code>
+        <br /><br />
+        <p>Set with JavaScript (Toggle by running without parameter)</p>
+        <code>fluid.auto();</code>
+        <br><br>
+        <button onclick="fluid.dark();" class="btn ">Try</button>
+        <br><br>
+          <h5>Set Fluid's theme manually</h5>
+          <p>Set with CSS (Dark class sets dark mode, no dark class sets light mode)</p>
+          <code>&lt;body class=&quot;dark&quot;&gt;</code>
+          <br /><br />
+          <p>Set with JavaScript (Toggle by running without parameter)</p>
+          <code>fluid.dark(true);</code>
+          <br><br>
           <button onclick="fluid.dark();" class="btn ">Try</button>
           <br><br>
-          <h5>CSS</h5>
-          <br />
-          <code>&lt;body class=&quot;dark&quot;&gt;</code>
-          <br>
+
         </div>
       </div>
               <br /><br />

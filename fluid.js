@@ -55,6 +55,23 @@ fluid.dark = function() {
 fluid.isDark = function() {
   return $("body").hasClass("dark");
 }
+fluid.auto = function() {
+  var hours = new Date().getHours()
+  // Light: 6AM - 6PM Dark: 7PM - 5AM
+  if (hours > 5 && hours < 19) {
+    $("body").removeClass("dark");
+  } else {
+    $("body").addClass("dark");
+  }
+  if ( $(".themeico").length ) {
+    if (fluid.isDark()) {
+      $(".themeico").text("brightness_low");
+    } else {
+      $(".themeico").text("brightness_high");
+    }
+  }
+  document.cookie = "fluidIsDark=auto";
+}
 /* Loader auto initilization */
 setTimeout(function () {
 try { $("loader").html('<div class="bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div>');
@@ -73,7 +90,11 @@ function init() {
   if (getCookie("fluidIsDark") == "true") {
     $("body").addClass("dark");
   } else {
+    if (getCookie("fluidIsDark") == "auto") {
+      fluid.auto();
+    } else {
     $("body").removeClass("dark");
+  }
   }
   if (!$("body").hasClass("notwemoji")) {
   twemoji.parse(document.body);
@@ -159,6 +180,28 @@ document.addEventListener('keydown', function(e) {
     }
   } else {
     darkOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var allowedKeysAuto = {
+  38: 'up',
+  40: 'down',
+  118: 'f7'
+};
+var autoOverride = ['up', 'up', 'down', 'down', 'f7'];
+var autoOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = allowedKeysAuto[e.keyCode];
+  var requiredKey = autoOverride[autoOverridePosition];
+  if (key == requiredKey) {
+    autoOverridePosition++;
+    if (autoOverridePosition == autoOverride.length) {
+      fluid.auto();
+      autoOverridePosition = 0;
+    }
+  } else {
+    autoOverridePosition = 0;
   }
 });
 
