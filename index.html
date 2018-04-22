@@ -68,7 +68,7 @@
       <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a style="color:orange" href="#install">v2.0 beta 4 (displayed)</a></h4><a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a>
+      <h4><a style="color:orange" href="#install">v2.0 GM (displayed)</a></h4><a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a>
 
       </div>
       <div class="container content">
@@ -262,10 +262,17 @@ Demo:
     &lt;div class=&quot;body&quot;&gt;
     Hello!
     &lt;/div&gt;
-&lt;/div&gt;
-</code>
+&lt;/div&gt;</code>
 </pre>
-<br />
+<p>Add the "collapse" class to the section to indicate that it can be collapsed</p>
+<code>&lt;div class=&quot;section collapse&quot;&gt;</code>
+<br /><br />
+<p>Add the "collapsed" class to the body of the section to have it defaultly collapsed</p>
+<code>&lt;div class=&quot;body collapsed&quot;&gt;</code>
+<br><br>
+<p>Click the try button below to give all sections on this page the collapse class. If your page dynamically changes the collapse class, make sure to run fluid.init() to initialize all of them.</p>
+<button onclick="$('.section').addClass('collapse');fluid.init();" class="btn">Try</button>
+<br /><br /><br />
 <h5>Cards</h5>
 <p>If you want a section with a 3D effect, use a card. However, cards do not work on mobile, and can cause lag if you use too many of them.</p>
 <pre>
@@ -421,6 +428,7 @@ Demo:
       <b>Changelog</b>
       <br>
       <ul>
+        <!-- <li style="color:orange;"><i>This is Fluid UI 2's release candidate. If using this build in a public site, be sure to upgrade to the final when released</i></li> -->
         <li style="color:red;"><b>!! Fluid UI 2 is still in development and may not work as expected. Use at your own risk. !!</b></li>
         <li>Auto theme, more theme settings</li>
         <li>Bugfixes</li>

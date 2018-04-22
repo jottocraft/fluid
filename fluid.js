@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules v2.0 Beta 4
+Fluid JS Modules v2.0 Gold Master (Release Candidate)
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -94,7 +94,7 @@ fluid.load = function(mode) {
     $("loader").addClass("hidden");
   }
 }
-function init() {
+fluid.init = function() {
   if (getCookie("fluidIsDark") == "true") {
     $("body").addClass("dark");
   } else {
@@ -122,9 +122,13 @@ $( "div.nav.active li" ).click(function(event) {
 $(this).siblings().removeClass("active")
 $(this).addClass("active")
 });
+
+$( ".section.collapse .header" ).click(function(event) {
+$(this).siblings(".body").toggleClass("collapsed")
+});
 }
 
-window.onload = init
+window.onload = fluid.init
 
 
 /* Cards */

@@ -1,5 +1,5 @@
 /*!
-Fluid UI v2.0 Beta 4
+Fluid UI v2.0 Gold Master (Release Candidate)
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -570,6 +570,18 @@ body.dark .chips {
   border-radius: 10px;
   margin-bottom: 15px;
   transition: all 0.5s !important;
+}
+.section.collapse .header {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+.section.collapse .body.collapsed {
+  display: none;
 }
 body:not(.dark) .section {
   background-color:#f2f2f2;
