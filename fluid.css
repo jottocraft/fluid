@@ -1,5 +1,5 @@
 /*!
-Fluid UI v2.0 Gold Master (Release Candidate)
+Fluid UI v2.0
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -63,6 +63,10 @@ img.emoji {
   vertical-align: middle;
 }
 .align {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icotext i, .icotext span {
   display: inline-block;
   vertical-align: middle;
 }

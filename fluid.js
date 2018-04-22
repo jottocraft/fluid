@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules v2.0 Gold Master (Release Candidate)
+Fluid JS Modules v2.0
 
 Copyright (c) 2017-2018 jottocraft
 

@@ -50,7 +50,7 @@
             </li>
 
             <li>
-            <a href="#install"><i class="material-icons left">file_download</i></a>
+            <a href="#install"><i class="material-icons left">cloud_download</i></a>
             </li>
 
 
@@ -68,7 +68,7 @@
       <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a style="color:orange" href="#install">v2.0 GM (displayed)</a></h4><a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a>
+      <h4><a href="#install">v2.0</a></h4><!-- <a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a> -->
 
       </div>
       <div class="container content">
@@ -376,9 +376,11 @@ Demo:
           </div>
           <div class="body">
           <div class="center">
-          <i>Many features shown on this site are from the beta version of Fluid UI and are not included in the latest stable version, version 1.2</i>
-          <br /><br />
-          <a href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip">download v1.2</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" href="#vmodal">changelog</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2 beta 4</a>
+          <br />
+          <h4>Fluid UI 2.0</h4>
+          <br />
+          <h4><a class="icotext" href="http://archives.materializecss.com/0.100.2/"><i class="material-icons" style="font-size: 25px;">library_books</i>&nbsp;<span>Materialize Docs</span></a></h4>
+          <h4><a class="icotext" href="https://github.com/jottocraft/fluid/releases/download/v1.2/fluid.zip"><i class="material-icons" style="font-size: 25px;">cloud_download</i>&nbsp;<span>Download</span></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger icotext" href="#vmodal"><i class="material-icons" style="font-size: 25px;">description</i>&nbsp;<span>Changelog</span></a><!-- &nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2 beta 4</a> --></h4>
         </div>
             <br /><br>
           <h5>Install Fluid UI</h5>
@@ -409,12 +411,23 @@ Demo:
 
   <div id="vmodal" class="modal">
     <div class="modal-content">
-      <h4>Fluid UI v1.2</h4>
+      <h4>Fluid UI v2.0</h4>
       <b>Changelog</b>
       <br>
       <ul>
-        <li>BUGFIXES!!! Focus cards finally work, fluid JS improvements, and button fixes.</li>
-        <li>Focus cards will be displayed at the current scroll position on the page instead of always at the top</li>
+        <li>Have Fluid set the theme based on time of day</li>
+<li>Get the current theme using fluid.isDark();</li>
+<li>Twemoji keep emoji consistent on all platforms, and support the latest emoji even if the client doesn't</li>
+<li>Use sections instead of cards for a more modern UI and more contrast</li>
+<li> Sections can be collapsed by clicking on the header and adding the "collapse" class</li>
+<li>Flat, modern buttons</li>
+<li>Curved input with a shadow when selected</li>
+<li>New, solid navigation bar</li>
+<li>Add the active class to the navbar to show what nav element is active</li>
+<li>Use a button row as a modern form of dropdowns</li>
+<li>Fixed a bug that caused the console to say it can't find the Roboto font</li>
+<li>Updated various elements across fluid to the Product Sans font</li>
+<li>Website updated to showcase all new features</li>
       </ul>
     </div>
     <div class="modal-footer">
