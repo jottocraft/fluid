@@ -113,6 +113,7 @@ function init() {
   if (!$("body").hasClass("notwemoji")) {
   twemoji.parse(document.body);
 }
+
   $( ".btns .btn" ).click(function(event) {
   $(this).siblings().removeClass("active")
   $(this).addClass("active")
