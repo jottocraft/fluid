@@ -41,8 +41,16 @@ SOFTWARE.
 
 
 fluid = new Object;
-fluid.dark = function() {
+fluid.dark = function(theme) {
+  if (theme == undefined) {
   $("body").toggleClass("dark");
+  }
+  if (theme == true) {
+  $("body").addClass("dark");
+  }
+  if (theme == false) {
+  $("body").removeClass("dark");
+  }
   if ( $(".themeico").length ) {
     if (fluid.isDark()) {
       $(".themeico").text("brightness_low");
