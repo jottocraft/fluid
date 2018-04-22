@@ -179,7 +179,7 @@ fluid.cards.close.focus = function() {
   menuopen = false;
 }
 
-/* Force load dark with special thing */
+/* Fluid Commands */
 // a key map of allowed keys
 var allowedKeys = {
   38: 'up',
@@ -221,6 +221,50 @@ document.addEventListener('keydown', function(e) {
     }
   } else {
     autoOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var collapseKeysAuto = {
+  38: 'up',
+  40: 'down',
+  117: 'f6'
+};
+var collapseOverride = ['up', 'up', 'down', 'down', 'f6'];
+var collapseOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = collapseKeysAuto[e.keyCode];
+  var requiredKey = collapseOverride[collapseOverridePosition];
+  if (key == requiredKey) {
+    collapseOverridePosition++;
+    if (collapseOverridePosition == collapseOverride.length) {
+      $('.section').addClass('collapse');fluid.init();
+      collapseOverridePosition = 0;
+    }
+  } else {
+    collapseOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var emojiKeysAuto = {
+  38: 'up',
+  40: 'down',
+  69: 'e'
+};
+var emojiOverride = ['up', 'up', 'down', 'down', 'e'];
+var emojiOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = emojiKeysAuto[e.keyCode];
+  var requiredKey = emojiOverride[emojiOverridePosition];
+  if (key == requiredKey) {
+    emojiOverridePosition++;
+    if (emojiOverridePosition == emojiOverride.length) {
+      twemoji.parse(document.body);
+      emojiOverridePosition = 0;
+    }
+  } else {
+    emojiOverridePosition = 0;
   }
 });
 
