@@ -101,7 +101,13 @@ function init() {
     if (getCookie("fluidIsDark") == "auto") {
       fluid.auto();
     } else {
+      if (getCookie("fluidIsDark") == "false") {
     $("body").removeClass("dark");
+  } else {
+    if ($("body").hasClass("auto")) {
+      fluid.auto();
+    }
+  }
   }
   }
   if (!$("body").hasClass("notwemoji")) {
