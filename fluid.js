@@ -23,6 +23,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+ function getCookie(cname) {
+     var name = cname + "=";
+     var decodedCookie = decodeURIComponent(document.cookie);
+     var ca = decodedCookie.split(';');
+     for(var i = 0; i <ca.length; i++) {
+         var c = ca[i];
+         while (c.charAt(0) == ' ') {
+             c = c.substring(1);
+         }
+         if (c.indexOf(name) == 0) {
+             return c.substring(name.length, c.length);
+         }
+     }
+     return "";
+ }
+
 
 fluid = new Object;
 fluid.dark = function() {
@@ -34,6 +50,7 @@ fluid.dark = function() {
       $(".themeico").text("brightness_high");
     }
   }
+  document.cookie = "fluidIsDark=" + fluid.isDark();
 }
 fluid.isDark = function() {
   return $("body").hasClass("dark");
@@ -53,6 +70,11 @@ fluid.load = function(mode) {
   }
 }
 function init() {
+  if (getCookie("fluidIsDark") == "true") {
+    $("body").addClass("dark");
+  } else {
+    $("body").removeClass("dark");
+  }
   if (!$("body").hasClass("notwemoji")) {
   twemoji.parse(document.body);
 }
