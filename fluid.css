@@ -1,5 +1,5 @@
 /*!
-Fluid UI v2.0
+Fluid UI v2.0.1
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -51,7 +51,13 @@ html {
     font-family: "Roboto", sans-serif;
     font-weight: normal;
 }
-
+/* Little Caesar */
+@font-face {
+  font-family: 'Pizza Pizza';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fluid.js.org/caesar.ttf) format('truetype');
+}
 h1, h2, h3, h4, h5 {
     font-family: "Product sans", sans-serif;
     font-weight: normal;
@@ -77,6 +83,15 @@ body { overflow-x: hidden; }
 body.dark {
     background-color: #2C2F33;
     color:#FFFFFF;
+}
+body.litleceser,body.litleceser h1, body.litleceser h2, body.litleceser h3, body.litleceser h4, body.litleceser h5  {
+  font-family: "Pizza Pizza", cursive;
+}
+body.litleceser {
+  background-color: #F46600 !important;
+}
+body.litleceser .nav {
+  background-color: #d85b02 !important;
 }
 
 /* Sweetalert dark mode */

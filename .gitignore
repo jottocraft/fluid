@@ -12,6 +12,11 @@
 #Builds
 *.zip
 
+#Secret
+beta.html
+fluid-beta.css
+fluid-beta.js
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

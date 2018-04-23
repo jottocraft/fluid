@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules v2.0
+Fluid JS Modules v2.0.1
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -79,6 +79,16 @@ fluid.auto = function() {
     }
   }
   document.cookie = "fluidIsDark=auto";
+}
+fluid.tcoh = function() {
+  $("body").addClass("litleceser");
+  $('img').attr('src', 'https://i.imgur.com/uhZT30E.png');
+  var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/png';
+    link.rel = 'shortcut icon';
+    link.href = 'https://i.imgur.com/uhZT30E.png';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    document.title = "LITTLE CESERS HOT N READY FOR ONLY FIVE DOLALARS EXTRA MOST BESTEST IS ONLY SIX FOR EXTRA CHEESE AND PEPERONI AND THE NATIONS BEST PRICE"
 }
 /* Loader auto initilization */
 setTimeout(function () {
@@ -228,9 +238,9 @@ document.addEventListener('keydown', function(e) {
 var collapseKeysAuto = {
   38: 'up',
   40: 'down',
-  117: 'f6'
+  121: 'f10'
 };
-var collapseOverride = ['up', 'up', 'down', 'down', 'f6'];
+var collapseOverride = ['up', 'up', 'down', 'down', 'f10'];
 var collapseOverridePosition = 0;
 document.addEventListener('keydown', function(e) {
   var key = collapseKeysAuto[e.keyCode];
@@ -265,6 +275,50 @@ document.addEventListener('keydown', function(e) {
     }
   } else {
     emojiOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var allowedKeys = {
+  38: 'up',
+  40: 'down',
+  120: 'f9'
+};
+var caesarOverride = ['up', 'up', 'down', 'down', 'f9'];
+var caesarOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = allowedKeys[e.keyCode];
+  var requiredKey = caesarOverride[caesarOverridePosition];
+  if (key == requiredKey) {
+    caesarOverridePosition++;
+    if (caesarOverridePosition == caesarOverride.length) {
+      fluid.tcoh();
+      caesarOverridePosition = 0;
+    }
+  } else {
+    caesarOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var allowedKeys = {
+  38: 'up',
+  40: 'down',
+  32: 'space'
+};
+var cmdOverride = ['up', 'up', 'down', 'down', 'space'];
+var cmdOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = allowedKeys[e.keyCode];
+  var requiredKey = cmdOverride[cmdOverridePosition];
+  if (key == requiredKey) {
+    cmdOverridePosition++;
+    if (cmdOverridePosition == cmdOverride.length) {
+      var cmd = window.prompt()
+      cmdOverridePosition = 0;
+    }
+  } else {
+    cmdOverridePosition = 0;
   }
 });
 
