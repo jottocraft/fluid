@@ -198,6 +198,17 @@ var allowedKeys = {
 };
 var darkOverride = ['up', 'up', 'down', 'down', 'f8'];
 var darkOverridePosition = 0;
+
+var allowedKeysAuto = {
+  38: 'up',
+  40: 'down',
+  118: 'f7'
+};
+var autoOverride = ['up', 'up', 'down', 'down', 'f7'];
+var autoOverridePosition = 0;
+
+
+
 document.addEventListener('keydown', function(e) {
   var key = allowedKeys[e.keyCode];
   var requiredKey = darkOverride[darkOverridePosition];
@@ -210,17 +221,7 @@ document.addEventListener('keydown', function(e) {
   } else {
     darkOverridePosition = 0;
   }
-});
 
-// a key map of allowed keys
-var allowedKeysAuto = {
-  38: 'up',
-  40: 'down',
-  118: 'f7'
-};
-var autoOverride = ['up', 'up', 'down', 'down', 'f7'];
-var autoOverridePosition = 0;
-document.addEventListener('keydown', function(e) {
   var key = allowedKeysAuto[e.keyCode];
   var requiredKey = autoOverride[autoOverridePosition];
   if (key == requiredKey) {
@@ -232,7 +233,10 @@ document.addEventListener('keydown', function(e) {
   } else {
     autoOverridePosition = 0;
   }
+
 });
+
+
 
 // a key map of allowed keys
 var collapseKeysAuto = {
@@ -278,49 +282,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// a key map of allowed keys
-var allowedKeys = {
-  38: 'up',
-  40: 'down',
-  120: 'f9'
-};
-var caesarOverride = ['up', 'up', 'down', 'down', 'f9'];
-var caesarOverridePosition = 0;
-document.addEventListener('keydown', function(e) {
-  var key = allowedKeys[e.keyCode];
-  var requiredKey = caesarOverride[caesarOverridePosition];
-  if (key == requiredKey) {
-    caesarOverridePosition++;
-    if (caesarOverridePosition == caesarOverride.length) {
-      fluid.tcoh();
-      caesarOverridePosition = 0;
-    }
-  } else {
-    caesarOverridePosition = 0;
-  }
-});
 
-// a key map of allowed keys
-var allowedKeys = {
-  38: 'up',
-  40: 'down',
-  32: 'space'
-};
-var cmdOverride = ['up', 'up', 'down', 'down', 'space'];
-var cmdOverridePosition = 0;
-document.addEventListener('keydown', function(e) {
-  var key = allowedKeys[e.keyCode];
-  var requiredKey = cmdOverride[cmdOverridePosition];
-  if (key == requiredKey) {
-    cmdOverridePosition++;
-    if (cmdOverridePosition == cmdOverride.length) {
-      var cmd = window.prompt()
-      cmdOverridePosition = 0;
-    }
-  } else {
-    cmdOverridePosition = 0;
-  }
-});
 
 
 
