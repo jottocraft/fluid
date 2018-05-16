@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules v2.0.1
+Fluid JS Modules v2.1.0
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -138,55 +138,85 @@ $(this).siblings(".body").toggleClass("collapsed")
 });
 }
 
-window.onload = fluid.init
+$( document ).ready(fluid.init);
 
 
 /* Cards */
 menuopen = false;
-fluid.cards = function(id) {
-  var focus = $("#" + id).hasClass('focus');
-  console.log(focus)
+fluid.cards = function(element, isModal) {
+  var focus = $(element).hasClass('focus');
   if (focus) {
-        $("#" + id).css({top: window.scrollY + 200});
+    if ( !$( "#pagewrapper" ).length ) {
+    $( "body" ).wrapInner( "<div id='pagewrapper'></div>");
+    $( "#pagewrapper" ).after( "<div id='focuscardwrapper' class='container'></div>" );
+    $( "#pagewrapper" ).after( "<div id='splashscreen' style='display:none;margin-top: 100px;' class='container'><h1 style='font-size:5rem;' id='splashscreenname'></h1><div id='splashscreencnt'></div></div>" );
+    $(".card.focus").appendTo("#focuscardwrapper");
+    $(".splash").appendTo("#splashscreencnt");
+    }
+        $(element).css({top: window.scrollY + 200});
         if (menuopen) {
           fluid.cards.close.focus();
-          $(".content").addClass('blur');
-          $("#" + id).removeClass('close');
-          setTimeout(function() {$(".content").attr("onclick","fluid.cards.close.focus();");}, 100)
+          $("#pagewrapper").addClass('blur');
+          if (isModal) document.body.style.overflow = "hidden"
+          $(element).removeClass('close');
+          setTimeout(function() {$("#pagewrapper").attr("onclick","fluid.card.close('" + element + "');");}, 100)
         } else {
-          $(".content").addClass('blur');
-          $("#" + id).removeClass('close');
-          setTimeout(function() {$(".content").attr("onclick","fluid.cards.close.focus();");}, 100)
+          $("#pagewrapper").addClass('blur');
+          if (isModal) document.body.style.overflow = "hidden"
+          $(element).removeClass('close');
+          setTimeout(function() {$("#pagewrapper").attr("onclick","fluid.cards.close.focus();");}, 100)
         }
   } else {
-    $(".content").attr("onclick","");
+    $("#pagewrapper").attr("onclick","");
     if (menuopen) {
       fluid.cards.close();
-      $("#" + id).removeClass('close');
+      $(element).removeClass('close');
     } else {
      menuopen = true;
-     $("#" + id).removeClass('close');
+     $(element).removeClass('close');
     }
   }
 }
-fluid.card = function() {}
-fluid.card.close = function(cardid) {
-  $(cardid).addClass('close');
-  $('.content').removeClass("blur");
-  $(".content").attr("onclick","");
-  menuopen = false;
+fluid.modal = function(element) {
+  fluid.cards(element, true)
 }
-fluid.cards.close = function() {
-  $(".card").addClass('close');
-  $('.content').removeClass("blur");
-  $(".content").attr("onclick","");
+fluid.cards.close = function(element) {
+  $(element).addClass('close');
+  $('#pagewrapper').removeClass("blur");
+  document.body.style.overflow = ""
+  $("#pagewrapper").attr("onclick","");
   menuopen = false;
 }
 fluid.cards.close.focus = function() {
-  $(".content").attr("onclick","");
+  $("#pagewrapper").attr("onclick","");
   $(".focus").addClass('close');
-  $('.content').removeClass("blur");
+  $('#pagewrapper').removeClass("blur");
+  document.body.style.overflow = ""
   menuopen = false;
+}
+
+fluid.splash = function(element) {
+  fluid.splashScroll = window.scrollY;
+  if ( !$( "#pagewrapper" ).length ) {
+  $( "body" ).wrapInner( "<div id='pagewrapper'></div>");
+  $( "#pagewrapper" ).after( "<div id='focuscardwrapper' class='container'></div>" );
+  $( "#pagewrapper" ).after( "<div id='splashscreen' style='display:none;margin-top: 100px;' class='container'><h1 style='font-size:5rem;' id='splashscreenname'></h1><div id='splashscreencnt'></div></div>" );
+  $(".card.focus").appendTo("#focuscardwrapper");
+  $(".splash").appendTo("#splashscreencnt");
+  }
+  $("#pagewrapper").hide();
+ var title = $(element).attr("title");
+  $("#splashscreenname").html(title);
+  $(element).show();
+  $("#splashscreen").show();
+}
+
+fluid.unsplash = function() {
+  $("#splashscreen").hide();
+  $("#splashscreenname").html("");
+  $(".splash").hide();
+  $("#pagewrapper").show();
+  window.scrollTo(0, fluid.splashScroll);
 }
 
 /* Fluid Commands */

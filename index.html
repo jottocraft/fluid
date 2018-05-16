@@ -23,55 +23,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
-<div class="nav right" >
-        <ul>
-            <li>
-            <a href="#input"><i class="material-icons left">keyboard</i></a>
-            </li>
-
-            <li>
-            <a href="#dark"><i class="material-icons left">format_paint</i></a>
-            </li>
-
-            <li>
-            <a href="#nav"><i class="material-icons left">list</i></a>
-            </li>
-
-            <li>
-            <a href="#load"><i class="material-icons left">more_horiz</i></a>
-            </li>
-
-            <li>
-            <a href="#cards"><i class="material-icons left">layers</i></a>
-            </li>
-
-            <li>
-            <a href="#notes"><i class="material-icons left">note</i></a>
-            </li>
-
-            <li>
-            <a href="#install"><i class="material-icons left">cloud_download</i></a>
-            </li>
 
 
-        </ul>
-    </div>
-</nav>
-
-<style>
-</style>
 <body class="auto">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
-  <br /><br /><br /><br /><br /><br /><br /><br /><br />
-  <div class="container center content">
+  <div style="display:none" class="navbar nav">
+    <img src="https://fluid.js.org/icon.png" />
+    <h4>Fluid UI</h4>
+            <ul class="right">
+                <li>
+                <a href="#input"><i class="material-icons left">keyboard</i><span>Input</span></a>
+                </li>
+
+                <li>
+                <a href="#dark"><i class="material-icons left">format_paint</i><span>Dark Mode</span></a>
+                </li>
+
+                <li>
+                <a href="#nav"><i class="material-icons left">list</i><span>Navbar</span></a>
+                </li>
+
+                <li>
+                <a href="#cards"><i class="material-icons left">layers</i><span>Cards & Sections</span></a>
+                </li>
+
+                <li>
+                <a href="#splash"><i class="material-icons left">notifications</i><span>Splash & Alerts</span></a>
+                </li>
+
+                <li>
+                <a href="#notes"><i class="material-icons left">note</i><span>Notes</span></a>
+                </li>
+
+                <li>
+                <a href="#install"><i class="material-icons left">cloud_download</i><span>Download</span></a>
+                </li>
+
+
+            </ul>
+      </div>
+      <div class="nav right">
+                <ul>
+                    <li>
+                    <a href="#input"><i class="material-icons left">keyboard</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#dark"><i class="material-icons left">format_paint</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#nav"><i class="material-icons left">list</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#cards"><i class="material-icons left">layers</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#splash"><i class="material-icons left">notifications</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#notes"><i class="material-icons left">note</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#install"><i class="material-icons left">cloud_download</i></a>
+                    </li>
+
+
+                </ul>
+          </div>
+
+        <br /><br /><br /><br /><br /><br />
+
+        <script>
+        function toggleNavbarStyle() {
+          $(".nav.right").toggle();
+          $(".navbar.nav").toggle();
+          window.scrollTo(0, 0);
+        }
+        </script>
+        <style>
+        pre{
+          margin:0;
+        }
+        </style>
+  <div style="margin-top: 100px" class="container center">
       <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a href="#install">v2.0</a></h4><!-- <a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a> -->
+      <h4><a href="#install">v2.1</a></h4><!-- <a style="font-family: 'Product sans'; font-size: 25px" href="#install">v1.2 (stable)</a> -->
 
       </div>
-      <div class="container content">
+      <div class="container">
         <!-- jottocraft's playground -->
       <!--  <br /><br /><br /><br />
 
@@ -100,7 +147,6 @@
         <p>Don't want the shadow? Add the "noshadow" class to remove the effect</p>
         <br />
         <h5>Twemoji</h5>
-         <br />
          <p>Fluid UI automatically parses emoji on your site on load into Twitter emoji 🙂. Add the "notwemoji" class to the body if you want to use native emoji instead.</p>
          <code>&lt;body class=&quot;notwemoji&quot;&gt;</code>
          <br /><br />
@@ -115,10 +161,11 @@
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br><br>
         <h5>Modern buttons</h5>
+        <p>Add an icon by placing a span next to a material icon instead of text</p>
         <br>
-        <button class="btn">Hello!</button>
+        <button class="btn"><i class="material-icons">star</i>Hello!</button>
         <br><br>
-        <code>&lt;button class=&quot;btn&quot;&gt;Hello!&lt;/button&gt;</code>
+        <code>&lt;button class=&quot;btn&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Hello!&lt;/button&gt;</code>
         <br><br><br>
         <h5>Button row</h5>
         <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional code required! You can add the active class to the default button, and handle the clicks yourself to get the data.</p>
@@ -161,7 +208,7 @@
         <br /><br />
         <p>Enable with JavaScript</p>
         <code>fluid.auto();</code>
-        <br><br>
+        <br><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo</i><br><br>
         <button onclick="fluid.auto();" class="btn ">Try</button>
         <br><br>
           <h5>Set Fluid's theme manually</h5>
@@ -181,12 +228,16 @@
               <div class="section">
                 <div class="header">
               <i class="material-icons">list</i>
-              <h4>Navbar</h4>
+              <h4>Navigation</h4>
               </div>
               <div class="body">
       <p>
-        Fluid UI also offers a simple and modern style navigation bar. You can add the active class to any one of these to show that it is active. Add the active class to the nav div itself to automatically give buttons the active class.
+        Fluid UI also offers simple navigation bars. You can add the active class to any one of these to show that it is active. Add the active class to the nav div itself to automatically give buttons the active class.
       </p>
+      <p style="margin-top: 0;">You can add text in either navigation bar style for clarity by putting a span next to the icon. See the navbar style for an example.
+      <br /><br />
+      <h5>Toolbar</h5>
+      <p>Toolbars are small and simple (The default navigation on this site is a toolbar)</p>
           <pre>
           <code>&lt;div class=&quot;nav right&quot;&gt;
         &lt;ul&gt;
@@ -204,43 +255,38 @@
         &lt;/ul&gt;
 &lt;/div&gt;</code>
 </pre>
-<br />
 <p>
   You can also move it to the left by changing its class:
 </p>
 <pre>
 <code>&lt;!-- Left alignment --&gt;
-&lt;nav class=&quot;left&quot;&gt;
-</code>
+&lt;div class=&quot;nav left&quot;&gt;</code>
 </pre>
-</div>
-</div>
-<br><br>
-<a name="load"></a>
-<div class="section">
-  <div class="header">
-<i class="material-icons">more_horiz</i>
-<h4>Loader</h4>
-</div>
-<div class="body">
-<p>Setup a loader without having to run initialization code:</p>
-  <code>
-    &lt;loader&gt;&lt;/loader&gt;
-  </code>
-  <br />
-  <p>Show the loader (The loader cannot have any display style overrides. Use the hidden class instead to hide by default)</p>
-    <code>
-      fluid.load(true);
-    </code>
-    <br />
-    <p>Hide the loader</p>
-      <code>
-        fluid.load(flase);
-      </code>
-<br /><br />
-Demo:
 <br />
-<loader></loader>
+<h5>Navbar</h5>
+<p>Navbars take up the entire top of the page and let you add your own title and logo</p>
+    <pre>
+    <code>&lt;div class=&quot;nav navbar&quot;&gt;
+   &lt;img src=&quot;https://fluid.js.org/icon.png&quot; /&gt;
+   &lt;h4&gt;Fluid UI&lt;/h4&gt;
+    &lt;ul class=&quot;right&quot;&gt;
+        &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;help&lt;/i&gt;&lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code>
+</pre>
+<br />
+<p>Click the button to toggle the style of the navigation on this site</p>
+<button onclick="toggleNavbarStyle()" class="btn">Try</button>
 </div>
 </div>
 <br><br>
@@ -248,7 +294,7 @@ Demo:
 <div class="section">
   <div class="header">
 <i class="material-icons">layers</i>
-<h4>Section and Card UI</h4>
+<h4>Sections and Cards</h4>
 </div>
 <div class="body">
   <h5>Sections</h5>
@@ -293,12 +339,6 @@ Demo:
     <code>
       &lt;div id=&quot;democard&quot; class=&quot;card focus close&quot;&gt;
     </code>
-    <p>
-      Because focus cards blur the background and close the card on click, you will need to create a content div as the parent for every part of your page, excluding the focus card itself (It doesn't matter where the card is)
-    </p>
-    <code>
-      &lt;div  class=&quot;content&quot;&gt;
-    </code>
   <p>
     Show a card:
   </p>
@@ -306,27 +346,16 @@ Demo:
       fluid.cards(card-id)
     </code>
     <p>
-      Close a card (where card is #id, .class, etc.):
+      To close cards (Use .card.focus for focused cards):
     </p>
       <code>
-        fluid.card.close("card");
+        fluid.cards.close(elementSelector);
       </code>
-    <p>
-      Close all cards:
-    </p>
-      <code>
-        fluid.cards.close();
-      </code>
-    <p>
-      Close only focus cards:
-    </p>
-      <code>
-        fluid.cards.close.focus();
       </code>
 <br /><br />
 <div class="row">
-<button onclick="fluid.cards('card')" class="btn ">Card demo</button>
-<button onclick="fluid.cards('focuscard')" class="btn ">Focused card demo</button>
+<button onclick="fluid.cards('#card')" class="btn ">Card demo</button>
+<button onclick="fluid.cards('#focuscard')" class="btn ">Focused card demo</button>
 </div>
 <br />
 <div id="card" class="card close">
@@ -334,8 +363,29 @@ Demo:
     <br />
     Hello World!
     <br /><br />
-    <button class="btn " onclick="fluid.card.close('#card');">Go away</button>
+    <button class="btn " onclick="fluid.cards.close('#card');">Go away</button>
 </div>
+</div>
+</div>
+<br><br>
+<a name="splash"></a>
+<div class="section">
+  <div class="header">
+<i class="material-icons">notifications</i>
+<h4>Splash Screens and Alerts</h4>
+</div>
+<div class="body">
+<p>Show your div as a splash screen with fluid.splash(). Use the title attribute to specify the title of the splash screen, and add the splash class.</p>
+  <code>&lt;div class=&quot;Splash Demo&quot; title=&quot;Splash Demo&quot;&gt;</code>
+  <br />
+  <code>fluid.splash(element)</code>
+  <br />
+  <button onclick="fluid.splash('#demosplash')" class="btn">Try</button>
+  <br /><br />
+  <p>You can also use a focus card as a modal in Fluid UI. Just use fluid.modal() to open the card and it will disable scrolling and act as an alert.</p>
+  <code>fluid.modal(element)</code>
+  <br />
+  <button onclick="fluid.modal('#vmodal')" class="btn">Try</button>
 </div>
 </div>
 <br><br>
@@ -377,27 +427,26 @@ Demo:
           <div class="body">
           <div class="center">
           <br />
-          <h4>Fluid UI 2.0</h4>
+          <h4>Fluid UI 2.1</h4>
           <br />
           <h4><a class="icotext" href="http://archives.materializecss.com/0.100.2/"><i class="material-icons" style="font-size: 25px;">library_books</i>&nbsp;<span>Materialize Docs</span></a></h4>
-          <h4><a class="icotext" href="https://github.com/jottocraft/fluid/releases/download/v2.0/fluid.zip"><i class="material-icons" style="font-size: 25px;">cloud_download</i>&nbsp;<span>Download</span></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger icotext" href="#vmodal"><i class="material-icons" style="font-size: 25px;">description</i>&nbsp;<span>Changelog</span></a><!-- &nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2 beta 4</a> --></h4>
+          <h4><a class="icotext" href="https://github.com/jottocraft/fluid/releases/download/v2.0/fluid.zip"><i class="material-icons" style="font-size: 25px;">cloud_download</i>&nbsp;<span>Download</span></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a onclick="fluid.modal('#vmodal')" style="cursor:pointer;" class="icotext"><i class="material-icons" style="font-size: 25px;">description</i>&nbsp;<span>Changelog</span></a><!-- &nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2 beta 4</a> --></h4>
         </div>
             <br /><br>
           <h5>Install Fluid UI</h5>
           <p>Make sure Fluid UI is in the /fluid directory</p>
           <pre>
-          <code>
-&lt;!-- Fluid UI --&gt;
+          <code>&lt;!-- Fluid UI --&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;
-          </code>
+&lt;script type=&quot;text/javascript&quot; src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;</code>
         </pre>
           </div>
         </div>
           <br /><br />
+
 
   </div>
 <div class="container">
@@ -406,35 +455,32 @@ Demo:
       <br />
       Focus cards are displayed like alerts, but are HTML elements that can include anything you want them to.
       <br /><br />
-      <button class="btn " onclick="fluid.card.close('#focuscard')">Go away</button>
+      <button class="btn " onclick="fluid.cards.close('#focuscard')">Go away</button>
   </div>
-
-  <div id="vmodal" class="modal">
-    <div class="modal-content">
-      <h4>Fluid UI v2.0</h4>
+<div>
+  <div id="vmodal" class="card close focus container">
+    <div>
+      <h4>Fluid UI v2.1</h4>
       <b>Changelog</b>
       <br>
       <ul>
-        <li>Have Fluid set the theme based on time of day</li>
-<li>Get the current theme using fluid.isDark();</li>
-<li>Twemoji keep emoji consistent on all platforms, and support the latest emoji even if the client doesn't</li>
-<li>Use sections instead of cards for a more modern UI and more contrast</li>
-<li> Sections can be collapsed by clicking on the header and adding the "collapse" class</li>
-<li>Flat, modern buttons</li>
-<li>Curved input with a shadow when selected</li>
-<li>New, solid navigation bar</li>
-<li>Add the active class to the navbar to show what nav element is active</li>
-<li>Use a button row as a modern form of dropdowns</li>
-<li>Fixed a bug that caused the console to say it can't find the Roboto font</li>
-<li>Updated various elements across fluid to the Product Sans font</li>
-<li>Website updated to showcase all new features</li>
+        <li>Fix major auto theme bug</li>
+        <li>New navbar style and text labels for the toolbar</li>
+        <li>Cards update</li>
+        <li>Icons in buttons</li>
+        <li>Fix various bugs causing cards to act odd</li>
+        <li>Fluid UI themed scrollbar for Chrome</li>
+        <li>Splash screens and fluid.splash()</li>
+        <li>New code blocks</li>
+        <li>Card contrast and color improvements</li>
       </ul>
-    </div>
-    <div class="modal-footer">
+      </div>
+    <div class="right footer">
       <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
-      <a style="" class="modal-action modal-close  btn">Ok</a>
+      <a onclick="fluid.cards.close('#vmodal')" class="btn">Ok</a>
     </div>
   </div>
+</div>
   <div id="vmodal2" class="modal">
     <div class="modal-content">
       <h4>Fluid UI 2 Beta 4</h4>
@@ -451,6 +497,11 @@ Demo:
       <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
       <a style="" class="modal-action modal-close  btn">Ok</a>
     </div>
+  </div>
+  <div id="demosplash" class="splash" title="This is a splash screen.">
+    <p>You can put anything you want in a splash screen, but if you want your users to be able to leave it, you'll have to manually add a button that runs fluid.unsplash().</p>
+    <br />
+    <button class="btn" onclick="fluid.unsplash();">OK</button>
   </div>
   <script>
   $(document).ready(function(){
