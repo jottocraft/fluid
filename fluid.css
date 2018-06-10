@@ -47,6 +47,12 @@ body.dark *element(s)* {
   font-weight: 400;
   src: url(https://fluid.js.org/product-sans.ttf) format('truetype');
 }
+@font-face {
+  font-family: 'Google sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fluid.js.org/gsans.ttf) format('truetype');
+}
 html {
     font-family: "Roboto", sans-serif;
     font-weight: normal;
@@ -61,6 +67,10 @@ html {
 h1, h2, h3, h4, h5 {
     font-family: "Product sans", sans-serif;
     font-weight: normal;
+}
+p, div, button, a, span, input, body, html {
+  font-family: "Google sans", sans-serif;
+  font-weight: normal;
 }
 img.emoji {
   height: 1em;
@@ -375,6 +385,7 @@ text-align: right;
 }
 .nav span {
   margin-left: 5px;
+  vertical-align: middle;
 }
 .nav li i {
   display: inline-block;
@@ -422,8 +433,14 @@ body:not(.dark) .nav li.active {
   background-color: #4c4c4c;
   color: white;
 }
+body:not(.dark) .nav li.active span {
+  color: white;
+}
 body.dark .nav li.active {
   background-color: #ededed;
+  color: black;
+}
+body.dark .nav li.active span {
   color: black;
 }
 body:not(.dark) .nav li.active i {
@@ -666,7 +683,8 @@ body.dark .section .btn:not(.active):hover {
 .section .header i {
   margin-right: 10px;
 }
-.section .header i, .section .header span, .section .header h1, .section .header h2, .section .header h3, .section .header h4, .section .header h5 {
+.section .header i, .section .header span, .section .header h1, .section .header h2, .section .header h3, .section .header h4, .section .header h5,
+.section.header i, .section.header span, .section.header h1, .section.header h2, .section.header h3, .section.header h4, .section.header h5 {
   display: inline-block;
   vertical-align: middle;
 }
@@ -6065,10 +6083,6 @@ select:focus {
     outline: 1px solid #c9f3ef
 }
 
-button:focus.swal-button {
-    outline: none;
-    background-color: #2ab7a9
-}
 
 label {
     font-size: .8rem;
