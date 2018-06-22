@@ -12,7 +12,7 @@
 #devtools and builds
 *.zip
 *.bat
-
+tmp
 
 #Archive
 studio
