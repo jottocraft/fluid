@@ -72,6 +72,10 @@
                 <a href="#splash"><i class="material-icons left">notifications</i><span>Splash & Alerts</span></a>
                 </li>
 
+                <li>
+                <a href="#install"><i class="material-icons left">cloud_download</i><span>Download</span></a>
+                </li>
+
 
             </ul>
       </div>
@@ -109,6 +113,10 @@
 
                     <li>
                     <a href="#splash"><i class="material-icons left">notifications</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#install"><i class="material-icons left">cloud_download</i></a>
                     </li>
 
 
@@ -231,15 +239,15 @@
               //fluid.zip availible for download
             $("#reldownload").attr("href", release.assets[0].browser_download_url)
           } else {
-            //no fluid.zip
-            $("#reldownload").attr("href", release.html_url)
-          }
-          }
-          if (prerelease == null) {
-            // a stable release is the latest availible, no beta button
-          $("#relbeta").hide();
-        } else {
-          // a beta release is the latest availible, show beta button
+              //no fluid.zip
+              $("#reldownload").attr("href", release.html_url)
+            }
+            }
+            if (prerelease == null) {
+              // a stable release is the latest availible, no beta button
+            $("#relbeta").hide();
+          } else {
+            // a beta release is the latest availible, show beta button
           $("#relbeta").show();
         }
           $("#relinteract").show();
@@ -254,7 +262,7 @@
       <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a id="showver" href="docs/index.html" class="prerelease">v2.9.1</a></h4> <a id="stablever" style="font-family: 'Product sans'; font-size: 25px; display:none;" href="index.html">v1.2 (stable)</a>
+      <h4><a id="showver" href="#install" class="prerelease">v2.9.1</a></h4> <a id="stablever" style="font-family: 'Product sans'; font-size: 25px; display:none;" href="/">v1.2 (stable)</a>
 
       </div>
       <br /><br />
@@ -595,7 +603,7 @@ fluid.cloudConfig = {
           <a name="install"></a>
           <div class="section">
             <div class="header">
-          <i class="material-icons">file_download</i>
+          <i class="material-icons">cloud_download</i>
           <h5>Install Fluid UI</h5>
           </div>
           <div class="body">
