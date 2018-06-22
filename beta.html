@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="https://fluid.js.org/icon.png" type="image/png">
+  <link rel="shortcut icon" href="icon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <link type="text/css" rel="stylesheet" href="fluid.css"  media="screen,projection"/>
+       <link type="text/css" rel="stylesheet" href="fluid-beta.css"  media="screen,projection"/>
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
@@ -22,16 +23,35 @@
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
 </head>
 
 
 <body class="auto">
+  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="fluid.js"></script>
+  <script type="text/javascript" src="fluid-beta.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+  <script>
+  fluid.cloudConfig = {
+    name: "Fluid UI",
+    description: "Fluid UI showcase",
+    cloudUser: "qHqjJxjEFMc2Sn0qbI6alaBr65u1",
+    cloudProject: "demo"
+  };
+  </script>
+  <script src="cloud.js"></script>
+
   <div style="display:none" class="navbar nav">
     <img src="https://fluid.js.org/icon.png" />
     <h4>Fluid UI</h4>
             <ul class="right">
+
+              <li>
+              <a href="cloud/index.html"><i class="material-icons left">cloud</i><span>Console</span></a>
+              </li>
+
                 <li>
                 <a href="#input"><i class="material-icons left">keyboard</i><span>Input</span></a>
                 </li>
@@ -41,7 +61,7 @@
                 </li>
 
                 <li>
-                <a href="#nav"><i class="material-icons left">list</i><span>Navbar</span></a>
+                <a href="#nav"><i class="material-icons left">navigation</i><span>Navigation</span></a>
                 </li>
 
                 <li>
@@ -52,19 +72,17 @@
                 <a href="#splash"><i class="material-icons left">notifications</i><span>Splash & Alerts</span></a>
                 </li>
 
-                <li>
-                <a href="#notes"><i class="material-icons left">note</i><span>Notes</span></a>
-                </li>
-
-                <li>
-                <a href="#install"><i class="material-icons left">cloud_download</i><span>Download</span></a>
-                </li>
-
 
             </ul>
       </div>
       <div class="nav right">
                 <ul>
+
+                  <li>
+                  <a href="cloud/index.html"><i class="material-icons left">cloud</i></a>
+                  </li>
+
+
                     <li>
                     <a href="#input"><i class="material-icons left">keyboard</i></a>
                     </li>
@@ -74,7 +92,15 @@
                     </li>
 
                     <li>
-                    <a href="#nav"><i class="material-icons left">list</i></a>
+                    <a href="#cloud"><i class="material-icons left">system_update_alt</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#nav"><i class="material-icons left">navigation</i></a>
+                    </li>
+
+                    <li>
+                    <a href="#spaces"><i class="material-icons left">dashboard</i></a>
                     </li>
 
                     <li>
@@ -85,25 +111,138 @@
                     <a href="#splash"><i class="material-icons left">notifications</i></a>
                     </li>
 
-                    <li>
-                    <a href="#notes"><i class="material-icons left">note</i></a>
-                    </li>
-
-                    <li>
-                    <a href="#install"><i class="material-icons left">cloud_download</i></a>
-                    </li>
-
 
                 </ul>
           </div>
 
-        <br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br />
 
+        <style>
+        body.beta .interact {
+          color: orange;
+        }
+        body.beta .switch {
+          color: #039be5;
+        }
+        body:not(.beta) .interact {
+          color: #039be5;
+        }
+        body:not(.beta) .switch {
+          color: orange;
+        }
+        #relnotes h1, #relnotes h2, #relnotes h3, #relnotes h4, #relnotes h5 {
+          font-size: 25px;
+          font-weight: bold;
+          font-family: "Google sans", sans-serif;
+        }
+        .prerelease, .outdated {
+          color: orange;
+        }
+        .unreleased {
+          color: red;
+        }
+        </style>
         <script>
+        const markdown = new showdown.Converter();
         function toggleNavbarStyle() {
           $(".nav.right").toggle();
           $(".navbar.nav").toggle();
           window.scrollTo(0, 0);
+        }
+        $.getJSON("https://api.github.com/repos/jottocraft/fluid/releases", function(data) {
+          console.log(data)
+          if (data[0].prerelease == false) {
+            release = data[0];
+            prerelease = null;
+          } else {
+            prerelease = data[0];
+            release = null;
+            for (var i = 0; i < data.length; i++) {
+              if (release == null) {
+              if (data[i].prerelease == false) {
+                release = data[i];
+              }
+            }
+            }
+          }
+          renderReleases(false);
+        })
+        function renderReleases(betaa) {
+          betashowcased = false;
+          $("#nofluid").hide();
+          if ($("#showver").hasClass("prerelease")) {
+            if (prerelease !== null) {
+              if ($("#showver").html() == prerelease.tag_name) {
+                //Lastest Prerelease
+                $("#stablever").html(release.tag_name + " (stable)")
+                $("#stablever").show();
+                betashowcased = true;
+              } else {
+                //Outdated Prerelease
+                $("#stablever").html(release.tag_name + " (latest)")
+                $("#stablever").show();
+                betashowcased = false;
+              }
+            } else {
+              //Unreleased prerelease (If a prerelease is already the latest, it will trigger outdated instead)
+              $("#showver").addClass("unreleased");
+              $("#stablever").html(release.tag_name + " (released)")
+              $("#stablever").show();
+              $("#nofluid").show();
+          }
+          //Display readable beta string instead of actual version number
+          var dispver = $("#showver").html()
+          if (dispver.split(".")[1] == "9") {
+            $("#showver").html("v" + (Number(dispver.split(".")[0].charAt(1)) + 1) + ".0.0 beta " + dispver.split(".")[2])
+          }
+
+          } else {
+            if ($("#showver").html() !== release.tag_name) {
+              //outdated release
+              $("#showver").addClass("outdated");
+              $("#stablever").html(release.tag_name + " (latest)")
+              $("#stablever").show();
+            }
+          }
+          if (betaa == undefined) {
+            beta = !$("body").hasClass("beta");
+          } else { beta = betaa; }
+          if (beta) {
+            //show beta
+            $("body").addClass("beta");
+            $("#relbeta").html("Get the stable version");
+            $(".relver").html(prerelease.name)
+            $("#relnotes").html(markdown.makeHtml(prerelease.body));
+            if (prerelease.assets[0] !== undefined) {
+            //fluid.zip availible for download
+            $("#reldownload").attr("href", prerelease.assets[0].browser_download_url)
+          } else {
+            //no fluid.zip
+            $("#reldownload").attr("href", prerelease.html_url)
+          }
+          } else {
+            //show stable
+            $("body").removeClass("beta");
+            $("#relbeta").html("Try the beta");
+            if (betashowcased) $("#relbeta").html("Try the beta (showcased)");
+            $(".relver").html(release.name)
+            $("#relnotes").html(markdown.makeHtml(release.body));
+            if (release.assets[0] !== undefined) {
+              //fluid.zip availible for download
+            $("#reldownload").attr("href", release.assets[0].browser_download_url)
+          } else {
+            //no fluid.zip
+            $("#reldownload").attr("href", release.html_url)
+          }
+          }
+          if (prerelease == null) {
+            // a stable release is the latest availible, no beta button
+          $("#relbeta").hide();
+        } else {
+          // a beta release is the latest availible, show beta button
+          $("#relbeta").show();
+        }
+          $("#relinteract").show();
         }
         </script>
         <style>
@@ -115,9 +254,11 @@
       <img style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
       <br /><br />
       <h1>Fluid UI</h1>
-      <h4><a href="#install">v2.1.1</a></h4> <a style="font-family: 'Product sans'; font-size: 25px; color: orange;" href="beta.html">v3.0.0 beta</a>
+      <h4><a id="showver" href="docs/index.html" class="prerelease">v2.9.1</a></h4> <a id="stablever" style="font-family: 'Product sans'; font-size: 25px; display:none;" href="index.html">v1.2 (stable)</a>
 
       </div>
+      <br /><br />
+      <br /><br />
       <div class="container">
         <!-- jottocraft's playground -->
       <!--  <br /><br /><br /><br />
@@ -131,12 +272,12 @@
 
          <br /><br /><br /><br />
        -->
-        <br><br>
+        <br /><br />
         <a name="input"></a>
         <div class="section">
           <div class="header">
         <i class="material-icons">keyboard</i>
-        <h4>Input</h4>
+        <h5>Input</h5>
       </div>
       <div class="body">
        <h5>Text input</h5>
@@ -159,14 +300,14 @@
         <br />
         <br />
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
-        <br><br>
+        <br /><br />
         <h5>Modern buttons</h5>
         <p>Add an icon by placing a span next to a material icon instead of text</p>
-        <br>
+        <br />
         <button class="btn"><i class="material-icons">star</i>Hello!</button>
-        <br><br>
+        <br /><br />
         <code>&lt;button class=&quot;btn&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Hello!&lt;/button&gt;</code>
-        <br><br><br>
+        <br /><br /><br />
         <h5>Button row</h5>
         <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional code required! You can add the active class to the default button, and handle the clicks yourself to get the data.</p>
         <i>Because buttons are inline, if you want to use buttons in a row normally only the row class</i>
@@ -186,12 +327,12 @@
 </pre>
 </div>
       </div>
-      <br><br>
+      <br /><br />
       <a name="dark"></a>
       <div class="section">
         <div class="header">
       <i class="material-icons">format_paint</i>
-      <h4>Dark mode</h4>
+      <h5>Dark mode</h5>
     </div>
     <div class="body">
         <p>
@@ -208,27 +349,68 @@
         <br /><br />
         <p>Enable with JavaScript</p>
         <code>fluid.auto();</code>
-        <br><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo</i><br><br>
+        <br /><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo</i><br /><br />
         <button onclick="fluid.auto();" class="btn ">Try</button>
-        <br><br>
+        <br /><br />
           <h5>Set Fluid's theme manually</h5>
           <p>Set with CSS (Dark class sets dark mode, no dark class sets light mode)</p>
           <code>&lt;body class=&quot;dark&quot;&gt;</code>
           <br /><br />
           <p>Set with JavaScript (Toggle by running without parameter)</p>
           <code>fluid.dark(true);</code>
-          <br><br>
+          <br /><br />
           <button onclick="fluid.dark();" class="btn ">Try</button>
-          <br><br>
+          <br /><br />
 
+        </div>
+      </div>
+      <br /><br />
+      <a name="cloud"></a>
+      <div class="section">
+        <div class="header">
+      <i class="material-icons">system_update_alt</i>
+      <h5>Fluid Cloud</h5>
+    </div>
+    <div class="body">
+        <p>
+          Fluid Cloud is a Fluid UI module that supports Fluid UI 3 or later versions. Fluid Cloud lets you configure alerts, which could be used for events or updates. Fluid Cloud can also be used to set a splash screen in case of an unexpected outage on your site.
+        </p>
+        <p>All of the site configuration (active splash screen and alert text) is public</p>
+        <p>You can go to the Fluid Cloud console by clicking on the cloud icon at the top of the page, or by going to <a href="cloud/index.html">fluid.js.org/cloud</a></p>
+        <br />
+        <h5>Initilization code</h5>
+        <p>Give your site a unique (for your account, not global) Fluid Cloud project ID. You will be given your Fluid Cloud user ID when you login to the cloud console.</p>
+        <br />
+        <p>fluid.cloudConfig variable (Make sure it is defined before loading cloud.js):</p>
+<pre><code>&lt;script src=&quot;https://www.gstatic.com/firebasejs/5.1.0/firebase.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+fluid.cloudConfig = {
+  cloudUser: "myuserid",
+  cloudProject: "site"
+}
+&lt;/script&gt;
+&lt;script src=&quot;fluid/cloud.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<br />
+<p>If your site has a web app manifest, you can define the cloudProject variable there. You still need to make sure to include both JavaScript files, however.</p>
+<p>Web app manifest:</p>
+<pre><code>{
+"name": "My site",
+"description": "Cool site",
+...
+"cloudUser": "myuserid",
+"cloudProject": "site",
+...
+}
+</code></pre>
         </div>
       </div>
               <br /><br />
               <a name="nav"></a>
               <div class="section">
                 <div class="header">
-              <i class="material-icons">list</i>
-              <h4>Navigation</h4>
+              <i class="material-icons">navigation</i>
+              <h5>Navigation</h5>
               </div>
               <div class="body">
       <p>
@@ -263,6 +445,14 @@
 &lt;div class=&quot;nav left&quot;&gt;</code>
 </pre>
 <br />
+<p>
+  You can make the navigation sticky (always stays at the top no matter where the user is scrolled) by adding the sticky class:
+</p>
+<pre>
+<code>&lt;!-- Sticky nav --&gt;
+&lt;div class=&quot;nav right sticky&quot;&gt;</code>
+</pre>
+<br />
 <h5>Navbar</h5>
 <p>Navbars take up the entire top of the page and let you add your own title and logo</p>
     <pre>
@@ -289,12 +479,25 @@
 <button onclick="toggleNavbarStyle()" class="btn">Try</button>
 </div>
 </div>
-<br><br>
+<br /><br />
+<a name="spaces"></a>
+<div class="section">
+  <div class="header">
+<i class="material-icons">dashboard</i>
+<h5>Fluid Spaces</h5>
+</div>
+<div class="body">
+  <p>
+    Fluid Spaces will soon let you create more flexible layouts on your site with rows and columns. This feature is coming in a later beta of Fluid UI 3.
+  </p>
+  </div>
+</div>
+<br /><br />
 <a name="cards"></a>
 <div class="section">
   <div class="header">
 <i class="material-icons">layers</i>
-<h4>Sections and Cards</h4>
+<h5>Sections and Cards</h5>
 </div>
 <div class="body">
   <h5>Sections</h5>
@@ -315,7 +518,7 @@
 <br /><br />
 <p>Add the "collapsed" class to the body of the section to have it defaultly collapsed</p>
 <code>&lt;div class=&quot;body collapsed&quot;&gt;</code>
-<br><br>
+<br /><br />
 <p>Click the try button below to give all sections on this page the collapse class. If your page dynamically changes the collapse class, make sure to run fluid.init() to initialize all of them.</p>
 <button onclick="$('.section').addClass('collapse');fluid.init();" class="btn">Try</button>
 <br /><br /><br />
@@ -367,12 +570,12 @@
 </div>
 </div>
 </div>
-<br><br>
+<br /><br />
 <a name="splash"></a>
 <div class="section">
   <div class="header">
 <i class="material-icons">notifications</i>
-<h4>Splash Screens and Alerts</h4>
+<h5>Splash Screens and Alerts</h5>
 </div>
 <div class="body">
 <p>Show your div as a splash screen with fluid.splash(). Use the title attribute to specify the title of the splash screen, and add the splash class.</p>
@@ -388,51 +591,23 @@
   <button onclick="fluid.modal('#vmodal')" class="btn">Try</button>
 </div>
 </div>
-<br><br>
-<a name="notes"></a>
-<div class="section">
-  <div class="header">
-<i class="material-icons">note</i>
-<h4>Notes</h4>
-</div>
-<div class="body">
-<p>All the files in Fluid UI are made to be easily modifiable. If you made a modification you like, feel free to make a PR on <a href="https://github.com/jottocraft/fluid">GitHub</a>.</p>
-          <p>Because Fluid UI is modded Materialize, you can find use most Materialize elements (and they all support dark mode!). <a href="https://materializecss.com">Materialize's documentation</a>. Fluid UI is built off of Materialize 0.100.2.</p>
-          <p>Colors used in Fluid UI can be found <a href="https://docs.google.com/document/d/1TSCk6cMDy7haPQjfoDdcfHIqu8YPM_mmZ4-XDMZiiak/edit?usp=sharing">here</a>. (I use this myself for development so it's always up to date)</p>
-          <p>
-            Most things should work as expected from Materialize's code. However, some things may be unstable, or not work altogether. Contact me with any issues you think should be added to this list.
-          </p>
-          <p><a href="https://github.com/Dogfalo/materialize/blob/v0.100.2/LICENSE">Materialize components Copyright (c) 2014-2018 Materialize</a></p>
-          <br>
-          <h5>Contact</h5>
-          <p>Email <a href="mailto:jotto3053@gmail.com">jotto3053@gmail.com</a> to contact me</p>
-          <br>
-          <h3 style="color:red;">Unsupported</h3>
-          <i>Because some Fluid UI components override / overlap with Materialize components, some Materialize components aren't functional</i>
-          <ul style="list-style-type:none">
-          <li>Materialize input labels, character counters, and error / success messages</li>
-          <li>Materialize cards</li>
-          <li>Materialize sections</li>
-          <li>Anything not included in Materialize v0.100.2</li>
-          </ul>
-        </div>
-          </div>
-          <br><br>
+          <br /><br />
           <a name="install"></a>
           <div class="section">
             <div class="header">
           <i class="material-icons">file_download</i>
-          <h4>Install Fluid UI</h4>
+          <h5>Install Fluid UI</h5>
           </div>
           <div class="body">
           <div class="center">
           <br />
-          <h4>Fluid UI 2.1.1</h4>
+          <h4 class="relver">Getting releases...</h4>
+          <h6 id="nofluid" style="font-family: 'Google sans', sans-serif;color: red;display:none;">The version of Fluid UI showcased on this site is unreleased and cannot be downloaded</h6>
+          <h5 id="relbeta" style="cursor:pointer;display:none;" class="switch" onclick="renderReleases();">Try the beta</h5>
           <br />
-          <h4><a class="icotext" href="http://archives.materializecss.com/0.100.2/"><i class="material-icons" style="font-size: 25px;">library_books</i>&nbsp;<span>Materialize Docs</span></a></h4>
-          <h4><a class="icotext" href="https://github.com/jottocraft/fluid/releases/download/v2.1.1/fluid.zip"><i class="material-icons" style="font-size: 25px;">cloud_download</i>&nbsp;<span>Download</span></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a onclick="fluid.modal('#vmodal')" style="cursor:pointer;" class="icotext"><i class="material-icons" style="font-size: 25px;">description</i>&nbsp;<span>Changelog</span></a><!-- &nbsp;&nbsp; | &nbsp;&nbsp;<a class="modal-trigger" style="color:orange" href="#vmodal2">v2 beta 4</a> --></h4>
+          <h4 style="display:none;" id="relinteract">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="reldownload" class="interact" class="icotext" href="#"><i class="material-icons" style="font-size: 25px;">cloud_download</i>&nbsp;<span>Download</span></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a onclick="fluid.modal('#vmodal')" class="interact" style="cursor:pointer;" class="icotext"><i class="material-icons" style="font-size: 25px;">note</i>&nbsp;<span>Release Notes</span></a></h4>
         </div>
-            <br /><br>
+            <br /><br />
           <h5>Install Fluid UI</h5>
           <p>Make sure Fluid UI is in the /fluid directory</p>
           <pre>
@@ -445,9 +620,10 @@
         </pre>
           </div>
         </div>
-          <br /><br />
+           <br /><br /><br /><br />
 
-
+<p style="text-align:center">(c) 2018 jottocraft&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
+  <br /><br />
   </div>
 <div class="container">
   <div id="focuscard" class="card close focus">
@@ -460,13 +636,9 @@
 <div>
   <div id="vmodal" class="card close focus container">
     <div>
-      <h4>Fluid UI v2.1.1</h4>
-      <b>Changelog</b>
-      <br>
-      <ul>
-        <li>Bugfixes</li>
-        <li>Google Sans for non-header text</li>
-      </ul>
+      <h4 class="relver">Fluid UI v2.9.9</h4>
+      <div id="relnotes">
+      </div>
       </div>
     <div class="right footer">
       <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
@@ -474,34 +646,11 @@
     </div>
   </div>
 </div>
-  <div id="vmodal2" class="modal">
-    <div class="modal-content">
-      <h4>Fluid UI 2 Beta 4</h4>
-      <b>Changelog</b>
-      <br>
-      <ul>
-        <!-- <li style="color:orange;"><i>This is Fluid UI 2's release candidate. If using this build in a public site, be sure to upgrade to the final when released</i></li> -->
-        <li style="color:red;"><b>!! Fluid UI 2 is still in development and may not work as expected. Use at your own risk. !!</b></li>
-        <li>Auto theme, more theme settings</li>
-        <li>Bugfixes</li>
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
-      <a style="" class="modal-action modal-close  btn">Ok</a>
-    </div>
-  </div>
   <div id="demosplash" class="splash" title="This is a splash screen.">
     <p>You can put anything you want in a splash screen, but if you want your users to be able to leave it, you'll have to manually add a button that runs fluid.unsplash().</p>
     <br />
     <button class="btn" onclick="fluid.unsplash();">OK</button>
   </div>
-  <script>
-  $(document).ready(function(){
-  // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-  $('.modal').modal();
-});
-  </script>
   <style>
   body {
     overflow-x:hidden;

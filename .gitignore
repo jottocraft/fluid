@@ -9,13 +9,13 @@
 *.userosscache
 *.sln.docstates
 
-#Builds
+#devtools and builds
 *.zip
+*.bat
 
-#Secret
-beta.html
-fluid-beta.css
-fluid-beta.js
+
+#Archive
+studio
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
