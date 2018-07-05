@@ -162,6 +162,13 @@
           if (data[0].prerelease == false) {
             release = data[0];
             prerelease = null;
+            for (var i = 0; i < data.length; i++) {
+              if (prerelease == null) {
+              if (data[i].prerelease == true) {
+                prerelease = data[i];
+              }
+            }
+            }
           } else {
             prerelease = data[0];
             release = null;
