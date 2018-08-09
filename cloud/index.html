@@ -4,7 +4,7 @@
   <link rel="shortcut icon" href="cloud.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <link type="text/css" rel="stylesheet" href="../fluid-beta.css"  media="screen,projection"/>
+       <link type="text/css" rel="stylesheet" href="../beta/fluid-beta.css"  media="screen,projection"/>
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -12,10 +12,10 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
-  <meta property="og:url" content="https://fluid.js.org" />
-  <meta property="og:title" content="Fluid UI" />
-  <meta property="og:description" content="Easy to use and modern CSS with a dark mode" />
-  <meta property="og:image" content="https://fluid.js.org/icon.png" />
+  <meta property="og:url" content="https://fluid.js.org/cloud" />
+  <meta property="og:title" content="Fluid Cloud Console" />
+  <meta property="og:description" content="Remotely manage your sites made with Fluid UI 3 or later" />
+  <meta property="og:image" content="https://fluid.js.org/cloud/cloud.png" />
 
   <meta charset="utf-8">
   <title>Fluid Cloud Console</title>
@@ -29,7 +29,7 @@
 <body class="auto">
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../fluid-beta.js"></script>
+  <script type="text/javascript" src="../beta/fluid-beta.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
@@ -65,9 +65,11 @@ firebase.auth().onAuthStateChanged(function(userr) {
     database.doc(user.uid).get().then(function(doc) {
         if (doc.exists) {
           sitedata = doc.data();
+          positions = {}
           for (var i = 0; i < sitedata.siteList.length; i++) {
-            if (sitedata.siteList[i] !== "deleted") renderSite(sitedata.siteList[i]);
+            if (sitedata.siteList[i] !== "deleted") { siteKeys(sitedata.siteList[i], true); positions[sitedata.siteList[i]] = i; }
           }
+          fluid.init();
         } else {
           sitedata = {
             siteList: []
@@ -83,26 +85,60 @@ function addSite() {
   newid = $("#newsiteid").val();
   sitedata.siteList.push(newid);
   sitedata[newid] = {
-    alert: {
-      title: "",
-      content: ""
-    },
     splash: {
       title: "",
       content: ""
     },
     toast: {
-      title: "",
-      content: ""
+      icon: "",
+      text: ""
     }
   }
   database.doc(user.uid).set(sitedata);
   renderSite(newid);
   fluid.unsplash();
 }
+function siteKeys(siteid, render) {
+  var repairs = false;
+  if (sitedata[siteid].splash == undefined) {
+    sitedata[siteid].splash = {
+      title: "",
+      content: ""
+    }
+    var repairs = true;
+  }
+  if (sitedata[siteid].toast == undefined) {
+    sitedata[siteid].toast = {
+      icon: "",
+      text: ""
+    }
+    var repairs = true;
+  }
+  if (repairs) {
+    database.doc(user.uid).set(sitedata);
+    console.log("Site updated to support new features https://fluid.js.org/beta/#cloud")
+  }
+  if (render == true) {
+    renderSite(siteid)
+  }
+}
 function renderSite(siteid) {
+  console.log(sitedata[siteid])
 var splashstatus = "disabled"
 if (sitedata[siteid].splash.title !== "") splashstatus = "enabled"
+var toaststatus = "disabled"
+if (sitedata[siteid].toast.icon !== "") toaststatus = "enabled"
+
+nofluid = `style="display:none"`; splashfeature = `style="display:none"`; toastfeature = `style="display:none"`;  alertfeature = `style="display:none"`;
+myver = {}; myver[sitedata[siteid].fluid] = "active";
+
+if (sitedata[siteid].fluid == undefined) {
+  nofluid = ""
+} else {
+if (sitedata[siteid].fluid >= 291) splashfeature = "";
+if (sitedata[siteid].fluid >= 292) toastfeature = "";
+if (sitedata[siteid].fluid >= 293) alertfeature = "";
+}
 $("#sitelist").html(`
   <div class="section">
     <div class="header">
@@ -110,35 +146,99 @@ $("#sitelist").html(`
   <h5>` + siteid + `</h5>
 </div>
 <div class="body" style="padding-top: 0px;">
+<h5>Site Status</h5>
+<p class="` + siteid + ` vtext">Fluid UI Version</p>
+<div class="btns row">
+<button onclick="saveV('` + siteid + `', 291)" class="btn ` + myver[291] +`">v3 b1</button>
+<button onclick="saveV('` + siteid + `', 292)" class="btn ` + myver[292] +`">v3 b2 or above</button>
+</div>
+<div>
+<button onclick="oldID = '` + siteid + `';fluid.splash('.splash.rename');" class="btn"><i class="material-icons">edit</i>Change Site ID</button>
+<button onclick="unlinkID = '` + siteid + `'; fluid.splash('.splash.unlink');" class="btn"><i class="material-icons">link_off</i>Unlink site</button>
+</div>
+<br /><br /><br />
+<div ` + nofluid + `>
+<h5>Specify Fluid UI Version</h5>
+<p>Specify the version of Fluid UI your site is using to unlock supported Fluid Cloud features</p>
+</div>
+<div ` + splashfeature + `>
   <h5>Splash screen</h5>
   <p>Splash screen is currently <b>` + splashstatus + `</b>.</p>
   <br />
   <input class="title" value="` + sitedata[siteid].splash.title + `" placeholder="Splash screen title" />
   <input class="splashcontent" value="` + sitedata[siteid].splash.content + `" placeholder="Splash screen content" />
   <br />
-  <div class="row"><button onclick="splash(true, '` + siteid + `', this)" class="btn">Enable</button><button onclick="splash(false, '` + siteid + `', this)" class="btn">Disable</button></div>
+  <div class="row"><button onclick="save('splash', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button><button onclick="save('splash', false, '` + siteid + `', this)" class="btn"><i class="material-icons">toggle_off</i>Disable</button></div>
+  </div>
+  <br />
+  <div ` + toastfeature + `>
+  <h5>Toast</h5>
+  <p>Toast is currently <b>` + toaststatus + `</b>.</p>
+  <br />
+  <input class="icon" value="` + sitedata[siteid].toast.icon + `" placeholder="Toast icon" />
+  <input class="text" value="` + sitedata[siteid].toast.text + `" placeholder="Toast text" />
+  <br />
+  <div class="row"><button onclick="save('toast', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button><button onclick="save('toast', false, '` + siteid + `', this)" class="btn"><i class="material-icons">toggle_off</i>Disable</button></div>
+  </div>
 </div>
 </div>
   ` + $("#sitelist").html());
 }
-function splash(enable, siteid, element) {
+function save(feat, enable, siteid, element) {
 if (enable) {
   $(element).parent().siblings("p").children("b").html("enabled")
-  sitedata[siteid].splash.title = $(element).parent().siblings("input.title").val()
-  sitedata[siteid].splash.content = $(element).parent().siblings("input.splashcontent").val()
-  database.doc(user.uid).set(sitedata);
 } else {
   $(element).parent().siblings("p").children("b").html("disabled")
-  $(element).parent().siblings("input.title").val("")
-  $(element).parent().siblings("input.splashcontent").val("")
-  sitedata[siteid].splash.title = $(element).parent().siblings("input.title").val()
-  sitedata[siteid].splash.content = $(element).parent().siblings("input.splashcontent").val()
-  database.doc(user.uid).set(sitedata);
+  $(element).parent().siblings("input").val("")
 }
+if (feat == "splash") {
+sitedata[siteid].splash.title = $(element).parent().siblings("input.title").val()
+sitedata[siteid].splash.content = $(element).parent().siblings("input.splashcontent").val()
+}
+if (feat == "toast") {
+sitedata[siteid].toast.icon = $(element).parent().siblings("input.icon").val()
+sitedata[siteid].toast.text = $(element).parent().siblings("input.text").val()
+}
+database.doc(user.uid).set(sitedata);
+}
+saveVis = false;
+function saveV(siteid, num) {
+  if (!saveVis) {
+saveVis = true;
+sitedata[siteid].fluid = num
+$("." + siteid + ".vtext").html("Updating site...")
+database.doc(user.uid).set(sitedata).then(function() {
+  window.location.reload();
+});
+}
+}
+unlinkID = undefined;
+function unlink() {
+sitedata.siteList[positions[unlinkID]] = "deleted";
+  delete sitedata[unlinkID];
+  database.doc(user.uid).set(sitedata).then(function() {
+     window.location.reload();
+  });
+}
+function changeID() {
+  newID = $("#NEWsiteid").val();
+  sitedata[newID] = sitedata[oldID];
+  sitedata.siteList[positions[oldID]] = newID;
+    delete sitedata[oldID];
+    database.doc(user.uid).set(sitedata).then(function() {
+       window.location.reload();
+    });
 }
 </script>
+<style>
+img.magicImage {
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.17);
+  border-radius: 50%;
+  background-color: #51adfa;
+}
+</style>
   <div style="margin-top: 100px;margin-top: 150px;" class="container center">
-      <img style="width:250px;height:250px;margin-right: 50px;vertical-align:middle;" alt="" class="center" src="cloud.png"></img>
+      <img class="magicImage" style="width:250px;height:250px;margin-right: 50px;vertical-align:middle;" alt="" class="center" src="cloud.png"></img>
       <div style="display:inline-block;vertical-align:middle;">
       <h1>Fluid Cloud</h1>
       <h4 style="color: orange">beta</h4>
@@ -161,7 +261,7 @@ if (enable) {
         <br />
         <input type="password" placeholder="Password" />
         <br />
-        <button onclick="$(this).parent().hide();$(this).parent().siblings('div').show();" class="btn">Back</button>
+        <button onclick="$(this).parent().hide();$(this).parent().siblings('div').show();" class="btn"><i class="material-icons">keyboard_arrow_left</i>Back</button>
         <button class="btn">Sign In</button>
       </div>
       <div>
@@ -178,19 +278,30 @@ if (enable) {
         <h5>Add Site</h5>
       </div>
       <div class="body" style="padding-top: 0px;">
-        <p>Your Fluid Cloud user ID is <b id="useriddisp">dsafdsajfdsafjd</b></p>
+        <p>Your Fluid Cloud user ID is <b id="useriddisp">N/A</b></p>
         <br />
-        <button onclick="fluid.splash('.splash.addsite')" class="btn">Add Site</button>
+        <button onclick="fluid.splash('.splash.addsite')" class="btn"><i class="material-icons">add</i>Add Site</button>
       </div>
 </div>
       <br />
       <div id="sitelist">
       </div>
       <div class="splash addsite" title="Add site">
-        <p>Enter the same ID that you defined (or plan to define) for the cloudProject key on your site. <a href="../beta.html#cloud">Learn more</a></p>
+        <p>Enter the same ID that you defined (or plan to define) for the cloudProject key on your site. <a href="../beta/#cloud">Learn more</a></p>
         <input id="newsiteid" placeholder="Site ID" />
         <br />
         <button onclick="addSite();" class="btn">Add site</button>
+      </div>
+      <div class="splash rename" title="Change Site ID">
+        <p>Make sure to update the site ID on your site. <a href="../beta/#cloud">Learn more</a></p>
+          <input id="NEWsiteid" placeholder="New Site ID" />
+        <br />
+        <button onclick="changeID();" class="btn">Change ID</button>
+      </div>
+      <div class="splash unlink" title="Unlink site">
+        <p>This action cannot be undone. Unlinking a site does not delete the Fluid site itself; it just removes its data from the cloud console and Fluid cloud database.</p>
+        <br />
+        <div class="row"><button onclick="unlink();" class="btn">Unlink site</button><button onclick="fluid.unsplash();" class="btn">Nevermind</button></div>
       </div>
       </div>
            <br /><br /><br /><br />

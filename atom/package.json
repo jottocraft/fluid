@@ -1,0 +1,15 @@
+{
+  "name": "fluid-ui",
+  "theme": "ui",
+  "version": "3.0.0",
+  "description": "Fluid UI for the Atom editor",
+  "keywords": [
+    "ui",
+    "theme"
+  ],
+  "repository": "https://github.com/jottocraft/fluid",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}

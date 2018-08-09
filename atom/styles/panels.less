@@ -1,0 +1,46 @@
+
+// Panels
+// -------------------
+
+// Overrides: atom/static/panels.less
+
+.panel-heading {
+  border-bottom: 1px solid @panel-heading-border-color;
+  background-color: @panel-heading-background-color;
+}
+
+.inset-panel {
+  background-color: @inset-panel-background-color;
+  .panel-heading {
+    background-color: lighten(@inset-panel-background-color, 4%);
+  }
+}
+.panels-menu li.active a {
+  color: white !important;
+  background-color: #207bdf !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.17);
+}
+.panels-menu li:not(.active) a:hover {
+  background-color: transparent !important;
+}
+.panels-menu li {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.panels-menu li a {
+  transition: all 0.4s;
+  border-radius: 10px !important;
+}
+
+
+
+
+
+// Modal -------------------
+// Used on top of the editor, like the Command Palette.
+
+atom-panel.modal {
+  border: 1px solid @overlay-border-color;
+  border-top: none;
+  box-shadow: 0 2px 8px 1px hsla(0,0%,0%,.3);
+}

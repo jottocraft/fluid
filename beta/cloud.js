@@ -12,7 +12,6 @@
   var database = firestore.collection("Sites");
 
 fluid.cloudInit = function() {
-  console.log("Starting Fluid Cloud")
   database.doc(fluid.cloudConfig.cloudUser).get().then(function(doc) {
       if (doc.exists) {
         fluid.thisSite = doc.data()[fluid.cloudConfig.cloudProject]
@@ -24,6 +23,9 @@ fluid.cloudInit = function() {
               </div>
               `)
               fluid.splash(".cloud.splash")
+          }
+          if (fluid.thisSite.toast.icon !== "") {
+              fluid.toast(fluid.thisSite.toast.icon, fluid.thisSite.toast.text)
           }
         }
       }
