@@ -230,9 +230,6 @@
               if (prerelease == null) {
               if (data[i].prerelease == true) {
                 prerelease = data[i];
-                prerelease.flight = prerelease.tag_name.split(".")
-                prerelease.flight.pop()
-                prerelease.flight = prerelease.flight.toString().replace(",",".").substr(1)
               }
             }
             }
@@ -247,6 +244,9 @@
             }
             }
           }
+          prerelease.flight = prerelease.tag_name.split(".")
+          prerelease.flight.pop()
+          prerelease.flight = prerelease.flight.toString().replace(",",".").substr(1)
           renderReleases(false);
         })
         function renderReleases(betaa) {
