@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="cloud.png" type="image/png">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="../beta/fluid-beta.css"  media="screen,projection"/>
@@ -13,24 +13,30 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
   <meta property="og:url" content="https://fluid.js.org/cloud" />
-  <meta property="og:title" content="Fluid Cloud Console" />
+  <meta property="og:title" content="Fluid Cloud" />
   <meta property="og:description" content="Remotely manage your sites made with Fluid UI 3 or later" />
   <meta property="og:image" content="https://fluid.js.org/cloud/cloud.png" />
 
   <meta charset="utf-8">
-  <title>Fluid Cloud Console</title>
+  <title>Fluid Cloud</title>
 <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
-
 <body class="auto">
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="../beta/fluid-beta.js"></script>
-
+  <style>
+  :root {
+    --theme-color: #1a8fd2;
+    --theme-color-outline: rgb(26, 143, 210, 0.75);
+    --theme-gradient: linear-gradient(to bottom right, #1bd3ca, #2f6ee2);
+    --theme-text-color: white;
+  }
+  </style>
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 <script>
 var config = {
@@ -67,7 +73,7 @@ firebase.auth().onAuthStateChanged(function(userr) {
           sitedata = doc.data();
           positions = {}
           for (var i = 0; i < sitedata.siteList.length; i++) {
-            if (sitedata.siteList[i] !== "deleted") { siteKeys(sitedata.siteList[i], true); positions[sitedata.siteList[i]] = i; }
+            if (sitedata.siteList[i] !== "deleted") { siteKeys(sitedata.siteList[i], true); positions[sitedata.siteList[i]] = i; $("#addscreen").addClass("collapse"); $("#addscreen").addClass("collapsed") }
           }
           fluid.init();
         } else {
@@ -92,6 +98,11 @@ function addSite() {
     toast: {
       icon: "",
       text: ""
+    },
+    brand: {
+      color: "",
+      textColor: "",
+      url: ""
     }
   }
   database.doc(user.uid).set(sitedata);
@@ -114,6 +125,14 @@ function siteKeys(siteid, render) {
     }
     var repairs = true;
   }
+  if (sitedata[siteid].brand == undefined) {
+    sitedata[siteid].brand = {
+      color: "",
+      textColor: "",
+      url: ""
+    }
+    var repairs = true;
+  }
   if (repairs) {
     database.doc(user.uid).set(sitedata);
     console.log("Site updated to support new features https://fluid.js.org/beta/#cloud")
@@ -129,40 +148,71 @@ if (sitedata[siteid].splash.title !== "") splashstatus = "enabled"
 var toaststatus = "disabled"
 if (sitedata[siteid].toast.icon !== "") toaststatus = "enabled"
 
-nofluid = `style="display:none"`; splashfeature = `style="display:none"`; toastfeature = `style="display:none"`;  alertfeature = `style="display:none"`;
-myver = {}; myver[sitedata[siteid].fluid] = "active";
+nofluid = `style="display:none"`; splashfeature = `style="display:none"`; toastfeature = `style="display:none"`;  brandfeature = `style="display:none"`;
+btns = {}; btns[sitedata[siteid].fluid] = "active";
 
 if (sitedata[siteid].fluid == undefined) {
   nofluid = ""
 } else {
 if (sitedata[siteid].fluid >= 291) splashfeature = "";
 if (sitedata[siteid].fluid >= 292) toastfeature = "";
-if (sitedata[siteid].fluid >= 293) alertfeature = "";
+if (sitedata[siteid].fluid >= 291) brandfeature = "";
+}
+if (sitedata[siteid].brand.url) {
+  icontmp =  "https://api.statvoo.com/favicon/?url=" + sitedata[siteid].brand.url
+  icon = `<img src="` + icontmp + `" style="width: 35px; height: 35px;" />`
+} else {
+  icon = "public"
+}
+if (sitedata[siteid].brand.color) {
+  theme = `style="background: ` + sitedata[siteid].brand.color + `; color: ` + sitedata[siteid].brand.textColor + `; "`
+} else {
+  theme = ""
 }
 $("#sitelist").html(`
-  <div class="section">
+  <div ` + theme + ` class="section collapse collapsed">
     <div class="header">
-  <i class="material-icons">public</i>
-  <h5>` + siteid + `</h5>
+  <i class="material-icons">` + icon + `</i>
+  <h4>` + siteid + `</h4>
+  <button onclick="window.open('` + sitedata[siteid].brand.url + `')" class="right btn" style="margin-top: 15px;"><i style="font-size: 24px;" class="material-icons">open_in_new</i>Open</button>
 </div>
 <div class="body" style="padding-top: 0px;">
-<h5>Site Status</h5>
+<h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Site Status</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
+<div class="thing" style="display:none;">
 <p class="` + siteid + ` vtext">Fluid UI Version</p>
 <div class="btns row">
-<button onclick="saveV('` + siteid + `', 291)" class="btn ` + myver[291] +`">v3 b1</button>
-<button onclick="saveV('` + siteid + `', 292)" class="btn ` + myver[292] +`">v3 b2 or above</button>
+<button onclick="saveV('` + siteid + `', 291)" class="btn ` + btns[291] +`">v3 b1</button>
+<button onclick="saveV('` + siteid + `', 292)" class="btn ` + btns[292] +`">v3 b2</button>
+<button onclick="saveV('` + siteid + `', 293)" class="btn ` + btns[293] +`">v3 b3 or above</button>
 </div>
 <div>
 <button onclick="oldID = '` + siteid + `';fluid.splash('.splash.rename');" class="btn"><i class="material-icons">edit</i>Change Site ID</button>
 <button onclick="unlinkID = '` + siteid + `'; fluid.splash('.splash.unlink');" class="btn"><i class="material-icons">link_off</i>Unlink site</button>
 </div>
-<br /><br /><br />
+</div>
+<br />
 <div ` + nofluid + `>
 <h5>Specify Fluid UI Version</h5>
 <p>Specify the version of Fluid UI your site is using to unlock supported Fluid Cloud features</p>
 </div>
+<br />
+<div ` + brandfeature + `>
+  <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Site Theme</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
+  <div class="thing" style="display:none;">
+  <p>Set your site's brand theme. Does not affect your site. Only shows in cloud console.</p>
+  <input value="` + sitedata[siteid].brand.color + `" class="color" placeholder="Theme gradient / Color"></input>
+  <input  value="` + sitedata[siteid].brand.textColor + `"class="text" placeholder="Theme Text Color"></input>
+  <br />
+  <input value="` + sitedata[siteid].brand.url + `" class="url" placeholder="Site URL"></input>
+  <br />
+  <button onclick="save('brand', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button>
+  <br />
+  </div>
+  </div>
+  <br />
 <div ` + splashfeature + `>
-  <h5>Splash screen</h5>
+  <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Splash screen</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
+  <div class="thing" style="display:none;">
   <p>Splash screen is currently <b>` + splashstatus + `</b>.</p>
   <br />
   <input class="title" value="` + sitedata[siteid].splash.title + `" placeholder="Splash screen title" />
@@ -170,34 +220,45 @@ $("#sitelist").html(`
   <br />
   <div class="row"><button onclick="save('splash', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button><button onclick="save('splash', false, '` + siteid + `', this)" class="btn"><i class="material-icons">toggle_off</i>Disable</button></div>
   </div>
+  </div>
   <br />
   <div ` + toastfeature + `>
-  <h5>Toast</h5>
+  <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Toast</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
+  <div class="thing" style="display:none;">
   <p>Toast is currently <b>` + toaststatus + `</b>.</p>
   <br />
-  <input class="icon" value="` + sitedata[siteid].toast.icon + `" placeholder="Toast icon" />
+  <input class="icon" value="` + sitedata[siteid].toast.icon + `" placeholder="Toast material icon" />
   <input class="text" value="` + sitedata[siteid].toast.text + `" placeholder="Toast text" />
   <br />
   <div class="row"><button onclick="save('toast', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button><button onclick="save('toast', false, '` + siteid + `', this)" class="btn"><i class="material-icons">toggle_off</i>Disable</button></div>
+  </div>
   </div>
 </div>
 </div>
   ` + $("#sitelist").html());
 }
-function save(feat, enable, siteid, element) {
+function save(feat, enable, siteid, data) {
+  toggleEle = ["splash", "toast"]
+if (toggleEle.includes(feat)) {
 if (enable) {
-  $(element).parent().siblings("p").children("b").html("enabled")
+  $(data).parent().siblings("p").children("b").html("enabled")
 } else {
-  $(element).parent().siblings("p").children("b").html("disabled")
-  $(element).parent().siblings("input").val("")
+  $(data).parent().siblings("p").children("b").html("disabled")
+  $(data).parent().siblings("input").val("")
+}
 }
 if (feat == "splash") {
-sitedata[siteid].splash.title = $(element).parent().siblings("input.title").val()
-sitedata[siteid].splash.content = $(element).parent().siblings("input.splashcontent").val()
+sitedata[siteid].splash.title = $(data).parent().siblings("input.title").val()
+sitedata[siteid].splash.content = $(data).parent().siblings("input.splashcontent").val()
 }
 if (feat == "toast") {
-sitedata[siteid].toast.icon = $(element).parent().siblings("input.icon").val()
-sitedata[siteid].toast.text = $(element).parent().siblings("input.text").val()
+sitedata[siteid].toast.icon = $(data).parent().siblings("input.icon").val()
+sitedata[siteid].toast.text = $(data).parent().siblings("input.text").val()
+}
+if (feat == "brand") {
+sitedata[siteid].brand.color = $(data).siblings("input.color").val()
+sitedata[siteid].brand.textColor = $(data).siblings("input.text").val()
+sitedata[siteid].brand.url = $(data).siblings("input.url").val()
 }
 database.doc(user.uid).set(sitedata);
 }
@@ -237,23 +298,25 @@ img.magicImage {
   background-color: #51adfa;
 }
 </style>
-  <div style="margin-top: 100px;margin-top: 150px;" class="container center">
-      <img class="magicImage" style="width:250px;height:250px;margin-right: 50px;vertical-align:middle;" alt="" class="center" src="cloud.png"></img>
-      <div style="display:inline-block;vertical-align:middle;">
-      <h1>Fluid Cloud</h1>
-      <h4 style="color: orange">beta</h4>
-      <h5 style="display:none;" id="signout"><a href="#" onclick="firebase.auth().signOut();window.location.reload();">Sign out</a></h5>
-    </div>
+  <div style="margin-top: 125px;" class="container">
 
+    <div class="card special" style="height: 300px;background: linear-gradient(to bottom right, #1bd3ca, #2f6ee2);color: white;margin-bottom: 20px;">
+      <img class="fluid logo" src="../beta/cutout.png" style="width: 238.636px;height: 175px;margin-top: 37.5px;margin-left: 50px;" />
+      <div style="display:inline-block; float: right; text-align: right; margin-top: 75px;margin-right: 50px;">
+        <h1 style="margin:0; display:inline-block;">Fluid Cloud</h1>
+        <h5><span class="label">beta</span></h5>
       </div>
-      <br /><br />
+    </div>
+      </div>
+
+
       <br /><br />
       <div class="container">
         <br /><br />
         <div id="authscreen" class="section">
           <div class="header">
         <i class="material-icons">lock</i>
-        <h5>Sign In</h5>
+        <h4>Sign In</h4>
       </div>
       <div class="body" style="padding-top: 0px;">
         <div style="display:none">
@@ -275,7 +338,7 @@ img.magicImage {
         <div style="display:none;" id="addscreen" class="section">
           <div class="header">
         <i class="material-icons">add</i>
-        <h5>Add Site</h5>
+        <h4>Add Site</h4>
       </div>
       <div class="body" style="padding-top: 0px;">
         <p>Your Fluid Cloud user ID is <b id="useriddisp">N/A</b></p>

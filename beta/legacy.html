@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="shortcut icon" href="icon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="fluid-beta.css"  media="screen,projection"/>
@@ -19,7 +19,7 @@
   <meta property="og:image" content="https://fluid.js.org/icon.png" />
 
   <meta charset="utf-8">
-  <title>Fluid UI (beta)</title>
+  <title>Fluid UI Legacy</title>
 <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,125 +37,161 @@
   <script type="text/javascript" src="fluid-beta.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script>
-  fluid.config = {
-    cloud: {
+  fluid.cloudConfig = {
     cloudUser: "qHqjJxjEFMc2Sn0qbI6alaBr65u1",
     cloudProject: "demo"
-    }
   };
   </script>
   <script src="cloud.js"></script>
 
-  <div  style="display:none" class="nav right">
-            <ul>
+      <div class="nav right">
+                <ul>
 
-              <li>
-              <a href="cloud/">
-                <i class="material-icons left">cloud</i>
-                <div class="list contextmenu">
-                  <div onclick="window.open('cloud/')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                  <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
-                  <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
-                </div>
-              </a>
-              </li>
-
-
-                <li>
-                <a href="#input">
-                  <i class="material-icons left">keyboard</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#input')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#input-text'" class="item"><i class="material-icons">format_size</i>Text</div>
-                    <div onclick="window.location.href = '#input-emoji'" class="item"><i class="material-icons">sentiment_satisfied_alt</i>Emoji</div>
-                    <div onclick="window.location.href = '#input-buttons'" class="item"><i class="material-icons">touch_app</i>Buttons</div>
-                    <div onclick="window.location.href = '#input-lists'" class="item"><i class="material-icons">list</i>List</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#dark">
-                  <i class="material-icons left">format_paint</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#dark')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#dark-style'" class="item"><i class="material-icons">format_paint</i>Set Fluid's Style</div>
-                    <div onclick="window.location.href = '#dark-auto'" class="item"><i class="material-icons">brightness_auto</i>Auto dark mode</div>
-                    <div onclick="window.location.href = '#dark-manual'" class="item"><i class="material-icons">brightness_low</i>Manual dark mode</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#cloud">
-                  <i class="material-icons left">system_update_alt</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#cloud')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
-                    <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#nav">
-                  <i class="material-icons left">navigation</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#nav')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#nav-toolbar'" class="item"><i class="material-icons">build</i>Toolbar</div>
-                    <div onclick="window.location.href = '#nav-navbar'" class="item"><i class="material-icons">navigation</i>Navbar</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#spaces">
-                  <i class="material-icons left">dashboard</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#spaces')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#cards">
-                  <i class="material-icons left">layers</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#cards')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#cards-sections'" class="item"><i class="material-icons">view_column</i>Sections</div>
-                    <div onclick="window.location.href = '#cards-cards'" class="item"><i class="material-icons">view_carousel</i>Cards</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#splash">
-                  <i class="material-icons left">notifications</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#splash')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#splash-splash'" class="item"><i class="material-icons">aspect_ratio</i>Splash Screens</div>
-                    <div onclick="window.location.href = '#splash-toasts'" class="item"><i class="material-icons">tab</i>Toasts</div>
-                    <div onclick="window.location.href = '#splash-modals'" class="item"><i class="material-icons">notifications</i>Modals</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#install">
-                  <i class="left material-icons">cloud_download</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#install')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="if (beta) { renderReleases(false); } window.location.href = '#install'" class="item"><i class="material-icons">cloud_download</i>Download<span class="relbetahide"> Stable</span></div>
-                    <div style="display:none" onclick="renderReleases(true); window.location.href = '#install'" class="item relbetahide"><i class="material-icons">bug_report</i>Try the beta</div>
-                  </div>
-                </a>
-                </li>
+                  <li>
+                  <a href="cloud/">
+                    <i class="material-icons left">cloud</i>
+                    <div class="list contextmenu">
+                      <div onclick="window.open('cloud/')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                      <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
+                      <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
+                    </div>
+                  </a>
+                  </li>
 
 
-            </ul>
-      </div>
+                    <li>
+                    <a href="#input">
+                      <i class="material-icons left">keyboard</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#input')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#input-text'" class="item"><i class="material-icons">format_size</i>Text</div>
+                        <div onclick="window.location.href = '#input-emoji'" class="item"><i class="material-icons">sentiment_satisfied_alt</i>Emoji</div>
+                        <div onclick="window.location.href = '#input-buttons'" class="item"><i class="material-icons">touch_app</i>Buttons</div>
+                        <div onclick="window.location.href = '#input-lists'" class="item"><i class="material-icons">list</i>List</div>
+                      </div>
+                    </a>
+                    </li>
 
-        <br /><br />
+                    <li>
+                    <a href="#dark">
+                      <i class="material-icons left">format_paint</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#dark')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#dark-style'" class="item"><i class="material-icons">format_paint</i>Set Fluid's Style</div>
+                        <div onclick="window.location.href = '#dark-auto'" class="item"><i class="material-icons">brightness_auto</i>Auto dark mode</div>
+                        <div onclick="window.location.href = '#dark-manual'" class="item"><i class="material-icons">brightness_low</i>Manual dark mode</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#cloud">
+                      <i class="material-icons left">system_update_alt</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#cloud')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
+                        <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#nav">
+                      <i class="material-icons left">navigation</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#nav')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#nav-toolbar'" class="item"><i class="material-icons">build</i>Toolbar</div>
+                        <div onclick="window.location.href = '#nav-navbar'" class="item"><i class="material-icons">navigation</i>Navbar</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#spaces">
+                      <i class="material-icons left">dashboard</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#spaces')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#cards">
+                      <i class="material-icons left">layers</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#cards')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#cards-sections'" class="item"><i class="material-icons">view_column</i>Sections</div>
+                        <div onclick="window.location.href = '#cards-cards'" class="item"><i class="material-icons">view_carousel</i>Cards</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#splash">
+                      <i class="material-icons left">notifications</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#splash')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="window.location.href = '#splash-splash'" class="item"><i class="material-icons">aspect_ratio</i>Splash Screens</div>
+                        <div onclick="window.location.href = '#splash-toasts'" class="item"><i class="material-icons">tab</i>Toasts</div>
+                        <div onclick="window.location.href = '#splash-modals'" class="item"><i class="material-icons">notifications</i>Modals</div>
+                      </div>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="#install">
+                      <i class="left material-icons">cloud_download</i>
+                      <div class="list contextmenu">
+                        <div onclick="window.open('#install')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
+                        <div onclick="if (beta) { renderReleases(false); } window.location.href = '#install'" class="item"><i class="material-icons">cloud_download</i>Download<span class="relbetahide"> Stable</span></div>
+                        <div style="display:none" onclick="renderReleases(true); window.location.href = '#install'" class="item relbetahide"><i class="material-icons">bug_report</i>Try the beta</div>
+                      </div>
+                    </a>
+                    </li>
+
+
+                </ul>
+          </div>
+
+          <div style="display:none" class="navbar nav">
+            <img src="https://fluid.js.org/icon.png" />
+            <h4>Fluid UI</h4>
+                    <ul class="right">
+
+                      <li>
+                      <a href="cloud/"><i class="material-icons left">cloud</i><span>Console</span></a>
+                      </li>
+
+                        <li>
+                        <a href="#input"><i class="material-icons left">keyboard</i><span>Input</span>
+                        </a>
+                        </li>
+
+                        <li>
+                        <a href="#dark"><i class="material-icons left">format_paint</i><span>Dark Mode</span></a>
+                        </li>
+
+                        <li>
+                        <a href="#nav"><i class="material-icons left">navigation</i><span>Navigation</span></a>
+                        </li>
+
+                        <li>
+                        <a href="#cards"><i class="material-icons left">layers</i><span>Cards & Sections</span></a>
+                        </li>
+
+                        <li>
+                        <a href="#splash"><i class="material-icons left">notifications</i><span>Splash & Alerts</span></a>
+                        </li>
+
+                        <li>
+                        <a href="#install"><i class="material-icons left">cloud_download</i><span>Download</span></a>
+                        </li>
+
+
+                    </ul>
+              </div>
+
+        <br /><br /><br /><br /><br />
 
         <style>
         body.beta .interact {
@@ -176,27 +212,6 @@
         }
         .unreleased {
           color: red;
-        }
-        body:not(.beta) .fluid.vibrant.releases {
-          background: linear-gradient(to bottom right, #10c9cc, #00f4b3);
-        }
-        body.beta .fluid.vibrant.releases {
-          background: linear-gradient(to bottom right, #ed7825, #f9b413);
-        }
-        body.beta .interact {
-          color: #ad3801 !important;
-        }
-        body:not(.beta) .interact {
-          color: #0576ad !important;
-        }
-        body:not(.dark) .override {
-          color: black !important;
-        }
-        :root {
-          --theme-color: #0bdd77;
-          --theme-color-outline: rgb(0, 255, 131, 0.75);
-          --theme-gradient: linear-gradient(to bottom right, #0be544, #0dc49c);
-          --theme-text-color: white;
         }
         </style>
         <script>
@@ -233,7 +248,7 @@
           prerelease.flight = prerelease.tag_name.split(".")
           prerelease.flight.pop()
           prerelease.flight = prerelease.flight.toString().replace(",",".").substr(1)
-          renderReleases($("#showver").hasClass("prerelease"));
+          renderReleases(false);
         })
         function renderReleases(betaa) {
           betashowcased = false;
@@ -260,9 +275,7 @@
           //Display readable beta string instead of actual version number
           var dispver = $("#showver").html()
           if (dispver.split(".")[1] == "9") {
-            $("#showver").html("v" + (Number(dispver.split(".")[0].charAt(1)) + 1) + ".0.0")
-            $("#betatag").html("beta " + dispver.split(".")[2])
-            $("#betatag").show();
+            $("#showver").html("v" + (Number(dispver.split(".")[0].charAt(1)) + 1) + ".0.0 Beta " + dispver.split(".")[2])
           }
 
           } else {
@@ -341,58 +354,30 @@
           background-color: #FFFFFF;
         }
         </style>
+  <div style="margin-top: 100px" class="container center">
+      <img class="magicImage" style="width:250px;height:250px;" alt="" class="center" src="icon.png"></img>
+      <br /><br />
+      <h1>Fluid UI</h1>
+      <h4><a id="showver" href="#install" class="prerelease">v2.9.3</a></h4> <a style="font-family: 'Product sans'; font-size: 25px;" href="#">Legacy Docs</a>
+      </div>
       <br /><br />
       <br /><br />
       <div class="container">
-
-        <div class="card special" style="height: 300px;background: linear-gradient(to bottom right, #00ff43, #00ffc7);color: white;margin-bottom: 20px;">
-          <img class="fluid logo" src="cutout.png" style="width: 238.636px;height: 175px;margin-top: 37.5px;margin-left: 50px;" />
-          <div style="display:inline-block; float: right; text-align: right; margin-top: 75px;margin-right: 50px;">
-            <h1 style="margin:0; display:inline-block;">Fluid UI</h1>
-            <h5 style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.3</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="label"></span></a></h5>
-          </div>
-        </div>
-<div class="center">
-        <div style="margin-bottom: 100px;" class="card nav">
-                  <ul>
-
-                      <li>
-                      <a href="#input"><i class="material-icons">keyboard</i><span>Input</span>
-                      </a>
-                      </li>
-
-                      <li>
-                      <a href="#dark"><i class="material-icons">format_paint</i><span>Themes</span></a>
-                      </li>
-
-                      <li>
-                      <a href="#cloud"><i class="material-icons">cloud</i><span>Cloud</span></a>
-                      </li>
-
-                      <li>
-                      <a href="#nav"><i class="material-icons">navigation</i><span>Navigation</span></a>
-                      </li>
-
-                      <li>
-                      <a href="#cards"><i class="material-icons">layers</i><span>Cards & Sections</span></a>
-                      </li>
-
-                      <li>
-                      <a href="#splash"><i class="material-icons">notifications</i><span>Splash & Alerts</span></a>
-                      </li>
-
-                      <span style="height: 100%;width: 5px;background-color: red !important;border-radius: 20px !important;vertical-align: middle;display:none;">&nbsp;</span>
-
-                      <li>
-                      <a href="#install"><i class="material-icons">cloud_download</i><span>Download</span></a>
-                      </li>
+        <!-- jottocraft's playground -->
+      <!--  <br /><br /><br /><br />
 
 
-                  </ul>
-            </div></div>
 
+<br /><br />
+
+
+
+
+         <br /><br /><br /><br />
+       -->
+        <br /><br />
         <a name="input"></a>
-        <div class="section">
+        <div class="section collapse collapsed one">
           <div class="header">
         <i class="material-icons">keyboard</i>
         <h3>Input</h3>
@@ -478,7 +463,7 @@
       </div>
       <br /><br />
       <a name="dark"></a>
-      <div class="section">
+      <div class="section collapse collapsed one">
         <div class="header">
       <i class="material-icons">format_paint</i>
       <h3>Themes</h3>
@@ -520,23 +505,14 @@
           <br /><br />
           <button onclick="fluid.dark(undefined, true);" class="btn ">Try</button>
           <br /><br />
-          <h5>Brand Colors</h5>
-          <p>Add this CSS anywhere to set the branding of your site. For --theme-color-outline, convert your theme color to RGBA and set the alpha value to 0.75.</p>
-          <pre><code>:root {
-  --theme-color: #0bdd77;
-  --theme-color-outline: rgb(0, 255, 131, 0.75);
-  --theme-gradient: linear-gradient(to bottom right, #0be544, #0dc49c);
-  --theme-text-color: white;
-}</code></pre>
-          <br /><br />
 
         </div>
       </div>
       <br /><br />
       <a name="cloud"></a>
-      <div class="section">
+      <div class="section collapse collapsed one">
         <div class="header">
-      <i class="material-icons">cloud</i>
+      <i class="material-icons">system_update_alt</i>
       <h3>Fluid Cloud</h3>
     </div>
     <div class="body">
@@ -549,14 +525,12 @@
         <h5>Initilization code</h5>
         <p>Give your site a unique (for your account, not global) Fluid Cloud project ID. You will be given your Fluid Cloud user ID when you login to the cloud console.</p>
         <br />
-        <p>fluid.config variable (Make sure it is defined before loading cloud.js):</p>
+        <p>fluid.cloudConfig variable (Make sure it is defined before loading cloud.js):</p>
 <pre><code>&lt;script src=&quot;https://www.gstatic.com/firebasejs/5.1.0/firebase.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-fluid.config = {
-  cloud: {
-    cloudUser: "myuserid",
-    cloudProject: "site"
-  }
+fluid.cloudConfig = {
+  cloudUser: "myuserid",
+  cloudProject: "site"
 }
 &lt;/script&gt;
 &lt;script src=&quot;fluid/cloud.js&quot;&gt;&lt;/script&gt;
@@ -577,7 +551,7 @@ fluid.config = {
       </div>
               <br /><br />
               <a name="nav"></a>
-              <div class="section">
+              <div class="section collapse collapsed one">
                 <div class="header">
               <i class="material-icons">navigation</i>
               <h3>Navigation</h3>
@@ -653,46 +627,20 @@ fluid.config = {
 </div>
 <br /><br />
 <a name="spaces"></a>
-<div class="section">
+<div class="section collapse collapsed one">
   <div class="header">
 <i class="material-icons">dashboard</i>
 <h3>Fluid Spaces</h3>
 </div>
 <div class="body">
-  <div>
-  <div class="space demo c1 fluid element theme">1</div>
-  <div class="space demo c1 fluid element theme">2</div>
-  <div class="space demo c1 fluid element theme">3</div>
-  <div class="space demo c1 fluid element theme">4</div>
-  <div class="space demo c1 fluid element theme">5</div>
-  <div class="space demo c1 fluid element theme">6</div>
-  <div class="space demo c1 fluid element theme">7</div>
-  <div class="space demo c1 fluid element theme">8</div>
-  <div class="space demo c1 fluid element theme">9</div>
-  <div class="space demo c1 fluid element theme">10</div>
-</div>
-<br /><br />
-<div>
-<div class="space demo c2 fluid element theme">c2</div>
-<div class="space demo c8 fluid element theme">c8</div>
-</div>
-<br /><br />
-<div>
-<div class="space demo c3 fluid element theme">c3</div>
-<div class="space demo c1 fluid element theme">c1</div>
-<div class="space demo c6 fluid element theme">c6</div>
-</div>
-<br /><br /><br />
-<pre><code><xmp><div>
-  <div class="space demo c3 fluid element theme">c3</div>
-  <div class="space demo c1 fluid element theme">c1</div>
-  <div class="space demo c6 fluid element theme">c6</div>
-</div></xmp></code></pre>
+  <p>
+    Fluid Spaces will soon let you create more flexible layouts on your site with rows and columns. This feature is coming in a later beta of Fluid UI 3.
+  </p>
   </div>
 </div>
 <br /><br />
 <a name="cards"></a>
-<div class="section">
+<div class="section collapse collapsed one">
   <div class="header">
 <i class="material-icons">layers</i>
 <h3>Sections and Cards</h3>
@@ -772,7 +720,7 @@ fluid.config = {
 </div>
 <br /><br />
 <a name="splash"></a>
-<div class="section">
+<div class="section collapse collapsed one">
   <div class="header">
 <i class="material-icons">notifications</i>
 <h3>Splash Screens and Alerts</h3>
@@ -804,26 +752,25 @@ fluid.config = {
 </div>
           <br /><br />
           <a name="install"></a>
-          <div class="section theme">
+          <div class="section collapse collapsed one">
             <div class="header">
           <i class="material-icons">cloud_download</i>
           <h3>Download</h3>
           </div>
           <div class="body">
           <div class="center">
-          <div style="display:inline-block;text-align:left;min-width: 500px;" class="card fluid vibrant releases">
-          <h4 style="color:white;" class="relver">Getting releases...</h4>
+          <br />
+          <h4 class="relver">Getting releases...</h4>
           <h6 id="nofluid" style="font-family: 'Google sans', sans-serif;color: red;display:none;">The version of Fluid UI showcased on this site is unreleased and cannot be downloaded</h6>
           <h5 style="cursor:pointer;display:none;" class="switch relbeta" onclick="renderReleases();">Try the beta</h5>
-          <br /><br />
-          <div style="display:none;font-size: 20px;" class="row" id="relinteract"><a id="reldownload" style="margin-right: 10px;" class="interact fluid">Download</a><a onclick="fluid.modal('#vmodal')" style='cursor:pointer;' class="interact">Release Notes</a></div>
+          <br />
+          <div style="display:none;" class="row" id="relinteract"><span class="fluid" id="relspace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><button style="font-size: 24px;padding: 10px 20px;border-radius: 25px;" id="reldownload" class="interact btn fluid" href="#"><i style="font-size: 24px;margin-right: 7px;" class="material-icons">cloud_download</i>Download</button><button style="font-size: 24px;padding: 10px 20px;border-radius: 25px;" onclick="fluid.modal('#vmodal')" class="interact btn"><i  style="font-size: 24px;margin-right: 7px;" class="material-icons">note</i>Release Notes</button></div>
         </div>
-        </div>
-            <br /><br /><br />
+            <br /><br />
           <h5>Install Fluid UI</h5>
           <p>Make sure Fluid UI is in the /fluid directory</p>
           <pre>
-          <code class="override">&lt;!-- Fluid UI --&gt;
+          <code>&lt;!-- Fluid UI --&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;

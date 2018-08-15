@@ -1,5 +1,5 @@
 /*!
-Fluid JS Modules v3.0 beta 2
+Fluid UI JavaScript Modules v3.0.0 beta 3
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -42,6 +42,7 @@ fluid.cloudEnabled = true;
 fluid.contextMenuOpen = false;
 
 fluid.dark = function(theme, auto) {
+  if (!fluid.forcedTheme) {
   if (theme == undefined) {
   $("body").toggleClass("dark");
   }
@@ -61,11 +62,18 @@ fluid.dark = function(theme, auto) {
   if ($("#activecontextmenu").children(".btn").hasClass("active")) {$("#activecontextmenu").children(".btn").css("background-color", "#207bdf") } else {
   if ($("#activecontextmenu").length) { if ($("#activecontextmenu").children().length == 2) { if ($("body").hasClass("dark")) { $("#activecontextmenu").children(".btn, i").css("background-color", "#16181a") } else { $("#activecontextmenu").children(".btn, i").css("background-color", "#dddddd") } } } }
   if (auto !== true) document.cookie = "fluidIsDark=" + fluid.isDark();
+} else {
+  console.error("Unable to change theme: Fluid Cloud Console policies configured by the site owner disallow setting a custom theme")
+}
 }
 fluid.isDark = function() {
   return $("body").hasClass("dark");
 }
+fluid.isOutlined = function() {
+  return $("body").hasClass("outline");
+}
 fluid.auto = function(auto) {
+  if (!fluid.forcedTheme) {
   var hours = new Date().getHours()
   // Light: 6AM - 6PM Dark: 7PM - 5AM
   if (hours > 5 && hours < 19) {
@@ -81,6 +89,9 @@ fluid.auto = function(auto) {
     }
   }
   if (auto !== true) document.cookie = "fluidIsDark=auto";
+} else {
+  console.error("Unable to change theme: Fluid Cloud Console policies configured by the site owner disallow setting a custom theme")
+}
 }
 fluid.tcoh = function() {
   $("body").addClass("litleceser");
@@ -137,57 +148,60 @@ fluid.init = function() {
 $( "#activecontextmenu" ).contextmenu(function(event) {
   event.preventDefault();
 });
+fluid.contextMenu = function(target, event) {
+  var element = target
+  if ($(element).children("a").length == 1) element = $(element).children("a").children("i").get(0);
+  if ($(element).siblings(".contextmenu").length == 1) {
+     if (event) event.preventDefault();
+    if (!fluid.contextMenuOpen) {
+      $(element).addClass("outOfContext")
+      document.body.style.overflow = "hidden";
+      $( "body" ).css( "padding-right", "5px");
+    fluid.contextMenuOpen = true;
+    fluid.generateWrapper();
+
+    var bodyRect = document.body.getBoundingClientRect(),
+      elemRect = element.getBoundingClientRect(),
+      left   = elemRect.left - bodyRect.left,
+      top   = elemRect.top - bodyRect.top;
+
+    $("#activecontextmenu").css("left", left)
+    $("#activecontextmenu").css("top", top)
+    $(element).parent().css("height", $(element).parent().height());
+    if ($(element).hasClass("material-icons")) {
+      $(element).parent().parent().css("width", "44px")
+      $(element).parent().parent().css("height", "44px")
+      $("#pagewrapper").attr("onclick","fluid.exitContextMenu(true);");
+    } else {
+      $("#pagewrapper").attr("onclick","fluid.exitContextMenu(false);");
+    }
+    $(element).parent().addClass("contextMenuSource")
+    if ($(element).hasClass("active")) {$(element).css("background-color", "#207bdf") } else {
+    if ($("body").hasClass("outline")){
+    if ($("body").hasClass("dark")) { $(element).css("border", "1px solid #16181a") } else { $(element).css("border", "1px solid #dddddd") }}
+    else { if ($("body").hasClass("dark")) { $(element).css("background-color", "#16181a") } else { $(element).css("background-color", "#dddddd") }} }
+    $(element).siblings(".contextmenu").css("display", "inline-block");
+    $(element).siblings(".contextmenu").css("margin-left", "-20px")
+    $(element).siblings(".contextmenu").css("margin-right", "10px")
+    $(element).parent().children().appendTo("#activecontextmenu");
+    $("#activecontextmenu").css("width", $("body").width() - Number($("#activecontextmenu").css("left").slice(0,-2)))
+    if ($(element).siblings('.contextmenu').css("right").charAt(0) == "-") {
+      $(element).siblings('.contextmenu').css("right", 0)
+      $(element).siblings(".contextmenu").css("margin-top", $(element).height() + 3)
+    } else {
+      $(element).siblings(".contextmenu").css("margin-top", $(element).height())
+    }
+    $("#pagewrapper").addClass("blur", 100)
+  }
+  } else {
+    if (fluid.expBeh) {
+      event.preventDefault();
+      fluid.bounceBack(element);
+    }
+  }
+}
 $( ".btn, .nav a, .nav li" ).contextmenu(function(event) {
-var element = event.target
-if ($(element).children("a").length == 1) element = $(element).children("a").children("i").get(0);
-if ($(element).siblings(".contextmenu").length == 1) {
-   event.preventDefault();
-  if (!fluid.contextMenuOpen) {
-    $(element).addClass("outOfContext")
-    document.body.style.overflow = "hidden";
-    $( "body" ).css( "padding-right", "5px");
-  fluid.contextMenuOpen = true;
-  fluid.generateWrapper();
-
-  var bodyRect = document.body.getBoundingClientRect(),
-    elemRect = element.getBoundingClientRect(),
-    left   = elemRect.left - bodyRect.left,
-    top   = elemRect.top - bodyRect.top;
-
-  $("#activecontextmenu").css("left", left)
-  $("#activecontextmenu").css("top", top)
-  $(element).parent().css("height", $(element).parent().height());
-  if ($(element).hasClass("material-icons")) {
-    $(element).parent().parent().css("width", "44px")
-    $(element).parent().parent().css("height", "44px")
-    $("#pagewrapper").attr("onclick","fluid.exitContextMenu(true);");
-  } else {
-    $("#pagewrapper").attr("onclick","fluid.exitContextMenu(false);");
-  }
-  $(element).parent().addClass("contextMenuSource")
-  if ($(element).hasClass("active")) {$(element).css("background-color", "#207bdf") } else {
-  if ($("body").hasClass("outline")){
-  if ($("body").hasClass("dark")) { $(element).css("border", "1px solid #16181a") } else { $(element).css("border", "1px solid #dddddd") }}
-  else { if ($("body").hasClass("dark")) { $(element).css("background-color", "#16181a") } else { $(element).css("background-color", "#dddddd") }} }
-  $(element).siblings(".contextmenu").css("display", "inline-block");
-  $(element).siblings(".contextmenu").css("margin-left", "-20px")
-  $(element).siblings(".contextmenu").css("margin-right", "10px")
-  $(element).parent().children().appendTo("#activecontextmenu");
-  $("#activecontextmenu").css("width", $("body").width() - Number($("#activecontextmenu").css("left").slice(0,-2)))
-  if ($(element).siblings('.contextmenu').css("right").charAt(0) == "-") {
-    $(element).siblings('.contextmenu').css("right", 0)
-    $(element).siblings(".contextmenu").css("margin-top", $(element).height() + 3)
-  } else {
-    $(element).siblings(".contextmenu").css("margin-top", $(element).height())
-  }
-  $("#pagewrapper").addClass("blur")
-}
-} else {
-  if (fluid.expBeh) {
-    event.preventDefault();
-    fluid.bounceBack(element);
-  }
-}
+fluid.contextMenu(event.target, event)
 });
 $( ".contextmenu.list .item" ).click(function(event) {
   fluid.exitContextMenu(false);
@@ -198,6 +212,11 @@ $(this).addClass("active")
 });
 
 $( ".section.collapse .header" ).click(function(event) {
+  if ($(this).parent().hasClass("collapsed")) {
+    if ($(this).parent().hasClass("one")) {
+      $(this).parent().siblings().addClass("collapsed");
+    }
+  }
 $(this).parent().toggleClass("collapsed");
 });
 
@@ -282,29 +301,33 @@ fluid.modal = function(element) {
   fluid.cards(element, true)
 }
 fluid.toast = function(icon, text, sticky, focus) {
-  fluid.toastNav = $(".nav:not(.toast):visible")
-  $(".nav:not(.toast)").hide();
+  fluid.toastNav = $(".nav:not(.toast):not(.card):visible")
+  $(fluid.toastNav).hide();
   var iconExtraStyles = ""
   if (text == undefined) { var text = ""; }
   if (icon == undefined) { var icon = "";  }
   if (text == "") { var iconExtraStyles = "margin-right: -15px;"; }
   fluid.generateWrapper();
+  $("#activetoast").hide();
     $("#activetoast").html(`<div class="nav sticky toast">
     <i onclick="fluid.exitToast()" class="material-icons" style="vertical-align: middle;cursor:pointer;` + iconExtraStyles + `">` + icon + `</i>
     <h5 style="margin:0px;display:inline-block;vertical-align:middle;margin-right: 7px;margin-left: 5px;">` + text + `</h5>
         </div>`)
+        $("#activetoast").show("fade");
+        fluid.toastHiding = false;
         $( ".toast" ).hover(
   function() {
-    $(".toast i").html("keyboard_arrow_down")
+    $(".toast i").html("cancel")
   }, function() {
-    $(".toast i").html(icon)
+    if (!fluid.toastHiding) $(".toast i").html(icon)
   }
 );
 }
 fluid.exitToast = function() {
   $(fluid.toastNav).show();
   var iconExtraStyles = ""
-    $("#activetoast").html("");
+  fluid.toastHiding = true;
+  $("#activetoast").hide("fade");
 }
 fluid.cards.close = function(element) {
   $(element).addClass('close');
