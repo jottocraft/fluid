@@ -23,7 +23,7 @@ SOFTWARE.
  */
 
 // Initialize Firebase
-  var config = {
+  fluid.firebaseConfig = {
     apiKey: "AIzaSyAzvQw_Pzt2WD9xge88VueFsqxfN-pLYkw",
     authDomain: "fluid-ui.firebaseapp.com",
     databaseURL: "https://fluid-ui.firebaseio.com",
@@ -31,12 +31,12 @@ SOFTWARE.
     storageBucket: "fluid-ui.appspot.com",
     messagingSenderId: "444063761692"
   };
-  firebase.initializeApp(config);
-  var firestore = firebase.firestore();
-  var database = firestore.collection("Sites");
+ fluid.firebase = firebase.initializeApp(fluid.firebaseConfig, "fluid");
+  fluid.firestore = fluid.firebase.firestore();
+  fluid.cloudDatabase = fluid.firestore.collection("Sites");
 
 fluid.cloudInit = function() {
-  database.doc(fluid.config.cloud.cloudUser).get().then(function(doc) {
+  fluid.cloudDatabase.doc(fluid.config.cloud.cloudUser).get().then(function(doc) {
       if (doc.exists) {
         fluid.thisSite = doc.data()[fluid.config.cloud.cloudProject]
         if (fluid.thisSite !== undefined) {

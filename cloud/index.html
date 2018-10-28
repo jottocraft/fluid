@@ -3,8 +3,8 @@
 <head>
   <link rel="shortcut icon" href="favicon.png" type="image/png">
   <!--Import Google Icon Font-->
-       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <link type="text/css" rel="stylesheet" href="../beta/fluid-beta.css"  media="screen,projection"/>
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
+       <link type="text/css" rel="stylesheet" href="../fluid.css"  media="screen,projection"/>
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -26,14 +26,22 @@
 </head>
 
 <body class="auto">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105685403-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-105685403-2');
+</script>
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../beta/fluid-beta.js"></script>
+  <script type="text/javascript" src="../fluid.js"></script>
   <style>
   :root {
     --theme-color: #1a8fd2;
     --theme-color-outline: rgb(26, 143, 210, 0.75);
-    --theme-gradient: linear-gradient(to bottom right, #1bd3ca, #2f6ee2);
     --theme-text-color: white;
   }
   </style>
@@ -99,10 +107,11 @@ function addSite() {
       icon: "",
       text: ""
     },
-    brand: {
+    data: {
       color: "",
       textColor: "",
-      url: ""
+      url: "",
+      analytics: ""
     }
   }
   database.doc(user.uid).set(sitedata);
@@ -125,10 +134,9 @@ function siteKeys(siteid, render) {
     }
     var repairs = true;
   }
-  if (sitedata[siteid].brand == undefined) {
-    sitedata[siteid].brand = {
-      color: "",
-      textColor: "",
+  if (sitedata[siteid].data == undefined) {
+    sitedata[siteid].data = {
+      analytics: "",
       url: ""
     }
     var repairs = true;
@@ -158,23 +166,22 @@ if (sitedata[siteid].fluid >= 291) splashfeature = "";
 if (sitedata[siteid].fluid >= 292) toastfeature = "";
 if (sitedata[siteid].fluid >= 291) brandfeature = "";
 }
-if (sitedata[siteid].brand.url) {
-  icontmp =  "https://api.statvoo.com/favicon/?url=" + sitedata[siteid].brand.url
+if (sitedata[siteid].data.url) {
+  icontmp =  "https://api.statvoo.com/favicon/?url=" + sitedata[siteid].data.url
   icon = `<img src="` + icontmp + `" style="width: 35px; height: 35px;" />`
 } else {
   icon = "public"
 }
-if (sitedata[siteid].brand.color) {
-  theme = `style="background: ` + sitedata[siteid].brand.color + `; color: ` + sitedata[siteid].brand.textColor + `; "`
-} else {
-  theme = ""
-}
+showAnalytics = `style="display:none"`;showOpen = `style="display:none"`;
+if (sitedata[siteid].data.analytics !== "") {showAnalytics = ""; }; if (sitedata[siteid].data.url !== "") {showOpen = ""; };
 $("#sitelist").html(`
-  <div ` + theme + ` class="section collapse collapsed">
+  <div class="section collapse collapsed">
     <div class="header">
   <i class="material-icons">` + icon + `</i>
   <h4>` + siteid + `</h4>
-  <button onclick="window.open('` + sitedata[siteid].brand.url + `')" class="right btn" style="margin-top: 15px;"><i style="font-size: 24px;" class="material-icons">open_in_new</i>Open</button>
+  <span  style="float:right;">
+  <span ` + showAnalytics + `><button onclick="window.open('` + sitedata[siteid].data.analytics + `')" class="right btn" style="margin-top: 15px;"><i style="font-size: 24px;" class="material-icons">trending_up</i>Analytics</button></span>
+  <span ` + showOpen + `><button onclick="window.open('` + sitedata[siteid].data.url + `')" class="right btn" style="margin-top: 15px;margin-left: 10px;"><i style="font-size: 24px;" class="material-icons">open_in_new</i>Open</button></span></span>
 </div>
 <div class="body" style="padding-top: 0px;">
 <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Site Status</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
@@ -185,31 +192,20 @@ $("#sitelist").html(`
 <button onclick="saveV('` + siteid + `', 292)" class="btn ` + btns[292] +`">v3 b2</button>
 <button onclick="saveV('` + siteid + `', 293)" class="btn ` + btns[293] +`">v3 b3 or above</button>
 </div>
-<div>
+<br />
+<input value="` + sitedata[siteid].data.url + `" class="url" placeholder="Site URL"></input>
+<input value="` + sitedata[siteid].data.analytics + `" class="analytics" placeholder="Analytics URL"></input>
+<br />
 <button onclick="oldID = '` + siteid + `';fluid.splash('.splash.rename');" class="btn"><i class="material-icons">edit</i>Change Site ID</button>
 <button onclick="unlinkID = '` + siteid + `'; fluid.splash('.splash.unlink');" class="btn"><i class="material-icons">link_off</i>Unlink site</button>
-</div>
-</div>
+<button onclick="save('data', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button>
 <br />
 <div ` + nofluid + `>
 <h5>Specify Fluid UI Version</h5>
 <p>Specify the version of Fluid UI your site is using to unlock supported Fluid Cloud features</p>
 </div>
-<br />
-<div ` + brandfeature + `>
-  <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Site Theme</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
-  <div class="thing" style="display:none;">
-  <p>Set your site's brand theme. Does not affect your site. Only shows in cloud console.</p>
-  <input value="` + sitedata[siteid].brand.color + `" class="color" placeholder="Theme gradient / Color"></input>
-  <input  value="` + sitedata[siteid].brand.textColor + `"class="text" placeholder="Theme Text Color"></input>
-  <br />
-  <input value="` + sitedata[siteid].brand.url + `" class="url" placeholder="Site URL"></input>
-  <br />
-  <button onclick="save('brand', true, '` + siteid + `', this)" class="btn"><i class="material-icons">save</i>Save</button>
-  <br />
-  </div>
-  </div>
-  <br />
+</div>
+  <br /><br />
 <div ` + splashfeature + `>
   <h5 style="display:inline-block;margin-right: 10px;vertical-align: middle;">Splash screen</h5><button onclick="$(this).siblings('.thing').toggle();" class="btn" style="padding: 2px;display:inline-block;vertical-align:middle;"><i class="material-icons" style="margin:0;">keyboard_arrow_down</i></button>
   <div class="thing" style="display:none;">
@@ -255,10 +251,9 @@ if (feat == "toast") {
 sitedata[siteid].toast.icon = $(data).parent().siblings("input.icon").val()
 sitedata[siteid].toast.text = $(data).parent().siblings("input.text").val()
 }
-if (feat == "brand") {
-sitedata[siteid].brand.color = $(data).siblings("input.color").val()
-sitedata[siteid].brand.textColor = $(data).siblings("input.text").val()
-sitedata[siteid].brand.url = $(data).siblings("input.url").val()
+if (feat == "data") {
+sitedata[siteid].data.url = $(data).siblings("input.url").val()
+sitedata[siteid].data.analytics = $(data).siblings("input.analytics").val()
 }
 database.doc(user.uid).set(sitedata);
 }
