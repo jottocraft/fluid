@@ -44,7 +44,7 @@ fluid.contextMenuOpen = false;
 
 fluid.theme = function(theme, dontSave) {
   $(".btns.themeSelector .btn").removeClass("active");
-  $(".btns.themeSelector .btn." + theme).addClass("active");
+  if (!String(theme).startsWith("#")) { $(".btns.themeSelector .btn." + theme).addClass("active"); }
   if (theme == undefined) {
     if (dontSave !== "unsetStat") { var activeTheme = "light"; } else { var activeTheme = "unset"; }
     var classes = document.body.classList;
