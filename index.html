@@ -29,7 +29,7 @@
 </head>
 
 
-<body class="auto">
+<body>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105685403-2"></script>
@@ -346,16 +346,62 @@
           border-radius: 50%;
           background-color: #FFFFFF;
         }
+        body:not(.nitro):not(.aquatic):not(.litleceser):not(.flex):not(.holiday):not(.midnight) .card.special {
+          background: linear-gradient(to bottom right, #00ff43, #00ffc7);
+        }
+        body.nitro .card.special {
+          background: linear-gradient(to bottom right, rgb(228, 58, 58), #620707);
+        }
+        body.aquatic .card.special {
+          background: linear-gradient(to bottom right, #169a96, #04624a);
+        }
+        body.litleceser .card.special {
+          background: linear-gradient(to bottom right, #ff6b00, #b34b01);
+        }
+        body.flex .card.special {
+          background: linear-gradient(to bottom right, var(--flex-light), var(--flex-layer2));
+        }
+        body.holiday .card.special {
+          background: linear-gradient(to bottom right, rgb(228, 58, 58), #07621A);
+        }
+        body.midnight .card.special {
+          background: linear-gradient(to bottom right, #131415, #000000);
+        }
+        .fluid.logo {
+          width: 238.636px;
+          height: 175px;
+          background-image: url(cutout.png);
+          background-size: contain;
+        }
+        body.holiday .fluid.logo {
+          width: 238.636px;
+          height: 170.625px;
+          background-repeat: no-repeat;
+    background-size: contain;
+          background-image: url(holiday.png);
+        }
+        body.holiday h5.ver.logo {
+          display:none;
+        }
+        body.holiday h5.holidaytheme {
+          display: block !important;
+          font-family: "Holiday", cursive;
+          font-size: 40px;
+        }
+        body.nitro .flex.colors, body.flex .flex.colors, body.aquatic .flex.colors, body.midnight .flex.colors {
+          display: block !important;
+        }
         </style>
       <br /><br />
       <br /><br />
       <div class="container">
 
-        <div class="card special" style="height: 300px;background: linear-gradient(to bottom right, #00ff43, #00ffc7);color: white;margin-bottom: 20px;">
-          <img class="fluid logo" src="cutout.png" style="width: 238.636px;height: 175px;margin-top: 37.5px;margin-left: 50px;" />
+        <div class="card special" style="height: 300px;color: white;margin-bottom: 20px;">
+          <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div>
           <div style="display:inline-block; float: right; text-align: right; margin-top: 75px;margin-right: 50px;">
             <h1 style="margin:0; display:inline-block;">Fluid UI</h1>
-            <h5 style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.4</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.4</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
           </div>
         </div>
 <div class="center">
@@ -487,52 +533,88 @@
       <div class="section">
         <div class="header">
       <i class="material-icons">format_paint</i>
-      <h3>Themes</h3>
+      <h3>Themes <div style="height: 30px;line-height: 22px;vertical-align: middle;" class="beta notice">coming soon</div></h3>
     </div>
     <div class="body">
+      <p><b style="color: red;">
+        All features demoed in this section are from Fluid UI 3 Beta 5 which is still in development. These features are subject to change before their release in the next beta coming soon. These demos are here to help you get ready for the new theme engine and showcase the new themes. Many details are intentionally left out.
+      </b></p>
         <p>
-          Fluid UI ships with a dark mode, which you can toggle easily with only one line of code, or use a CSS class. Dark mode currently only supports components from Materialize. To use your own elements with dark mode, read the instructions in the fluid.css file.
+          With the Fluid Flex update (coming soon), Fluid UI ships with several standard and colorful themes. You can use any of the included themes (list below), or make your own theme. The Fluid Flex update completly reworks the Fluid UI theme engine, and changes the default theme from light to auto. You can change the theme by adding the theme ID as a class to the body element, or using the fluid.theme JavaScript function. You can also use an included theme selector or make your own theme selection UI.
         </p>
-        <p>Check if dark theme is enabled</p>
-        <code>fluid.isDark()</code>
+        <ul><li><b>Default Light</b> (ID: "light")</li>
+          <li><b>Standard Dark</b> (ID: "dark")</li>
+          <li><b>Midnight Black</b> (ID: "midnight")</li>
+          <li><b>Signature Red</b> (ID: "nitro")</li>
+        <li><b>Aquatic</b> (ID: "aquatic")</li></ul>
+        <p>Get the current theme (When using the auto theme, this will return the theme that was automatically chosen)</p>
+        <code>fluid.theme()</code>
         <br /><br />
-        <a name="dark-style"></a>
-        <h5>Set Fluid's style</h5>
-        <p>Fluid ships with 2 different styles: default, and outlined. The default theme applies bold, filled elements. The outlined theme contains light, simple elements. The outlined can be enabled by adding the outline class to the body.</p>
-        <p>It is not reccommended to allow users to switch between styles. If you allow users to switch between styles, use fluid.isOutlined() to get the current style.</p>
-        <code>fluid.isOutlined()</code>
-        <br />
-        <button onclick="outlineDemo()" class="btn outline-demo">Enable outlined style</button>
-        <br /><br /><br />
         <a name="dark-auto"></a>
-        <h5>Automatically set dark mode based on time (Reccommended)</h5>
-        <i>Light mode: 6AM - 6PM  Dark mode: 7PM - 5AM</i>
-        <br />
-        <p>Enable with CSS</p>
-        <code>&lt;body class=&quot;auto&quot;&gt;</code>
+        <h5>Automatically set theme (Default)</h5>
+        <i>Light mode: 6AM - 5PM  Dark mode: 6PM - 5AM</i>
         <br /><br />
-        <p>Enable with JavaScript</p>
-        <code>fluid.auto();</code>
-        <br /><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo</i><br /><br />
+        <p>JavaScript function</p>
+        <code>fluid.theme("auto");</code>
+        <br /><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo. Manually change the theme and come back here if it doesn't do anything.</i><br /><br />
         <button onclick="fluid.auto(true);" class="btn ">Try</button>
         <br /><br />
         <a name="dark-manual"></a>
-          <h5>Set dark mode manually</h5>
-          <p>Set with CSS (Dark class sets dark mode, no dark class sets light mode)</p>
-          <code>&lt;body class=&quot;dark&quot;&gt;</code>
+          <h5>Manually set theme</h5>
+          <p>You can set the theme to whatever you want. You can choose to do this to change the default theme and still allow users to change their own theme, or you can make your site fixed with a single theme. The user's prefrences (from cookies) will always override the default theme unless the force class is added (this tells Fluid to ignore user prefrence completly). If you have a single-theme site without a theme selection UI, it is not reccommended to add the force class (to keep your dark-theme users happy)</p>
+          <code>&lt;body class=&quot;themeID&quot;&gt;</code>
           <br /><br />
-          <p>Set with JavaScript (Toggle by running without parameter)</p>
-          <code>fluid.dark(true);</code>
+          <p>Set theme with JavaScript. The theme variable can either be a hex color (for auto-generated flex theme), "toggle" for toggling between light and dark, or a theme ID. Set the second parameter to true to prevent Fluid from saving the theme as the user prefrence and applying it on reload (for demos or if you have your own theme storage system)</p>
+          <code>fluid.theme(theme, [override theme saving]);</code>
           <br /><br />
-          <button onclick="fluid.dark(undefined, true);" class="btn ">Try</button>
+          <h5>Theme Selector</h5>
+          <p>The theme selector shows themes that you configure using the fluidThemes variable</p>
+          <br />
+          <div class="btns row themeSelector"></div>
+          <code>&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
+          <br />
+          <p>Fluid Flex demo (Using the demo will override all other themes. Reload the page to return to a normal theme.)</p>
+          <input type="color" id="color"
+                     value="#4B3E84">
+          <button onclick="fluid.theme($('#color').val()); $('body').addClass('flex')" class="btn">Generate theme</button>
           <br /><br />
-          <h5>Brand Colors</h5>
-          <p>Add this CSS anywhere on your site to make Fluid UI's colors match your brand. Default values (blue & white) are displayed on this site. For the --theme-color-outline variable, add "C0" to the end of your hex or change your rgb string to rgba with 0.75 as the 4th argument. This is nessasary to ensure that the color is slightly transparent when in outline mode.</p>
-          <pre><code>:root {
-  --theme-color: #0bdd77;
-  --theme-color-outline: #3396e6C0;
-  --theme-text-color: white;
+          <pre id="genTheme"></pre>
+<br /><br />
+          <h5>Fluid Flex</h5>
+          <p>Fluid Flex celebrates the 1 year anniversary of the Teleport Flex Project (started 11.25.2017)</p>
+          <p><b>Fluid Flex does not support outline mode yet. Enable dark/light theme depending on which text color you want for your theme alongside the flex-text variable. Fluid Flex only supports black/white text colors right now.</b></p>
+          <p>Fluid Flex Layers</p>
+          <ul>
+            <li>Cards (lightest)</li>
+            <li>Background</li>
+            <li>Layer 1 (Elements)</li>
+            <li>Layer 2 (Sections)</li>
+            <li>Layer 3 (Hover, darkest)</li>
+          </ul>
+          <br />
+          <p>Prefix all custom theme classes with "flex" so Fluid can recognize the theme when it is set. Make sure to include the flex prefix when using fluid.theme to apply your custom theme.</p>
+          <pre><code>body.flexMyTheme {
+      /* Fluid Flex (UI colors) */
+      --flex-light: rgb(149, 14, 14);
+      --flex-bg: rgb(127, 1, 1);
+      --flex-text: white;
+      --flex-layer1: rgb(129, 7, 7);
+      --flex-layer2: rgb(104, 0, 0);
+      --flex-layer3: #5c0101;
+
+      /* Brand Colors (Active elements and other colored accents. Flex themes do not need to include this but it is reccommended.
+      You can also use these by themselves without a flex theme to apply to the default light/dark themes.) */
+      --theme-color: #0bdd77;
+      --theme-color-outline: #3396e6C0;
+      --theme-text-color: white;
 }</code></pre>
+<br />
+<p>Fluid Flex Demos</p>
+<button onclick="fluid.theme('nitro')" class="btn">Teleport 2.0 Signature Red</button>
+<button onclick="fluid.theme('aquatic')" class="btn">Aquatic</button>
+<button onclick="fluid.theme('midnight')" class="btn">Midnight black</button>
+<button style="margin-left: 50px;" onclick="fluid.theme('auto')" class="btn">Reset</button>
+<br /><br />
           <br /><br />
 
         </div>
@@ -651,9 +733,65 @@ fluid.config = {
     &lt;/ul&gt;
 &lt;/div&gt;</code>
 </pre>
+<div style="display:none;">
 <br />
 <p>Click the button to toggle the style of the navigation on this site</p>
 <button onclick="toggleNavbarStyle()" class="btn">Try</button>
+</div>
+<br /><br />
+<h5>Side navigation</h5>
+
+<div style="height: 650px;" class="card withnav">
+<div class="sidenav">
+  <div class="title">
+    <h5>Teleport 3</h5>
+    <p>by jottocraft</p>
+  </div>
+  <div class="item active">
+    <i class="material-icons">settings</i> Controls
+  </div>
+  <div class="item">
+    <i class="material-icons">folder</i> Chips
+  </div>
+  <div class="item">
+    <i class="material-icons">devices</i> Devices
+  </div>
+  <div class="item">
+    <i class="material-icons">info</i> About
+  </div>
+</div>
+<div class="content">
+<p>If putting side navigation into a card, make sure that the card has the "withnav" class, and make sure that the card is a fixed height. Add the content div next to the side nav for proper padding.</p>
+<pre>
+  <code>
+&lt;div style="height: 650px;" class="card withnav"&gt;
+  &lt;div class="sidenav"&gt;
+    &lt;div class="title"&gt;
+      &lt;h5&gt;Teleport 3&lt;/h5&gt;
+      &lt;p&gt;by jottocraft&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="item active"&gt;
+      &lt;i class="material-icons"&gt;settings&lt;/i&gt; Controls
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;folder&lt;/i&gt; Chips
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;devices&lt;/i&gt; Devices
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;info&lt;/i&gt; About
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="content"&gt;
+    &lt;p&gt;Card content&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+  </code>
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 <br /><br />

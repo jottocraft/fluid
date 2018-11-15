@@ -1,5 +1,6 @@
 /*!
-Fluid UI JavaScript Modules v3.0.0 beta 4
+Fluid UI JavaScript Modules v2.9.4-9.5 [INTERNAL DEVELOPMENT VERSION. FOR DEMONSTRATION PURPOSES ONLY]
+!!!THIS VERSION OF FLUID UI SHOULD *NOT* BE DEPLOYED ON ANY EXTERNAL SITE FOR ANY REASON!!!
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -41,57 +42,84 @@ fluid = new Object;
 fluid.cloudEnabled = true;
 fluid.contextMenuOpen = false;
 
-fluid.dark = function(theme, auto) {
-  if (!fluid.forcedTheme) {
+fluid.theme = function(theme, dontSave) {
+  $(".btns.themeSelector .btn").removeClass("active");
+  $(".btns.themeSelector .btn." + theme).addClass("active");
   if (theme == undefined) {
-  $("body").toggleClass("dark");
+    if (dontSave !== "unsetStat") { var activeTheme = "light"; } else { var activeTheme = "unset"; }
+    var classes = document.body.classList;
+    if ($("body").hasClass("dark")) var activeTheme = "dark";
+    if ($("body").hasClass("light")) var activeTheme = "light";
+    if ($("body").hasClass("nitro")) var activeTheme = "nitro";
+    if ($("body").hasClass("midnight")) var activeTheme = "midnight";
+    if ($("body").hasClass("aquatic")) var activeTheme = "aquatic";
+    for (var i = 0; i < classes.length; i++) { if (classes[i].startsWith("flex")) { var activeTheme = classes[i].slice(4) } }
+    return activeTheme;
   }
-  if (theme == true) {
-  $("body").addClass("dark");
-  }
-  if (theme == false) {
-  $("body").removeClass("dark");
-  }
-  if ( $(".themeico").length ) {
-    if (fluid.isDark()) {
-      $(".themeico").text("brightness_low");
+  $("body").removeClass("midnight");
+  $("body").removeClass("nitro");
+  $("body").removeClass("aquatic");
+  if (theme == "toggle") { $("body").toggleClass("dark"); }
+  if (theme == "dark") { $("body").addClass("dark"); }
+  if (theme == "light") { $("body").removeClass("dark"); }
+  if (theme == "midnight") { $("body").addClass("dark"); $("body").addClass("midnight"); }
+  if (theme == "nitro") { $("body").addClass("dark"); $("body").addClass("nitro"); }
+  if (theme == "aquatic") { $("body").addClass("dark"); $("body").addClass("aquatic"); }
+  if (String(theme).startsWith("flex")) { $("body").addClass("dark"); $("body").addClass(theme); }
+  if (theme == "auto") {
+    var hours = new Date().getHours()
+    // Light: 6AM - 5PM Dark: 6PM - 5AM
+    if (hours > 5 && hours < 18) {
+      $("body").removeClass("dark");
     } else {
-      $(".themeico").text("brightness_high");
+      $("body").addClass("dark");
     }
   }
+  if (String(theme).startsWith("#")) {
+    var baseColor = theme.slice(1)
+    console.warn("[Fluid UI] Using fluid.theme to generate a theme based on a color. This function should only be used for demo purposes only. Do not use this function on an actual site.")
+    jQuery.getScript("https://bgrins.github.io/TinyColor/tinycolor.js", function() {
+      var color = tinycolor(baseColor)
+      document.body.style.setProperty("--flex-light", tinycolor(baseColor).brighten(10).toString())
+      document.body.style.setProperty("--flex-bg", tinycolor(baseColor).brighten(5).toString())
+      if (tinycolor(baseColor).isLight()) {
+        var colorDark = "black";
+        document.body.style.setProperty("--flex-text", "black")
+        $("body").removeClass("dark")
+      } else {
+        var colorDark = "white";
+        document.body.style.setProperty("--flex-text", "white")
+        $("body").addClass("dark")
+      }
+      document.body.style.setProperty("--flex-layer1", tinycolor(baseColor).darken(5).toString())
+      document.body.style.setProperty("--flex-layer2", tinycolor(baseColor).darken(10).toString())
+      document.body.style.setProperty("--flex-layer3", tinycolor(baseColor).darken(15).toString())
+      document.body.style.setProperty("--theme-color", colorDark)
+      document.body.style.setProperty("--theme-color-outline", colorDark + `c0`)
+      document.body.style.setProperty("--theme-text-color", tinycolor(baseColor).brighten(10).toString())
+      $("#genTheme").html(`<code>/* Set this CSS on your Fluid site to use your generated Flex Theme */
+
+    body.flexNewTheme {
+        --flex-light: ` +  tinycolor(baseColor).brighten(10).toString() + `;
+        --flex-bg: ` + tinycolor(baseColor).brighten(5).toString() + `;
+        --flex-text: ` + colorDark + `;
+        --flex-layer1: ` + tinycolor(baseColor).darken(5).toString() + `;
+        --flex-layer2: ` + tinycolor(baseColor).darken(10).toString() + `;
+        --flex-layer3: ` + tinycolor(baseColor).darken(15).toString() + `;
+        --theme-color: ` +  colorDark + `;
+        --theme-color-outline: ` +  tinycolor(colorDark).toHexString() + `c0;
+        --theme-text-color: ` + tinycolor(baseColor).brighten(10).toString() + `;
+    }</code>`);
+    });
+  }
+  if (theme !== undefined) {
   if ($("#activecontextmenu").children(".btn").hasClass("active")) {$("#activecontextmenu").children(".btn").css("background-color", "#207bdf") } else {
-  if ($("#activecontextmenu").length) { if ($("#activecontextmenu").children().length == 2) { if ($("body").hasClass("dark")) { $("#activecontextmenu").children(".btn, i").css("background-color", "#16181a") } else { $("#activecontextmenu").children(".btn, i").css("background-color", "#dddddd") } } } }
-  if (auto !== true) document.cookie = "fluidIsDark=" + fluid.isDark();
-} else {
-  console.error("Unable to change theme: Fluid Cloud Console policies configured by the site owner disallow setting a custom theme")
+  if ($("#activecontextmenu").length) { if ($("#activecontextmenu").children().length == 2) { if ($("body").hasClass("dark")) { $("#activecontextmenu").children(".btn, i")[0].style = "background-color: var(--flex-layer3, #16181a);" } else { $("#activecontextmenu").children(".btn, i")[0].style = "background-color: var(--flex-layer3, #dddddd);" } } } }
+  if (dontSave !== true) document.cookie = "fluidTheme=" + theme;
 }
-}
-fluid.isDark = function() {
-  return $("body").hasClass("dark");
 }
 fluid.isOutlined = function() {
   return $("body").hasClass("outline");
-}
-fluid.auto = function(auto) {
-  if (!fluid.forcedTheme) {
-  var hours = new Date().getHours()
-  // Light: 6AM - 6PM Dark: 7PM - 5AM
-  if (hours > 5 && hours < 19) {
-    $("body").removeClass("dark");
-  } else {
-    $("body").addClass("dark");
-  }
-  if ( $(".themeico").length ) {
-    if (fluid.isDark()) {
-      $(".themeico").text("brightness_low");
-    } else {
-      $(".themeico").text("brightness_high");
-    }
-  }
-  if (auto !== true) document.cookie = "fluidIsDark=auto";
-} else {
-  console.error("Unable to change theme: Fluid Cloud Console policies configured by the site owner disallow setting a custom theme")
-}
 }
 fluid.tcoh = function() {
   $("body").addClass("litleceser");
@@ -118,26 +146,23 @@ fluid.load = function(mode) {
   }
 }
 fluid.init = function() {
-  if (getCookie("fluidIsDark") == "true") {
-    fluid.dark(true, true)
+  $( ".btns.row.themeSelector" ).html(`
+    <div onclick="fluid.theme('auto')" class="btn auto"><i class="material-icons">brightness_auto</i> Auto</div>
+    <div onclick="fluid.theme('light')" class="btn light"><i class="material-icons">brightness_high</i> Light</div>
+    <div onclick="fluid.theme('dark')" class="btn dark"><i class="material-icons">brightness_low</i> Dark</div>
+    <div onclick="fluid.theme('midnight')" class="btn midnight"><i class="material-icons">brightness_3</i> Midnight Black</div>
+    `);
+
+  if (getCookie("fluidTheme") !== "") {
+    fluid.theme(getCookie("fluidTheme"), true)
   } else {
-    if (getCookie("fluidIsDark") == "auto") {
-      fluid.auto(true);
-    } else {
-      if (getCookie("fluidIsDark") == "false") {
-    fluid.dark(false, true)
-  } else {
-    if ($("body").hasClass("auto")) {
-      fluid.auto(true);
-    }
-  }
-  }
+    if (fluid.theme(undefined, "unsetStat") == "unset") fluid.theme("auto", true);
   }
   if (!$("body").hasClass("notwemoji")) {
   twemoji.parse(document.body);
 }
 
-  $( ".btns .btn, .list.select .item" ).click(function(event) {
+  $( ".btns:not(.themeSelector) .btn, .list.select .item, .sidenav .item" ).click(function(event) {
   if ($(event.target).parent().hasClass("multiple")) {
     $(this).toggleClass("active")
   } else {
@@ -173,7 +198,7 @@ fluid.contextMenu = function(target, event) {
 
     var bodyRect = document.body.getBoundingClientRect(),
       elemRect = element.getBoundingClientRect(),
-      left   = elemRect.left - bodyRect.left,
+      left   = elemRect.left - bodyRect.left - 5,
       top   = elemRect.top - bodyRect.top;
 
     $("#activecontextmenu").css("left", left)
@@ -190,7 +215,7 @@ fluid.contextMenu = function(target, event) {
     if ($(element).hasClass("active")) {$(element).css("background-color", "#207bdf") } else {
     if ($("body").hasClass("outline")){
     if ($("body").hasClass("dark")) { $(element).css("border", "1px solid #16181a") } else { $(element).css("border", "1px solid #dddddd") }}
-    else { if ($("body").hasClass("dark")) { $(element).css("background-color", "#16181a") } else { $(element).css("background-color", "#dddddd") }} }
+    else { if ($("body").hasClass("dark")) { element.style = "background-color: var(--flex-layer3, #16181a);"; } else { element.style = "background-color: var(--flex-layer3, #dddddd);"; }} }
     $(element).siblings(".contextmenu").css("display", "inline-block");
     $(element).siblings(".contextmenu").css("margin-left", "-20px")
     $(element).siblings(".contextmenu").css("margin-right", "10px")
@@ -403,7 +428,8 @@ document.addEventListener('keydown', function(e) {
   if (key == requiredKey) {
     darkOverridePosition++;
     if (darkOverridePosition == darkOverride.length) {
-      fluid.dark();
+      fluid.theme("toggle");
+      $("body").removeClass("nitro");
       darkOverridePosition = 0;
     }
   } else {
@@ -415,7 +441,8 @@ document.addEventListener('keydown', function(e) {
   if (key == requiredKey) {
     autoOverridePosition++;
     if (autoOverridePosition == autoOverride.length) {
-      fluid.auto();
+      fluid.theme("auto");
+      $("body").removeClass("nitro");
       autoOverridePosition = 0;
     }
   } else {
@@ -467,6 +494,52 @@ document.addEventListener('keydown', function(e) {
     }
   } else {
     emojiOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var nitroKeysAuto = {
+  38: 'up',
+  40: 'down',
+  78: 'n'
+};
+var nitroOverride = ['up', 'up', 'down', 'down', 'n'];
+var nitroOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = nitroKeysAuto[e.keyCode];
+  var requiredKey = nitroOverride[nitroOverridePosition];
+  if (key == requiredKey) {
+    nitroOverridePosition++;
+    if (nitroOverridePosition == nitroOverride.length) {
+      $("body").toggleClass("nitro");
+      $("body").addClass("dark");
+      nitroOverridePosition = 0;
+    }
+  } else {
+    nitroOverridePosition = 0;
+  }
+});
+
+// a key map of allowed keys
+var midnightKeysAuto = {
+  38: 'up',
+  40: 'down',
+  77: 'm'
+};
+var midnightOverride = ['up', 'up', 'down', 'down', 'm'];
+var midnightOverridePosition = 0;
+document.addEventListener('keydown', function(e) {
+  var key = midnightKeysAuto[e.keyCode];
+  var requiredKey = midnightOverride[midnightOverridePosition];
+  if (key == requiredKey) {
+    midnightOverridePosition++;
+    if (midnightOverridePosition == midnightOverride.length) {
+      $("body").toggleClass("midnight");
+      $("body").addClass("dark");
+      midnightOverridePosition = 0;
+    }
+  } else {
+    midnightOverridePosition = 0;
   }
 });
 
