@@ -1,6 +1,5 @@
 /*!
-Fluid UI JavaScript Modules v2.9.4-9.5 [INTERNAL DEVELOPMENT VERSION. FOR DEMONSTRATION PURPOSES ONLY]
-!!!THIS VERSION OF FLUID UI SHOULD *NOT* BE DEPLOYED ON ANY EXTERNAL SITE FOR ANY REASON!!!
+Fluid UI JavaScript Modules v3.0.0 Beta 5
 
 Copyright (c) 2017-2018 jottocraft
 
@@ -44,28 +43,23 @@ fluid.contextMenuOpen = false;
 
 fluid.theme = function(theme, dontSave) {
   $(".btns.themeSelector .btn").removeClass("active");
-  if (!String(theme).startsWith("#")) { $(".btns.themeSelector .btn." + theme).addClass("active"); }
-  if (theme == undefined) {
-    if (dontSave !== "unsetStat") { var activeTheme = "light"; } else { var activeTheme = "unset"; }
-    var classes = document.body.classList;
-    if ($("body").hasClass("dark")) var activeTheme = "dark";
-    if ($("body").hasClass("light")) var activeTheme = "light";
-    if ($("body").hasClass("nitro")) var activeTheme = "nitro";
-    if ($("body").hasClass("midnight")) var activeTheme = "midnight";
-    if ($("body").hasClass("aquatic")) var activeTheme = "aquatic";
-    for (var i = 0; i < classes.length; i++) { if (classes[i].startsWith("flex")) { var activeTheme = classes[i].slice(4) } }
-    return activeTheme;
-  }
+  if (theme) { $(".btns.themeSelector .btn." + theme.replace("#", "")).addClass("active"); }
+  classes = document.body.classList.value.split(" ");
+  for (var ii = 0; ii < classes.length; ii++) { if ((classes[ii].startsWith("light") || classes[ii].startsWith("dark")) && ((classes[ii] !== "dark") && (classes[ii] !== "light"))) { $("body").removeClass(classes[ii]) } }
+  document.body.style = "";
+  if (theme) {
   $("body").removeClass("midnight");
   $("body").removeClass("nitro");
   $("body").removeClass("aquatic");
+}
   if (theme == "toggle") { $("body").toggleClass("dark"); }
   if (theme == "dark") { $("body").addClass("dark"); }
   if (theme == "light") { $("body").removeClass("dark"); }
   if (theme == "midnight") { $("body").addClass("dark"); $("body").addClass("midnight"); }
   if (theme == "nitro") { $("body").addClass("dark"); $("body").addClass("nitro"); }
   if (theme == "aquatic") { $("body").addClass("dark"); $("body").addClass("aquatic"); }
-  if (String(theme).startsWith("flex")) { $("body").addClass("dark"); $("body").addClass(theme); }
+  if (String(theme).startsWith("light")) { $("body").removeClass("dark"); $("body").addClass(theme); }
+  if (String(theme).startsWith("dark")) { $("body").addClass("dark"); $("body").addClass(theme); }
   if (theme == "auto") {
     var hours = new Date().getHours()
     // Light: 6AM - 5PM Dark: 6PM - 5AM
@@ -74,6 +68,17 @@ fluid.theme = function(theme, dontSave) {
     } else {
       $("body").addClass("dark");
     }
+  }
+  if (theme == undefined) {
+    if (dontSave !== "unsetStat") { var activeTheme = "light"; } else { var activeTheme = "unset"; }
+    if ($("body").hasClass("dark")) var activeTheme = "dark";
+    if ($("body").hasClass("light")) var activeTheme = "light";
+    if ($("body").hasClass("nitro")) var activeTheme = "nitro";
+    if ($("body").hasClass("midnight")) var activeTheme = "midnight";
+    if ($("body").hasClass("aquatic")) var activeTheme = "aquatic";
+    if (activeTheme) { $(".btns.themeSelector .btn." + activeTheme.replace("#", "")).addClass("active"); }
+    for (var i = 0; i < document.body.classList.length.length; i++) { if (document.body.classList.length[i].startsWith("light")) { var activeTheme = document.body.classList.length[i] } if (document.body.classList.length[i].startsWith("dark")) { var activeTheme = document.body.classList.length[i] } }
+    return activeTheme;
   }
   if (String(theme).startsWith("#")) {
     var baseColor = theme.slice(1)
@@ -91,6 +96,8 @@ fluid.theme = function(theme, dontSave) {
         document.body.style.setProperty("--flex-text", "white")
         $("body").addClass("dark")
       }
+      var colorDesc = "dark";
+      if (colorDark == "black") var colorDesc = "light";
       document.body.style.setProperty("--flex-layer1", tinycolor(baseColor).darken(5).toString())
       document.body.style.setProperty("--flex-layer2", tinycolor(baseColor).darken(10).toString())
       document.body.style.setProperty("--flex-layer3", tinycolor(baseColor).darken(15).toString())
@@ -99,7 +106,7 @@ fluid.theme = function(theme, dontSave) {
       document.body.style.setProperty("--theme-text-color", tinycolor(baseColor).brighten(10).toString())
       $("#genTheme").html(`<code>/* Set this CSS on your Fluid site to use your generated Flex Theme */
 
-    body.flexNewTheme {
+    body.` + colorDesc + `NewTheme {
         --flex-light: ` +  tinycolor(baseColor).brighten(10).toString() + `;
         --flex-bg: ` + tinycolor(baseColor).brighten(5).toString() + `;
         --flex-text: ` + colorDark + `;
@@ -145,13 +152,58 @@ fluid.load = function(mode) {
     $("loader").addClass("hidden");
   }
 }
+fluid.themePages = function(ele, dir) {
+  if (dir == +1) {
+    fluid.themePage++;
+    $('.themeSelector span').hide();
+    $('.themeSelector .s' + fluid.themePageList[fluid.themePage]).show();
+    if (fluid.themePage == (fluid.themePageList.length - 1)) { $(ele).hide(); } $(ele).siblings(".btn").show();
+  } else {
+    fluid.themePage--;
+    $('.themeSelector span').hide();
+    $('.themeSelector .s' + fluid.themePageList[fluid.themePage]).show();
+    if (fluid.themePage == 0) { $(ele).hide(); } $(ele).siblings(".btn").show();
+  }
+}
 fluid.init = function() {
+  if (typeof fluidThemes !== "undefined") {
+    var flexDom = [];
+    for (var i = 0; i < fluidThemes.length; i++) {
+      if (typeof fluidThemes[i] == "object") { if (!fluidThemes[i].icon) { fluidThemes[i].icon = "palette";} flexDom.push(`<div onclick="fluid.theme('` + fluidThemes[i].id + `')" class="btn ` + fluidThemes[i].id.replace("#", "") + `"><i class="material-icons">` + fluidThemes[i].icon + `</i> ` + fluidThemes[i].name + `</div>`)  }
+    }
+    fluid.themePage = 0;
+    fluid.themePageList = [];
   $( ".btns.row.themeSelector" ).html(`
+    <div style="display: none;" onclick="fluid.themePages(this, -1);" class="btn"><i class="material-icons">keyboard_arrow_left</i></div>
+    <span class="s0">
     <div onclick="fluid.theme('auto')" class="btn auto"><i class="material-icons">brightness_auto</i> Auto</div>
     <div onclick="fluid.theme('light')" class="btn light"><i class="material-icons">brightness_high</i> Light</div>
     <div onclick="fluid.theme('dark')" class="btn dark"><i class="material-icons">brightness_low</i> Dark</div>
-    <div onclick="fluid.theme('midnight')" class="btn midnight"><i class="material-icons">brightness_3</i> Midnight Black</div>
+    </span>
+    <span style="display:none;" class="s1">
+    ` + ( fluidThemes.includes("midnight") ? ( `<div onclick="fluid.theme('midnight')" class="btn midnight"><i class="material-icons">brightness_3</i> Midnight Black</div>` ) : ("") ) + `
+    ` + ( fluidThemes.includes("nitro") ? ( `<div onclick="fluid.theme('nitro')" class="btn nitro"><i class="material-icons">whatshot</i> Nitro</div>` ) : ("") ) + `
+    ` + ( fluidThemes.includes("aquatic") ? ( `<div onclick="fluid.theme('aquatic')" class="btn aquatic"><i class="material-icons">pool</i> Aqua</div>` ) : ("") ) + `
+    </span>
+    <span style="display:none;" class="s2">
+    ` + flexDom.join("") + `
+    </span>
+    <span style="display:none;" class="s3">
+    ` + ( fluidThemes.includes("rainbow") ? (
+      `<div onclick="fluid.theme('darkRed')" class="btn darkRed"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #8e0004;" class="material-icons"></i></div>
+      <div onclick="fluid.theme('darkOrange')" class="btn darkOrange"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #8e4b00;" class="material-icons"></i></div>
+      <div onclick="fluid.theme('darkYellow')" class="btn darkYellow"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #6a5a00;"class="material-icons"></i></div>
+      <div onclick="fluid.theme('darkGreen')" class="btn darkGreen"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #257300;" class="material-icons"></i></div>
+      <div onclick="fluid.theme('darkBlue')" class="btn darkBlue"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #0043bf;" class="material-icons"></i></div>
+      <div onclick="fluid.theme('darkPurple')" class="btn darkPurple"><i style="width: 24px; height: 24px; border-radius: 50%; background-color: #8100b9;" class="material-icons"></i></div>`
+    ) : ("") ) + `
+    </span>
+    <div onclick="fluid.themePages(this, +1);" class="btn"><i class="material-icons">keyboard_arrow_right</i></div>
     `);
+    for (var i = 0; i < ($('.themeSelector').children().length - 2); i++) {
+      if ($('.themeSelector .s' + i).children().length) fluid.themePageList.push(i);
+    }
+  }
 
   if (getCookie("fluidTheme") !== "") {
     fluid.theme(getCookie("fluidTheme"), true)

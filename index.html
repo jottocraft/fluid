@@ -5,23 +5,20 @@
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="fluid.css"  media="screen,projection"/>
-       <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/non-spec-apps/mio-icons/latest/outline.css"  media="screen,projection"/>
        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
   <meta property="og:url" content="https://fluid.js.org" />
   <meta property="og:title" content="Fluid UI" />
-  <meta property="og:description" content="Easy to use, simple CSS with a dark mode" />
+  <meta property="og:description" content="Simple CSS with a dark mode" />
   <meta property="og:image" content="https://fluid.js.org/icon.png" />
 
   <meta charset="utf-8">
   <title>Fluid UI (beta)</title>
-<meta name="description" content="">
-  <meta name="author" content="">
+<meta name="description" content="Simple CSS with a dark mode">
+  <meta name="author" content="jottocraft">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
@@ -44,33 +41,18 @@
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="fluid.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script>
-  fluid.config = {
-    cloud: {
-    cloudUser: "qHqjJxjEFMc2Sn0qbI6alaBr65u1",
-    cloudProject: "demo"
-    }
-  };
+  fluidThemes = [
+    "midnight", "nitro", "aquatic", "rainbow"
+  ]
   </script>
-  <script src="cloud.js"></script>
-
+  <script async type="text/javascript" src="fluid.js"></script>
 
   <div  style="display:none" class="nav right">
             <ul>
-
-              <li>
-              <a href="cloud/">
-                <i class="material-icons left">cloud</i>
-                <div class="list contextmenu">
-                  <div onclick="window.open('cloud/')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                  <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
-                  <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
-                </div>
-              </a>
-              </li>
 
 
                 <li>
@@ -94,17 +76,6 @@
                     <div onclick="window.location.href = '#dark-style'" class="item"><i class="material-icons">format_paint</i>Set Fluid's Style</div>
                     <div onclick="window.location.href = '#dark-auto'" class="item"><i class="material-icons">brightness_auto</i>Auto dark mode</div>
                     <div onclick="window.location.href = '#dark-manual'" class="item"><i class="material-icons">brightness_low</i>Manual dark mode</div>
-                  </div>
-                </a>
-                </li>
-
-                <li>
-                <a href="#cloud">
-                  <i class="material-icons left">system_update_alt</i>
-                  <div class="list contextmenu">
-                    <div onclick="window.open('#cloud')" class="item"><i class="material-icons">open_in_new</i>Open in new tab</div>
-                    <div onclick="window.location.href = '#cloud'" class="item"><i class="material-icons">book</i>Cloud Docs</div>
-                    <div onclick="window.location.href = 'cloud/'" class="item"><i class="material-icons">cloud</i>Cloud Console</div>
                   </div>
                 </a>
                 </li>
@@ -346,26 +317,11 @@
           border-radius: 50%;
           background-color: #FFFFFF;
         }
-        body:not(.nitro):not(.aquatic):not(.litleceser):not(.flex):not(.holiday):not(.midnight) .card.special {
-          background: linear-gradient(to bottom right, #00ff43, #00ffc7);
-        }
-        body.nitro .card.special {
-          background: linear-gradient(to bottom right, rgb(228, 58, 58), #620707);
-        }
-        body.aquatic .card.special {
-          background: linear-gradient(to bottom right, #169a96, #04624a);
-        }
-        body.litleceser .card.special {
-          background: linear-gradient(to bottom right, #ff6b00, #b34b01);
-        }
-        body.flex .card.special {
-          background: linear-gradient(to bottom right, var(--flex-light), var(--flex-layer2));
+        body .card.special {
+          background: linear-gradient(to bottom right, var(--flex-light, #00ff43), var(--flex-layer3, #00ffc7));
         }
         body.holiday .card.special {
           background: linear-gradient(to bottom right, rgb(228, 58, 58), #07621A);
-        }
-        body.midnight .card.special {
-          background: linear-gradient(to bottom right, #131415, #000000);
         }
         .fluid.logo {
           width: 238.636px;
@@ -400,7 +356,7 @@
           <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div>
           <div style="display:inline-block; float: right; text-align: right; margin-top: 75px;margin-right: 50px;">
             <h1 style="margin:0; display:inline-block;">Fluid UI</h1>
-            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.4</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.5</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
             <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
           </div>
         </div>
@@ -415,10 +371,6 @@
 
                       <li>
                       <a href="#dark"><i class="material-icons">format_paint</i><span>Themes</span></a>
-                      </li>
-
-                      <li>
-                      <a href="#cloud"><i class="material-icons">cloud</i><span>Cloud</span></a>
                       </li>
 
                       <li>
@@ -533,20 +485,17 @@
       <div class="section">
         <div class="header">
       <i class="material-icons">format_paint</i>
-      <h3>Themes <div style="height: 30px;line-height: 22px;vertical-align: middle;" class="beta notice">coming soon</div></h3>
+      <h3>Themes</h3>
     </div>
     <div class="body">
-      <p><b style="color: red;">
-        All features demoed in this section are from Fluid UI 3 Beta 5 which is still in development. These features are subject to change before their release in the next beta coming soon. These demos are here to help you get ready for the new theme engine and showcase the new themes. Many details are intentionally left out.
-      </b></p>
         <p>
-          With the Fluid Flex update (coming soon), Fluid UI ships with several standard and colorful themes. You can use any of the included themes (list below), or make your own theme. The Fluid Flex update completly reworks the Fluid UI theme engine, and changes the default theme from light to auto. You can change the theme by adding the theme ID as a class to the body element, or using the fluid.theme JavaScript function. You can also use an included theme selector or make your own theme selection UI.
+          With the introduction of Fluid Flex in Fluid UI 3.0.0 beta 5, Fluid UI ships with several standard and colorful themes. You can use any of the included themes (list below), or make your own theme. The Fluid Flex update completly reworks the Fluid UI theme engine, and changes the default theme from light to auto. You can change the theme by adding the theme ID as a class to the body element, or using the fluid.theme JavaScript function. You can also use an included theme selector or make your own theme selection UI.
         </p>
         <ul><li><b>Default Light</b> (ID: "light")</li>
           <li><b>Standard Dark</b> (ID: "dark")</li>
           <li><b>Midnight Black</b> (ID: "midnight")</li>
-          <li><b>Signature Red</b> (ID: "nitro")</li>
-        <li><b>Aquatic</b> (ID: "aquatic")</li></ul>
+          <li><b>Nitro</b> (ID: "nitro")</li>
+        <li><b>Aqua</b> (ID: "aquatic")</li></ul>
         <p>Get the current theme (When using the auto theme, this will return the theme that was automatically chosen)</p>
         <code>fluid.theme()</code>
         <br /><br />
@@ -557,18 +506,18 @@
         <p>JavaScript function</p>
         <code>fluid.theme("auto");</code>
         <br /><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo. Manually change the theme and come back here if it doesn't do anything.</i><br /><br />
-        <button onclick="fluid.auto(true);" class="btn ">Try</button>
+        <button onclick="fluid.theme('auto');" class="btn ">Try</button>
         <br /><br />
         <a name="dark-manual"></a>
           <h5>Manually set theme</h5>
-          <p>You can set the theme to whatever you want. You can choose to do this to change the default theme and still allow users to change their own theme, or you can make your site fixed with a single theme. The user's prefrences (from cookies) will always override the default theme unless the force class is added (this tells Fluid to ignore user prefrence completly). If you have a single-theme site without a theme selection UI, it is not reccommended to add the force class (to keep your dark-theme users happy)</p>
+          <p>You can set the theme to whatever you want. You can choose to do this to change the default theme and still allow users to change their own theme, or you can make your site fixed with a single theme. The user's prefrences (from cookies) will always override the default theme unless the force class is added to the body (this tells Fluid UI to ignore user prefrence completly). If you don't have a theme selection UI, it is reccommended to not add the force class to allow advanced users to manually enable a theme you don't support.</p>
           <code>&lt;body class=&quot;themeID&quot;&gt;</code>
           <br /><br />
-          <p>Set theme with JavaScript. The theme variable can either be a hex color (for auto-generated flex theme), "toggle" for toggling between light and dark, or a theme ID. Set the second parameter to true to prevent Fluid from saving the theme as the user prefrence and applying it on reload (for demos or if you have your own theme storage system)</p>
+          <p>Set theme with JavaScript. The theme variable can either be "toggle" for toggling between light and dark or a theme ID. Set the second parameter to true to prevent Fluid from saving the theme as the user prefrence and applying it on reload (for demos or if you have your own way of storing users' theme prefrences)</p>
           <code>fluid.theme(theme, [override theme saving]);</code>
           <br /><br />
           <h5>Theme Selector</h5>
-          <p>The theme selector shows themes that you configure using the fluidThemes variable</p>
+          <p>The theme selector shows themes that you configure using the fluidThemes variable. The theme selector can show up to 4 pages. 1: Light/Dark/Auto 2: Midnight Black/Nitro/Aqua 3: Any custom themes 4: All rainbow colored themes (not reccommended). fluidThemes should be an array with each of the themeIDs you want to enable. Custom themes should be objects with the name and themeID properties, and optionally a material icon in the icon property. The rainbow theme selector can be enabled by adding "rainbow" to the array. There is no way to disable the light/dark/auto themes. Pages 1, 2 and 4 are demoed below.</p>
           <br />
           <div class="btns row themeSelector"></div>
           <code>&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
@@ -592,8 +541,8 @@
             <li>Layer 3 (Hover, darkest)</li>
           </ul>
           <br />
-          <p>Prefix all custom theme classes with "flex" so Fluid can recognize the theme when it is set. Make sure to include the flex prefix when using fluid.theme to apply your custom theme.</p>
-          <pre><code>body.flexMyTheme {
+          <p>Custom themes should be prefixed with "light" or "dark" depending on what theme you want to use as the base. This also allows Fluid UI to recognize the theme. Make sure to include the flex prefix when using fluid.theme to apply your custom theme.</p>
+          <pre><code>body.darkMyTheme {
       /* Fluid Flex (UI colors) */
       --flex-light: rgb(149, 14, 14);
       --flex-bg: rgb(127, 1, 1);
@@ -610,56 +559,13 @@
 }</code></pre>
 <br />
 <p>Fluid Flex Demos</p>
-<button onclick="fluid.theme('nitro')" class="btn">Teleport 2.0 Signature Red</button>
-<button onclick="fluid.theme('aquatic')" class="btn">Aquatic</button>
+<button onclick="fluid.theme('nitro')" class="btn">Nitro (Teleport 2.0 Red)</button>
+<button onclick="fluid.theme('aquatic')" class="btn">Aqua</button>
 <button onclick="fluid.theme('midnight')" class="btn">Midnight black</button>
 <button style="margin-left: 50px;" onclick="fluid.theme('auto')" class="btn">Reset</button>
 <br /><br />
           <br /><br />
 
-        </div>
-      </div>
-      <br /><br />
-      <a name="cloud"></a>
-      <div class="section">
-        <div class="header">
-      <i class="material-icons">cloud</i>
-      <h3>Fluid Cloud</h3>
-    </div>
-    <div class="body">
-        <p>
-          Fluid Cloud is a Fluid UI module that supports Fluid UI 3 or later versions. Fluid Cloud lets you configure alerts, which could be used for events or updates. Fluid Cloud can also be used to set a splash screen in case of an unexpected outage on your site.
-        </p>
-        <p>All of the site configuration (active splash screen and alert text) is public</p>
-        <p>You can go to the Fluid Cloud console by clicking on the cloud icon at the top of the page, or by going to <a href="cloud/">fluid.js.org/cloud</a></p>
-        <br />
-        <h5>Initilization code</h5>
-        <p>Give your site a unique (for your account, not global) Fluid Cloud project ID. You will be given your Fluid Cloud user ID when you login to the cloud console.</p>
-        <br />
-        <p>fluid.config variable (Make sure it is defined before loading cloud.js):</p>
-<pre><code>&lt;script src=&quot;https://www.gstatic.com/firebasejs/5.1.0/firebase.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-fluid.config = {
-  cloud: {
-    cloudUser: "myuserid",
-    cloudProject: "site"
-  }
-}
-&lt;/script&gt;
-&lt;script src=&quot;fluid/cloud.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<br />
-<p>If your site has a web app manifest, you can define the cloudProject variable there. You still need to make sure to include both JavaScript files, however.</p>
-<p>Web app manifest:</p>
-<pre><code>{
-"name": "My site",
-"description": "Cool site",
-...
-"cloudUser": "myuserid",
-"cloudProject": "site",
-...
-}
-</code></pre>
         </div>
       </div>
               <br /><br />
@@ -739,7 +645,7 @@ fluid.config = {
 <button onclick="toggleNavbarStyle()" class="btn">Try</button>
 </div>
 <br /><br />
-<h5>Side navigation <div class="beta notice">coming soon</div></h5>
+<h5>Side navigation</h5>
 
 <div style="height: 650px;" class="card withnav">
 <div class="sidenav">
