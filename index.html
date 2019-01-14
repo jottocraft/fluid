@@ -175,6 +175,9 @@
         body:not(.dark) .override {
           color: black !important;
         }
+		.material-icons {
+		font-family: 'Material Icons Outline';
+		}
         </style>
         <script>
         const markdown = new showdown.Converter();
@@ -352,43 +355,42 @@
       <br /><br />
       <div class="container">
 
-        <div class="card special" style="height: 300px;color: white;margin-bottom: 20px;">
-          <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div>
-          <div style="display:inline-block; float: right; text-align: right; margin-top: 75px;margin-right: 50px;">
-            <h1 style="margin:0; display:inline-block;">Fluid UI</h1>
-            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.5</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
-            <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
-          </div>
-        </div>
+         <!-- <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div> -->
+
+			
 <div class="center">
-        <div style="margin-bottom: 100px;" class="card nav">
+<h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-layer3, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI</h1>
+            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.6</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
+			<br />
+        <div style="margin-bottom: 100px; box-shadow: none; background-color: transparent; border: none;" class="card nav">
                   <ul>
 
                       <li>
-                      <a href="#input"><i class="material-icons">keyboard</i><span>Input</span>
+                      <a href="#input"><i class="material-icons">keyboard</i><span style="font-weight: bold;">Input</span>
                       </a>
                       </li>
 
                       <li>
-                      <a href="#dark"><i class="material-icons">format_paint</i><span>Themes</span></a>
+                      <a href="#dark"><i class="material-icons">format_paint</i><span style="font-weight: bold;">Themes</span></a>
                       </li>
 
                       <li>
-                      <a href="#nav"><i class="material-icons">navigation</i><span>Navigation</span></a>
+                      <a href="#nav"><i class="material-icons">navigation</i><span style="font-weight: bold;">Navigation</span></a>
                       </li>
 
                       <li>
-                      <a href="#cards"><i class="material-icons">layers</i><span>Cards & Sections</span></a>
+                      <a href="#cards"><i class="material-icons">layers</i><span style="font-weight: bold;">Cards & Sections</span></a>
                       </li>
 
                       <li>
-                      <a href="#splash"><i class="material-icons">notifications</i><span>Splash & Alerts</span></a>
+                      <a href="#splash"><i class="material-icons">notifications</i><span style="font-weight: bold;">Splash & Alerts</span></a>
                       </li>
 
                       <span style="height: 100%;width: 5px;background-color: red !important;border-radius: 20px !important;vertical-align: middle;display:none;">&nbsp;</span>
 
                       <li>
-                      <a href="#install"><i class="material-icons">cloud_download</i><span>Download</span></a>
+                      <a href="#install"><i class="material-icons">cloud_download</i><span style="font-weight: bold;">Download</span></a>
                       </li>
 
 
@@ -417,17 +419,20 @@
         <br /><br />
         <a name="input-buttons"></a>
         <h5>Buttons</h5>
-        <p>Add an icon by placing a span next to a material icon instead of text. Right click the button to see the context menu demo. You can also right click on any item in the toolbar, however, this does not support navigation items with labels yet.</p>
-        <p><i class="material-icons">experiment</i>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class next to it. If you have multiple supported elements, wrap the element with its contextmenu in a span or div to prevent mix-ups.</p>
+        <p>Add an icon by placing a span next to a material icon instead of text. You can add the "outline" class to make the button use an outline instead of a background, acting as a secondary button. You can add the "small" class to a button to make it smaller.</p>
+        <p>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class next to it. It is reccommended that you wrap your button in a div element with the display property set to inline-block.</p>
         <br />
-        <div>
-        <button class="btn"><i class="material-icons">star</i>Hello World</button>
+        <div style="display: inline-block;">
+        <button class="btn"><i class="material-icons">arrow_forward</i>Continue</button>
         <div class="list contextmenu">
-          <div class="item"><i class="material-icons">star</i>Item 1</div>
-          <div class="item"><i class="material-icons">star</i>Item 2</div>
-          <div class="item"><i class="material-icons">star</i>Item 3</div>
+          <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+          <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+          <div class="item"><i class="material-icons">star_border</i>Item 3</div>
         </div>
       </div>
+	  <button class="btn outline"><i class="material-icons">close</i>Cancel</button>
+	  <br /><br />
+	  <button class="btn small">Small button</button>
         <br /><br />
         <a name="input-switches"></a>
         <h5>Switches</h5>
@@ -468,9 +473,9 @@
 <p>If you want it to act as a select element list, you can add the "select" class, and handle the clicks. This will cause it to act the same as a button row (see above). You can also add the "multiple" class in addition the the select class to make it work like checkboxes.</p>
 <br />
 <div class="list select multiple">
-  <div class="item"><i class="material-icons">star</i>Item 1</div>
-  <div class="item"><i class="material-icons">star</i>Item 2</div>
-  <div class="item"><i class="material-icons">star</i>Item 3</div>
+  <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+  <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+  <div class="item"><i class="material-icons">star_border</i>Item 3</div>
 </div>
 <br />
 <pre><code>&lt;div class=&quot;list select multiple&quot;&gt;
@@ -518,7 +523,9 @@
           <br /><br />
           <h5>Theme Selector</h5>
           <p>The theme selector shows themes that you configure using the fluidThemes variable. The theme selector can show up to 4 pages. 1: Light/Dark/Auto 2: Midnight Black/Nitro/Aqua 3: Any custom themes 4: All rainbow colored themes (not reccommended). fluidThemes should be an array with each of the themeIDs you want to enable. Custom themes should be objects with the name and themeID properties, and optionally a material icon in the icon property. The rainbow theme selector can be enabled by adding "rainbow" to the array. There is no way to disable the light/dark/auto themes. Pages 1, 2 and 4 are demoed below.</p>
-          <br />
+          <p>Add this code before loading fluid.js to specify what themes you want to be shown in the theme selector</p>
+          <code>fluidThemes = [ "midnight", "nitro", "aquatic", "rainbow" ]</code>
+          <br /><br />
           <div class="btns row themeSelector"></div>
           <code>&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
           <br />
@@ -904,7 +911,7 @@
       </div>
       </div>
     <div class="right footer">
-      <a href="https://github.com/jottocraft/fluid/releases" class=" btn">Releases</a>
+      <a href="https://github.com/jottocraft/fluid/releases" class="btn outline">Releases</a>
       <a onclick="fluid.cards.close('#vmodal')" class="btn">Ok</a>
     </div>
   </div>
