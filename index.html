@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script async type="text/javascript" src="fluid.js"></script>
   <link rel="shortcut icon" href="favicon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
@@ -28,6 +30,12 @@
 
 <body>
 
+  <div style="display: none;" class="sidebar">
+    <h4>Projects</h4>
+    <div class="item">Fluid UI</div>
+    <div class="item">Fluid UI</div>
+  </div>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105685403-2"></script>
   <script>
@@ -39,7 +47,6 @@
   </script>
 
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -49,7 +56,6 @@
     "midnight", "nitro", "aquatic", "rainbow"
   ]
   </script>
-  <script async type="text/javascript" src="fluid.js"></script>
 
   <div  style="display:none" class="nav right">
             <ul>
@@ -357,10 +363,10 @@
 
          <!-- <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div> -->
 
-			
+
 <div class="center">
-<h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-layer3, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI</h1>
-            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.6</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+<h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-text, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI</h1>
+            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.7</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
             <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
 			<br />
         <div style="margin-bottom: 100px; box-shadow: none; background-color: transparent; border: none;" class="card nav">
@@ -543,6 +549,8 @@
           <ul>
             <li>Cards (lightest)</li>
             <li>Background</li>
+            <li>Text</li>
+            <li>Secondary text</li>
             <li>Layer 1 (Elements)</li>
             <li>Layer 2 (Sections)</li>
             <li>Layer 3 (Hover, darkest)</li>
@@ -554,6 +562,7 @@
       --flex-light: rgb(149, 14, 14);
       --flex-bg: rgb(127, 1, 1);
       --flex-text: white;
+      --flex-sectext: #ff9c9c;
       --flex-layer1: rgb(129, 7, 7);
       --flex-layer2: rgb(104, 0, 0);
       --flex-layer3: #5c0101;
@@ -583,6 +592,18 @@
               <h3>Navigation</h3>
               </div>
               <div class="body">
+                <p><b>Navigation elements in Fluid UI are highly experimental. Each site has different needs for its navigation, and Fluid UI's options are limited. Navigation elements listed below are not fully supported.</b></p>
+                <br />
+                <h5>Directory thing</h5>
+                <br />
+                <div class="directory">
+                  <span>Home</span>
+                  <i class="material-icons">keyboard_arrow_right</i>
+                  <span>Documents</span>
+                  <i class="material-icons">keyboard_arrow_right</i>
+                  <span class="active">Calendar</span>
+                </div>
+                <br /> <br />
       <p>
         Fluid UI also offers simple navigation bars. You can add the active class to any one of these to show that it is active. Add the active class to the nav div itself to automatically give buttons the active class.
       </p>
@@ -652,8 +673,19 @@
 <button onclick="toggleNavbarStyle()" class="btn">Try</button>
 </div>
 <br /><br />
+<h5>Sidebar</h5>
+<p>Try out the sidebar demo. When using the sidebar, add the "hasSidebar" class to the body element to make sure everything is padded correctly. Place the sidebar right after the <body> tag</p>
+<button onclick="$('body').toggleClass('hasSidebar'); $('.sidebar').toggle();" class="btn">Toggle sidebar</button>
+<br /><br />
+<pre><code>&#x3C;div style=&#x22;display: none;&#x22; class=&#x22;sidebar&#x22;&#x3E;
+    &#x3C;h4&#x3E;Projects&#x3C;/h4&#x3E;
+    &#x3C;div class=&#x22;item&#x22;&#x3E;Fluid UI&#x3C;/div&#x3E;
+    &#x3C;div class=&#x22;item&#x22;&#x3E;Fluid UI&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;</code></pre>
+<br />
 <h5>Side navigation</h5>
-
+<p>Side navigation doesn't work well with overflow. It is not reccommended you use side navigation, and its use cases are limited.</p>
+<br />
 <div style="height: 650px;" class="card withnav">
 <div class="sidenav">
   <div class="title">
