@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://fluid.js.org/icon.png" />
 
   <meta charset="utf-8">
-  <title>Fluid UI (beta)</title>
+  <title>Fluid UI</title>
 <meta name="description" content="Simple CSS with a dark mode">
   <meta name="author" content="jottocraft">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -363,14 +363,13 @@
 
          <!-- <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div> -->
 
-
 <div class="center">
 <h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-text, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI</h1>
-            <h5 class="ver logo" style="color: #ffa700"><a id="showver" herf="#install" style="vertical-align: middle;color: inherit;" class="prerelease">v2.9.7</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="ver logo"><a id="showver" herf="#install" class="release" style="vertical-align: middle;">v3.0.0</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
             <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
 			<br />
         <div style="margin-bottom: 100px; box-shadow: none; background-color: transparent; border: none;" class="card nav">
-                  <ul>
+                  <ul style="white-space: normal;">
 
                       <li>
                       <a href="#input"><i class="material-icons">keyboard</i><span style="font-weight: bold;">Input</span>
@@ -386,6 +385,10 @@
                       </li>
 
                       <li>
+                      <a href="#cards"><i class="material-icons">dashboard</i><span style="font-weight: bold;">Spaces</span></a>
+                      </li>
+
+                      <li>
                       <a href="#cards"><i class="material-icons">layers</i><span style="font-weight: bold;">Cards & Sections</span></a>
                       </li>
 
@@ -394,6 +397,10 @@
                       </li>
 
                       <span style="height: 100%;width: 5px;background-color: red !important;border-radius: 20px !important;vertical-align: middle;display:none;">&nbsp;</span>
+
+                      <li>
+                      <a href="#development"><i class="material-icons">code</i><span style="font-weight: bold;">Development</span></a>
+                      </li>
 
                       <li>
                       <a href="#install"><i class="material-icons">cloud_download</i><span style="font-weight: bold;">Download</span></a>
@@ -424,8 +431,9 @@
         <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br /><br />
         <a name="input-buttons"></a>
-        <h5>Buttons</h5>
+        <h5>Buttons & Dropdowns</h5>
         <p>Add an icon by placing a span next to a material icon instead of text. You can add the "outline" class to make the button use an outline instead of a background, acting as a secondary button. You can add the "small" class to a button to make it smaller.</p>
+        <p>Dropdowns in Fluid do not need any special CSS and are styled the same as Fluid UI buttons. Dropdowns also support the outline and small classes, but do not support other button features such as button rows or context menus.</p>
         <p>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class next to it. It is reccommended that you wrap your button in a div element with the display property set to inline-block.</p>
         <br />
         <div style="display: inline-block;">
@@ -439,12 +447,22 @@
 	  <button class="btn outline"><i class="material-icons">close</i>Cancel</button>
 	  <br /><br />
 	  <button class="btn small">Small button</button>
-        <br /><br />
+    <br /><br />
+    <select>
+      <option value="0">Select an option:</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+        <br /><br /><br />
         <a name="input-switches"></a>
-        <h5>Switches</h5>
+        <h5>Switches & Sliders</h5>
         <p>Fluid UI will automatically toggle the active class on the switch when clicked</p>
+        <p>Sliders are just standard HTML sliders with the slider class added</p>
         <br />
         <div class="switch"><span class="head"></span></div><div class="label">Enable dark mode</div>
+        <br /><br />
+        <input type="range" class="slider" min="1" max="100" value="50">
         <br /><br />
 <pre><code>&lt;div class="switch"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div class="label"&gt;Enable dark mode&lt;/div&gt;</code></pre>
@@ -744,9 +762,11 @@
 <div class="section">
   <div class="header">
 <i class="material-icons">dashboard</i>
-<h3>Fluid Spaces</h3>
+<h3>Spaces</h3>
 </div>
 <div class="body">
+  <p>Create quick columns using Spaces</p>
+  <br />
   <div>
   <div class="space demo c1 fluid element theme">1</div>
   <div class="space demo c1 fluid element theme">2</div>
@@ -891,6 +911,20 @@
 </div>
 </div>
           <br /><br />
+          <a name="development"></a>
+          <div class="section">
+            <div class="header">
+          <i class="material-icons">code</i>
+          <h3>Development</h3>
+          </div>
+          <div class="body">
+            <h5>Code Editor</h5>
+            <p>Check out <a href="/studio">Fluid Studio</a>, a code editor designed for Fluid UI (coming soon).</p>
+            <br />
+            <h5>Open-Source</h5>
+            <p>Fluid UI is open-source on <a href="https://github.com/jottocraft/fluid">GitHub</a>. Feel free to leave issues there or help contribute by editing these docs with a PR. All Fluid UI releases are created and managed on GitHub. For questions or comments, please email <a href="mailto:hello@jottocraft.com">hello@jottocraft.com</a>.</p>
+            </div>
+          </div>
           <a name="install"></a>
           <div class="section">
             <div class="header">
@@ -924,7 +958,7 @@
         </div>
            <br /><br /><br /><br />
 
-<p style="text-align:center">(c) 2019 jottocraft&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
+<p style="text-align:center">(c) 2019 jottocraft&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/">source</a></p>
   <br /><br />
   </div>
 <div class="container">
