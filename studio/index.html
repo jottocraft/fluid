@@ -23,11 +23,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
-</nav>
 
 <style>
 </style>
 <body class="auto">
+  <style>
+    body.dark #mainIMG {
+      background-image: url(https://i.imgur.com/ciHEiBm.png);
+    }
+    body:not(.dark) #mainIMG {
+      background-image: url(https://i.imgur.com/3xcn5ts.png);
+    }
+  </style>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="fluid.js"></script>
   <br /><br /><br /><br /><br /><br />
@@ -44,7 +51,7 @@
             <h5>Fluid Studio is coming soon. No dates are confirmed yet, but it will probably see the first beta starting May and the first stable release starting Late 2019.</h5>
             </div>
           <br />
-        <img src="https://i.imgur.com/dJocG8m.png" style="height: 500px;border-radius: 10px; margin-top: 50px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.17);" />
+        <div id="mainIMG" style="width: 1000px;height: 518px;border-radius: 10px;margin-top: 50px;box-shadow: 0 10px 30px rgba(0, 0, 0, 0.17);margin: 50px auto;background-size: cover;"></div>
       </div>
       <div style="margin-top: 100px;" class="container">
         <div class="section">
