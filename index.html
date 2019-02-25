@@ -53,7 +53,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
   <script>
   fluidThemes = [
-    "midnight", "nitro", "aquatic", "rainbow"
+    ["midnight", "nitro", "aquatic"], ["rainbow"]
   ]
   </script>
 
@@ -365,7 +365,7 @@
 
 <div class="center">
 <h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-text, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI</h1>
-            <h5 class="ver logo"><a id="showver" herf="#install" class="release" style="vertical-align: middle;">v3.0.0</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
+            <h5 class="ver logo"><a id="showver" herf="#install" class="release" style="vertical-align: middle;">v3.1.0</a><a href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="beta notice"></span></a></h5>
             <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
 			<br />
         <div style="margin-bottom: 100px; box-shadow: none; background-color: transparent; border: none;" class="card nav">
@@ -419,12 +419,13 @@
       <div class="body">
         <a name="input-text"></a>
        <h5>Text input</h5>
+       <p>You can add an icon by putting an icon directly before the input element, then adding the inputIcon class to both the input and the icon. If your input has margin, it will need to be added to the icon as well. You can add the "noshadow" class to an input or textarea to remove the shadow effect. You can also add the "shadow" class to make it always show the shadow effect.</p>
+        <i class="inputIcon material-icons">search</i>
+        <input class="inputIcon" placeholder="Search" />
         <br />
-        <input placeholder="Demo" />
-        <br />
-        <code>&lt;input placeholder=&quot;Demo&quot; type=&quot;text&quot; /&gt;</code>
-        <p>Don't want the shadow? Add the "noshadow" class to remove the effect</p>
-        <br />
+        <pre><code>&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
+&#x3C;input class=&#x22;inputIcon&#x22; placeholder=&#x22;Search&#x22; /&#x3E;</code></pre>
+        <br /><br /><br />
         <textarea></textarea>
         <br />
         <br />
@@ -468,7 +469,7 @@
 &lt;div class="label"&gt;Enable dark mode&lt;/div&gt;</code></pre>
         <br /><br /><br />
         <h5>Button row</h5>
-        <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional code required! You can add the active class to the default button, and handle the clicks yourself to get the data. You can also add the "multiple" class to allow multiple to be selected at once, making it act as checkboxes.</p>
+        <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional code required! If you want to handle the active class yourself, you can add the "manual" class to the buttons. This also works for lists, sidenavs, and sidebars. You can add the active class to the default button, and handle the clicks yourself to get the data. You can also add the "multiple" class to allow multiple to be selected at once, making it act as checkboxes.</p>
         <br /><br />
         <div class="btns row">
         <button class="btn">Option A</button>
@@ -539,16 +540,22 @@
         <br /><br />
         <a name="dark-manual"></a>
           <h5>Manually set theme</h5>
-          <p>You can set the theme to whatever you want. You can choose to do this to change the default theme and still allow users to change their own theme, or you can make your site fixed with a single theme. The user's prefrences (from cookies) will always override the default theme unless the force class is added to the body (this tells Fluid UI to ignore user prefrence completly). If you don't have a theme selection UI, it is reccommended to not add the force class to allow advanced users to manually enable a theme you don't support.</p>
+          <p>You can set the default theme to whatever you want. You can choose to do this to change the default theme and still allow users to change their own theme, or you can make your site fixed with a single theme. The user's prefrences (from cookies or localStorage) will always override the default theme unless the force class is added to the body (this tells Fluid UI to ignore user prefrence completly). If you don't have a theme selection UI, it is reccommended to not add the force class to allow advanced users to manually enable a theme you don't officially support. You can set the fluid.onThemeChange variable to a function to handle theme changes.</p>
+          <p>If setting a custom theme that starts with "dark" (white text on a dark background), make sure to also add the dark class alongside the custom theme's ID.</p>
           <code>&lt;body class=&quot;themeID&quot;&gt;</code>
           <br /><br />
           <p>Set theme with JavaScript. The theme variable can either be "toggle" for toggling between light and dark or a theme ID. Set the second parameter to true to prevent Fluid from saving the theme as the user prefrence and applying it on reload (for demos or if you have your own way of storing users' theme prefrences)</p>
           <code>fluid.theme(theme, [override theme saving]);</code>
           <br /><br />
+          <h5>Theme preference storage</h5>
+          <p>When changing the theme with JavaScript, Fluid UI stores the theme as the user's preferred theme in a cookie called fluidTheme. If you want to temporarily change the theme without saving it as a prefrence, set the override theme prefrence paramater shown above to true.</p>
+          <p>If you want to use localStorage instead of cookies, set the fluidStorage variable to "localStorage" before loading Fluid UI JavaScript Modules.</p>
+          <code>fluidStorage = "localStorage"</code>
+          <br /><br />
           <h5>Theme Selector</h5>
-          <p>The theme selector shows themes that you configure using the fluidThemes variable. The theme selector can show up to 4 pages. 1: Light/Dark/Auto 2: Midnight Black/Nitro/Aqua 3: Any custom themes 4: All rainbow colored themes (not reccommended). fluidThemes should be an array with each of the themeIDs you want to enable. Custom themes should be objects with the name and themeID properties, and optionally a material icon in the icon property. The rainbow theme selector can be enabled by adding "rainbow" to the array. There is no way to disable the light/dark/auto themes. Pages 1, 2 and 4 are demoed below.</p>
+          <p>The theme selector shows themes that you configure using the fluidThemes variable. The theme selector can show up to 4 pages. 1: Light/Dark/Auto 2-4: Flex themes. fluidThemes should be an array of arrays. Each array in fluidThemes represents a page. Each page is an array of the themeIDs you want to enable. Custom themes should be objects with the name and id properties, with the theme's display name and themeID, and optionally a material icon string in the icon property. The rainbow theme selector can be enabled by adding "rainbow" the array of a page (adding "rainbow" to a page causes that page to show rainbow themes only. You cannot mix the rainbow themes page with other custom themes). There is no way to disable the default light/dark/auto themes page.</p>
           <p>Add this code before loading fluid.js to specify what themes you want to be shown in the theme selector</p>
-          <code>fluidThemes = [ "midnight", "nitro", "aquatic", "rainbow" ]</code>
+          <code>fluidThemes = [ [ "midnight", "nitro", "aquatic" ], [ "rainbow" ] ]</code>
           <br /><br />
           <div class="btns row themeSelector"></div>
           <code>&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
@@ -562,7 +569,7 @@
 <br /><br />
           <h5>Fluid Flex</h5>
           <p>Fluid Flex celebrates the 1 year anniversary of the Teleport Flex Project (started 11.25.2017)</p>
-          <p><b>Fluid Flex does not support outline mode yet. Enable dark/light theme depending on which text color you want for your theme alongside the flex-text variable. Fluid Flex only supports black/white text colors right now.</b></p>
+          <p><b>Enable dark/light theme depending on which text color you want for your theme alongside the flex-text variable. Fluid Flex only supports black/white text colors right now.</b></p>
           <p>Fluid Flex Layers</p>
           <ul>
             <li>Cards (lightest)</li>

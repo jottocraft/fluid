@@ -16,6 +16,8 @@ tmp
 
 #Archive
 studio/fluid-studio.zip
+studio/Setup.exe
+studio/builds
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
