@@ -1,4 +1,3 @@
 # Fluid UI
-Modern CSS with a built in dark mode
-
-See the demo here: https://fluid.js.org
+A simple UI framework with a dark mode
+https://fluid.js.org
