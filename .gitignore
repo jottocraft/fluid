@@ -14,10 +14,18 @@
 *.bat
 tmp
 
+#v4
+v4.html
+v4.css
+v4-s.css
+v4.js
+v4.png
+
 #Archive
 studio/fluid-studio.zip
 studio/Setup.exe
 studio/builds
+studio
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
