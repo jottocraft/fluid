@@ -78,7 +78,7 @@ fluid.theme = function(theme, dontSave) {
   if (String(theme).startsWith("#")) {
     var baseColor = theme.slice(1)
     console.warn("[Fluid UI] Using fluid.theme to generate a theme based on a color. This function should only be used for demo purposes only. Do not use this function on an actual site.")
-    jQuery.getScript("https://bgrins.github.io/TinyColor/tinycolor.js", function() {
+    jQuery.getScript("https://cdn.jottocraft.com/tinycolor.js", function() {
       var color = tinycolor(baseColor)
       document.body.style.setProperty("--flex-light", tinycolor(baseColor).brighten(10).toString())
       document.body.style.setProperty("--flex-bg", tinycolor(baseColor).brighten(5).toString())
