@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" href="/icon.png" type="image/png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <!--Import Google Icon Font-->
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
        <link type="text/css" rel="stylesheet" href="/fluid.css"  media="screen,projection"/>
@@ -12,7 +12,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
   <meta charset="utf-8">
-  <title>Fluid UI v4</title>
+  <title>v4</title>
 <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,40 +20,65 @@
 </head>
 
 <style>
+  body.darkBlack {
+        --flex-light: #191919;
+        --flex-bg: #0d0d0d;
+        --flex-text: white;
+        --flex-sectext: #666666;
+        --flex-layer1: #000000;
+        --flex-layer2: #000000;
+        --flex-layer3: #000000;
+        --theme-color: white;
+        --theme-color-outline: #ffffffc0;
+        --theme-text-color: #191919;
+    }
+    img.main {
+      position: fixed;
+      opacity: 0.4;
+      left: -40px;
+      top: calc(50vh - 200px);
+      width: 400px;
+      height: auto;
+    }
+    img.theme {
+      position: fixed;
+      opacity: 0.1;
+      right: -200px;
+      top: calc(100vh - 100px);
+      width: 400px;
+      height: auto;
+    }
+    img.switch {
+      position: fixed;
+      opacity: 0.2;
+      right: 100px;
+      top: calc(100vh - 300px);
+      width: 400px;
+      height: auto;
+    }
+    img.navv {
+      position: fixed;
+      left: 75px;
+      bottom: -150px;
+      width: auto;
+      height: 400px;
+    }
+    img.ph {
+      position: fixed;
+      left: calc(100% - 850px);
+      bottom: -75px;
+      width: auto;
+      height: 400px;
+    }
 </style>
-<body class="auto">
+<body class="dark darkBlack">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/fluid.js"></script>
-  <br /><br /><br /><br /><br /><br />
-  <div class="center">
-  <h1 style="font-size: 100px;background: -webkit-linear-gradient(var(--flex-light, #00ff43), var(--flex-text, #00ffc7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">Fluid UI v4</h1>
-  <h5>The next generation of Fluid UI with mobile support</h5>
-  			<br /></div>
-      <div style="margin-top: 100px;" class="container">
-        <div class="section">
-      <div class="header" style="text-align: left;">
-        <i class="material-icons">smartphone</i>
-        <h3>Fluid UI + Skeleton CSS</h3>
-      </div>
-      <div class="body">
-<h5>Fluid UI v4 uses Skeleton CSS for grids, layouts, and mobile support. Fluid UI v4 is built with mobile in mind.</h5>
-      </div>
-  </div>
-  <div class="section">
-<div class="header" style="text-align: left;">
-  <i class="material-icons">timer</i>
-  <h3>Lighter and faster</h3>
-</div>
-<div class="body">
-<h5>Fluid UI v4 has been rewritten to be faster, lighter, compatible, and easier to understand.</h5>
-</div>
-</div>
-
-    </div>
-
-
-
-</div>
-
+ <img class="main" src="https://fluid.js.org/cutout.png" />
+ <img class="theme" src="https://i.imgur.com/4qtihJD.png" />
+ <img class="switch" src="https://i.imgur.com/OKA9RWF.png" />
+ <img class="navv" src="https://i.imgur.com/EntQl9k.png" />
+ <img class="ph" src="https://i.imgur.com/PH6Mrrl.png" />
+<h1 style="position: fixed; left: calc(100% - 700px); top: calc(50vh - 300px); font-size: 75px; color:gray;">Fluid UI v4</h1>
+<h4 style="position: fixed; left: calc(100% - 700px); top: calc(50vh - 175px); color: #3a3a3a;">Coming Soon</h4>
 </body>
 </html>
