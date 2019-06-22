@@ -148,14 +148,16 @@
 
         <style>
         body.beta .interact {
-          color: #e59400 !important;
-        }
-        body.beta .change {
-          color: #039be5;
-        }
-        body:not(.beta) .change {
-          color: orange;
-        }
+      color: #e59400 !important;
+    }
+
+    body.beta .change {
+      color: #039be5;
+    }
+
+    body:not(.beta) .change {
+      color: orange;
+    }
         #relnotes h1, #relnotes h2, #relnotes h3, #relnotes h4, #relnotes h5 {
           font-size: 30px;
           font-family: "Product sans", sans-serif;
@@ -167,17 +169,26 @@
           color: red;
         }
         body:not(.beta) .fluid.vibrant.releases {
-          background: linear-gradient(to bottom right, #10c9cc, #00f4b3);
-        }
-        body.beta .fluid.vibrant.releases {
-          background: linear-gradient(to bottom right, #ed7825, #f9b413);
-        }
-        body.beta .interact {
-          color: #ad3801 !important;
-        }
-        body:not(.beta) .interact {
-          color: #0576ad !important;
-        }
+      background: linear-gradient(to bottom right, #18c5c7, #2ceab8);
+    }
+
+    body.beta .fluid.vibrant.releases {
+      background: linear-gradient(to bottom right, #eac75c, #ea9e2c);
+    }
+    .fluid.vibrant.releases.nofluid {
+      background: linear-gradient(to bottom right, #ff4a4a, #ff7737) !important;
+    }
+    body.beta .interact {
+      color: #944f14 !important;
+    }
+
+    .fluid.vibrant.releases.nofluid .interact {
+      color: #b92020 !important;
+    }
+
+    body:not(.beta) .interact {
+      color: #18968a !important;
+    }
         body:not(.dark) .override {
           color: black !important;
         }
@@ -192,115 +203,117 @@
           $(".navbar.nav").toggle();
           window.scrollTo(0, 0);
         }
-        $.getJSON("https://api.github.com/repos/jottocraft/fluid/releases", function(data) {
-          console.log(data)
-          rawVer = $("#showver").html();
-          if (data[0].prerelease == false) {
-            release = data[0];
-            prerelease = null;
-            for (var i = 0; i < data.length; i++) {
-              if (prerelease == null) {
-              if (data[i].prerelease == true) {
-                prerelease = data[i];
-              }
+        $.getJSON("https://api.github.com/repos/jottocraft/fluid/releases", function (data) {
+      console.log(data)
+      rawVer = $("#showver").html();
+      if (data[0].prerelease == false) {
+        release = data[0];
+        prerelease = null;
+        for (var i = 0; i < data.length; i++) {
+          if (prerelease == null) {
+            if (data[i].prerelease == true) {
+              prerelease = data[i];
             }
+          }
+        }
+      } else {
+        prerelease = data[0];
+        release = null;
+        for (var i = 0; i < data.length; i++) {
+          if (release == null) {
+            if (data[i].prerelease == false) {
+              release = data[i];
             }
+          }
+        }
+      }
+      prerelease.flight = prerelease.tag_name.split(".")
+      prerelease.flight.pop()
+      prerelease.flight = prerelease.flight.toString().replace(",", ".").substr(1)
+      renderReleases($("#showver").hasClass("prerelease"));
+    })
+    function renderReleases(betaa) {
+      betashowcased = false;
+      $(".card.releases").removeClass("nofluid")
+      flight = rawVer.split(".")
+      flight.pop()
+      flight = flight.toString().replace(",", ".").substr(1)
+      if ($("#showver").hasClass("prerelease")) {
+        if (flight == prerelease.flight) {
+          $("#stablever").html(release.tag_name + " (stable)")
+          $("#stablever").show();
+          if ($("#showver").html() == prerelease.tag_name) {
+            betashowcased = true;
           } else {
-            prerelease = data[0];
-            release = null;
-            for (var i = 0; i < data.length; i++) {
-              if (release == null) {
-              if (data[i].prerelease == false) {
-                release = data[i];
-              }
-            }
-            }
+            betashowcased = false;
           }
-          prerelease.flight = prerelease.tag_name.split(".")
-          prerelease.flight.pop()
-          prerelease.flight = prerelease.flight.toString().replace(",",".").substr(1)
-          renderReleases($("#showver").hasClass("prerelease"));
-        })
-        function renderReleases(betaa) {
-          betashowcased = false;
-          $("#nofluid").hide();
-          flight = rawVer.split(".")
-          flight.pop()
-          flight = flight.toString().replace(",",".").substr(1)
-          if ($("#showver").hasClass("prerelease")) {
-            if (flight == prerelease.flight) {
-                $("#stablever").html(release.tag_name + " (stable)")
-                $("#stablever").show();
-                if ($("#showver").html() == prerelease.tag_name) {
-                  betashowcased = true;
-              } else {
-                betashowcased = false;
-              }
-            } else {
-              //Unreleased prerelease (If a prerelease is already the latest, it will trigger outdated instead)
-              $("#showver").addClass("unreleased");
-              $("#stablever").html(release.tag_name + " (released)")
-              $("#stablever").show();
-              $("#nofluid").show();
-          }
-          //Display readable beta string instead of actual version number
-          var dispver = $("#showver").html()
-          if (dispver.split(".")[1] == "9") {
-            $("#showver").html("v" + (Number(dispver.split(".")[0].charAt(1)) + 1) + ".0.0")
-            $("#betatag").html("beta " + dispver.split(".")[2])
-            $("#betatag").show();
-          }
+        } else {
+          //Unreleased prerelease (If a prerelease is already the latest, it will trigger outdated instead)
+          $("#showver").addClass("unreleased");
+          $("#stablever").html(release.tag_name + " (released)")
+          $("#stablever").show();
+          $(".card.releases").addClass("nofluid")
+        }
+        //Display readable beta string instead of actual version number
+        var dispver = $("#showver").html()
+        if (dispver.split(".")[1] == "9") {
+          $("#showver").html("v" + (Number(dispver.split(".")[0].charAt(1)) + 1))
+          $("#betatag").html("beta " + dispver.split(".")[2])
+          $("#betatag").show();
+        }
 
-          } else {
-            if ($("#showver").html() !== release.tag_name) {
-              //outdated release
-              $("#showver").addClass("outdated");
-              $("#stablever").html(release.tag_name + " (latest)")
-              $("#stablever").show();
-            }
-          }
-          if (betaa == undefined) {
-            beta = !$("body").hasClass("beta");
-          } else { beta = betaa; }
-          if (beta) {
-            //show beta
-            $(".betawarning").show();
-            $("body").addClass("beta");
-            $(".relbeta").html("Get the stable version");
-            $(".relver").html(prerelease.name)
-            $("#relnotes").html(markdown.makeHtml(prerelease.body));
-            if (prerelease.assets[0] !== undefined) {
-            //fluid.zip availible for download
-            $("#reldownload").attr("href", prerelease.assets[0].browser_download_url)
-          } else {
-            //no fluid.zip
-            $("#reldownload").attr("href", prerelease.html_url)
-          }
-          } else {
-            //show stable
-            $(".betawarning").hide();
-            $("body").removeClass("beta");
-            $(".relbeta").html("Try the beta");
-            if (betashowcased) $(".relbeta").html("Try the beta (showcased)");
-            $(".relver").html(release.name)
-            $("#relnotes").html(markdown.makeHtml(release.body));
-            if (release.assets[0] !== undefined) {
-              //fluid.zip availible for download
-            $("#reldownload").attr("href", release.assets[0].browser_download_url)
-          } else {
-              //no fluid.zip
-              $("#reldownload").attr("href", release.html_url)
-            }
-            }
-            if (Number(flight) > Number(prerelease.flight)) {
-              // a stable release is the latest availible, no beta button
-            $(".relbeta, .relbetahide").hide();
-          } else {
-            // a beta release is the latest availible, show beta button
-          $(".relbeta, .relbetahide").show();
+      } else {
+        if ($("#showver").html() !== release.tag_name) {
+          //outdated release
+          $("#showver").addClass("outdated");
+          $("#stablever").html(release.tag_name + " (latest)")
+          $("#stablever").show();
         }
-          $("#relinteract").show();
+      }
+      if (betaa == undefined) {
+        beta = !$("body").hasClass("beta");
+      } else { beta = betaa; }
+      if (beta) {
+        //show beta
+        $(".betawarning").show();
+        $("body").addClass("beta");
+        $(".relbeta").html('<i style="vertical-align: middle; margin-right: 5px;" class="material-icons">build</i>Get the stable version');
+        $(".relver").html(prerelease.name)
+        $("#whenReleased").html("Released " + new Date(prerelease.created_at).toDateString())
+        $("#relnotes").html(markdown.makeHtml(prerelease.body));
+        if (prerelease.assets[0] !== undefined) {
+          //fluid.zip availible for download
+          $("#reldownload").attr("href", prerelease.assets[0].browser_download_url)
+        } else {
+          //no fluid.zip
+          $("#reldownload").attr("href", prerelease.html_url)
         }
+      } else {
+        //show stable
+        $(".betawarning").hide();
+        $("body").removeClass("beta");
+        $(".relbeta").html('<i style="vertical-align: middle; margin-right: 5px;" class="material-icons">bug_report</i>Try the beta');
+        if (betashowcased) $(".relbeta").html('<i style="vertical-align: middle; margin-right: 5px;" class="material-icons">bug_report</i>Try the beta (showcased)');
+        $(".relver").html(release.name)
+        $("#whenReleased").html("Released " + new Date(release.created_at).toDateString())
+        $("#relnotes").html(markdown.makeHtml(release.body));
+        if (release.assets[0] !== undefined) {
+          //fluid.zip availible for download
+          $("#reldownload").attr("href", release.assets[0].browser_download_url)
+        } else {
+          //no fluid.zip
+          $("#reldownload").attr("href", release.html_url)
+        }
+      }
+      if (Number(flight) > Number(prerelease.flight)) {
+        // a stable release is the latest availible, no beta button
+        $(".relbeta, .relbetahide").hide();
+      } else {
+        // a beta release is the latest availible, show beta button
+        $(".relbeta, .relbetahide").show();
+      }
+      $("#relinteract").show();
+    }
         function outlineDemo() {
           $("body").toggleClass("outline");
           if ($("body").hasClass("outline")) {
@@ -943,15 +956,18 @@
           <h3>Download</h3>
           </div>
           <div class="body">
-          <div class="center">
-          <div style="display:inline-block;text-align:left;min-width: 500px;" class="card fluid vibrant releases">
-          <h4 style="color:white;" class="relver">Getting releases...</h4>
-          <h6 id="nofluid" style="font-family: 'Google sans', sans-serif;color: red;display:none;">The version of Fluid UI showcased on this site is unreleased and cannot be downloaded</h6>
-          <h5 style="cursor:pointer;display:none;" class="change relbeta" onclick="renderReleases();">Try the beta</h5>
-          <br /><br />
-          <div style="display:none;font-size: 20px;" class="row" id="relinteract"><a id="reldownload" style="margin-right: 10px;" class="interact fluid">Download</a><a onclick="fluid.modal('#vmodal')" style='cursor:pointer;' class="interact">Release Notes</a></div>
-        </div>
-        </div>
+              <div style="text-align:left; padding: 20px 30px;" class="card fluid vibrant releases">
+                  <h4 style="color:white; font-weight: bold; letter-spacing: 0.5px;" class="relver">Getting releases...</h4>
+                  <p id="whenReleased" style="color: white;"></p>
+                  <br />
+                  <div style="display:none;font-size: 20px;" class="row" id="relinteract"><a id="reldownload"
+                      style="margin-right: 10px;" class="interact fluid"><i style="vertical-align: middle; margin-right: 5px;"
+                        class="material-icons">cloud_download</i>Download</a><a onclick="fluid.modal('#vmodal')"
+                      style='cursor:pointer;margin-right: 10px;' class="interact"><i
+                        style="vertical-align: middle; margin-right: 5px;" class="material-icons">notes</i>Release Notes</a><a
+                      onclick="renderReleases();" style='cursor:pointer;margin-right: 10px;' class="interact relbeta"></a>
+                  </div>
+                </div>
             <br /><br /><br />
           <h5>Install Fluid UI</h5>
           <p>Make sure Fluid UI is in the /fluid directory</p>
