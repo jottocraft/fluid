@@ -4,7 +4,7 @@
 <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
   <script type="text/javascript" src="v4.js"></script>
@@ -79,7 +79,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
   <script>
     fluidThemes = [
-      ["midnight", "nitro", "water"], ["candy", "violet", "highContrast", { "name": "Sky", icon: "book", id: "sky" }], ["rainbow"]
+      ["midnight", "nitro", "water"], ["candy", "violet", "tome", "oni"], ["rainbow"]
     ]
   </script>
 
@@ -723,14 +723,16 @@
           See the list below for how to change the icon style.
         </p>
         <ul>
-          <li><i style="font-family: 'Material Icons Extended'" class="material-icons">featured_video</i> "Material Icons Extended" (Default)
+          <li><i style="font-family: 'Material Icons Extended'" class="material-icons">featured_video</i> "Material
+            Icons Extended" (Default)
             <ul>
               <li>This icon set uses the default filled Material Icon style and includes all of the icons from the
                 Material design website, plus some extra ones</li>
               <li>This icon set is enabled by default</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Outlined'" class="material-icons">featured_video</i> "Material Icons Outlined"
+          <li><i style="font-family: 'Material Icons Outlined'" class="material-icons">featured_video</i> "Material
+            Icons Outlined"
             <ul>
               <li>This is the icon set used by this site. To use this icon set, remove the Material Icons Extended
                 stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
@@ -739,7 +741,8 @@
                 href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"&gt;</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Round'" class="material-icons">featured_video</i> "Material Icons Round"
+          <li><i style="font-family: 'Material Icons Round'" class="material-icons">featured_video</i> "Material Icons
+            Round"
             <ul>
               <li>To use this icon set, remove the Material Icons Extended
                 stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
@@ -748,15 +751,16 @@
                 href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"&gt;</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Sharp'" class="material-icons">featured_video</i> "Material Icons Sharp"
-              <ul>
-                <li>To use this icon set, remove the Material Icons Extended
-                  stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
-                  variable to "Material Icons Sharp".</li>
-                <li style="font-family: monospace, monospace;">&lt;link
-                  href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"&gt;</li>
-              </ul>
-            </li>
+          <li><i style="font-family: 'Material Icons Sharp'" class="material-icons">featured_video</i> "Material Icons
+            Sharp"
+            <ul>
+              <li>To use this icon set, remove the Material Icons Extended
+                stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
+                variable to "Material Icons Sharp".</li>
+              <li style="font-family: monospace, monospace;">&lt;link
+                href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"&gt;</li>
+            </ul>
+          </li>
         </ul>
         <br /><br />
         <h5><img style="margin: -5px 5px 0px 0px; vertical-align: middle; width: 24px !important;"
@@ -1263,7 +1267,8 @@
           <br />
           <div style="display:none;font-size: 20px;" class="row" id="relinteract"><a id="reldownload"
               style="margin-right: 10px;" class="interact fluid"><i style="vertical-align: middle; margin-right: 5px;"
-                class="material-icons">cloud_download</i>Download</a><a onclick="fluid.alert('Changelog', changelogHTML, 'update', [{name: 'Releases', action: 'window.location.href = `https://github.com/jottocraft/fluid`'}, {name: 'OK'}])"
+                class="material-icons">cloud_download</i>Download</a><a
+              onclick="fluid.alert('Changelog', changelogHTML, 'update', [{name: 'Releases', action: 'window.location.href = `https://github.com/jottocraft/fluid`'}, {name: 'OK'}])"
               style='cursor:pointer;margin-right: 10px;' class="interact"><i
                 style="vertical-align: middle; margin-right: 5px;" class="material-icons">update</i>Changelog</a><a
               onclick="renderReleases();" style='cursor:pointer;margin-right: 10px;' class="interact relbeta"></a>
@@ -1272,7 +1277,8 @@
         <br /><br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Install Fluid
           UI</h5>
-        <p>Click the download button on the card above to download Fluid UI. Code below assumes Fluid UI is in the /fluid directory</p>
+        <p>Click the download button on the card above to download Fluid UI. Code below assumes Fluid UI is in the
+          /fluid directory</p>
         <p>Fluid UI uses the following libraries:</p>
         <ul>
           <li>Google Material Icons (Extended) | Used for Icons in Fluid UI</li>
@@ -1290,8 +1296,10 @@
 &lt;script src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;</code>
         </pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">cloud</i>Fluid UI CDN</h5>
-        <p>The Fluid UI CDN may be shutdown at any time without notice. Use the Fluid UI CDN at your own risk.</p>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">cloud</i>Fluid UI CDN
+        </h5>
+        <p>The Fluid UI CDN may be shutdown at any time without notice. The CDN automatically updates with the latest
+          version of Fluid UI. Use the Fluid UI CDN at your own risk.</p>
         <p>Fluid UI uses the following libraries:</p>
         <ul>
           <li>Google Material Icons (Extended) | Used for Icons in Fluid UI</li>
@@ -1318,7 +1326,7 @@
       <p>(c) jottocraft 2017-2019. All rights reserved.&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid">source
           code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
     </div>
-    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.2 (11252019)</p>
+    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.2 (11242019)</p>
     <br /><br />
   </div>
   <div class="container">

@@ -56,7 +56,8 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
   }
 })
 
-fluid.includedFlexThemes = ["midnight", "nitro", "water", "highContrast", "candy", "violet", "oni"]
+fluid.includedFlexThemes = ["nitro", "water", "highContrast", "candy", "violet"]
+fluid.includedFluidThemes = ["midnight", "tome", "oni"]
 fluid.theme = function (requestedTheme, temporary) {
   // GET CURRENT THEME -----------------------
   var currentTheme = null;
@@ -70,6 +71,11 @@ fluid.theme = function (requestedTheme, temporary) {
       currentTheme = fluid.includedFlexThemes[i];
     }
   }
+  for (var i = 0; i < fluid.includedFluidThemes.length; i++) {
+    if (String(bodyClass).includes(fluid.includedFluidThemes[i])) {
+      currentTheme = fluid.includedFluidThemes[i];
+    }
+  }
 
   for (var i = 0; i < document.body.classList.length; i++) { if ((document.body.classList[i] !== "light") && document.body.classList[i].startsWith("light")) { currentTheme = document.body.classList[i] } if ((document.body.classList[i] !== "dark") && document.body.classList[i].startsWith("dark")) { currentTheme = document.body.classList[i] } }
   if (currentTheme) { $(".btns.themeSelector .btn." + currentTheme.replace("#", "")).addClass("active"); }
@@ -81,9 +87,10 @@ fluid.theme = function (requestedTheme, temporary) {
   classes = document.body.classList.value.split(" ");
   for (var ii = 0; ii < classes.length; ii++) { if ((classes[ii].startsWith("light") || classes[ii].startsWith("dark")) && ((classes[ii] !== "dark") && (classes[ii] !== "light"))) { $("body").removeClass(classes[ii]) } }
   for (var i = 0; i < fluid.includedFlexThemes.length; i++) $("body").removeClass(fluid.includedFlexThemes[i])
+  for (var i = 0; i < fluid.includedFluidThemes.length; i++) $("body").removeClass(fluid.includedFluidThemes[i])
 
   if (requestedTheme.includes("light") || (requestedTheme == "highContrast")) { $("body").removeClass("dark"); $("body").addClass("light"); }
-  if (requestedTheme.includes("dark") || fluid.includedFlexThemes.includes(requestedTheme)) { $("body").removeClass("light"); $("body").addClass("dark"); }
+  if (requestedTheme.includes("dark") || fluid.includedFlexThemes.includes(requestedTheme) || fluid.includedFluidThemes.includes(requestedTheme)) { $("body").removeClass("light"); $("body").addClass("dark"); }
   if (requestedTheme !== "auto") $("body").addClass(requestedTheme);
 
   //Auto (time-based) theme
@@ -421,6 +428,8 @@ fluid.onLoad = function () {
         if (fluidThemes[i][ii] == "water") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('water')" class="btn themeWindow flex water"><div class="themeName"><i class="material-icons">waves</i> Water</div></button>`) }
         if (fluidThemes[i][ii] == "candy") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('candy')" class="btn themeWindow flex candy"><div class="themeName"><i class="material-icons">color_lens</i> Candy</div></button>`) }
         if (fluidThemes[i][ii] == "violet") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('violet')" class="btn themeWindow flex violet"><div class="themeName"><i class="material-icons">terrain</i> Violet</div></button>`) }
+        if (fluidThemes[i][ii] == "tome") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('tome')" class="btn themeWindow flex tome"><div class="themeName"><i class="material-icons">link</i> Tome</div></button>`) }
+        if (fluidThemes[i][ii] == "oni") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('oni')" class="btn themeWindow flex oni"><div class="themeName"><i class="material-icons">local_florist</i> Blossom</div></button>`) }
         if (fluidThemes[i][ii] == "highContrast") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('highContrast')" class="btn themeWindow flex highContrast"><div class="themeName"><i class="material-icons">accessibility_new</i> High Contrast</div></button>`) }
         if (fluidThemes[i][ii] == "rainbow") {
           fluid.themePageDOM[i] = [`<button style="background-color: #8e0004 !important;" onclick="fluid.theme('darkRed')" class="btn darkRed gColor"></button>
