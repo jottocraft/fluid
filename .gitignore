@@ -12,6 +12,8 @@
 #devtools and builds
 *.zip
 *.bat
+*.min.css
+*.min.js
 tmp
 
 #Studio Archive

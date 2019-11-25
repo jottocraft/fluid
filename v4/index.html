@@ -3,14 +3,24 @@
 
 <head>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="https://bgrins.github.io/TinyColor/tinycolor.js"></script>
-  <script async type="text/javascript" src="v4.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
+  <script type="text/javascript" src="v4.js"></script>
   <link rel="shortcut icon" href="v4.png" type="image/png">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
   <link type="text/css" rel="stylesheet" href="v4.css" media="screen,projection" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=css"></script>
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
@@ -32,6 +42,30 @@
 
 <body>
 
+  <div style="display: none;" class="sidebar acrylicMaterial">
+    <h4
+      style="-webkit-text-fill-color: transparent; background: -webkit-linear-gradient(#0ae5c5, #0bd9d9); -webkit-background-clip: text;">
+      Teleport</h4>
+    <img class="logo" src="https://tp.js.org/favicon.png" />
+
+    <div class="items">
+      <div class="item main">
+        <div class="icon"><i class="material-icons">home</i></div> <span class="label">Home</span>
+      </div>
+      <div class="divider"></div>
+      <div class="item">
+        <div class="icon"><i class="material-icons">add</i></div> <span class="label">Create</span>
+      </div>
+      <div class="item">
+        <div class="icon"><i class="material-icons">edit</i></div> <span class="label">Edit</span>
+      </div>
+    </div>
+
+    <div class="collapse">
+      <i class="material-icons">keyboard_arrow_left</i>
+    </div>
+  </div>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105685403-2"></script>
   <script>
@@ -42,14 +76,10 @@
     gtag('config', 'UA-105685403-2');
   </script>
 
-  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
   <script>
     fluidThemes = [
-      ["midnight", "nitro", "aquatic"], ["rainbow"]
+      ["midnight", "nitro", "water"], ["candy", "violet", "highContrast", { "name": "Sky", icon: "book", id: "sky" }], ["rainbow"]
     ]
   </script>
 
@@ -114,18 +144,23 @@
       color: black !important;
     }
 
-    @font-face {
-      font-family: 'Material Icons Outline';
-      font-style: normal;
-      font-weight: 400;
-      src: url('/outline.woff2') format('woff2');
-    }
-
     .material-icons {
-      font-family: 'Material Icons Outline';
+      font-family: 'Material Icons Outlined';
     }
   </style>
   <script>
+    chromaProfile = {
+      title: "Fluid UI Demo Effects",
+      description: "Demo effects from the Fluid UI demo site",
+      author: "jottocraft",
+      domain: "fluid.js.org"
+    }
+    if (fluid.get("pref-chroma") == 'true') {
+      fluid.chroma.init(chromaProfile, function () {
+        fluid.chroma.themeLink = true;
+        fluid.theme();
+      })
+    }
     const markdown = new showdown.Converter();
     function toggleNavbarStyle() {
       $(".nav.right").toggle();
@@ -161,6 +196,7 @@
       prerelease.flight = prerelease.flight.toString().replace(",", ".").substr(1)
       renderReleases($("#showver").hasClass("prerelease"));
     })
+    changelogHTML = "There was an error when trying to load the changelog. Try again later."
     function renderReleases(betaa) {
       betashowcased = false;
       $(".card.releases").removeClass("nofluid")
@@ -209,7 +245,7 @@
         $(".relbeta").html('<i style="vertical-align: middle; margin-right: 5px;" class="material-icons">build</i>Get the stable version');
         $(".relver").html(prerelease.name)
         $("#whenReleased").html("Released " + new Date(prerelease.created_at).toDateString())
-        $("#relnotes").html(markdown.makeHtml(prerelease.body));
+        changelogHTML = markdown.makeHtml(prerelease.body)
         if (prerelease.assets[0] !== undefined) {
           //fluid.zip availible for download
           $("#reldownload").attr("href", prerelease.assets[0].browser_download_url)
@@ -225,7 +261,7 @@
         if (betashowcased) $(".relbeta").html('<i style="vertical-align: middle; margin-right: 5px;" class="material-icons">bug_report</i>Try the beta (showcased)');
         $(".relver").html(release.name)
         $("#whenReleased").html("Released " + new Date(release.created_at).toDateString())
-        $("#relnotes").html(markdown.makeHtml(release.body));
+        changelogHTML = markdown.makeHtml(prerelease.body)
         if (release.assets[0] !== undefined) {
           //fluid.zip availible for download
           $("#reldownload").attr("href", release.assets[0].browser_download_url)
@@ -319,10 +355,10 @@
 
     <div class="center">
       <h1
-        style="font-size: 95px; background: -webkit-linear-gradient(var(--flex-light, #4fff5d), var(--flex-sectext, #5fffcb)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">
+        style="font-size: 95px; background: -webkit-linear-gradient(var(--flex-light, #01ff62), var(--flex-sectext, #01ff9c)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">
         Fluid UI</h1>
       <h5 style="font-size: 25px;" class="ver logo"><a id="showver" herf="#install" class="prerelease"
-          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.1</a><a
+          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.2</a><a
           href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="badge"></span></a></h5>
       <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
       <br />
@@ -337,20 +373,17 @@
           <a href="#nav"><i class="material-icons">navigation</i><span style="font-weight: bold;">Navigation</span></a>
 
 
-          <a href="#cards"><i class="material-icons">layers</i><span style="font-weight: bold;">Cards &
-              Sections</span></a>
+          <a href="#cards"><i class="material-icons">layers</i><span style="font-weight: bold;">Groups</span></a>
 
 
 
-          <a href="#splash"><i class="material-icons">notifications</i><span style="font-weight: bold;">Splash &
-              Alerts</span></a>
+          <a href="#splash"><i class="material-icons">notifications</i><span
+              style="font-weight: bold;">Alerts</span></a>
 
 
-          <a href="#core"><i class="material-icons">view_quilt</i><span style="font-weight: bold;">Core</span></a>
+          <a href="#layout"><i class="material-icons">view_quilt</i><span style="font-weight: bold;">Layout</span></a>
 
-
-          <a href="#install"><i class="material-icons">cloud_download</i><span
-              style="font-weight: bold;">Download</span></a>
+          <a href="#install"><i class="material-icons">code</i><span style="font-weight: bold;">Install</span></a>
 
 
 
@@ -375,13 +408,13 @@
         <i class="inputIcon material-icons">search</i>
         <input class="inputIcon" placeholder="Search" />
         <br />
-        <pre><code>&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
+        <pre><code class="prettyprint">&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
 &#x3C;input class=&#x22;inputIcon&#x22; placeholder=&#x22;Search&#x22; /&#x3E;</code></pre>
         <br /><br /><br />
         <textarea></textarea>
         <br />
         <br />
-        <code>&lt;textarea&gt;&lt;/textarea&gt;</code>
+        <code class="prettyprint">&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br /><br />
         <a name="input-buttons"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">touch_app</i>Buttons &
@@ -395,6 +428,9 @@
         <p>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class
           next to it. It is reccommended that you wrap your button in a div element with the display property set to
           inline-block.</p>
+        <br />
+        <code
+          class="prettyprint">&lt;div class="btn"&gt;&lt;i class="material-icons"&gt;star&lt;/i&gt; Demo Button&lt;/div&gt;</code>
         <br />
         <div style="display: inline-block;">
           <button class="btn"><i class="material-icons">arrow_forward</i>Continue</button>
@@ -426,7 +462,7 @@
         <br /><br />
         <input type="range" class="slider" min="1" max="100" value="50">
         <br /><br />
-        <pre><code>&lt;div class="switch"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;
+        <pre><code class="prettyprint">&lt;div class="switch"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div class="label"&gt;Demo switch&lt;/div&gt;</code></pre>
         <br /><br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
@@ -450,7 +486,7 @@
           <button onclick="fluid.set('pref-demoSmall', 'opC')" class="btn opC">Option C</button>
         </div>
         <pre>
-<code>&lt;div class=&quot;btns row&quot;&gt;
+<code class="prettyprint">&lt;div class=&quot;btns row&quot;&gt;
   &lt;button class=&quot;btn&quot;&gt;Option A&lt;/button&gt;
   &lt;button class=&quot;btn&quot;&gt;Option B&lt;/button&gt;
   &lt;button class=&quot;btn&quot;&gt;Option C&lt;/button&gt;
@@ -481,25 +517,26 @@
         </p>
         <br />
         <p>Setting a preference (If the prefrence is a boolean, call fluid.set without a value to toggle it)</p>
-        <code>fluid.set([setting string], [value string])</code>
+        <code class="prettyprint">fluid.set([setting string], [value string])</code>
         <br />
         <p>Getting a preference</p>
-        <code>fluid.get([setting string])</code>
+        <code class="prettyprint">fluid.get([setting string])</code>
         <br />
         <p>Listening to a preference change (use event.detail for the new value)</p>
-        <code>document.addEventListener(pref-[setting string], [callback function])</code>
+        <code class="prettyprint">document.addEventListener(pref-[setting string], [callback function])</code>
         <br />
         <p>If your value is a boolean, you can use a switch to represent the setting. When using an element to represent
           a setting, add the setting string to the class list. The default value should be represented with the active
           class for true and no active class for false.</p>
-        <code>&lt;div class="switch [setting]"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="label"&gt;My new setting&lt;/div&gt;</code>
+        <code
+          class="prettyprint">&lt;div class="switch [setting]"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="label"&gt;My new setting&lt;/div&gt;</code>
         <br />
         <p>If your value is a string, you can use a button row to represent the setting. When using an element to
           represent a setting, add the setting string to the button row's class list, and the value string to each of
           the button's class lists. The default value of the setting should be represented by adding the active class to
           the respective child button.</p>
         <pre>
-            <code>&lt;div class=&quot;btns row [setting string]&quot;&gt;
+            <code class="prettyprint">&lt;div class=&quot;btns row [setting string]&quot;&gt;
   &lt;button onclick=&quot;fluid.set(...)&quot; class=&quot;btn [value string]&quot;&gt;Option A&lt;/button&gt;
   &lt;button onclick=&quot;fluid.set(...)&quot; class=&quot;btn [value string]&quot;&gt;Option B&lt;/button&gt;
   &lt;button onclick=&quot;fluid.set(...)&quot; class=&quot;btn [value string]&quot;&gt;Option C&lt;/button&gt;
@@ -513,10 +550,10 @@
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">mood</i>Emoji</h5>
         <p>Fluid UI automatically parses emoji on your site on load into Twitter emoji 🙂. Add the "notwemoji" class to
           the body if you want to use native emoji instead.</p>
-        <code>&lt;body class=&quot;notwemoji&quot;&gt;</code>
+        <code class="prettyprint">&lt;body class=&quot;notwemoji&quot;&gt;</code>
         <br /><br />
         <p>If your site renders emoji after load, tell Twemoji to re-parse</p>
-        <code>twemoji.parse(document.body);</code>
+        <code class="prettyprint">twemoji.parse(document.body);</code>
         <br /><br />
         <a name="input-lists"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
@@ -531,7 +568,7 @@
           <div class="item"><i class="material-icons">star_border</i>Item 3</div>
         </div>
         <br />
-        <pre><code>&lt;div class=&quot;list select multiple&quot;&gt;
+        <pre><code class="prettyprint">&lt;div class=&quot;list select multiple&quot;&gt;
   &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 1&lt;/div&gt;
   &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 2&lt;/div&gt;
   &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 3&lt;/div&gt;
@@ -568,17 +605,19 @@
           <li>Special Theme (time-based): Automatic (ID: "auto")</li>
           <li>Fluid Theme (white): Default Light (ID: "light")</li>
           <li>Fluid Theme (dark gray): Standard Dark (ID: "dark")</li>
-          <li>Flex Theme (black): Midnight Black (ID: "midnight")</li>
-          <li>Flex Theme (dark red): Nitro (ID: "nitro")</li>
+          <li>Fluid Theme (black): Midnight Black (ID: "midnight")</li>
+          <li>Flex Theme (red): Nitro (ID: "nitro")</li>
           <li>Flex Theme (teal): Aqua (ID: "aquatic")</li>
           <li>Flex Theme (light red): Candy (ID: "candy")</li>
           <li>Flex Theme (violet): Violet (ID: "violet")</li>
+          <li>Fluid Theme (dark red): Violet (ID: "oni")</li>
+          <li>Fluid Theme (dark purple): Tome (ID: "tome")</li>
           <li>Experimental Theme (white): High Contrast (ID: "highContrast")</li>
         </ul>
         <br />
         <p>Get the current theme (When using the auto theme, this will return the theme that was automatically chosen)
         </p>
-        <code>fluid.theme()</code>
+        <code class="prettyprint">fluid.theme()</code>
         <br /><br />
         <a name="dark-auto"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
@@ -592,7 +631,7 @@
             href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#Browser_compatibility">a
             supported browser</a>, dark theme applies by default</p>
         <p>JavaScript function</p>
-        <code>fluid.theme("auto");</code>
+        <code class="prettyprint">fluid.theme("auto");</code>
         <br /><i>Auto theme is defaultly enabled on this site, so changes may not appear when running the demo. Try the
           theme selector demo below if nothing happens.</i><br /><br />
         <button onclick="fluid.theme('auto');" class="btn ">Try</button>
@@ -612,12 +651,12 @@
           flex class. If you experience issues setting the default theme, remove all
           classes from the body element, call fluid.theme, and check the classes added to the body element to see what
           you need to add.</p>
-        <code>&lt;body class=&quot;themeID&quot;&gt;</code>
+        <code class="prettyprint">&lt;body class=&quot;themeID&quot;&gt;</code>
         <br /><br />
         <p>Set theme with JavaScript. The theme variable can either be "toggle" for toggling between light and dark or a
           theme ID. Set the second parameter to true to prevent Fluid from saving the theme as the user preference and
           applying it on reload (for demos or if you have your own way of storing users' theme preferences)</p>
-        <code>fluid.theme(theme, [override theme saving]);</code>
+        <code class="prettyprint">fluid.theme(theme, [override theme saving]);</code>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
             class="material-icons">arrow_drop_down_circle</i>Theme Selector</h5>
@@ -631,20 +670,17 @@
           themes only. You cannot mix the rainbow themes page with other custom themes). There is no way to disable the
           default light/dark/auto themes page.</p>
         <p>Add this code before loading fluid.js to specify what themes you want to be shown in the theme selector</p>
-        <code>fluidThemes = [ [ "midnight", "nitro", "aquatic" ], [ "rainbow" ] ]</code>
+        <code class="prettyprint">fluidThemes = [ [ "midnight", "nitro", "aquatic" ], [ "rainbow" ] ]</code>
         <br /><br />
         <div class="btns row themeSelector"></div>
-        <code>&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
-        <br />
-        <p>Fluid Flex demo (Using the demo will override all other themes. Reload the page to return to a normal theme.)
-        </p>
-        <input type="color" id="color" value="#4B3E84">
-        <button onclick="fluid.theme($('#color').val()); $('body').addClass('flex')" class="btn">Generate theme</button>
+        <code class="prettyprint">&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
         <br /><br />
         <pre id="genTheme"></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">color_lens</i>Fluid Flex
         </h5>
+        <p>You can easily design your own Fluid Flex themes with <a href="/colors">Fluid UI Color Studio</a></p>
+        <br />
         <p>Fluid Flex Layers</p>
         <ul>
           <li>Cards (lightest): --flex-light</li>
@@ -658,8 +694,8 @@
         <br />
         <p>Custom themes no longer need to be prefixed with light or dark if you are using the full Fluid Theme set of
           variables. If your theme uses Fluid Flex (a theme from Fluid UI v3 or a simple theme as documented in this
-          section), they still need to be prefixed with light or dark to work properly.</p>
-        <pre><code>body.darkMyTheme {
+          section), they still need to be prefixed with "light" or "dark" to work properly.</p>
+        <pre><code class="prettyprint">body.darkMyTheme {
       /* Fluid Flex (UI colors) */
       --flex-light: rgb(149, 14, 14);
       --flex-bg: rgb(127, 1, 1);
@@ -677,6 +713,80 @@
         <br />
         <p>All themes (excluding Light, Dark, and auto) in the theme selector below use Fluid Flex</p>
         <div class="btns row themeSelector"></div>
+        <pre id="acrylicSection"></pre>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">star_border</i>Icons
+        </h5>
+        <p>Fluid UI uses Google Material Icons. You can choose any icon from <a
+            href="https://material.io/resources/icons">this website</a> to use in Fluid UI. Material Icons come in 5
+          different styles. You can choose which style you want to use on your site by setting the --icons CSS variable.
+          See the list below for how to change the icon style.
+        </p>
+        <ul>
+          <li><i style="font-family: 'Material Icons Extended'" class="material-icons">featured_video</i> "Material Icons Extended" (Default)
+            <ul>
+              <li>This icon set uses the default filled Material Icon style and includes all of the icons from the
+                Material design website, plus some extra ones</li>
+              <li>This icon set is enabled by default</li>
+            </ul>
+          </li>
+          <li><i style="font-family: 'Material Icons Outlined'" class="material-icons">featured_video</i> "Material Icons Outlined"
+            <ul>
+              <li>This is the icon set used by this site. To use this icon set, remove the Material Icons Extended
+                stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
+                variable to "Material Icons Outlined".</li>
+              <li style="font-family: monospace, monospace;">&lt;link
+                href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"&gt;</li>
+            </ul>
+          </li>
+          <li><i style="font-family: 'Material Icons Round'" class="material-icons">featured_video</i> "Material Icons Round"
+            <ul>
+              <li>To use this icon set, remove the Material Icons Extended
+                stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
+                variable to "Material Icons Round".</li>
+              <li style="font-family: monospace, monospace;">&lt;link
+                href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"&gt;</li>
+            </ul>
+          </li>
+          <li><i style="font-family: 'Material Icons Sharp'" class="material-icons">featured_video</i> "Material Icons Sharp"
+              <ul>
+                <li>To use this icon set, remove the Material Icons Extended
+                  stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
+                  variable to "Material Icons Sharp".</li>
+                <li style="font-family: monospace, monospace;">&lt;link
+                  href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"&gt;</li>
+              </ul>
+            </li>
+        </ul>
+        <br /><br />
+        <h5><img style="margin: -5px 5px 0px 0px; vertical-align: middle; width: 24px !important;"
+            src="https://i.imgur.com/FLwviAM.png" class="material-icons" />Razer Chroma</h5>
+        <p>Fluid UI supports static effects on Razer Chroma-enabled keyboards, mice, headsets, mousepads, keypads, and
+          Chroma connect / Chroma link devices. Fluid UI also supports detailed lighting effects on Razer Chroma-enabled
+          keyboards. You can set fluid.chroma.themeLink to true to show the user's current Fluid UI theme on all
+          supported chroma devices, which is the only included chroma effect in Fluid UI. You can make your own static
+          and detailed keyboard effects to deepen your site's chroma integration.</p>
+        <br />
+        <pre>
+<code class="prettyprint">fluid.chroma.init({
+  title: [name of your website or web app (string)],
+  description: [description of your website or web app (string)],
+  author: [author name (string)]
+}, function() {
+  //You can automatically reflect your user's theme with Chroma by uncommenting the line below
+  //Ideally, you would also run fluid.theme() after to ensure that the user's current theme is shown without having to change themes.
+  //fluid.chroma.themeLink = true;
+
+  //Set a static theme
+  fluid.chroma.static([color (rgb or hex string)])
+})
+</code>
+        </pre>
+        <p>Demo: Click the button below to enable Razer Chroma, then try changing themes to see the keyboard lighting
+          change.</p>
+        <button
+          onclick="if (fluid.get('pref-chroma') == 'true') { fluid.set('pref-chroma', false); fluid.chroma.disable(); } else { $('body').css('cursor', 'progress'); fluid.chroma.init(chromaProfile, () => { fluid.set('pref-chroma', true); fluid.chroma.themeLink = true; fluid.theme(); $('body').css('cursor', 'default'); alert('Chroma effects enabled') }) }"
+          class="btn pref-chroma">Enable Chroma Effects</button>
         <pre id="acrylicSection"></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">texture</i>Fluid UI
@@ -720,8 +830,9 @@
       <div class="body">
         <p><b>Navigation elements in Fluid UI are highly experimental. Each site has different needs for its navigation,
             and Fluid UI's options are limited. Navigation elements listed below are not fully supported.</b></p>
-        <p style="color: red; font-size: 18px;"><b>Toolbars, Navbars, and Sidebars have been disabled in Fluid UI v4
-            beta 1. Navigation options are being reworked and will return in a later beta of Fluid UI v4.</b></p>
+        <p style="color: red; font-size: 18px;"><b>Toolbars and Navbars have been disabled in Fluid UI v4
+            beta 1 and continue to be disabled in Fluid UI v4 beta 2. They are being reworked and will return in a later
+            beta of Fluid UI v4.</b></p>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">folder</i>Breadcrumbs
         </h5>
@@ -745,7 +856,7 @@
           <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">tab</i>Toolbar</h5>
           <p>Toolbars are small and simple (The default navigation on this site is a toolbar)</p>
           <pre>
-          <code>&lt;div class=&quot;nav right&quot;&gt;
+          <code class="prettyprint">&lt;div class=&quot;nav right&quot;&gt;
         &lt;ul&gt;
             &lt;li class=&quot;active&quot;&gt;
             &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
@@ -765,7 +876,7 @@
             You can also move it to the left by changing its class:
           </p>
           <pre>
-<code>&lt;!-- Left alignment --&gt;
+<code class="prettyprint">&lt;!-- Left alignment --&gt;
 &lt;div class=&quot;nav left&quot;&gt;</code>
 </pre>
           <br />
@@ -774,7 +885,7 @@
             the sticky class:
           </p>
           <pre>
-<code>&lt;!-- Sticky nav --&gt;
+<code class="prettyprint">&lt;!-- Sticky nav --&gt;
 &lt;div class=&quot;nav right sticky&quot;&gt;</code>
 </pre>
           <br />
@@ -783,7 +894,7 @@
           </h5>
           <p>Navbars take up the entire top of the page and let you add your own title and logo</p>
           <pre>
-    <code>&lt;div class=&quot;nav navbar&quot;&gt;
+    <code class="prettyprint">&lt;div class=&quot;nav navbar&quot;&gt;
    &lt;img src=&quot;https://fluid.js.org/icon.png&quot; /&gt;
    &lt;h4&gt;Fluid UI&lt;/h4&gt;
     &lt;ul class=&quot;right&quot;&gt;
@@ -812,15 +923,26 @@
           <p>Try out the sidebar demo. When using the sidebar, add the "hasSidebar" class to the body element to make
             sure everything is padded correctly. Place the sidebar right after the
 
-            <body> tag</p>
+            &lt;body&gt; tag. Sidebars can be collapsed by the user by default. Collapsed sidebars only show the icon.
+          </p>
           <button onclick="$('body').toggleClass('hasSidebar'); $('.sidebar').toggle();" class="btn">Toggle
             sidebar</button>
           <br /><br />
-          <pre><code>&#x3C;div style=&#x22;display: none;&#x22; class=&#x22;sidebar&#x22;&#x3E;
-    &#x3C;h4&#x3E;Projects&#x3C;/h4&#x3E;
-    &#x3C;div class=&#x22;item&#x22;&#x3E;Fluid UI&#x3C;/div&#x3E;
-    &#x3C;div class=&#x22;item&#x22;&#x3E;Fluid UI&#x3C;/div&#x3E;
-&#x3C;/div&#x3E;</code></pre>
+          <pre><code class="prettyprint">&lt;div class=&quot;sidebar acrylicMaterial&quot;&gt;
+    &lt;h4&gt;Teleport&lt;/h4&gt;
+    &lt;img class=&quot;logo&quot; src=&quot;https://tp.js.org/favicon.png&quot; /&gt;
+      
+    &lt;div class=&quot;items&quot;&gt;
+      &lt;div class=&quot;item main&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;home&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Home&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Create&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Edit&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+      
+    &lt;div class=&quot;collapse&quot;&gt;
+      &lt;i class=&quot;material-icons&quot;&gt;keyboard_arrow_left&lt;/i&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
           <br />
           <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">border_left</i>Side
             navigation</h5>
@@ -850,7 +972,7 @@
               <p>If putting side navigation into a card, make sure that the card has the "withnav" class, and make sure
                 that the card is a fixed height. Add the content div next to the side nav for proper padding.</p>
               <pre>
-  <code>
+  <code class="prettyprint">
 &lt;div style="height: 650px;" class="card withnav"&gt;
   &lt;div class="sidenav"&gt;
     &lt;div class="title"&gt;
@@ -886,7 +1008,7 @@
     <div class="section">
       <div class="header">
         <i class="material-icons">layers</i>
-        <h3>Sections and Cards</h3>
+        <h3>Groups</h3>
       </div>
       <div class="body">
         <a name="cards-sections"></a>
@@ -895,7 +1017,7 @@
         <p>Using a section to seperate different components on a page in your site is reccommended. Sections are easy to
           setup, and provide contrast against the background.</p>
         <pre>
-<code>&lt;div class=&quot;section&quot;&gt;
+<code class="prettyprint">&lt;div class=&quot;section&quot;&gt;
     &lt;div class=&quot;header&quot;&gt;
       &lt;i class=&quot;material-icons&quot;&gt;note&lt;/i&gt;
       &lt;h3&gt;Demo&lt;/h3&gt;
@@ -906,21 +1028,65 @@
 &lt;/div&gt;</code>
 </pre>
         <p>Add the "collapse" class to the section to indicate that it can be collapsed.</p>
-        <code>&lt;div class=&quot;section collapse&quot;&gt;</code>
+        <code class="prettyprint">&lt;div class=&quot;section collapse&quot;&gt;</code>
         <br /><br />
         <p>Add the "collapsed" class to the body of the section to have it defaultly collapsed</p>
-        <code>&lt;div class=&quot;body collapsed&quot;&gt;</code>
+        <code class="prettyprint">&lt;div class=&quot;body collapsed&quot;&gt;</code>
         <br /><br />
         <p>Click the try button below to give all sections on this page the collapse class. If your page dynamically
           changes the collapse class, make sure to run fluid.init() to initialize all of them.</p>
         <button onclick="$('.section').addClass('collapse');fluid.init();" class="btn">Try</button>
         <br /><br /><br />
+        <a name="cards-elevated"></a>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">amp_stories</i>Elevated
+          Content
+        </h5>
+        <p>Elevated content is used for displaying a small group of items that would be too small to use a card or
+          section. Elevated Content has very little padding, has a light shadow, and has a subtle background.</p>
+        <br />
+        <div style="padding: 10px 20px; border: 2px solid var(--elements); border-radius: 10px;" class="row">
+          <div class="seven columns">
+            <h4 style="font-weight: bold; font-size: 24px;">Demo Assignment</h4>
+            <p style="color: var(--lightText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et
+              dolore magna aliqua. Proin nibh nisl condimentum id venenatis. Commodo elit at imperdiet dui accumsan sit
+              amet nulla. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Sed cras ornare arcu dui
+              vivamus arcu. Ut etiam sit amet nisl purus in. Sed egestas egestas fringilla phasellus faucibus
+              scelerisque eleifend donec. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Cursus
+              euismod quis viverra nibh cras. Blandit volutpat maecenas volutpat blandit aliquam. Lorem dolor sed
+              viverra ipsum nunc. Fames ac turpis egestas maecenas pharetra convallis.</p>
+            <p style="color: var(--lightText);">
+              Aliquam ultrices sagittis orci a scelerisque purus semper eget. Non odio euismod lacinia at quis risus sed
+              vulputate. Pretium vulputate sapien nec sagittis. Rhoncus est pellentesque elit ullamcorper dignissim cras
+              tincidunt lobortis feugiat. Ac tincidunt vitae semper quis lectus nulla. Tincidunt tortor aliquam nulla
+              facilisi cras. Massa placerat duis ultricies lacus. Posuere lorem ipsum dolor sit. Ut faucibus pulvinar
+              elementum integer enim neque. Pharetra sit amet aliquam id diam. Porta nibh venenatis cras sed.
+            </p>
+          </div>
+          <div class="five columns">
+            <div class="elevated">
+              <p style="color: #4d984d; margin-top: 0px;">Turned In (Due November 25th, 2019)</p>
+              <button class="btn"><i class="material-icons">assignment</i> Resubmit</button>
+            </div>
+            <br />
+            <p>Here, the elevated content provides visual seperation from the rest of the assignment without making the
+              UI feel cluttered or busy</p>
+          </div>
+        </div>
+        <br />
+        <pre>
+<code class="prettyprint">&lt;div class="elevated"&gt;
+    &lt;p style="color: #4d984d; margin-top: 0px;"&gt;Turned In (Due November 25th, 2019)&lt;/p&gt;
+    &lt;button class="btn"&gt;&lt;i class="material-icons"&gt;assignment&lt;/i&gt; Resubmit&lt;/button&gt;
+&lt;/div&gt;</code>
+</pre>
+        <br /><br /><br />
         <a name="cards-cards"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web_asset</i>Cards</h5>
-        <p>If you want a section with a 3D effect, use a card. However, cards do not work on mobile, and can cause lag
-          if you use too many of them.</p>
+        <p>Note that cards do not work on mobile and can cause lag
+          if you use too many of them. Avoid putting a card in a card.</p>
         <pre>
-<code>&lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
+<code class="prettyprint">&lt;div id=&quot;democard&quot; class=&quot;card&quot;&gt;
   &lt;!-- Card Content --&gt;
   &lt;/div&gt;
 </code>
@@ -928,26 +1094,26 @@
         <p>
           Add the "close" class to make the card hidden by default
         </p>
-        <code>
+        <code class="prettyprint">
     &lt;div id=&quot;democard&quot; class=&quot;card close&quot;&gt;
   </code>
         <p>
           Add the "focus" class to make the card act as an alert and blur the background. Clicking on the background
           will also close the card!
         </p>
-        <code>
+        <code class="prettyprint">
       &lt;div id=&quot;democard&quot; class=&quot;card focus close&quot;&gt;
     </code>
         <p>
           Show a card:
         </p>
-        <code>
+        <code class="prettyprint">
       fluid.cards(card-id)
     </code>
         <p>
           To close cards (Use .card.focus for focused cards):
         </p>
-        <code>
+        <code class="prettyprint">
         fluid.cards.close(elementSelector);
       </code>
         </code>
@@ -971,7 +1137,7 @@
     <div class="section">
       <div class="header">
         <i class="material-icons">notifications</i>
-        <h3>Splash Screens and Alerts</h3>
+        <h3>Alerts</h3>
       </div>
       <div class="body">
         <a name="splash-splash"></a>
@@ -979,9 +1145,9 @@
           Screens</h5>
         <p>Show your div as a splash screen with fluid.splash(). Use the title attribute to specify the title of the
           splash screen, and add the splash class.</p>
-        <code>&lt;div class=&quot;Splash Demo&quot; title=&quot;Splash Demo&quot;&gt;</code>
+        <code class="prettyprint">&lt;div class=&quot;Splash Demo&quot; title=&quot;Splash Demo&quot;&gt;</code>
         <br />
-        <code>fluid.splash(element)</code>
+        <code class="prettyprint">fluid.splash(element)</code>
         <br />
         <button onclick="fluid.splash('#demosplash')" class="btn">Try</button>
         <br /><br />
@@ -990,33 +1156,45 @@
             class="material-icons">picture_in_picture</i>Toasts</h5>
         <p>Use fluid.toast, and include a <a href="https://material.io/tools/icons/?style=baseline">material icon
             string</a> and the toast's message</p>
-        <code>fluid.toast(materialIcon, message)</code>
+        <code class="prettyprint">fluid.toast(title, text [, icon] [, icon color])</code>
         <br />
-        <button onclick="fluid.toast('tab', 'This is a toast!')" class="btn">Try</button>
+        <button onclick="fluid.toast('Demo Toast', 'This is a demo', 'picture_in_picture')" class="btn">Try</button>
         <br /><br />
         <a name="splash-modals"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">crop_3_2</i>Modals</h5>
         <p>You can also use a focus card as a modal in Fluid UI. Just use fluid.modal() to open the card and it will
           disable scrolling and act as an alert.</p>
-        <code>fluid.modal(element)</code>
+        <code class="prettyprint">fluid.modal(element)</code>
         <br />
         <button onclick="fluid.modal('#vmodal')" class="btn">Try</button>
         <br /><br />
         <a name="splash-alerts"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alerts
         </h5>
-        <p>Fluid UI supports <a href="https://sweetalert.js.org/">Sweetalert</a> and also has native Fluid UI alerts</p>
-        <code>fluid.alert(title, body)</code>
+        <p>Fluid UI has native alerts and also supports <a href="https://sweetalert.js.org/">Sweetalert</a></p>
+        <code class="prettyprint">fluid.alert(title, body [, icon] [, actions array])</code>
         <br />
-        <button onclick="fluid.modal('#vmodal')" class="btn">Try</button>
+        <p>The actions parameter is optional. The actions parameter should be an array of objects representing different
+          action buttons shown on the alert. Each action will close the alert before running the action. An action
+          should have the following properties:</p>
+        <ul>
+          <li>String name: The name of the action as it should be shown to the user</li>
+          <li>String icon (optional): The material icon for the action</li>
+          <li>String action (optional): The HTML onclick parameter for the action button. For a close button, leave this
+            blank.</li>
+        </ul>
+        <br />
+        <button
+          onclick="fluid.alert('Demo Alert', 'This is a demo alert', 'notifications', [{name: 'Cancel', action: 'alert(`Cancel pressed`)'}, {name: 'OK', action: 'alert(`OK pressed`)'}])"
+          class="btn">Try</button>
       </div>
     </div>
     <br /><br />
-    <a name="core"></a>
+    <a name="layout"></a>
     <div class="section">
       <div class="header">
         <i class="material-icons">view_quilt</i>
-        <h3>Core</h3>
+        <h3>Layout</h3>
       </div>
       <div class="body">
         <div style="text-align: center;">
@@ -1039,30 +1217,44 @@
         <br /></br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">hdr_strong</i>Fluid UI +
           Skeleton CSS</h5>
-        <p>Fluid UI uses Skeleton CSS for several core components and layouts. Skeleton enables amazing experiences with
-          Fluid UI, bringing the best grid, additional mobile support, font scaling, and much more. Skeleton is also the
-          lighest weight framework, with only 400 lines of code.
-          Both Skeleton and Fluid UI are open-source, because we believe that open-source code enables the developer
-          community to do great things with our code. All credit for Skeleton components goes to Dave Gamache. All
-          rights reserved.</p>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">code</i>Fully
-          open-source</h5>
-        <p>Open source code allows the developer community to collaborate on code, learn from code, and build with each
-          other's code. Fluid UI belives in open-source and has all of its source code accessible to anybody on GitHub
-          under the MIT license.
-          And with Fluid UI v4, the entire framework has been reorginized and rewritten, making it lighter, faster, and
-          easier for people in the open source community to use and contribute to. Open source code means ad-free and
-          transparent apps, websites, and services so you don't have to worry about open-source apps and websites hiding
-          anything.
-          Open source code is not monetized and is always free for everyone.
+        <p>Fluid UI uses components from Skeleton CSS. Skeleton enables amazing experiences with
+          Fluid UI, bringing the best grid, improved mobile support, and font scaling. Skeleton is also an
+          extremely lightweight framework with only 400 lines of code.
+          All credit for Skeleton components goes to Dave Gamache. Skeleton is licensed under the MIT license. Check out
+          Skeleton's code <a href="https://github.com/dhg/Skeleton">here</a>.</p>
+        <p>Fluid UI supports Skeleton's grid. To learn how to use Skeleton's grid, go <a
+            href="http://getskeleton.com/#grid">here</a>.</p>
+        <br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">code</i>Open-Source</h5>
+        <p>Fluid UI's code is Open Source on <a href="https://github.com/jottocraft/fluid">GitHub</a>
+        </p>
+        <br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">public</i>Browser
+          Requirements</h5>
+        <p>Note: Features that are not ready for production use (like Fluid UI Acrylic) may require a more advanced
+          browser than the requirements listed below.</p>
+        <p>Fluid UI is designed for small independently created websites. Fluid UI is not designed for compatibility and
+          accessibility.</p>
+        <p>Fluid UI <b>requires</b> the following:
+          <ul>
+            <li>JavaScript-enabled</li>
+            <li>CSS variable support</li>
+            <li>All versions of Internet Explorer are NOT supported</li>
+          </ul>
+          <p>Ideally, browsers should also be:</p>
+          <ul>
+            <li>A major modern browser</li>
+            <li>No version released more than 3 years ago</li>
+            <li>Chromium-based browsers work best</li>
+          </ul>
         </p>
       </div>
     </div>
     <a name="install"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">cloud_download</i>
-        <h3>Download</h3>
+        <i class="material-icons">code</i>
+        <h3>Install</h3>
       </div>
       <div class="body">
         <div style="text-align:left; padding: 20px 30px;" class="card fluid vibrant releases">
@@ -1071,35 +1263,62 @@
           <br />
           <div style="display:none;font-size: 20px;" class="row" id="relinteract"><a id="reldownload"
               style="margin-right: 10px;" class="interact fluid"><i style="vertical-align: middle; margin-right: 5px;"
-                class="material-icons">cloud_download</i>Download</a><a onclick="fluid.modal('#vmodal')"
+                class="material-icons">cloud_download</i>Download</a><a onclick="fluid.alert('Changelog', changelogHTML, 'update', [{name: 'Releases', action: 'window.location.href = `https://github.com/jottocraft/fluid`'}, {name: 'OK'}])"
               style='cursor:pointer;margin-right: 10px;' class="interact"><i
-                style="vertical-align: middle; margin-right: 5px;" class="material-icons">notes</i>Release Notes</a><a
+                style="vertical-align: middle; margin-right: 5px;" class="material-icons">update</i>Changelog</a><a
               onclick="renderReleases();" style='cursor:pointer;margin-right: 10px;' class="interact relbeta"></a>
           </div>
         </div>
         <br /><br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Install Fluid
           UI</h5>
-        <p>Code below assumes Fluid UI is in the /fluid directory</p>
+        <p>Click the download button on the card above to download Fluid UI. Code below assumes Fluid UI is in the /fluid directory</p>
+        <p>Fluid UI uses the following libraries:</p>
+        <ul>
+          <li>Google Material Icons (Extended) | Used for Icons in Fluid UI</li>
+          <li>TinyColor | Used for Fluid UI Acrylic</li>
+          <li>jQuery | Used for core Fluid UI features</li>
+        </ul>
+        <br />
         <pre>
-          <code class="override">&lt;!-- Fluid UI --&gt;
+          <code class="prettyprint">&lt;!-- Fluid UI --&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons+Extended&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
-&lt;script src=&quot;https://bgrins.github.io/TinyColor/tinycolor.js&quot;&gt;&lt;/script&gt;
+&lt;script async src=&quot;https://cdn.jottocraft.com/fluid/assets/tinycolor.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot; /&gt;
-&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;</code>
+        </pre>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">cloud</i>Fluid UI CDN</h5>
+        <p>The Fluid UI CDN may be shutdown at any time without notice. Use the Fluid UI CDN at your own risk.</p>
+        <p>Fluid UI uses the following libraries:</p>
+        <ul>
+          <li>Google Material Icons (Extended) | Used for Icons in Fluid UI</li>
+          <li>TinyColor | Used for Fluid UI Acrylic</li>
+          <li>jQuery | Used for core Fluid UI features</li>
+        </ul>
+        <br />
+        <pre>
+          <code class="prettyprint">&lt;!-- Fluid UI --&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons+Extended&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://cdn.jottocraft.com/fluid/v4.min.css&quot; media=&quot;screen,projection&quot;/&gt;
+&lt;script async src=&quot;https://cdn.jottocraft.com/fluid/assets/tinycolor.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jottocraft.com/fluid/v4.min.js&quot;&gt;&lt;/script&gt;</code>
         </pre>
       </div>
     </div>
     <br /><br /><br /><br />
 
-    <p style="text-align:center">(c) 2019 jottocraft&nbsp;&nbsp;&nbsp;&nbsp;<a
-        href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-        href="https://github.com/jottocraft/fluid/">source</a></p>
-    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.1 (06222019)</p>
+    <div style="text-align: center; padding: 50px 0px;">
+      <img style="height: 80px; vertical-align: middle;" src="https://i.imgur.com/2geYYiz.png" />
+      <h5 style="display: inline-block; vertical-align: middle;">jottocraft</h5>
+      <p>(c) jottocraft 2017-2019. All rights reserved.&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid">source
+          code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
+    </div>
+    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.2 (11252019)</p>
     <br /><br />
   </div>
   <div class="container">

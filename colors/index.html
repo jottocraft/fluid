@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet"
+        href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script async onload="tinyColorReady()" type="text/javascript"
+        src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
+    <script async type="text/javascript" src="../v4/v4.js"></script>
+    <link rel="shortcut icon" href="colorStudioFavicon.png" type="image/png">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../v4/v4.css" media="screen,projection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!--OpenGraph -->
+    <meta property="og:url" content="https://fluid.js.org/colors" />
+    <meta property="og:title" content="Fluid UI Color Studio" />
+    <meta property="og:description" content="Design Custom Fluid UI Themes" />
+    <meta property="og:image" content="https://fluid.js.org/colors/colorStudio.png" />
+
+    <meta charset="utf-8">
+    <title>Color Studio</title>
+    <meta name="description" content="Design Custom Fluid UI Themes">
+    <meta name="author" content="jottocraft">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+</head>
+
+<body class="hasSidebar dark nitro flex">
+    <style id="themePreviewCSS"></style>
+    <script>
+        themeType = "flex";
+        themeBase = "dark";
+        themeVars = ["--background", "--elements", "--elementText", "--darker", "--darkest", "--acrylic", "--inputColor", "--listColor", "--listHover", "--switchHead", "--sideColor", "--sideActive", "--sideItem", "--navActiveText", "--navActive",
+            "--navText", "--nav", "--cards", "--lightText", "--secText", "--theme", "--themeText"]
+        flexVars = ["--flex-light", "--flex-bg", "--flex-text", "--flex-sectext", "--flex-layer1", "--flex-layer2", "--flex-layer3", "--theme-color", "--theme-text-color"]
+        document.addEventListener("fluidTheme", function (data) {
+            if (confirm("The theme has changed to '" + data.detail + "'. Update variables in the sidebar?")) {
+                loadTheme();
+            }
+        });
+        function loadTheme() {
+            if (themeType == "full") {
+                for (var i = 0; i < themeVars.length; i++) {
+                    $("#" + themeVars[i]).val(tinycolor(getComputedStyle(document.body).getPropertyValue(themeVars[i]).replace(" ", "")).toHexString())
+                }
+            }
+            if (themeType == "flex") {
+                for (var i = 0; i < flexVars.length; i++) {
+                    $("#" + flexVars[i]).val(tinycolor(getComputedStyle(document.body).getPropertyValue(flexVars[i]).replace(" ", "")).toHexString())
+                }
+            }
+            if (typeof tinycolor !== "undefined") {
+                var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylic");
+                if (acrylicBase == "") acrylicBase = getComputedStyle(document.body).getPropertyValue("--background");
+                document.documentElement.style.setProperty("--acrylic10", tinycolor(acrylicBase).setAlpha(0.1).toRgbString())
+                document.documentElement.style.setProperty("--acrylic50", tinycolor(acrylicBase).setAlpha(0.5).toRgbString())
+                document.documentElement.style.setProperty("--acrylic50-fallback", tinycolor(acrylicBase).setAlpha(0.9).toRgbString())
+                document.documentElement.style.setProperty("--acrylicSecText", tinycolor(getComputedStyle(document.body).getPropertyValue("--text")).setAlpha(0.3).toRgbString())
+            }
+        }
+
+        function tinyColorReady() {
+            $(document).ready(loadTheme)
+        }
+
+        function themePreview() {
+            if (themeType == "flex") {
+                if (fluid.theme() == themeBase) {
+                    fluid.theme("nitro", true);
+                }
+                var cssArr = [];
+                for (var i = 0; i < flexVars.length; i++) {
+                    cssArr.push(flexVars[i] + ":" + $("#" + flexVars[i]).val() + " !important");
+                }
+                $("#themePreviewCSS").html("body {" + cssArr.join(";") + "}")
+            }
+            if (themeType == "full") {
+                fluid.theme(themeBase, true);
+                var cssArr = [];
+                for (var i = 0; i < themeVars.length; i++) {
+                    cssArr.push(themeVars[i] + ":" + $("#" + themeVars[i]).val() + " !important");
+                }
+                $("#themePreviewCSS").html("body {" + cssArr.join(";") + "}")
+            }
+            if (typeof tinycolor !== "undefined") {
+                var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylic");
+                if (acrylicBase == "") acrylicBase = getComputedStyle(document.body).getPropertyValue("--background");
+                document.documentElement.style.setProperty("--acrylic10", tinycolor(acrylicBase).setAlpha(0.1).toRgbString())
+                document.documentElement.style.setProperty("--acrylic50", tinycolor(acrylicBase).setAlpha(0.5).toRgbString())
+                document.documentElement.style.setProperty("--acrylic50-fallback", tinycolor(acrylicBase).setAlpha(0.9).toRgbString())
+                document.documentElement.style.setProperty("--acrylicSecText", tinycolor(getComputedStyle(document.body).getPropertyValue("--text")).setAlpha(0.3).toRgbString())
+            }
+        }
+
+        function themeCSS() {
+            if (themeType == "flex") {
+                var themeID = "dark" + ($("#themeName").val().charAt(0).toUpperCase() + $("#themeName").val().slice(1).replace(/\s/g, ''));
+                if (themeID !== "dark") {
+                    var cssArr = [];
+                    for (var i = 0; i < flexVars.length; i++) {
+                        cssArr.push("   " + flexVars[i] + ": " + $("#" + flexVars[i]).val() + ";\n");
+                    }
+                    $("#themeCSS").html("body." + themeID + ", body.showThemeWindows .themeWindow." + themeID + " {\n" + cssArr.join("") + "}")
+                    $("#themeID").html(themeID)
+                    fluid.modal("#themeCard")
+                } else {
+                    alert("Please enter a valid theme name")
+                }
+            }
+            if (themeType == "full") {
+                var themeID = $("#themeName").val().replace(/\s/g, '');
+                var cssArr = [];
+                for (var i = 0; i < themeVars.length; i++) {
+                    cssArr.push("   " + themeVars[i] + ": " + $("#" + themeVars[i]).val() + ";\n");
+                }
+                $("#themeCSS").html("body." + themeID + ", body.showThemeWindows .themeWindow." + themeID + " {\n" + cssArr.join("") + "}")
+                $("#themeID").html(themeID)
+                fluid.modal("#themeCard")
+            }
+        }
+
+        function colorGenerate() {
+            var theme = $("#baseColor").val();
+            var baseColor = theme.slice(1)
+            var color = tinycolor(baseColor)
+            var cssArr = [];
+            $("#--flex-light").val(tinycolor(baseColor).brighten(10).toHexString());
+            $("#--flex-bg").val(tinycolor(baseColor).brighten(5).toHexString());
+            if (tinycolor(baseColor).isLight()) {
+                var colorDark = "black";
+                $("#--flex-text").val("#000000");
+                $("body").removeClass("dark")
+                $("body").addClass("light");
+            } else {
+                var colorDark = "white";
+                $("#--flex-text").val("#ffffff");
+                $("body").addClass("dark")
+                $("body").removeClass("light");
+            }
+            var colorDesc = "dark";
+            if (colorDark == "black") var colorDesc = "light";
+            $("#--flex-layer1").val(tinycolor(baseColor).darken(5).toHexString());
+            $("#--flex-layer2").val(tinycolor(baseColor).darken(10).toHexString());
+            $("#--flex-layer3").val(tinycolor(baseColor).darken(15).toHexString());
+            $("#--theme-color").val(tinycolor(colorDark).toHexString());
+            $("#--flex-sectext").val(tinycolor(baseColor).brighten(40).desaturate(50).toHexString());
+            $("#--theme-text-color").val(tinycolor(baseColor).brighten(10).toHexString());
+            themePreview();
+        }
+    </script>
+    <div class="card focus close container" style="margin-left: -275px;" id="themeCard">
+        <h4>Your Theme's CSS</h4><br />
+        <p>Step 1: Copy and paste this CSS on your site</p>
+        <pre><code id="themeCSS">
+</code></pre>
+        <br />
+        <p>Step 2: Use your theme ID to enable your theme in the theme selector or with fluid.theme()</p>
+        <code id="themeID"></code>
+        <br />
+        <button class="btn" onclick="fluid.cards.close('#themeCard')">OK</button>
+    </div>
+    <div style="padding: 10px; text-align: center; overflow: auto;" class="sidebar">
+        <h5 style="font-weight: bold;">Color Studio</h5>
+        <div style="background-color: var(--darker); display: none;" class="btns row small">
+            <div onclick="themeType = 'flex'; $('#fullTheme').hide(); $('#flexTheme').show(); themePreview();"
+                class="btn active">Flex Theme</div>
+            <div onclick="themeType = 'full'; $('#fullTheme').show(); $('#flexTheme').hide(); themePreview();"
+                class="btn">Full Theme</div>
+        </div>
+        <input id="themeName" style="background-color: var(--flex-layer1); width: 100%; text-transform:capitalize;"
+            placeholder="Theme name" />
+
+        <div id="fullTheme" style="display: none;">
+            <br /><br />
+            <div style="background-color: var(--darker);" class="btns row small">
+                <div onclick="themeBase = 'dark'; fluid.theme('dark', true); themePreview();" class="btn active">Dark
+                    Base
+                </div>
+                <div onclick="themeBase = 'light'; fluid.theme('light', true); themePreview();" class="btn">Light Base
+                </div>
+            </div>
+
+            <br />
+            Background
+            <input type="color" id="--background" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Elements Background
+            <input type="color" id="--elements" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Element Text
+            <input type="color" id="--elementText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Darker/Hover
+            <input type="color" id="--darker" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Darkest
+            <input type="color" id="--darkest" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Acrylic
+            <input type="color" id="--acrylic" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Input Background
+            <input type="color" id="--inputColor" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            List Background
+            <input type="color" id="--listColor" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            List Hover (contextMenu)
+            <input type="color" id="--listHover" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Switch Head
+            <input type="color" id="--switchHead" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidenav Background
+            <input type="color" id="--sideColor" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidenav Active Item
+            <input type="color" id="--sideActive" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidenav Item Text
+            <input type="color" id="--sideItem" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidebar Active Text
+            <input type="color" id="--navActiveText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidebar Active Background
+            <input type="color" id="--navActive" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidebar Text
+            <input type="color" id="--navText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Sidebar Background
+            <input type="color" id="--nav" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Card Background
+            <input type="color" id="--cards" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Light Text <span style="font-size: 10px;">slightly lighter/darker than text</span>
+            <input type="color" id="--lightText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Secondary Text
+            <input type="color" id="--secText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Theme/Brand Background
+            <input type="color" id="--theme" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Theme/Brand Text
+            <input type="color" id="--themeText" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+        </div>
+
+        <div id="flexTheme">
+            <br />
+            Automatically Generate Theme
+            <input type="color" id="baseColor" value="#4B3E84" style="width:85%; margin-top: 5px;">
+            <br /><br />
+            <button class="btn small" style="background-color:var(--flex-layer1);" onclick="colorGenerate();">Generate
+                Theme</button>
+            <br /><br /><br /><br />
+            Background
+            <input type="color" id="--flex-bg" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Card Background
+            <input type="color" id="--flex-light" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Text<br />
+            <input type="color" id="--flex-text" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Secondary Text
+            <input type="color" id="--flex-sectext" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Layer 1 / Elements
+            <input type="color" id="--flex-layer1" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Layer 2 / Hover
+            <input type="color" id="--flex-layer2" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Layer 3 / Darkest
+            <input type="color" id="--flex-layer3" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Theme/Brand Background
+            <input type="color" id="--theme-color" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br />
+            Theme/Brand Text
+            <input type="color" id="--theme-text-color" onchange="themePreview()" value="#ff0000"
+                style="width:85%; margin-top: 5px;">
+            <br /><br /><br /><br />
+            <button class="btn" onclick="themeCSS()">Generate CSS</button>
+        </div>
+
+    </div>
+    <br /><br />
+
+    <br /><br />
+    <br /><br />
+    <div class="container">
+
+        <!-- <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div> -->
+
+        <div class="center">
+            <img src="colorStudio.png"
+                style="width: 150px; border-radius: 50%; font-size: 95px; background: -webkit-linear-gradient(var(--flex-light, #4fff5d), var(--flex-sectext, #5fffcb)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">
+            </img>
+            <h3>Fluid UI Color Studio</h3>
+            <br /><br />
+            <div style="margin-bottom: 100px;" class="nav links">
+                <ul style="white-space: normal; margin: 0px;">
+
+
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+                    <a href="#"><i class="material-icons">star</i><span style="font-weight: bold;">NavItem</span></a>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="header">
+                <i class="material-icons">material_design</i>
+                <h2>Elements</h2>
+            </div>
+            <div class="body">
+                <h1>Header 1</h1>
+                <h2>Header 2</h2>
+                <h3>Header 3</h3>
+                <h4>Header 4</h4>
+                <h5>Header 5</h5>
+                <h6>Header 6</h6>
+                <p>Normal Text (<a href="#">link</a>)</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Habitant morbi tristique senectus et netus et malesuada. Eu
+                    scelerisque felis imperdiet proin fermentum leo. Id consectetur purus ut faucibus. Integer
+                    eget aliquet nibh praesent. Tincidunt eget nullam non nisi est sit. Tincidunt eget nullam
+                    non nisi est sit amet. Sit amet porttitor eget dolor morbi non arcu risus. Dignissim diam
+                    quis enim lobortis scelerisque fermentum dui faucibus. Non sodales neque sodales ut etiam
+                    sit. Vitae suscipit tellus mauris a diam. Posuere morbi leo urna molestie at elementum eu
+                    facilisis sed. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Mattis nunc
+                    sed blandit libero volutpat sed cras ornare arcu. Metus aliquam eleifend mi in nulla posuere
+                    sollicitudin aliquam ultrices. Id volutpat lacus laoreet non curabitur gravida arcu. Mattis
+                    nunc sed blandit libero volutpat sed cras ornare arcu. Velit egestas dui id ornare arcu odio
+                    ut sem.
+
+                </p>
+                <p style="color: var(--secText);">Secondary Text (<a href="#">link</a>)</p>
+                <p style="color: var(--secText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Habitant morbi tristique senectus et netus et malesuada. Eu
+                    scelerisque felis imperdiet proin fermentum leo. Id consectetur purus ut faucibus. Integer
+                    eget aliquet nibh praesent. Tincidunt eget nullam non nisi est sit. Tincidunt eget nullam
+                    non nisi est sit amet. Sit amet porttitor eget dolor morbi non arcu risus. Dignissim diam
+                    quis enim lobortis scelerisque fermentum dui faucibus. Non sodales neque sodales ut etiam
+                    sit. Vitae suscipit tellus mauris a diam. Posuere morbi leo urna molestie at elementum eu
+                    facilisis sed. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Mattis nunc
+                    sed blandit libero volutpat sed cras ornare arcu. Metus aliquam eleifend mi in nulla posuere
+                    sollicitudin aliquam ultrices. Id volutpat lacus laoreet non curabitur gravida arcu. Mattis
+                    nunc sed blandit libero volutpat sed cras ornare arcu. Velit egestas dui id ornare arcu odio
+                    ut sem.
+
+                </p>
+                <i class="inputIcon material-icons">search</i>
+                <input class="inputIcon" placeholder="Search" />
+                <br /><br />
+                <textarea></textarea>
+                <br /><br />
+                <div style="display: inline-block;">
+                    <button class="btn"><i class="material-icons">arrow_forward</i>Continue</button>
+                    <div class="list contextmenu">
+                        <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+                        <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+                        <div class="item"><i class="material-icons">star_border</i>Item 3</div>
+                    </div>
+                </div>
+                <button class="btn outline"><i class="material-icons">close</i>Cancel</button>
+                <br /><br />
+                <div style="display: inline-block;">
+                    <button style="background-color:var(--darker);border-color:var(--darker);" class="btn"><i
+                            class="material-icons">mouse</i>Hover</button>
+                    <div class="list contextmenu">
+                        <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+                        <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+                        <div class="item"><i class="material-icons">star_border</i>Item 3</div>
+                    </div>
+                </div>
+                <button style="background-color:var(--darker);border-color:var(--darker);" class="btn outline"><i
+                        class="material-icons">mouse</i>Hover</button>
+                <br /><br />
+                <button class="btn small">Small button</button>
+                <br /><br />
+                <select>
+                    <option value="0">Select an option:</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+                <br /><br /><br />
+
+                <div class="switch"><span class="head"></span></div>
+                <div class="label">Demo switch</div>
+                <br /><br />
+                <input type="range" class="slider" min="1" max="100" value="50">
+                <br /><br />
+                <div class="btns row">
+                    <button class="btn">Option A</button>
+                    <button class="btn">Option B</button>
+                    <button class="btn">Option C</button>
+                </div>
+                <br />
+                <!-- small button row -->
+                <div class="btns row small">
+                    <button class="btn">Option A</button>
+                    <button class="btn">Option B</button>
+                    <button class="btn">Option C</button>
+                </div>
+                <br />
+                <div class="list select multiple">
+                    <div class="item"><i class="material-icons">star</i>Item 1</div>
+                    <div class="item"><i class="material-icons">star</i>Item 2</div>
+                    <div class="item"><i class="material-icons">star</i>Item 3</div>
+                </div>
+                <br /><br />
+                <code>console.log("Hello World!")</code>
+                <br /><br />
+                <div id="demoWallContainer"
+                    style="height: 600px; background-image: url('https://i.imgur.com/cn1qcVA.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
+                    <div id="acrylicDemoWindow"
+                        style="margin: 200px 0px; padding: 40px; display: inline-block; border-radius: 10px; font-weight: bold; cursor: move; color: var(--text); z-index: 10;"
+                        class="acrylicMaterial">This element uses Fluid UI Acrylic<br />You can drag this and change
+                        themes to see
+                        how the color changes.<br />Browsers that do not support Acrylic will not see the blur effect.
+                    </div>
+                    <button onclick="changeDemoWall();" class="acrylicMaterial"
+                        style="position: absolute; right: 10px; margin-top: 525px;">Change Wallpaper</button>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $("#acrylicDemoWindow").draggable();
+                    })
+                    var demoWall = 0;
+                    var demoWalls = ["https://i.imgur.com/cn1qcVA.jpg", "https://i.imgur.com/d8gklDZ.jpg", "https://i.imgur.com/LxT56De.jpg", "https://i.imgur.com/gELuC4p.jpg", "https://i.imgur.com/73vMibt.jpg", "https://i.imgur.com/esS5C8x.jpg"]
+                    function changeDemoWall() {
+                        demoWall++;
+                        if (demoWall == demoWalls.length) demoWall = 0;
+                        $("#demoWallContainer").css("background-image", "url('" + demoWalls[demoWall] + "')")
+                    }
+                </script>
+
+            </div>
+        </div>
+        <div class="section">
+            <div class="header">
+                <i class="material-icons">layers</i>
+                <h2>Card Elements</h2>
+            </div>
+            <div class="body">
+                <div style="height: 2000px;" class="card withnav">
+                    <div class="sidenav">
+                        <div class="title">
+                            <h5>Teleport 3</h5>
+                            <p>by jottocraft</p>
+                        </div>
+                        <div class="item active">
+                            <i class="material-icons">settings</i> Controls
+                        </div>
+                        <div class="item">
+                            <i class="material-icons">folder</i> Chips
+                        </div>
+                        <div class="item">
+                            <i class="material-icons">devices</i> Devices
+                        </div>
+                        <div class="item">
+                            <i class="material-icons">info</i> About
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h1>Header 1</h1>
+                        <h2>Header 2</h2>
+                        <h3>Header 3</h3>
+                        <h4>Header 4</h4>
+                        <h5>Header 5</h5>
+                        <h6>Header 6</h6>
+                        <p>Normal Text</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Habitant morbi tristique senectus et netus et malesuada. Eu
+                            scelerisque felis imperdiet proin fermentum leo. Id consectetur purus ut faucibus. Integer
+                            eget aliquet nibh praesent. Tincidunt eget nullam non nisi est sit. Tincidunt eget nullam
+                            non nisi est sit amet. Sit amet porttitor eget dolor morbi non arcu risus. Dignissim diam
+                            quis enim lobortis scelerisque fermentum dui faucibus. Non sodales neque sodales ut etiam
+                            sit. Vitae suscipit tellus mauris a diam. Posuere morbi leo urna molestie at elementum eu
+                            facilisis sed. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Mattis nunc
+                            sed blandit libero volutpat sed cras ornare arcu. Metus aliquam eleifend mi in nulla posuere
+                            sollicitudin aliquam ultrices. Id volutpat lacus laoreet non curabitur gravida arcu. Mattis
+                            nunc sed blandit libero volutpat sed cras ornare arcu. Velit egestas dui id ornare arcu odio
+                            ut sem.
+
+                        </p>
+                        <p style="color: var(--secText);">Secondary Text</p>
+                        <p style="color: var(--secText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                            do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Habitant morbi tristique senectus et netus et malesuada. Eu
+                            scelerisque felis imperdiet proin fermentum leo. Id consectetur purus ut faucibus. Integer
+                            eget aliquet nibh praesent. Tincidunt eget nullam non nisi est sit. Tincidunt eget nullam
+                            non nisi est sit amet. Sit amet porttitor eget dolor morbi non arcu risus. Dignissim diam
+                            quis enim lobortis scelerisque fermentum dui faucibus. Non sodales neque sodales ut etiam
+                            sit. Vitae suscipit tellus mauris a diam. Posuere morbi leo urna molestie at elementum eu
+                            facilisis sed. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Mattis nunc
+                            sed blandit libero volutpat sed cras ornare arcu. Metus aliquam eleifend mi in nulla posuere
+                            sollicitudin aliquam ultrices. Id volutpat lacus laoreet non curabitur gravida arcu. Mattis
+                            nunc sed blandit libero volutpat sed cras ornare arcu. Velit egestas dui id ornare arcu odio
+                            ut sem.
+
+                        </p>
+                        <i class="inputIcon material-icons">search</i>
+                        <input class="inputIcon" placeholder="Search" />
+                        <br /><br />
+                        <textarea></textarea>
+                        <br /><br />
+                        <div style="display: inline-block;">
+                            <button class="btn"><i class="material-icons">arrow_forward</i>Continue</button>
+                            <div class="list contextmenu">
+                                <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+                                <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+                                <div class="item"><i class="material-icons">star_border</i>Item 3</div>
+                            </div>
+                        </div>
+                        <button class="btn outline"><i class="material-icons">close</i>Cancel</button>
+                        <br /><br />
+                        <div style="display: inline-block;">
+                            <button style="background-color:var(--darker);border-color:var(--darker);" class="btn"><i
+                                    class="material-icons">mouse</i>Hover</button>
+                            <div class="list contextmenu">
+                                <div class="item"><i class="material-icons">star_border</i>Item 1</div>
+                                <div class="item"><i class="material-icons">star_border</i>Item 2</div>
+                                <div class="item"><i class="material-icons">star_border</i>Item 3</div>
+                            </div>
+                        </div>
+                        <button style="background-color:var(--darker);border-color:var(--darker);"
+                            class="btn outline"><i class="material-icons">mouse</i>Hover</button>
+                        <br /><br />
+                        <button class="btn small">Small button</button>
+                        <br /><br />
+                        <select>
+                            <option value="0">Select an option:</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <br /><br /><br />
+
+                        <div class="switch"><span class="head"></span></div>
+                        <div class="label">Demo switch</div>
+                        <br /><br />
+                        <input type="range" class="slider" min="1" max="100" value="50">
+                        <br /><br />
+                        <div class="btns row">
+                            <button class="btn">Option A</button>
+                            <button class="btn">Option B</button>
+                            <button class="btn">Option C</button>
+                        </div>
+                        <br />
+                        <!-- small button row -->
+                        <div class="btns row small">
+                            <button class="btn">Option A</button>
+                            <button class="btn">Option B</button>
+                            <button class="btn">Option C</button>
+                        </div>
+                        <br />
+                        <div class="list select multiple">
+                            <div class="item"><i class="material-icons">star</i>Item 1</div>
+                            <div class="item"><i class="material-icons">star</i>Item 2</div>
+                            <div class="item"><i class="material-icons">star</i>Item 3</div>
+                        </div>
+                        <br /><br />
+                        <code>console.log("Hello World!")</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br /><br /><br /><br />
+
+        <p style="text-align:center">(c) 2019 jottocraft&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+                href="https://github.com/jottocraft/fluid/">source</a></p>
+        <br /><br />
+    </div>
+
+</body>
+
+</html>
