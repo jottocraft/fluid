@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
   <script type="text/javascript" src="v4.js"></script>
-  <link rel="shortcut icon" href="/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="../favicon.png" type="image/png">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -43,8 +43,7 @@
 <body>
 
   <div style="display: none;" class="sidebar acrylicMaterial">
-    <h4
-      style="color: #57e2d6;">
+    <h4 style="color: #57e2d6;">
       Teleport</h4>
     <img class="logo" src="https://tp.js.org/favicon.png" />
 
@@ -79,7 +78,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
   <script>
     fluidThemes = [
-      ["midnight", "nitro", "water"], ["candy", "violet", "tome"], ["rainbow"]
+      ["midnight", "water", "tome"], ["rainbow"]
     ]
   </script>
 
@@ -146,6 +145,13 @@
 
     .material-icons {
       font-family: 'Material Icons Outlined';
+    }
+
+    .screenDemo {
+      padding: 20px;
+      border: 2px solid var(--secText);
+      border-radius: 10px;
+      margin: 20px;
     }
   </style>
   <script>
@@ -354,11 +360,10 @@
     <!-- <div class="fluid logo" style="margin-top: 37.5px;margin-left: 50px;" ></div> -->
 
     <div class="center">
-      <h1
-        style="font-size: 95px; color: #57e2af; font-weight: bold;">
+      <h1 style="font-size: 95px; color: #57e2af; font-weight: bold;">
         Fluid UI</h1>
       <h5 style="font-size: 25px;" class="ver logo"><a id="showver" herf="#install" class="prerelease"
-          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.2</a><a
+          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.3</a><a
           href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="badge"></span></a></h5>
       <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
       <br />
@@ -606,13 +611,8 @@
           <li>Fluid Theme (white): Default Light (ID: "light")</li>
           <li>Fluid Theme (dark gray): Standard Dark (ID: "dark")</li>
           <li>Fluid Theme (black): Midnight Black (ID: "midnight")</li>
-          <li>Flex Theme (dark red): Nitro (ID: "nitro")</li>
-          <li>Flex Theme (teal): Aqua (ID: "aquatic")</li>
-          <li>Flex Theme (light red): Candy (ID: "candy")</li>
-          <li>Flex Theme (violet): Violet (ID: "violet")</li>
-          <li>Fluid Theme (red/pink): Blossom (ID: "oni")</li>
           <li>Fluid Theme (dark purple): Tome (ID: "tome")</li>
-          <li>Experimental Theme (white): High Contrast (ID: "highContrast")</li>
+          <li>Fluid Theme (dark red): Nitro (ID: "nitro")</li>
         </ul>
         <br />
         <p>Get the current theme (When using the auto theme, this will return the theme that was automatically chosen)
@@ -665,12 +665,14 @@
           shows Light/Dark/Auto themes. The other pages can be configured to show Fluid Flex themes. fluidThemes should
           be an array of arrays. Each array in fluidThemes represents a page. Each page is an array of the themeIDs you
           want to enable. Custom themes should be objects with the name and id properties, with the theme's display name
-          and themeID, and optionally a material icon string in the icon property. The rainbow theme selector can be
+          and themeID, and optionally a material icon string in the icon property. There is no way to disable the
+          default light/dark/auto themes page. All theme selectors must include at least light, dark, and auto.</p>
+        <p>The rainbow theme selector can be
           enabled by adding "rainbow" the array of a page (adding "rainbow" to a page causes that page to show rainbow
-          themes only. You cannot mix the rainbow themes page with other custom themes). There is no way to disable the
-          default light/dark/auto themes page.</p>
+          themes only. You cannot mix the rainbow themes page with other custom themes). Note that the rainbow themes
+          are intended to be used for fun and are not officially supported.</p>
         <p>Add this code before loading fluid.js to specify what themes you want to be shown in the theme selector</p>
-        <code class="prettyprint">fluidThemes = [ [ "midnight", "nitro", "aquatic" ], [ "rainbow" ] ]</code>
+        <code class="prettyprint">fluidThemes = [ [ "midnight", "nitro", "tome" ], [ "rainbow" ] ]</code>
         <br /><br />
         <div class="btns row themeSelector"></div>
         <code class="prettyprint">&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
@@ -734,7 +736,7 @@
           <li><i style="font-family: 'Material Icons Outlined'" class="material-icons">featured_video</i> "Material
             Icons Outlined"
             <ul>
-              <li>This is the icon set used by this site. To use this icon set, remove the Material Icons Extended
+              <li>This is the icon set used on this site. To use this icon set, remove the Material Icons Extended
                 stylesheet code from your site and replace it with the code shown below. Then, set the --icons CSS
                 variable to "Material Icons Outlined".</li>
               <li style="font-family: monospace, monospace;">&lt;link
@@ -782,7 +784,11 @@
   //fluid.chroma.themeLink = true;
 
   //Set a static theme
-  fluid.chroma.static([color (rgb or hex string)])
+  fluid.chroma.static([color (rgb or hex string)]);
+
+  //Or set a more complex theme
+  //See the CHROMA_CUSTOM section at https://assets.razerzone.com/dev_portal/REST/html/md__r_e_s_t_external_03_8keyboard.html for more details
+  fluid.chroma.effect([color (rgb or hex string)], [2D array (6x22) of colors for each key on the keyboard]);
 })
 </code>
         </pre>
@@ -796,10 +802,27 @@
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">texture</i>Fluid UI
           Acrylic
         </h5>
-        <p>Fluid UI now has a transparent Acrylic material. Currently, this only supports side navigation or custom
-          elements with the "acrylicMaterial" class added. To enable acrylic on a card with sidenav, add the "acrylic"
-          class to the card that the sidenav is in. Acrylic is a highly experimental material and only supports
-          Microsoft Edge (EdgeHTML based) and Safari. Chromium based browsers will be supported soon.</p>
+        <p>Fluid UI now has a transparency effects with Fluid UI Acrylic. Acrylic is enabled by default on cards with
+          sidenavs, sidebars, toolbars, and navbars. You can also use Acrylic with any element by adding the
+          "acrylicMaterial" class. Make sure you test custom Acrylic implementations, and make sure you don't overuse
+          Acrylic on your site.</p>
+        <p>Acrylic is designed to work on any background (images, solid colors, and even if there is no background) and
+          to provide enough contrast to allow most colors to be displayed and legible. Custom Fluid themes can set the
+          acrylic tint color by setting the --acrylicBase CSS variable. Fluid Flex themes do this for you automatically.
+          You can provide a solid color and have Fluid UI calculate the opacity for you or provide a color with an
+          opacity of at least 70%. When setting the Acrylic tint color, make sure that it also works over your page's
+          background since Acrylic should be able to be used without a custom background.</p>
+        <p>Acrylic can be completely disabled on your site by adding the "disableAcrylic" class to the body element. If
+          Fluid UI couldn't calculate the acrylic variables and during page load before the variables are calculated,
+          acrylic will fallback to --acrylicBase or --elements.</p>
+        <br />
+        <div class="row">
+          <button onclick="$('body').toggleClass('disableAcrylic'); $(this).toggleClass('active');" class="btn">Disable
+            Acrylic</button>
+          <button onclick="$('body').toggleClass('sampleBgImage'); $(this).toggleClass('active');" class="btn">Show a
+            background image</button>
+        </div>
+        <br />
         <div id="demoWallContainer"
           style="height: 600px; background-image: url('https://i.imgur.com/cn1qcVA.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
           <div id="acrylicDemoWindow"
@@ -835,8 +858,8 @@
         <p><b>Navigation elements in Fluid UI are highly experimental. Each site has different needs for its navigation,
             and Fluid UI's options are limited. Navigation elements listed below are not fully supported.</b></p>
         <p style="color: red; font-size: 18px;"><b>Toolbars and Navbars have been disabled in Fluid UI v4
-            beta 1 and continue to be disabled in Fluid UI v4 beta 2. They are being reworked and will return in a later
-            beta of Fluid UI v4.</b></p>
+            beta 1 and continue to be disabled in Fluid UI v4 beta 3. They are being reworked and will return in the
+            next release of Fluid UI (v4 beta 4).</b></p>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">folder</i>Breadcrumbs
         </h5>
@@ -948,10 +971,93 @@
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
           <br />
+          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web</i>Screens</h5>
+          <p>Fluid UI Screens is a flexible way to manage multiple different screens on the same page. You can define a
+            function that will load each screen, then use Fluid UI to change screens. Fluid UI will save the screen in
+            the URL so that it will show the screen on reload and so the user can bookmark the screen. Fluid UI screens
+            also supports the browser back button.</p>
+          <p><b>Screen names and the screen ID parameter cannot include slashes (/) or periods (.)</b></p>
+          <br />
+          <p>Define a screen:</p>
+          <pre><code class="prettyprint">fluid.screens.folderScreen = function(id, entry) {
+  //screens have an optional ID for whatever the screen is showing (in this example, the ID would be the ID of the folder the user is navigated to)
+  //the screen ID must be a string and able to fit into the URL
+  //the entry parameter is a boolean specifying whether this screen is the first to load on the page
+
+  //code that will show this screen
+};</code></pre>
+          <br />
+          <p>Define the default screen:</p>
+          <pre><code class="prettyprint">fluid.defaultScreen = "homeScreen";</code></pre>
+          <br />
+          <p>Open a screen:</p>
+          <pre><code class="prettyprint">fluid.screen("folderScreen", "folder18232372");</code></pre>
+          <br />
+          <p>When your site is done loading and you want to show the user the screen from the URL or the default screen,
+            run fluid.screen with no parameters:</p>
+          <pre><code class="prettyprint">fluid.screen();</code></pre>
+          <br /><br />
+          <p>Screens Demo</p>
+          <p>Try moving between screens, using your browser's back button, and reloading</p>
+          <div class="row">
+            <button onclick="fluid.screen('screenA')" class="btn">Show screen A (defualt)</button>
+            <button onclick="fluid.screen('screenB')" class="btn">Show screen B</button>
+            <button onclick="fluid.screen('screenC', '1234')" class="btn">Show screen C (with parameter)</button>
+          </div>
+          <br />
+          <div style="display: none;" class="screenDemo screenA">
+            <h5>This is screen A (default)</h5>
+          </div>
+          <div style="display: none;" class="screenDemo screenB">
+            <h5>This is screen B</h5>
+          </div>
+          <div style="display: none;" class="screenDemo screenC">
+            <h5>This is screen C</h5>
+            <p>Screen parameter: <span>N/A</span></p>
+          </div>
+          <br />
+          <pre><code class="prettyprint">//make sure you define screens after loading the Fluid UI script
+
+fluid.screens.screenA = () => {
+  $(".screenDemo").hide();
+  $(".screenDemo.screenA").show();
+};
+
+fluid.screens.screenB = () => {
+  $(".screenDemo").hide();
+  $(".screenDemo.screenB").show();
+};
+
+fluid.screens.screenC = (param) => {
+  $(".screenDemo").hide();
+  $(".screenDemo.screenC p span").text(param);
+  $(".screenDemo.screenC").show();
+};
+
+fluid.defaultScreen = "screenA";
+fluid.screen(); //load initial screen</code></pre>
+          <script>
+            fluid.screens.screenA = () => {
+              $(".screenDemo").hide();
+              $(".screenDemo.screenA").show();
+            }
+            fluid.screens.screenB = () => {
+              $(".screenDemo").hide();
+              $(".screenDemo.screenB").show();
+            }
+            fluid.screens.screenC = (param) => {
+              $(".screenDemo").hide();
+              $(".screenDemo.screenC p span").text(param);
+              $(".screenDemo.screenC").show();
+            }
+            fluid.defaultScreen = "screenA";
+            fluid.screen();
+          </script>
+          <br /><br />
           <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">border_left</i>Side
             navigation</h5>
-          <p>Side navigation doesn't work well with overflow. It is not reccommended you use side navigation, and its
-            use cases are limited.</p>
+          <p>Use side navigation for cards with a lot of content. Cards using side navigation must have a fixed height.
+          </p>
           <br />
           <div style="height: 650px;" class="card withnav">
             <div class="sidenav">
@@ -1041,50 +1147,6 @@
           changes the collapse class, make sure to run fluid.init() to initialize all of them.</p>
         <button onclick="$('.section').addClass('collapse');fluid.init();" class="btn">Try</button>
         <br /><br /><br />
-        <a name="cards-elevated"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">amp_stories</i>Elevated
-          Content
-        </h5>
-        <p>Elevated content is used for displaying a small group of items that would be too small to use a card or
-          section. Elevated Content has very little padding, has a light shadow, and has a subtle background.</p>
-        <br />
-        <div style="padding: 10px 20px; border: 2px solid var(--elements); border-radius: 10px;" class="row">
-          <div class="seven columns">
-            <h4 style="font-weight: bold; font-size: 24px;">Demo Assignment</h4>
-            <p style="color: var(--lightText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et
-              dolore magna aliqua. Proin nibh nisl condimentum id venenatis. Commodo elit at imperdiet dui accumsan sit
-              amet nulla. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Sed cras ornare arcu dui
-              vivamus arcu. Ut etiam sit amet nisl purus in. Sed egestas egestas fringilla phasellus faucibus
-              scelerisque eleifend donec. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Cursus
-              euismod quis viverra nibh cras. Blandit volutpat maecenas volutpat blandit aliquam. Lorem dolor sed
-              viverra ipsum nunc. Fames ac turpis egestas maecenas pharetra convallis.</p>
-            <p style="color: var(--lightText);">
-              Aliquam ultrices sagittis orci a scelerisque purus semper eget. Non odio euismod lacinia at quis risus sed
-              vulputate. Pretium vulputate sapien nec sagittis. Rhoncus est pellentesque elit ullamcorper dignissim cras
-              tincidunt lobortis feugiat. Ac tincidunt vitae semper quis lectus nulla. Tincidunt tortor aliquam nulla
-              facilisi cras. Massa placerat duis ultricies lacus. Posuere lorem ipsum dolor sit. Ut faucibus pulvinar
-              elementum integer enim neque. Pharetra sit amet aliquam id diam. Porta nibh venenatis cras sed.
-            </p>
-          </div>
-          <div class="five columns">
-            <div class="elevated">
-              <p style="color: #4d984d; margin-top: 0px;">Turned In (Due November 25th, 2019)</p>
-              <button class="btn"><i class="material-icons">assignment</i> Resubmit</button>
-            </div>
-            <br />
-            <p>Here, the elevated content provides visual seperation from the rest of the assignment without making the
-              UI feel cluttered or busy</p>
-          </div>
-        </div>
-        <br />
-        <pre>
-<code class="prettyprint">&lt;div class="elevated"&gt;
-    &lt;p style="color: #4d984d; margin-top: 0px;"&gt;Turned In (Due November 25th, 2019)&lt;/p&gt;
-    &lt;button class="btn"&gt;&lt;i class="material-icons"&gt;assignment&lt;/i&gt; Resubmit&lt;/button&gt;
-&lt;/div&gt;</code>
-</pre>
-        <br /><br /><br />
         <a name="cards-cards"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web_asset</i>Cards</h5>
         <p>Note that cards do not work on mobile and can cause lag
@@ -1164,14 +1226,6 @@
         <br />
         <button onclick="fluid.toast('Demo Toast', 'This is a demo', 'picture_in_picture')" class="btn">Try</button>
         <br /><br />
-        <a name="splash-modals"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">crop_3_2</i>Modals</h5>
-        <p>You can also use a focus card as a modal in Fluid UI. Just use fluid.modal() to open the card and it will
-          disable scrolling and act as an alert.</p>
-        <code class="prettyprint">fluid.modal(element)</code>
-        <br />
-        <button onclick="fluid.modal('#vmodal')" class="btn">Try</button>
-        <br /><br />
         <a name="splash-alerts"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alerts
         </h5>
@@ -1202,7 +1256,7 @@
       </div>
       <div class="body">
         <div style="text-align: center;">
-          <img src="/icon.png" style="
+          <img src="../icon.png" style="
                       width:  20%;
                       vertical-align: middle;
                       max-width: 150px;
@@ -1235,8 +1289,6 @@
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">public</i>Browser
           Requirements</h5>
-        <p>Note: Features that are not ready for production use (like Fluid UI Acrylic) may require a more advanced
-          browser than the requirements listed below.</p>
         <p>Fluid UI is designed for small independently created websites. Fluid UI is not designed for compatibility and
           accessibility.</p>
         <p>Fluid UI <b>requires</b> the following:
@@ -1298,8 +1350,9 @@
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">cloud</i>Fluid UI CDN
         </h5>
-        <p>The Fluid UI CDN may be shutdown at any time without notice. The CDN automatically updates with the latest
-          version of Fluid UI. Use the Fluid UI CDN at your own risk.</p>
+        <p>The Fluid UI CDN is for testing sites with the latest version of Fluid UI. The Fluid UI CDN may serve a
+          version of Fluid UI that is not stable and can update without notice. Use the Fluid UI CDN at
+          your own risk.</p>
         <p>Fluid UI uses the following libraries:</p>
         <ul>
           <li>Google Material Icons (Extended) | Used for Icons in Fluid UI</li>
@@ -1326,7 +1379,7 @@
       <p>(c) jottocraft 2017-2020. All rights reserved.&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid">source
           code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
     </div>
-    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.2 (11242019)</p>
+    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.3 (04042020)</p>
     <br /><br />
   </div>
   <div class="container">

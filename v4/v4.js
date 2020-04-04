@@ -1,6 +1,6 @@
 /*!
-Fluid UI JavaScript Modules v3.9.2
-Copyright (c) 2017-2019 jottocraft. All rights reserved.
+Fluid UI JavaScript Modules v3.9.3
+Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
 
@@ -31,7 +31,7 @@ Date.prototype.isDstObserved = function () {
   return this.getTimezoneOffset() < this.stdTimezoneOffset();
 }
 
-fluid = new Object;
+fluid = { screens: {} };
 fluid.contextMenuOpen = false;
 
 fluid.dst = new Date().isDstObserved()
@@ -56,8 +56,8 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
   }
 })
 
-fluid.includedFlexThemes = ["nitro", "water", "highContrast", "candy", "violet"]
-fluid.includedFluidThemes = ["midnight", "tome", "oni"]
+fluid.includedFlexThemes = ["water", "highContrast"]
+fluid.includedFluidThemes = ["candy", "midnight", "tome", "nitro"]
 fluid.theme = function (requestedTheme, temporary) {
   // GET CURRENT THEME -----------------------
   var currentTheme = null;
@@ -84,6 +84,14 @@ fluid.theme = function (requestedTheme, temporary) {
   // -----------------------------------------
 
   // APPLY REQUESTED THEME -------------------
+  if (requestedTheme == "toggle") {
+    if ($("body").hasClass("dark")) {
+      return fluid.theme("light");
+    } else {
+      return fluid.theme("dark");
+    }
+  }
+
   classes = document.body.classList.value.split(" ");
   for (var ii = 0; ii < classes.length; ii++) { if ((classes[ii].startsWith("light") || classes[ii].startsWith("dark")) && ((classes[ii] !== "dark") && (classes[ii] !== "light"))) { $("body").removeClass(classes[ii]) } }
   for (var i = 0; i < fluid.includedFlexThemes.length; i++) $("body").removeClass(fluid.includedFlexThemes[i])
@@ -114,11 +122,16 @@ fluid.theme = function (requestedTheme, temporary) {
   // OTHER THEME THINGS ----------------------
   //Acrylic (tinycolor library required)
   if (typeof tinycolor !== "undefined") {
-    var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylic") || getComputedStyle(document.body).getPropertyValue("--background");
-    document.documentElement.style.setProperty("--acrylic10", tinycolor(acrylicBase).setAlpha(0.1).toRgbString())
-    document.documentElement.style.setProperty("--acrylic50", tinycolor(acrylicBase).setAlpha(0.5).toRgbString())
-    document.documentElement.style.setProperty("--acrylic50-fallback", tinycolor(acrylicBase).setAlpha(0.9).toRgbString())
-    document.documentElement.style.setProperty("--acrylicSecText", tinycolor(getComputedStyle(document.body).getPropertyValue("--text")).setAlpha(0.3).toRgbString())
+    var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylicBase") || getComputedStyle(document.body).getPropertyValue("--background");
+    if ((tinycolor(acrylicBase).getAlpha() == 1) || (tinycolor(acrylicBase).getAlpha() < .7)) {
+      document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).setAlpha(0.8).toRgbString())
+      document.documentElement.style.setProperty("--acrylicFallback", tinycolor(acrylicBase).setAlpha(0.95).toRgbString())
+      document.documentElement.style.setProperty("--acrylicDisabled", tinycolor(acrylicBase).setAlpha(1).toRgbString())
+    } else {
+      document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).toRgbString())
+      document.documentElement.style.setProperty("--acrylicFallback", tinycolor(acrylicBase).setAlpha(0.95).toRgbString())
+      document.documentElement.style.setProperty("--acrylicDisabled", tinycolor(acrylicBase).setAlpha(1).toRgbString())
+    }
   } else {
     console.warn("[FLUID UI] The tinycolor library is not present. Fluid UI Acrylic will not work on this site.");
   }
@@ -229,7 +242,7 @@ fluid.chroma.init = function (profile, cb) {
       }`,
     success: function (res) {
       fluid.chroma.session = res
-      setInterval(function () {
+      fluid.chroma.heartbeatInterval = setInterval(function () {
         $.ajax({
           type: "PUT",
           url: fluid.chroma.session.uri + "/heartbeat",
@@ -255,6 +268,7 @@ fluid.chroma.disable = function (cb) {
       success: function () {
         fluid.chroma.on = false;
         fluid.chroma.session = {};
+        window.clearInterval(fluid.chroma.heartbeatInterval);
         if (cb) cb();
       }
     })
@@ -373,7 +387,7 @@ fluid.contextMenu = function (target, event) {
         if ($("body").hasClass("outline")) {
           if ($("body").hasClass("dark")) { $(element).css("border", "1px solid #16181a") } else { $(element).css("border", "1px solid #dddddd") }
         }
-        else { if ($("body").hasClass("dark")) { element.style = "background-color: var(--flex-layer3, #16181a);"; } else { element.style = "background-color: var(--flex-layer3, #dddddd);"; } }
+        else { if ($("body").hasClass("dark")) { element.style = "background-color: var(--darker, #16181a);"; } else { element.style = "background-color: var(--darker, #dddddd);"; } }
       }
       $(element).siblings(".contextmenu").css("display", "inline-block");
       $(element).siblings(".contextmenu").css("margin-left", "-20px")
@@ -386,7 +400,7 @@ fluid.contextMenu = function (target, event) {
       } else {
         $(element).siblings(".contextmenu").css("margin-top", $(element).height())
       }
-      $("#pagewrapper").addClass("blur", 100)
+      fluid.blur();
     }
   } else {
     if (fluid.expBeh) {
@@ -414,36 +428,30 @@ fluid.onLoad = function () {
   }
 
   //Render fluid theme page DOM
-  if (typeof fluidThemes !== "undefined") {
-    if (typeof fluidThemes[0] !== "object") {
-      fluidThemes = [];
-    }
-    fluid.themePageDOM = [];
-    for (var i = 0; i < fluidThemes.length; i++) {
-      fluid.themePageDOM.push([]);
-      for (var ii = 0; ii < fluidThemes[i].length; ii++) {
-        if (typeof fluidThemes[i][ii] == "object") { if (!fluidThemes[i][ii].icon) { fluidThemes[i][ii].icon = "palette"; } fluid.themePageDOM[i].push(`<button onclick="fluid.theme('` + fluidThemes[i][ii].id + `')" class="btn themeWindow flex ` + fluidThemes[i][ii].id.replace("#", "") + `"><div class="themeName"><i class="material-icons">` + fluidThemes[i][ii].icon + `</i> ` + fluidThemes[i][ii].name + `</div></button>`) }
-        if (fluidThemes[i][ii] == "midnight") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('midnight')" class="btn themeWindow flex midnight"><div class="themeName"><i class="material-icons">brightness_3</i> Midnight Black</div></button>`) }
-        if (fluidThemes[i][ii] == "nitro") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('nitro')" class="btn themeWindow flex nitro"><div class="themeName"><i class="material-icons">whatshot</i> Nitro</div></button>`) }
-        if (fluidThemes[i][ii] == "water") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('water')" class="btn themeWindow flex water"><div class="themeName"><i class="material-icons">waves</i> Water</div></button>`) }
-        if (fluidThemes[i][ii] == "candy") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('candy')" class="btn themeWindow flex candy"><div class="themeName"><i class="material-icons">color_lens</i> Candy</div></button>`) }
-        if (fluidThemes[i][ii] == "violet") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('violet')" class="btn themeWindow flex violet"><div class="themeName"><i class="material-icons">terrain</i> Violet</div></button>`) }
-        if (fluidThemes[i][ii] == "tome") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('tome')" class="btn themeWindow flex tome"><div class="themeName"><i class="material-icons">link</i> Tome</div></button>`) }
-        if (fluidThemes[i][ii] == "oni") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('oni')" class="btn themeWindow flex oni"><div class="themeName"><i class="material-icons">local_florist</i> Blossom</div></button>`) }
-        if (fluidThemes[i][ii] == "highContrast") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('highContrast')" class="btn themeWindow flex highContrast"><div class="themeName"><i class="material-icons">accessibility_new</i> High Contrast</div></button>`) }
-        if (fluidThemes[i][ii] == "rainbow") {
-          fluid.themePageDOM[i] = [`<button style="background-color: #8e0004 !important;" onclick="fluid.theme('darkRed')" class="btn darkRed gColor"></button>
+  if (typeof fluidThemes == "undefined") fluidThemes = [];
+  fluid.themePageDOM = [];
+  for (var i = 0; i < fluidThemes.length; i++) {
+    fluid.themePageDOM.push([]);
+    for (var ii = 0; ii < fluidThemes[i].length; ii++) {
+      if (typeof fluidThemes[i][ii] == "object") { if (!fluidThemes[i][ii].icon) { fluidThemes[i][ii].icon = "palette"; } fluid.themePageDOM[i].push(`<button onclick="fluid.theme('` + fluidThemes[i][ii].id + `')" class="btn themeWindow flex ` + fluidThemes[i][ii].id.replace("#", "") + `"><div class="themeName"><i class="material-icons">` + fluidThemes[i][ii].icon + `</i> ` + fluidThemes[i][ii].name + `</div></button>`) }
+      if (fluidThemes[i][ii] == "midnight") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('midnight')" class="btn themeWindow midnight"><div class="themeName"><i class="material-icons">brightness_3</i> Midnight</div></button>`) }
+      if (fluidThemes[i][ii] == "nitro") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('nitro')" class="btn themeWindow nitro"><div class="themeName"><i class="material-icons">whatshot</i> Nitro</div></button>`) }
+      if (fluidThemes[i][ii] == "water") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('water')" class="btn themeWindow flex water"><div class="themeName"><i class="material-icons">waves</i> Water</div></button>`) }
+      if (fluidThemes[i][ii] == "candy") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('candy')" class="btn themeWindow candy"><div class="themeName"><i class="material-icons">color_lens</i> Candy</div></button>`) }
+      if (fluidThemes[i][ii] == "tome") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('tome')" class="btn themeWindow tome"><div class="themeName"><i class="material-icons">link</i> Tome</div></button>`) }
+      if (fluidThemes[i][ii] == "highContrast") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('highContrast')" class="btn themeWindow flex highContrast"><div class="themeName"><i class="material-icons">accessibility_new</i> High Contrast</div></button>`) }
+      if (fluidThemes[i][ii] == "rainbow") {
+        fluid.themePageDOM[i] = [`<button style="background-color: #8e0004 !important;" onclick="fluid.theme('darkRed')" class="btn darkRed gColor"></button>
      <button style="background-color: #8e4b00 !important;" onclick="fluid.theme('darkOrange')" class="btn darkOrange gColor"></button>
      <button style="background-color: #6a5a00 !important;" onclick="fluid.theme('darkYellow')" class="btn darkYellow gColor"></button>
      <button style="background-color: #257300 !important;" onclick="fluid.theme('darkGreen')" class="btn darkGreen gColor"></button>
      <button style="background-color: #0043bf !important;" onclick="fluid.theme('darkBlue')" class="btn darkBlue gColor"></button>
      <button style="background-color: #8100b9 !important;" onclick="fluid.theme('darkPurple')" class="btn darkPurple gColor"></button>`]
-        }
       }
     }
   }
 
-  //Legacy (>=v3.x.x) compatibility
+  //Legacy (<=v3.x.x) compatibility
   if (getCookie("fluidTheme") !== "") {
     console.warn("[FLUID UI] Detected a legacy Fluid UI Theme cookie. Moving to localStorage...")
     window.localStorage.setItem("fluidTheme", getCookie("fluidTheme"));
@@ -467,28 +475,27 @@ fluid.onLoad = function () {
 }
 
 fluid.init = function () {
-  if (typeof fluidThemes !== "undefined") {
-    fluid.themePageList = [];
-    $(".btns.row.themeSelector").html(`
-   <button style="display: none;" onclick="fluid.themePages(this, -1);" class="btn arrow leftArrow"><i class="material-icons">keyboard_arrow_left</i></button>
+  if (typeof fluidThemes == "undefined") fluidThemes = [];
+  fluid.themePageList = [];
+  $(".btns.row.themeSelector").html(`
+   ` + (fluidThemes.length > 1 ? `<button style="display: none;" onclick="fluid.themePages(this, -1);" class="btn arrow leftArrow"><i class="material-icons">keyboard_arrow_left</i></button>` : ``) + `
    <span class="s0">
    <button onclick="fluid.theme('auto')" class="btn themeWindow auto ` + ((new Date().getHours() > fluid.auto.darkEndAM) && (new Date().getHours() < fluid.auto.darkStartPM) ? "lightBox" : "darkBox") + `"><div class="themeName"><i class="material-icons">brightness_auto</i> Auto</div></button>
    <button onclick="fluid.theme('light')" class="btn themeWindow light lightBox"><div class="themeName"><i class="material-icons">brightness_high</i> Light</div></button>
    <button onclick="fluid.theme('dark')" class="btn themeWindow dark darkBox"><div class="themeName"><i class="material-icons">brightness_low</i> Dark</div></button>
    </span>
    ` + fluid.themePageDOM.map(function (key, i) {
-      return `<span style="display:none;" class="s` + (i + 1) + `">
+    return `<span style="display:none;" class="s` + (i + 1) + `">
      ` + key.join("") + `
      </span>`
-    }).join("") + `
-   <button onclick="fluid.themePages(this, +1);" class="btn arrow rightArrow"><i class="material-icons">keyboard_arrow_right</i></button>
-   `);
-    $(".themeWindow").prepend(`<div class="demoSecText"></div><div class="demoSecText short"></div><div class="demoBtn"><div class="demoBtnText"></div></div><div class="demoSwitch"><div class="demoHead"></div></div>`)
-    $(".themeSelector").attr("themePage", 0)
-    for (var i = 0; i < ($('.themeSelector').children().length - 2); i++) {
-      if ($('.themeSelector .s' + i).children().length) fluid.themePageList.push(i);
-    }
+  }).join("") + `
+  ` + (fluidThemes.length > 1 ? `<button onclick="fluid.themePages(this, +1);" class="btn arrow rightArrow"><i class="material-icons">keyboard_arrow_right</i></button>` : ``));
+  $(".themeWindow").prepend(`<div class="demoSecText"></div><div class="demoSecText short"></div><div class="demoBtn"><div class="demoBtnText"></div></div><div class="demoSwitch"><div class="demoHead"></div></div>`)
+  $(".themeSelector").attr("themePage", 0)
+  for (var i = 0; i < ($('.themeSelector').children().length - 2); i++) {
+    if ($('.themeSelector .s' + i).children().length) fluid.themePageList.push(i);
   }
+
 
   if (window.localStorage.getItem("fluidTheme") !== null) {
     fluid.theme(window.localStorage.getItem("fluidTheme"), true)
@@ -503,7 +510,7 @@ fluid.init = function () {
   }
 
   if (!$("body").hasClass("notwemoji")) {
-    $.getScript("https://twemoji.maxcdn.com/2/twemoji.min.js?12.0.4", function () {
+    $.getScript("https://twemoji.maxcdn.com/v/latest/twemoji.min.js", function () {
       if (typeof twemoji !== "undefined") twemoji.parse(document.body);
     })
   }
@@ -581,7 +588,44 @@ fluid.init = function () {
   }
 }
 
+fluid.screen = function (screenID, param, isBack) {
+  //mark screens as enabled
+  fluid.screensEnabled = true;
 
+  //get url screen
+  var urlScreen = null, urlParam = null;
+  if (document.location.hash.startsWith("#/")) {
+    if (document.location.hash.split("/")[1]) {
+      urlScreen = document.location.hash.split("/")[1].split(".")[0];
+      urlParam = document.location.hash.split("/")[1].split(".")[1];
+    }
+  }
+
+  //update screen
+  if (fluid.screens[screenID]) {
+    if (screenID == fluid.defaultScreen ? param : true) {
+      document.location.hash = "#/" + screenID + (param ? "." + param : "");
+    } else {
+      history.replaceState({}, '', "#");
+    }
+    fluid.screens[screenID](param);
+  } else {
+    //load default screen because screen was not found or screenID was undefined
+    if (fluid.screens[urlScreen]) {
+      fluid.screens[urlScreen](urlParam, !isBack && (screenID == undefined));
+    } else if (fluid.defaultScreen && (isBack ? (!document.location.hash || (document.location.hash == "#")) : true)) {
+      fluid.screens[fluid.defaultScreen](param, screenID == undefined);
+    } else if (!isBack) {
+      console.error("[FLUID UI] fluid.screen was called, but no screen could be found. Make sure you have defined the screen you are trying to navigate to or the default screen.");
+    }
+  }
+}
+
+window.onhashchange = function () {
+  if (fluid.screensEnabled) {
+    fluid.screen(undefined, undefined, true);
+  }
+}
 
 $(document).ready(function () {
   if (typeof fluidAutoLoad !== "undefined") {
@@ -599,7 +643,7 @@ $(window).resize(function () {
 
 fluid.exitContextMenu = function (force) {
   if (fluid.contextMenuOpen) {
-    $("#pagewrapper").removeClass("blur")
+    fluid.unblur();
     $("#activecontextmenu").children(".contextmenu").css("display", "none");
     if (force) { wait = 0; } else { wait = 300; }
     setTimeout(function () {
@@ -621,35 +665,45 @@ fluid.bounceBack = function (ele) {
   if (!fluid.contextMenuOpen) {
     fluid.contextMenuOpen = true;
 
-    $("#pagewrapper").addClass("blur")
+    fluid.blur();
     document.body.style.overflow = "hidden";
     $("body").css("padding-right", "5px");
     setTimeout(function () {
-      $("#pagewrapper").removeClass("blur");
+      fluid.unblur();
       document.body.style.overflow = "";
       $("body").css("padding-right", "");
     }, 200)
   }
 }
 
+fluid.blur = function () {
+  $("#pagewrapper, .sidebar").addClass("blur")
+}
+
+fluid.unblur = function () {
+  $("#pagewrapper, .sidebar").removeClass("blur")
+}
+
 /* Cards */
 menuopen = false;
-fluid.cards = function (element, isModal) {
+fluid.cards = function (element) {
   var focus = $(element).hasClass('focus');
   if (focus) {
     fluid.generateWrapper();
     $(element).css("top", "50px");
     if (menuopen) {
       fluid.cards.close(".focus");
-      $("#pagewrapper").addClass('blur');
-      if (isModal) document.body.style.overflow = "hidden"
+      fluid.blur();
+      document.body.style.overflow = "hidden"
       $("body").css("padding-right", "5px");
+      $(element).addClass('container');
       $(element).removeClass('close');
       setTimeout(function () { $("#pagewrapper").attr("onclick", "fluid.card.close('" + element + "');"); }, 100)
     } else {
-      $("#pagewrapper").addClass('blur');
-      if (isModal) document.body.style.overflow = "hidden"
+      fluid.blur();
+      document.body.style.overflow = "hidden"
       $("body").css("padding-right", "5px");
+      $(element).addClass('container');
       $(element).removeClass('close');
       setTimeout(function () { $("#pagewrapper").attr("onclick", "fluid.cards.close('.focus');"); }, 100)
     }
@@ -693,17 +747,17 @@ fluid.alert = function (title, body, icon, actions, color) {
 
    <i style="color: ` + (color ? color : "var(--text)") + `" class="material-icons">` + icon + `</i>
    <h5>` + title + `</h5>
-   <div>
+   <div class="body">
     <div>` + body + `</div>
    </div>
-   ` + (actions ? `<div class="elevated footer">` + actions.map((action) => {
-     return `<button onclick="fluid.exitAlert();` + (action.action || "") + `" class="btn">
+   ` + (actions ? `<div class="footer">` + actions.map((action) => {
+    return `<button onclick="fluid.exitAlert();` + (action.action || "") + `" class="btn">
      ` + (action.icon ? `<i class="material-icons">` + action.icon + `</i> ` : "") + action.name + `
      </button>`
-   }).join("") + `</div>` : "") + `
+  }).join("") + `</div>` : "") + `
   </div>`)
   fluid.wrapperBlur = $("#pagewrapper").hasClass("blur");
-  $('#pagewrapper').addClass("blur");
+  fluid.blur();
   $('.card.focus:not(.close)').addClass("blur");
   if (fluid.wrapperBlur) {
     $("#activeAlert").show();
@@ -719,13 +773,13 @@ fluid.exitAlert = function () {
     $("#activeAlert").hide();
   } else {
     $("#activeAlert").hide("fade");
-    $('#pagewrapper').removeClass("blur");
+    fluid.unblur();
   }
   $('.card.focus:not(.close)').removeClass("blur");
 }
 fluid.cards.close = function (element) {
   $(element).addClass('close');
-  $('#pagewrapper').removeClass("blur");
+  fluid.unblur();
   document.body.style.overflow = ""
   $("body").css("padding-right", "");
   $("#pagewrapper").attr("onclick", "");
@@ -734,12 +788,13 @@ fluid.cards.close = function (element) {
 fluid.generateWrapper = function () {
   if (!$("#pagewrapper").length) {
     $("body").wrapInner("<div id='pagewrapper'></div>");
-    $("#pagewrapper").after("<div id='focuscardwrapper' class='container'></div>");
+    $("#pagewrapper").after(`<div style="position: fixed; left: 0px; width: 100%; z-index: 999;"><div id='focuscardwrapper' class='container'></div></div>`);
     $("#pagewrapper").after("<div id='activecontextmenu' style='position:absolute'></div>");
     $("#pagewrapper").after("<div id='activeAlert' style='z-index: 99;'></div>");
     $("#pagewrapper").after("<div id='splashscreen' style='display:none;margin-top: 100px;' class='container'><h1 style='font-size:5rem;' id='splashscreenname'></h1><div id='splashscreencnt'></div></div>");
     $(".card.focus").appendTo("#focuscardwrapper");
     $(".splash").appendTo("#splashscreencnt");
+    $(".sidebar").appendTo("body");
   }
 }
 fluid.splash = function (element) {

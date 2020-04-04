@@ -36,16 +36,12 @@
 <body class="hasSidebar dark nitro flex">
     <style id="themePreviewCSS"></style>
     <script>
+        fluid.theme = () => {}; //disable normal fluid theme
         themeType = "flex";
         themeBase = "dark";
         themeVars = ["--background", "--elements", "--elementText", "--darker", "--darkest", "--acrylic", "--inputColor", "--listColor", "--listHover", "--switchHead", "--sideColor", "--sideActive", "--sideItem", "--navActiveText", "--navActive",
             "--navText", "--nav", "--cards", "--lightText", "--secText", "--theme", "--themeText"]
         flexVars = ["--flex-light", "--flex-bg", "--flex-text", "--flex-sectext", "--flex-layer1", "--flex-layer2", "--flex-layer3", "--theme-color", "--theme-text-color"]
-        document.addEventListener("fluidTheme", function (data) {
-            if (confirm("The theme has changed to '" + data.detail + "'. Update variables in the sidebar?")) {
-                loadTheme();
-            }
-        });
         function loadTheme() {
             if (themeType == "full") {
                 for (var i = 0; i < themeVars.length; i++) {
@@ -72,31 +68,27 @@
         }
 
         function themePreview() {
+            $("body").addClass("flex");
+            $("body").addClass("dark");
+            $("body").removeClass("light");
             if (themeType == "flex") {
-                if (fluid.theme() == themeBase) {
-                    fluid.theme("nitro", true);
-                }
                 var cssArr = [];
                 for (var i = 0; i < flexVars.length; i++) {
                     cssArr.push(flexVars[i] + ":" + $("#" + flexVars[i]).val() + " !important");
                 }
                 $("#themePreviewCSS").html("body {" + cssArr.join(";") + "}")
             }
-            if (themeType == "full") {
-                fluid.theme(themeBase, true);
-                var cssArr = [];
-                for (var i = 0; i < themeVars.length; i++) {
-                    cssArr.push(themeVars[i] + ":" + $("#" + themeVars[i]).val() + " !important");
-                }
-                $("#themePreviewCSS").html("body {" + cssArr.join(";") + "}")
-            }
             if (typeof tinycolor !== "undefined") {
-                var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylic");
-                if (acrylicBase == "") acrylicBase = getComputedStyle(document.body).getPropertyValue("--background");
-                document.documentElement.style.setProperty("--acrylic10", tinycolor(acrylicBase).setAlpha(0.1).toRgbString())
-                document.documentElement.style.setProperty("--acrylic50", tinycolor(acrylicBase).setAlpha(0.5).toRgbString())
-                document.documentElement.style.setProperty("--acrylic50-fallback", tinycolor(acrylicBase).setAlpha(0.9).toRgbString())
-                document.documentElement.style.setProperty("--acrylicSecText", tinycolor(getComputedStyle(document.body).getPropertyValue("--text")).setAlpha(0.3).toRgbString())
+                var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylicBase") || getComputedStyle(document.body).getPropertyValue("--background");
+                if ((tinycolor(acrylicBase).getAlpha() == 1) || (tinycolor(acrylicBase).getAlpha() < .7)) {
+                    document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).setAlpha(0.8).toRgbString())
+                    document.documentElement.style.setProperty("--acrylicFallback", tinycolor(acrylicBase).setAlpha(0.95).toRgbString())
+                    document.documentElement.style.setProperty("--acrylicDisabled", tinycolor(acrylicBase).setAlpha(1).toRgbString())
+                } else {
+                    document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).toRgbString())
+                    document.documentElement.style.setProperty("--acrylicFallback", tinycolor(acrylicBase).setAlpha(0.95).toRgbString())
+                    document.documentElement.style.setProperty("--acrylicDisabled", tinycolor(acrylicBase).setAlpha(1).toRgbString())
+                }
             }
         }
 
@@ -155,8 +147,10 @@
             $("#--theme-text-color").val(tinycolor(baseColor).brighten(10).toHexString());
             themePreview();
         }
+
+        $(document).ready(loadTheme);
     </script>
-    <div class="card focus close container" style="margin-left: -275px;" id="themeCard">
+    <div class="card focus close container" id="themeCard">
         <h4>Your Theme's CSS</h4><br />
         <p>Step 1: Copy and paste this CSS on your site</p>
         <pre><code id="themeCSS">
@@ -169,13 +163,8 @@
     </div>
     <div style="padding: 10px; text-align: center; overflow: auto;" class="sidebar">
         <h5 style="font-weight: bold;">Color Studio</h5>
-        <div style="background-color: var(--darker); display: none;" class="btns row small">
-            <div onclick="themeType = 'flex'; $('#fullTheme').hide(); $('#flexTheme').show(); themePreview();"
-                class="btn active">Flex Theme</div>
-            <div onclick="themeType = 'full'; $('#fullTheme').show(); $('#flexTheme').hide(); themePreview();"
-                class="btn">Full Theme</div>
-        </div>
-        <input id="themeName" style="background-color: var(--flex-layer1); width: 100%; text-transform:capitalize;"
+        <br />
+        <input id="themeName" style="background-color: var(--flex-layer2); width: 100%; text-transform:capitalize; height: 16px; padding: 16px 10px;"
             placeholder="Theme name" />
 
         <div id="fullTheme" style="display: none;">
@@ -283,7 +272,7 @@
             Automatically Generate Theme
             <input type="color" id="baseColor" value="#4B3E84" style="width:85%; margin-top: 5px;">
             <br /><br />
-            <button class="btn small" style="background-color:var(--flex-layer1);" onclick="colorGenerate();">Generate
+            <button class="btn small" style="background-color:var(--flex-layer2);" onclick="colorGenerate();">Generate
                 Theme</button>
             <br /><br /><br /><br />
             Background
@@ -322,7 +311,7 @@
             <input type="color" id="--theme-text-color" onchange="themePreview()" value="#ff0000"
                 style="width:85%; margin-top: 5px;">
             <br /><br /><br /><br />
-            <button class="btn" onclick="themeCSS()">Generate CSS</button>
+            <button style="background-color: var(--flex-layer2);" class="btn" onclick="themeCSS()">Generate CSS</button>
         </div>
 
     </div>
@@ -385,7 +374,7 @@
 
                 </p>
                 <p style="color: var(--secText);">Secondary Text (<a href="#">link</a>)</p>
-                <p style="color: var(--secText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                <p style="color: var(--lightText);">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                     eiusmod tempor incididunt ut
                     labore et dolore magna aliqua. Habitant morbi tristique senectus et netus et malesuada. Eu
                     scelerisque felis imperdiet proin fermentum leo. Id consectetur purus ut faucibus. Integer
