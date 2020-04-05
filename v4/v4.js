@@ -378,9 +378,9 @@ fluid.contextMenu = function (target, event) {
       if ($(element).hasClass("material-icons")) {
         $(element).parent().parent().css("width", "44px")
         $(element).parent().parent().css("height", "44px")
-        $("#pagewrapper").attr("onclick", "fluid.exitContextMenu(true);");
+        $("#pagewrapper, .sidebar").attr("onclick", "fluid.exitContextMenu(true);");
       } else {
-        $("#pagewrapper").attr("onclick", "fluid.exitContextMenu(false);");
+        $("#pagewrapper, .sidebar").attr("onclick", "fluid.exitContextMenu(false);");
       }
       $(element).parent().addClass("contextMenuSource")
       if ($(element).hasClass("active")) { $(element).css("background-color", "#207bdf") } else {
@@ -652,7 +652,7 @@ fluid.exitContextMenu = function (force) {
       $(".contextMenuSource").children(".btn, i").css("border", "");
       $(".contextMenuSource").children(".btn, i").removeClass("outOfContext")
       $(".contextMenuSource").css("height", "");
-      $("#pagewrapper").attr("onclick", "");
+      $("#pagewrapper, .sidebar").attr("onclick", "");
       $(".contextMenuSource").removeClass("contextMenuSource")
       fluid.contextMenuOpen = false;
       document.body.style.overflow = "";
@@ -698,17 +698,17 @@ fluid.cards = function (element) {
       $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
-      setTimeout(function () { $("#pagewrapper").attr("onclick", "fluid.card.close('" + element + "');"); }, 100)
+      setTimeout(function () { $("#pagewrapper, .sidebar").attr("onclick", "fluid.card.close('" + element + "');"); }, 100)
     } else {
       fluid.blur();
       document.body.style.overflow = "hidden"
       $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
-      setTimeout(function () { $("#pagewrapper").attr("onclick", "fluid.cards.close('.focus');"); }, 100)
+      setTimeout(function () { $("#pagewrapper, .sidebar").attr("onclick", "fluid.cards.close('.focus');"); }, 100)
     }
   } else {
-    $("#pagewrapper").attr("onclick", "");
+    $("#pagewrapper, .sidebar").attr("onclick", "");
     if (menuopen) {
       fluid.cards.close();
       $(element).removeClass('close');
@@ -782,7 +782,7 @@ fluid.cards.close = function (element) {
   fluid.unblur();
   document.body.style.overflow = ""
   $("body").css("padding-right", "");
-  $("#pagewrapper").attr("onclick", "");
+  $("#pagewrapper, .sidebar").attr("onclick", "");
   menuopen = false;
 }
 fluid.generateWrapper = function () {
