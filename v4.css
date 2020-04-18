@@ -7,7 +7,7 @@ Skeleton CSS components (c) 2014 Dave Gamache
  */
 
 /* Table of contents
- –––––––––––––––––––––––––––––––––––––––––––––––––– 
+ -------------------------------------------------- 
  - Variables & Included Themes
  - Core Styles, Fonts, & Icons
  - Acrylic
@@ -29,7 +29,7 @@ Skeleton CSS components (c) 2014 Dave Gamache
  */
 
 /* Variables
- ––––––––––––––––––––––––––––––––––––––––––––––––––  */
+ --------------------------------------------------  */
 
 /* Core Styles */
 
@@ -389,7 +389,7 @@ body.darkPurple, body.showThemeWindows .themeWindow.darkPurple {
 }
 
 /* Core Styles & Fonts
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 body {
   margin: 0;
@@ -605,7 +605,7 @@ a {
 
 /* Acrylic
 Elements that use the acrylic texture will have their background and text colors defined here
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 body.disableAcrylic .acrylicMaterial, body.disableAcrylic .card .sidenav, body.disableAcrylic .sidebar {
   background-color: var(--acrylicDisabled, var(--elements));
   border: solid 1px var(--acrylicDisabled, var(--elements));
@@ -658,7 +658,7 @@ body.sampleBgImage {
 }
 
 /* Buttons
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .btn, button, select {
   font-family: var(--textFont);
@@ -893,7 +893,7 @@ body.showThemeWindows .themeSelector .arrow i {
 }
 
 /* Lists & Context Menus
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .list .item i {
   display: inline-block;
@@ -965,7 +965,7 @@ body.showThemeWindows .themeSelector .arrow i {
 }
 
 /* Code
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 code {
   display: block;
@@ -1125,7 +1125,7 @@ body:not(.dark) code .dec {
 /* decimal         - lightgreen */
 
 /* Input
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), textarea {
   width: 400px;
@@ -1185,7 +1185,7 @@ textarea {
 }
 
 /* Switches
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .switch {
   border-radius: var(--elementRadius);
@@ -1262,7 +1262,7 @@ textarea {
 }
 
 /* Navigation
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .directory span {
   vertical-align: middle;
@@ -1462,7 +1462,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Toasts & Alerts
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .toast {
   position: fixed;
@@ -1543,7 +1543,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Cards
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .card:not(.focus) {
   position: relative;
@@ -1614,7 +1614,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Sidenav
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .sidenav {
   width: 240px;
@@ -1660,7 +1660,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Sections / Headers
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .section {
   border-radius: var(--cardRadius);
@@ -1695,7 +1695,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Progress
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .progress {
   width: 100%;
@@ -1761,14 +1761,14 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Splash Screens (Basically all of the code managed in JS)
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 .splash {
   display: none;
 }
 
 /* Helpers
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 /* Shorthand floats & alignments */
 
@@ -1806,7 +1806,7 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 }
 
 /* Miscellaneous
-––––––––––––––––––––––––––––––––––––––––––––––––––  */
+--------------------------------------------------  */
 
 /* Badges (previously .beta.notice) */
 
