@@ -1,4 +1,11 @@
-# Fluid UI
-A simple UI framework with a dark mode
+<p align="center">
+  <img width="320" src="https://i.imgur.com/lYqJuvo.png" />
+</p>
 
-https://fluid.jottocraft.com
+<br />
+
+<p align="center">
+Documentation: <a href="https://fluid.jottocraft.com">fluid.jottocraft.com</a>
+</p>
+
+<br /><br />
