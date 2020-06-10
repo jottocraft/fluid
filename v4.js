@@ -1,5 +1,5 @@
 /*!
-Fluid UI JavaScript Modules v3.9.3
+Fluid UI JavaScript Modules v3.9.4
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
@@ -31,7 +31,7 @@ Date.prototype.isDstObserved = function () {
   return this.getTimezoneOffset() < this.stdTimezoneOffset();
 }
 
-fluid = { screens: {} };
+fluid = { screens: {}, externalScreens: {} };
 fluid.contextMenuOpen = false;
 
 fluid.dst = new Date().isDstObserved()
@@ -57,7 +57,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
 })
 
 fluid.includedFlexThemes = ["water", "highContrast"]
-fluid.includedFluidThemes = ["candy", "midnight", "tome", "nitro"]
+fluid.includedFluidThemes = ["midnight", "tome", "nitro"]
 fluid.theme = function (requestedTheme, temporary) {
   // GET CURRENT THEME -----------------------
   var currentTheme = null;
@@ -124,7 +124,7 @@ fluid.theme = function (requestedTheme, temporary) {
   if (typeof tinycolor !== "undefined") {
     var acrylicBase = getComputedStyle(document.body).getPropertyValue("--acrylicBase") || getComputedStyle(document.body).getPropertyValue("--background");
     if ((tinycolor(acrylicBase).getAlpha() == 1) || (tinycolor(acrylicBase).getAlpha() < .7)) {
-      document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).setAlpha(0.8).toRgbString())
+      document.documentElement.style.setProperty("--acrylic", tinycolor(acrylicBase).setAlpha(0.9).toRgbString())
       document.documentElement.style.setProperty("--acrylicFallback", tinycolor(acrylicBase).setAlpha(0.95).toRgbString())
       document.documentElement.style.setProperty("--acrylicDisabled", tinycolor(acrylicBase).setAlpha(1).toRgbString())
     } else {
@@ -166,21 +166,21 @@ fluid.set = function (key, val, trigger) {
         }
       }
       if (String(val) == "true") {
-        $(".switch." + key + ", .btn." + key).addClass("active");
+        $(".switch." + key + ", .btn." + key + ", .checkbox." + key).addClass("active");
       } else {
-        $(".switch." + key + ", .btn." + key).removeClass("active");
+        $(".switch." + key + ", .btn." + key + ", .checkbox." + key).removeClass("active");
       }
     } else {
       //value pref
-      $(".btns." + key + " .btn").removeClass("active")
-      $(".btns." + key + " .btn." + val).addClass("active")
+      $(".btns." + key + " .btn, .radio." + key + " .checkbox").removeClass("active")
+      $(".btns." + key + " .btn." + val + ", .radio." + key + " .checkbox." + val).addClass("active")
     }
     if (trigger == undefined) window.localStorage.setItem(key, val);
     if (trigger !== "load") {
       document.dispatchEvent(new CustomEvent(key, { detail: val }));
     }
   } else {
-    console.error("Error: Calling fluid.set with invalid prefrence name. Make sure the name of your prefrence starts with 'pref-'. See https://fluid.js.org/#input-prefs.")
+    console.error("Error: Calling fluid.set with invalid prefrence name. Make sure the name of your prefrence starts with 'pref-'. See https://fluid.jottocraft.com/#input-prefs.")
   }
 }
 
@@ -378,9 +378,9 @@ fluid.contextMenu = function (target, event) {
       if ($(element).hasClass("material-icons")) {
         $(element).parent().parent().css("width", "44px")
         $(element).parent().parent().css("height", "44px")
-        $("#pagewrapper, .sidebar").attr("onclick", "fluid.exitContextMenu(true);");
+        $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.exitContextMenu(true);");
       } else {
-        $("#pagewrapper, .sidebar").attr("onclick", "fluid.exitContextMenu(false);");
+        $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.exitContextMenu(false);");
       }
       $(element).parent().addClass("contextMenuSource")
       if ($(element).hasClass("active")) { $(element).css("background-color", "#207bdf") } else {
@@ -437,7 +437,6 @@ fluid.onLoad = function () {
       if (fluidThemes[i][ii] == "midnight") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('midnight')" class="btn themeWindow midnight"><div class="themeName"><i class="material-icons">brightness_3</i> Midnight</div></button>`) }
       if (fluidThemes[i][ii] == "nitro") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('nitro')" class="btn themeWindow nitro"><div class="themeName"><i class="material-icons">whatshot</i> Nitro</div></button>`) }
       if (fluidThemes[i][ii] == "water") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('water')" class="btn themeWindow flex water"><div class="themeName"><i class="material-icons">waves</i> Water</div></button>`) }
-      if (fluidThemes[i][ii] == "candy") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('candy')" class="btn themeWindow candy"><div class="themeName"><i class="material-icons">color_lens</i> Candy</div></button>`) }
       if (fluidThemes[i][ii] == "tome") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('tome')" class="btn themeWindow tome"><div class="themeName"><i class="material-icons">link</i> Tome</div></button>`) }
       if (fluidThemes[i][ii] == "highContrast") { fluid.themePageDOM[i].push(`<button onclick="fluid.theme('highContrast')" class="btn themeWindow flex highContrast"><div class="themeName"><i class="material-icons">accessibility_new</i> High Contrast</div></button>`) }
       if (fluidThemes[i][ii] == "rainbow") {
@@ -478,7 +477,7 @@ fluid.init = function () {
   if (typeof fluidThemes == "undefined") fluidThemes = [];
   fluid.themePageList = [];
   $(".btns.row.themeSelector").html(`
-   ` + (fluidThemes.length > 1 ? `<button style="display: none;" onclick="fluid.themePages(this, -1);" class="btn arrow leftArrow"><i class="material-icons">keyboard_arrow_left</i></button>` : ``) + `
+   ` + (fluidThemes.length ? `<button style="display: none;" onclick="fluid.themePages(this, -1);" class="btn arrow leftArrow"><i class="material-icons">keyboard_arrow_left</i></button>` : ``) + `
    <span class="s0">
    <button onclick="fluid.theme('auto')" class="btn themeWindow auto ` + ((new Date().getHours() > fluid.auto.darkEndAM) && (new Date().getHours() < fluid.auto.darkStartPM) ? "lightBox" : "darkBox") + `"><div class="themeName"><i class="material-icons">brightness_auto</i> Auto</div></button>
    <button onclick="fluid.theme('light')" class="btn themeWindow light lightBox"><div class="themeName"><i class="material-icons">brightness_high</i> Light</div></button>
@@ -489,7 +488,7 @@ fluid.init = function () {
      ` + key.join("") + `
      </span>`
   }).join("") + `
-  ` + (fluidThemes.length > 1 ? `<button onclick="fluid.themePages(this, +1);" class="btn arrow rightArrow"><i class="material-icons">keyboard_arrow_right</i></button>` : ``));
+  ` + (fluidThemes.length ? `<button onclick="fluid.themePages(this, +1);" class="btn arrow rightArrow"><i class="material-icons">keyboard_arrow_right</i></button>` : ``));
   $(".themeWindow").prepend(`<div class="demoSecText"></div><div class="demoSecText short"></div><div class="demoBtn"><div class="demoBtnText"></div></div><div class="demoSwitch"><div class="demoHead"></div></div>`)
   $(".themeSelector").attr("themePage", 0)
   for (var i = 0; i < ($('.themeSelector').children().length - 2); i++) {
@@ -515,12 +514,19 @@ fluid.init = function () {
     })
   }
 
-  $(".btns:not(.themeSelector) .btn:not(.manual):not([init='true']), .list.select .item:not(.manual):not([init='true']), .sidenav .item:not(.manual):not([init='true']), .sidebar .item:not(.manual):not([init='true'])").click(function (event) {
-    if ($(event.target).parent().hasClass("multiple")) {
-      $(this).toggleClass("active")
-    } else {
-      $(this).siblings().removeClass("active")
-      $(this).addClass("active")
+  $(".btns:not(.themeSelector) .btn:not(.manual):not([init='true']), .list.select .item:not(.manual):not([init='true']), .sidenav .item:not(.manual):not([init='true']), .sidebar .item:not(.manual):not([init='true']), .radio .checkbox:not([init='true'])").click(function (event) {
+    if (!($(this).parent().attr("class") || "").includes("pref-") && !($(this).parents(".radio").attr("class") || "").includes("pref-")) {
+      //not a pref
+      if ($(this).parent().hasClass("multiple")) {
+        $(this).toggleClass("active")
+      } else if ($(this).parents(".radio")[0]) {
+        //radio button
+        $(this).parent().siblings().children(".checkbox").removeClass("active")
+        $(this).addClass("active")
+      } else {
+        $(this).siblings().removeClass("active")
+        $(this).addClass("active")
+      }
     }
     $(this).attr("init", "true")
   });
@@ -536,16 +542,17 @@ fluid.init = function () {
   })
 
   fluid.shouldSwitch = true;
-  $(".switch:not([init='true'])").click(function (event) {
-    if ($(event.target).hasClass("head")) {
-      var ele = $(event.target).parent();
-    } else { var ele = event.target }
-    if (fluid.shouldSwitch && !$(ele).attr("class").includes("pref-")) {
-      $(ele).toggleClass("active");
-      fluid.shouldSwitch = false;
-      setTimeout(() => fluid.shouldSwitch = true, 400)
+  $(".switch:not([init='true']), .checkbox:not([init='true'])").click(function (event) {
+    if (!$(this).parents(".radio")[0]) {
+      //not a radio button
+      if (fluid.shouldSwitch && !$(this).attr("class").includes("pref-")) {
+        //not a pref
+        $(this).toggleClass("active");
+        fluid.shouldSwitch = false;
+        setTimeout(() => fluid.shouldSwitch = true, 400)
+      }
+      $(this).attr("init", "true")
     }
-    $(this).attr("init", "true")
   });
 
   $("#activecontextmenu:not([init='true'])").contextmenu(function (event) {
@@ -588,8 +595,31 @@ fluid.init = function () {
   }
 }
 
-fluid.screen = function (screenID, param, isBack) {
-  //mark screens as enabled
+fluid.screen = function (requestedID, param, isBack) {
+
+  //Function to load screen with ID
+  function loadScreen(screenID, param, entry) {
+    if (typeof fluid.screens[screenID] == "string") {
+      //external screen
+      if (fluid.externalScreens[screenID]) {
+        //external screen already loaded
+        fluid.externalScreens[screenID](param, entry);
+      } else {
+        //external screen not yet loaded
+        $.getScript(fluid.screens[screenID], () => {
+          if (fluid.externalScreens[screenID]) {
+            fluid.externalScreens[screenID](param, entry);
+          } else {
+            console.error("[FLUID UI] Error: The scriptURL for screen '" + screenID + "' does not define fluid.externalScreens['" + screenID + "']");
+          }
+        });
+      }
+    } else {
+      fluid.screens[screenID](param, entry);
+    }
+  }
+
+  //mark screens as enabled for back button listener
   fluid.screensEnabled = true;
 
   //get url screen
@@ -602,19 +632,20 @@ fluid.screen = function (screenID, param, isBack) {
   }
 
   //update screen
-  if (fluid.screens[screenID]) {
-    if (screenID == fluid.defaultScreen ? param : true) {
-      document.location.hash = "#/" + screenID + (param ? "." + param : "");
+  if (fluid.screens[requestedID]) {
+    if (requestedID == fluid.defaultScreen ? param : true) {
+      document.location.hash = "#/" + requestedID + (param ? "." + param : "");
     } else {
       history.replaceState({}, '', "#");
     }
-    fluid.screens[screenID](param);
+
+    loadScreen(requestedID, param);
   } else {
-    //load default screen because screen was not found or screenID was undefined
+    //load default screen because screen was not found or requestedID was undefined
     if (fluid.screens[urlScreen]) {
-      fluid.screens[urlScreen](urlParam, !isBack && (screenID == undefined));
+      loadScreen(urlScreen, urlParam, !isBack && (requestedID == undefined));
     } else if (fluid.defaultScreen && (isBack ? (!document.location.hash || (document.location.hash == "#")) : true)) {
-      fluid.screens[fluid.defaultScreen](param, screenID == undefined);
+      loadScreen(fluid.defaultScreen, param, requestedID == undefined);
     } else if (!isBack) {
       console.error("[FLUID UI] fluid.screen was called, but no screen could be found. Make sure you have defined the screen you are trying to navigate to or the default screen.");
     }
@@ -652,7 +683,7 @@ fluid.exitContextMenu = function (force) {
       $(".contextMenuSource").children(".btn, i").css("border", "");
       $(".contextMenuSource").children(".btn, i").removeClass("outOfContext")
       $(".contextMenuSource").css("height", "");
-      $("#pagewrapper, .sidebar").attr("onclick", "");
+      $("#pagewrapper, .sidebar, .navbar").attr("onclick", "");
       $(".contextMenuSource").removeClass("contextMenuSource")
       fluid.contextMenuOpen = false;
       document.body.style.overflow = "";
@@ -677,16 +708,16 @@ fluid.bounceBack = function (ele) {
 }
 
 fluid.blur = function () {
-  $("#pagewrapper, .sidebar").addClass("blur")
+  $("#pagewrapper, .sidebar, .navbar").addClass("blur")
 }
 
 fluid.unblur = function () {
-  $("#pagewrapper, .sidebar").removeClass("blur")
+  $("#pagewrapper, .sidebar, .navbar").removeClass("blur")
 }
 
 /* Cards */
 menuopen = false;
-fluid.cards = function (element) {
+fluid.cards = function (element, stayOpen) {
   var focus = $(element).hasClass('focus');
   if (focus) {
     fluid.generateWrapper();
@@ -698,17 +729,17 @@ fluid.cards = function (element) {
       $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
-      setTimeout(function () { $("#pagewrapper, .sidebar").attr("onclick", "fluid.card.close('" + element + "');"); }, 100)
+      if (stayOpen !== "stayOpen") { setTimeout(function () { $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.card.close('" + element + "');"); }, 100) }
     } else {
       fluid.blur();
       document.body.style.overflow = "hidden"
       $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
-      setTimeout(function () { $("#pagewrapper, .sidebar").attr("onclick", "fluid.cards.close('.focus');"); }, 100)
+      if (stayOpen !== "stayOpen") { setTimeout(function () { $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.cards.close('.focus');"); }, 100) }
     }
   } else {
-    $("#pagewrapper, .sidebar").attr("onclick", "");
+    $("#pagewrapper, .sidebar, .navbar").attr("onclick", "");
     if (menuopen) {
       fluid.cards.close();
       $(element).removeClass('close');
@@ -782,19 +813,20 @@ fluid.cards.close = function (element) {
   fluid.unblur();
   document.body.style.overflow = ""
   $("body").css("padding-right", "");
-  $("#pagewrapper, .sidebar").attr("onclick", "");
+  $("#pagewrapper, .sidebar, .navbar").attr("onclick", "");
   menuopen = false;
 }
 fluid.generateWrapper = function () {
   if (!$("#pagewrapper").length) {
     $("body").wrapInner("<div id='pagewrapper'></div>");
-    $("#pagewrapper").after(`<div style="position: fixed; left: 0px; width: 100%; z-index: 999;"><div id='focuscardwrapper' class='container'></div></div>`);
+    $("#pagewrapper").after(`<div style="position: fixed; left: 0px; width: 100%; z-index: 99999;"><div id='focuscardwrapper' class='container'></div></div>`);
     $("#pagewrapper").after("<div id='activecontextmenu' style='position:absolute'></div>");
     $("#pagewrapper").after("<div id='activeAlert' style='z-index: 99;'></div>");
     $("#pagewrapper").after("<div id='splashscreen' style='display:none;margin-top: 100px;' class='container'><h1 style='font-size:5rem;' id='splashscreenname'></h1><div id='splashscreencnt'></div></div>");
     $(".card.focus").appendTo("#focuscardwrapper");
     $(".splash").appendTo("#splashscreencnt");
     $(".sidebar").appendTo("body");
+    $(".navbar").appendTo("body");
   }
 }
 fluid.splash = function (element) {

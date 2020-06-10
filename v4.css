@@ -1,5 +1,5 @@
 /*!
-Fluid UI Elements v3.9.3
+Fluid UI Elements v3.9.4
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
 
@@ -19,7 +19,7 @@ Skeleton CSS components (c) 2014 Dave Gamache
  - Navigation
  - Toasts & Alerts
  - Cards
- - Sidenav
+ - Sidenav / Navbar
  - Sections / Headers
  - Progress
  - Splash screens
@@ -33,7 +33,7 @@ Skeleton CSS components (c) 2014 Dave Gamache
 
 /* Core Styles */
 
-@import url('https://fonts.googleapis.com/css?family=Public+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap');
 
 :root {
   --elementRadius: 15px;
@@ -50,78 +50,81 @@ Skeleton CSS components (c) 2014 Dave Gamache
 
 /* Light theme */
 
-:root, body.light, body.showThemeWindows .themeWindow.lightBox {
+:root, body.light, .themeWindow.lightBox {
   --background: white;
   --elements: #ececec;
   --elementText: #404040;
   --darker: #dddddd;
   --darkest: #cccccc;
-  --acrylicBase: #ecececcc;
+  --acrylicBase: #ecececdb;
   --inputColor: #efefef;
-  --listColor: #f1f1f1;
+  --listColor: #fbfbfb;
   --listHover: #e4e4e4;
   --switchHead: white;
-  --navBorder: #b3b3b3;
-  --navActive: #b5b5b5;
-  --cards: #f5f5f5;
+  --navBorder: #00000029;
+  --navActive: #f7f7f7;
+  --cards: #ffffff;
   --cardShadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   --text: #333;
   --lightText: #565656;
   --secText: #929292;
   --theme: #3396e6;
   --themeText: white;
+  --highlight: #ffffff99;
 }
 
 @media (prefers-color-scheme: dark) {
   /* system-wide dark theme */
-  :root, body.dark, body.showThemeWindows .themeWindow.darkBox {
+  :root, body.dark, .themeWindow.darkBox {
     --background: #151515;
     --elements: #262626;
     --elementText: white;
     --darker: #303030;
     --darkest: #3d3d3d;
-    --acrylicBase: #1f1f1fcc;
+    --acrylicBase: #1f1f1fdb;
     --inputColor: #242424;
     --listColor: #212121;
     --listHover: #313131;
     --switchHead: #cccccc;
-    --navBorder: #616161;
-    --navActive: #696969;
+    --navBorder: #ffffff24;
+    --navActive: #3e3e3e;
     --cards: #191919;
     --text: #efefef;
     --lightText: #c4c4c4;
     --secText: #808080;
     --theme: #133e61;
     --themeText: #f1f9ff;
+    --highlight: #ffffff12;
   }
 }
 
 /* Dark theme */
 
-body.dark, body.showThemeWindows .themeWindow.darkBox {
-  --background: #151515;
+body.dark, .themeWindow.darkBox {
+  /* --background: #57e2af; */
   --elements: #262626;
   --elementText: white;
   --darker: #303030;
   --darkest: #3d3d3d;
-  --acrylicBase: #1f1f1fcc;
+  --acrylicBase: #1f1f1fdb;
   --inputColor: #242424;
   --listColor: #212121;
   --listHover: #313131;
   --switchHead: #cccccc;
-  --navBorder: #616161;
-  --navActive: #696969;
+  --navBorder: #ffffff24;
+  --navActive: #3e3e3e;
   --cards: #191919;
   --text: #efefef;
   --lightText: #c4c4c4;
   --secText: #808080;
   --theme: #133e61;
   --themeText: #f1f9ff;
+  --highlight: #ffffff12;
 }
 
 /* tome theme */
 
-body.tome, body.showThemeWindows .themeWindow.tome {
+body.tome, .themeWindow.tome {
   --background: #18161d;
   --elements: #322e3c;
   --elementText: white;
@@ -140,11 +143,12 @@ body.tome, body.showThemeWindows .themeWindow.tome {
   --secText: #6a6179;
   --theme: #5c3e7b;
   --themeText: #f8f0ff;
+  --highlight: #ffffff12;
 }
 
 /* Flex theme layer */
 
-body.flex, body.showThemeWindows .themeWindow.flex {
+body.flex, .themeWindow.flex {
   --background: var(--flex-bg);
   --elements: var(--flex-layer1);
   --elementText: var(--text);
@@ -163,12 +167,12 @@ body.flex, body.showThemeWindows .themeWindow.flex {
   --secText: var(--flex-sectext);
   --theme: var(--theme-color);
   --themeText: var(--theme-text-color);
+  --highlight: #ffffff12;
 }
 
-/* High Contrast theme
-I'm working on improving this theme, email hello@jottocraft.com if you have any suggestions */
+/* High Contrast theme (experimental) */
 
-body.flex.highContrast:not(.dark), body.showThemeWindows .themeWindow.highContrast {
+body.flex.highContrast:not(.dark), .themeWindow.highContrast {
   --flex-light: #dcdcdc;
   --flex-bg: rgb(255, 255, 255);
   --flex-text: black;
@@ -215,7 +219,7 @@ body.flex.highContrast:not(.dark), body.showThemeWindows .themeWindow.highContra
 
 /* Included Flex Themes */
 
-body.nitro.dark, body.showThemeWindows .themeWindow.nitro {
+body.nitro.dark, .themeWindow.nitro {
   --background: #211212;
   --elements: #562a2a;
   --elementText: white;
@@ -234,9 +238,10 @@ body.nitro.dark, body.showThemeWindows .themeWindow.nitro {
   --secText: #ab7d7d;
   --theme: #7d3030;
   --themeText: #fff0f0;
+  --highlight: #ffffff12;
 }
 
-body.water.dark, body.showThemeWindows .themeWindow.water {
+body.water.dark, .themeWindow.water {
   --flex-light: #2b5761;
   --flex-bg: #194048;
   --flex-text: white;
@@ -248,7 +253,7 @@ body.water.dark, body.showThemeWindows .themeWindow.water {
   --theme-text-color: #cbf4fd;
 }
 
-body.midnight.dark, body.showThemeWindows .themeWindow.midnight {
+body.midnight.dark, .themeWindow.midnight {
   --background: #000000;
   --elements: #1b1b1b;
   --elementText: white;
@@ -272,32 +277,12 @@ body.midnight.dark, body.showThemeWindows .themeWindow.midnight {
   --secText: #676767;
   --theme: #4c4c4c;
   --themeText: #ffffff;
-}
-
-body.candy, body.showThemeWindows .themeWindow.candy {
-  --background: #3c141f;
-  --elements: #79303f;
-  --elementText: #ffffff;
-  --darker: #af5064;
-  --darkest: #c75f75;
-  --acrylicBase: #521629;
-  --inputColor: #581f31;
-  --listColor: #501c2b;
-  --listHover: #a6445c;
-  --switchHead: white;
-  --navBorder: #924360;
-  --navActive: #ac445f;
-  --cards: #330c1a;
-  --text: #ffffff;
-  --lightText: #e4b5c2;
-  --secText: #a9556d;
-  --theme: #c7617d;
-  --themeText: #ffe9ec;
+  --highlight: #ffffff12;
 }
 
 /* Included rainbow themes */
 
-body.darkRed, body.showThemeWindows .themeWindow.darkRed {
+body.darkRed, .themeWindow.darkRed {
   --flex-light: #da191e;
   --flex-bg: #ce0d12;
   --flex-text: white;
@@ -310,7 +295,7 @@ body.darkRed, body.showThemeWindows .themeWindow.darkRed {
   --theme-text-color: #da191e;
 }
 
-body.darkOrange, body.showThemeWindows .themeWindow.darkOrange {
+body.darkOrange, .themeWindow.darkOrange {
   --flex-light: #e38319;
   --flex-bg: #d7770d;
   --flex-text: white;
@@ -323,7 +308,7 @@ body.darkOrange, body.showThemeWindows .themeWindow.darkOrange {
   --theme-text-color: #e38319;
 }
 
-body.darkYellow, body.showThemeWindows .themeWindow.darkYellow {
+body.darkYellow, .themeWindow.darkYellow {
   --flex-light: #c19719;
   --flex-bg: #b58b0d;
   --flex-text: white;
@@ -336,7 +321,7 @@ body.darkYellow, body.showThemeWindows .themeWindow.darkYellow {
   --theme-text-color: #c19719;
 }
 
-body.darkGreen, body.showThemeWindows .themeWindow.darkGreen {
+body.darkGreen, .themeWindow.darkGreen {
   --flex-light: #50c319;
   --flex-bg: #44b70d;
   --flex-text: white;
@@ -349,7 +334,7 @@ body.darkGreen, body.showThemeWindows .themeWindow.darkGreen {
   --theme-text-color: #50c319;
 }
 
-body.darkBlue, body.showThemeWindows .themeWindow.darkBlue {
+body.darkBlue, .themeWindow.darkBlue {
   --flex-light: #196fff;
   --flex-bg: #0d63ff;
   --flex-text: white;
@@ -362,7 +347,7 @@ body.darkBlue, body.showThemeWindows .themeWindow.darkBlue {
   --theme-text-color: #196fff;
 }
 
-body.darkNavyBlue, body.showThemeWindows .themeWindow.darkNavyBlue {
+body.darkNavyBlue, .themeWindow.darkNavyBlue {
   --flex-light: #191999;
   --flex-bg: #0d0d8d;
   --flex-text: white;
@@ -375,7 +360,7 @@ body.darkNavyBlue, body.showThemeWindows .themeWindow.darkNavyBlue {
   --theme-text-color: #191999;
 }
 
-body.darkPurple, body.showThemeWindows .themeWindow.darkPurple {
+body.darkPurple, .themeWindow.darkPurple {
   --flex-light: #c319ff;
   --flex-bg: #b70dff;
   --flex-text: white;
@@ -400,6 +385,10 @@ body {
 
 body.hasSidebar {
   padding-left: 275px;
+}
+
+body.hasNavbar {
+  padding-top: 70px;
 }
 
 body.hasSidebar.collapsedSidebar {
@@ -606,17 +595,17 @@ a {
 /* Acrylic
 Elements that use the acrylic texture will have their background and text colors defined here
 --------------------------------------------------  */
-body.disableAcrylic .acrylicMaterial, body.disableAcrylic .card .sidenav, body.disableAcrylic .sidebar {
+body.disableAcrylic .acrylicMaterial, body.disableAcrylic .card .sidenav, body.disableAcrylic .sidebar, body.disableAcrylic .navbar {
   background-color: var(--acrylicDisabled, var(--elements));
   border: solid 1px var(--acrylicDisabled, var(--elements));
 }
 
-body:not(.disableAcrylic) .acrylicMaterial, body:not(.disableAcrylic) .card .sidenav, body:not(.disableAcrylic) .sidebar {
+body:not(.disableAcrylic) .acrylicMaterial, body:not(.disableAcrylic) .card .sidenav, body:not(.disableAcrylic) .sidebar, body:not(.disableAcrylic) .navbar {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   background-blend-mode: exclusion;
   background: var(--acrylic, var(--acrylicBase, var(--acrylicDisabled, var(--elements))));
-  border: solid 1px var(--acrylicDisabled, var(--elements));
+  border: solid 1px #ffffff03;
 }
 
 .btn.acrylicMaterial:hover {
@@ -665,20 +654,33 @@ body.sampleBgImage {
   cursor: pointer;
   border: none;
   outline: none;
-  padding: 12px 30px;
+  padding: 10px 28px;
   text-align: center;
   border-radius: var(--elementRadius);
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   transition: var(--trans);
-  background-color: var(--elements);
   color: var(--elementText);
   user-select: none;
   vertical-align: middle;
   margin: 2px 5px;
   font-weight: bold;
   letter-spacing: 0.9px;
+  background-color: var(--elements);
+  border: 2px solid transparent;
+}
+
+.btn.outline, button.outline, select.outline {
+  background-color: inherit;
+  border: 2px solid var(--elements);
+  color: var(--elementText);
+}
+
+.btn.primary, button.primary {
+  background-color: var(--theme);
+  color: var(--themeText);
+  border-color: transparent;
 }
 
 button:focus {
@@ -695,6 +697,19 @@ button:focus {
   line-height: inherit;
 }
 
+.btn:not(.active):not(.outline):not(.primary):hover, button:not(.active):not(.outline):not(.primary):hover {
+  background-color: var(--darker);
+  border-color: var(--highlight);
+}
+
+.btn.outline:not(.active):hover, button.outline:not(.active):hover {
+  border-color: var(--darker);
+}
+
+.btn.primary:not(.active):hover, button.primary:not(.active):hover {
+  border-color: var(--highlight);
+}
+
 .btn.disabled {
   filter: blur(0.5px);
   cursor: normal;
@@ -703,26 +718,14 @@ button:focus {
 .btn.active {
   box-shadow: var(--elementShadow);
   background-color: var(--theme);
-  border-color: var(--theme) !important;
+  border-color: var(--highlight) !important;
   color: var(--themeText);
 }
 
-.btn.outline, button.outline, select.outline {
-  background-color: inherit !important;
-  padding: 10px 28px;
-  border: 2px solid;
-  border-color: var(--elements);
-  color: var(--elementText) !important;
-}
 
 .btn.small, select.small {
   padding: 10px 20px;
   font-size: 14px;
-}
-
-.btn:not(.active):hover, button:not(.active):hover {
-  background-color: var(--darker);
-  border-color: var(--darker);
 }
 
 .btns {
@@ -736,6 +739,7 @@ button:focus {
 
 .btns .btn:not(.active) {
   background-color: transparent !important;
+  border-color: transparent !important;
 }
 
 .btns .btn {
@@ -769,17 +773,26 @@ button:focus {
 
 /* Theme windows */
 
+.btns.themeSelector {
+  background-color: inherit !important;
+  height: 85px;
+}
+
+.btns.themeSelector .btn:not(.active):hover {
+  border-color: transparent !important;
+}
+
 .themeWindow .themeName {
   font-weight: bold;
 }
 
-body.showThemeWindows .themeWindow:before {
+.themeWindow:before {
   content: '';
   display: block;
   margin-top: -50%;
 }
 
-body.showThemeWindows .themeWindow, body.showThemeWindows .btns .themeWindow:not(.active), body.showThemeWindows .btns .themeWindow {
+.themeWindow, .btns .themeWindow:not(.active), .btns .themeWindow {
   width: 100px;
   text-align: left !important;
   height: 75px;
@@ -792,7 +805,7 @@ body.showThemeWindows .themeWindow, body.showThemeWindows .btns .themeWindow:not
   overflow: hidden;
 }
 
-body.showThemeWindows .themeWindow .themeName {
+.themeWindow .themeName {
   font-size: 12px;
   line-height: 12px;
   font-weight: bold;
@@ -805,16 +818,16 @@ body.showThemeWindows .themeWindow .themeName {
   white-space: nowrap;
 }
 
-body.showThemeWindows .themeWindow .themeName i {
+.themeWindow .themeName i {
   font-size: 14px;
   margin-right: 0px;
 }
 
-body.showThemeWindows .themeWindow.active {
+.themeWindow.active {
   border: 2px solid var(--theme) !important;
 }
 
-body.showThemeWindows .themeWindow .demoSecText {
+.themeWindow .demoSecText {
   background-color: var(--text);
   border-radius: 10px;
   height: 4px;
@@ -824,14 +837,14 @@ body.showThemeWindows .themeWindow .demoSecText {
   position: absolute;
 }
 
-body.showThemeWindows .themeWindow .demoSecText.short {
+.themeWindow .demoSecText.short {
   background-color: var(--secText);
   width: 50px;
   height: 2px;
   margin-top: 60px;
 }
 
-body.showThemeWindows .themeWindow .demoBtn {
+.themeWindow .demoBtn {
   background-color: var(--elements);
   height: 9px;
   width: 35px;
@@ -841,7 +854,7 @@ body.showThemeWindows .themeWindow .demoBtn {
   position: absolute;
 }
 
-body.showThemeWindows .themeWindow .demoBtn .demoBtnText {
+.themeWindow .demoBtn .demoBtnText {
   width: 22px;
   height: 1px;
   background-color: var(--elementText);
@@ -850,7 +863,7 @@ body.showThemeWindows .themeWindow .demoBtn .demoBtnText {
   border-radius: 10px;
 }
 
-body.showThemeWindows .themeWindow .demoSwitch {
+.themeWindow .demoSwitch {
   background-color: var(--theme);
   height: 7px;
   width: 14px;
@@ -860,7 +873,7 @@ body.showThemeWindows .themeWindow .demoSwitch {
   position: absolute;
 }
 
-body.showThemeWindows .themeWindow .demoSwitch .demoHead {
+.themeWindow .demoSwitch .demoHead {
   width: 6px;
   margin-top: 0.5px;
   height: 6px;
@@ -871,7 +884,7 @@ body.showThemeWindows .themeWindow .demoSwitch .demoHead {
 }
 
 .gColor {
-  height: 44px;
+  height: 75px;
   width: 40px;
 }
 
@@ -905,10 +918,6 @@ body.showThemeWindows .themeSelector .arrow i {
   line-height: inherit;
 }
 
-.list {
-  background-color: var(--listColor);
-}
-
 .contextmenu {
   position: absolute;
   width: 200px;
@@ -919,7 +928,7 @@ body.showThemeWindows .themeSelector .arrow i {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 12px;
+  padding: 10px 2px;
 }
 
 .contextmenu.list .item:not(.disabled):hover {
@@ -948,7 +957,7 @@ body.showThemeWindows .themeSelector .arrow i {
   cursor: pointer;
   font-weight: bold;
   letter-spacing: 0.9px;
-  padding: 15px;
+  padding: 15px 10px;
   border-radius: var(--cardRadius);
   transition: var(--trans);
 }
@@ -1130,18 +1139,27 @@ body:not(.dark) code .dec {
 input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]), textarea {
   width: 400px;
   margin-bottom: 30px;
-  border-radius: calc(var(--elementRadius) + 5px);
+  border-radius: var(--elementRadius);
   padding: 0px 10px;
   border: none;
   outline: none;
-  height: 48px;
+  height: 44px;
   margin-bottom: 20px;
   transition: var(--trans);
-  background-color: var(--inputColor);
   color: var(--text);
+  border: 2px solid var(--elements);
+  background: inherit;
 }
 
-input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]):not(.noshadow):focus, textarea:not(.noshadow):focus {
+input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]).filled {
+  background-color: var(--inputColor);
+}
+
+input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]):not(.filled):focus, textarea:not(.filled):focus {
+  border-color: var(--theme);
+}
+
+input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]).filled:not(.noshadow):focus, textarea.filled:not(.noshadow):focus {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -1164,13 +1182,14 @@ input::placeholder, textarea::placeholder {
 }
 
 input.inputIcon {
-  padding-left: 40px !important;
+  padding-left: 38px !important;
 }
 
 i.inputIcon {
   position: absolute;
-  z-index: 99;
-  padding: 12px 10px;
+  z-index: 10;
+  padding: 12px;
+  font-size: 20px;
 }
 
 textarea {
@@ -1180,7 +1199,7 @@ textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 15px;
   overflow: hidden;
 }
 
@@ -1236,7 +1255,7 @@ textarea {
 
 .slider {
   -webkit-appearance: none;
-  height: 25px;
+  height: 10px;
   outline: none;
   border-radius: calc(var(--elementRadius) - 5px);
   min-width: 200px;
@@ -1246,8 +1265,8 @@ textarea {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 22px;
   background: var(--theme);
   cursor: pointer;
   border-radius: calc(var(--elementRadius) - 5px);
@@ -1261,7 +1280,51 @@ textarea {
   border-radius: calc(var(--elementRadius) - 5px);
 }
 
-/* Navigation
+.checkbox {
+  border-radius: 3px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background-color 0.4s;
+  box-shadow: none;
+  background-color: var(--elements);
+  text-align: center;
+}
+
+.checkbox.active {
+  background-color: var(--theme);
+}
+
+.checkbox:not(.active) i {
+  display: none;
+}
+
+.checkbox.active i {
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--themeText);
+}
+
+.radio > div {
+  margin: 10px 0px;
+}
+
+.radio .checkbox {
+  border-radius: 50%;
+}
+
+.radio .checkbox.active .circle {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--themeText);
+  margin: 7.5px;
+  border-radius: 50%;
+}
+
+/* Navigation (sidebars / navbars)
 --------------------------------------------------  */
 
 .directory span {
@@ -1286,7 +1349,7 @@ textarea {
 }
 
 .sidebar {
-  height: calc(100vh - 0px);
+  height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
@@ -1296,10 +1359,14 @@ textarea {
   transition: var(--trans), width 0.2s;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--cardShadow);
   border-top: none !important;
   border-bottom: none !important;
   border-left: none !important;
+}
+
+body.hasNavbar .sidebar {
+  height: calc(100vh - 70px);
+  top: 70px;
 }
 
 .sidebar .items {
@@ -1320,13 +1387,11 @@ textarea {
 }
 
 .sidebar .item {
-  font-size: 20px;
-  padding: 0px 10px;
+  font-size: 16px;
+  padding: 5px 10px;
   padding-right: 2px;
   border: 2px solid transparent;
-  margin: 10px 10px;
-  height: 40px;
-  line-height: 36px;
+  margin: 10px;
   border-radius: calc(var(--cardRadius) - 5px);
   transition: var(--trans);
   cursor: pointer;
@@ -1342,11 +1407,11 @@ textarea {
 }
 
 .sidebar .item.main {
-  height: 60px;
-  line-height: 54px;
   border-radius: calc(var(--cardRadius) - 2px);
-  font-size: 26px;
+  font-size: 22px;
   border: 2px solid var(--navBorder);
+  padding: 12px 0px;
+  padding-left: 10px;
 }
 
 .sidebar .item.active {
@@ -1354,6 +1419,7 @@ textarea {
   color: var(--text);
   letter-spacing: 0.9px;
   box-shadow: var(--elementShadow);
+  border-color: transparent;
 }
 
 .sidebar .item.active .label {
@@ -1461,6 +1527,70 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
   font-size: 22px;
 }
 
+.navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 70px;
+  padding: 15px;
+  z-index: 999;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.navbar img {
+  height: 40px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.navbar h4 {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar .items {
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.navbar .navitem {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0px 10px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: var(--elementRadius);
+  margin: 0px 4px;
+  transition: var(--trans);
+}
+
+body.dark .navbar .navitem:hover {
+  background-color: #ffffff0a;
+}
+
+body:not(.dark) .navbar .navitem:hover {
+  background-color: #0000000a;
+}
+
+.navbar .navitem i {
+  vertical-align: middle;
+  margin-right: 2px;
+  font-size: 22px;
+}
+
+.navbar .navitem span {
+  vertical-align: middle;
+  font-size: 14px;
+}
+
 /* Toasts & Alerts
 --------------------------------------------------  */
 
@@ -1503,6 +1633,49 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
   cursor: pointer;
   font-size: 18px;
   margin-top: 4px;
+}
+
+.alert:not(.card).info {
+  background: #6997c761;
+}
+
+.alert:not(.card).warning {
+  background: #d8c27e61;
+}
+
+.alert:not(.card).error {
+  background: #d8777761;
+}
+
+.alert:not(.card).success {
+  background: #73ca9161;
+}
+
+body.dark .alert:not(.card) {
+  border: 2px solid #ffffff33;
+}
+
+body:not(.dark) .alert:not(.card) {
+  border: 2px solid #00000033;
+}
+
+.alert:not(.card) {
+  padding: 10px 15px;
+  border-radius: var(--cardRadius);
+  margin: 20px 0px;
+  background: inherit;
+}
+
+.alert:not(.card) .header h5 {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 24px;
+  height: 24px;
+}
+
+.alert:not(.card) .header i {
+  vertical-align: middle;
+  margin-right: 5px;
 }
 
 .card.alert {
@@ -1664,32 +1837,35 @@ body.hasSidebar:not(.collapsedSidebar) .sidebar .logo {
 
 .section {
   border-radius: var(--cardRadius);
+  margin-top: 20px;
 }
 
-.section .header i {
-  font-size: 42px;
+.section > .header i {
+  font-size: 38px;
   margin-left: 5px;
   margin-right: 10px;
-}
-
-.section .header h1, .section .header h2, .section .header h3, .section .header h4, .section .header h5, .section .header h6, .section .header i {
-  display: inline-block;
   vertical-align: middle;
 }
 
-.section .header {
+.section > .header h1, .section > .header h2, .section > .header h3, .section > .header h4, .section > .header h5, .section > .header h6 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.section > .header {
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 40px 0px;
+  padding: 40px 20px;
 }
 
 @media (max-width: 550px) {
-  .section .header i {
+  .section > .header i {
     display: block;
   }
-  .section .header h1, .section .header h2, .section .header h3, .section .header h4, .section .header h5 {
+  .section > .header h1, .section > .header h2, .section > .header h3, .section > .header h4, .section > .header h5 {
     margin-top: 0px;
   }
 }
@@ -1989,30 +2165,6 @@ body.dark .swal-modal {
   .container {
     max-width: 1300px;
   }
-}
-
-/* HTML Lists */
-
-ul {
-  list-style: circle inside;
-}
-
-ol {
-  list-style: decimal inside;
-}
-
-ol, ul {
-  padding-left: 0;
-  margin-top: 0;
-}
-
-ul ul, ul ol, ol ol, ol ul {
-  margin: 1.5rem 0 1.5rem 3rem;
-  font-size: 90%;
-}
-
-li {
-  margin-bottom: 1rem;
 }
 
 /* Tables */

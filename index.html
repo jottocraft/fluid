@@ -7,8 +7,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
-  <script type="text/javascript" src="/v4.js"></script>
-  <link rel="shortcut icon" href="/favicon.png" type="image/png">
+  <script type="text/javascript" src="v4.js"></script>
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 
-  <link type="text/css" rel="stylesheet" href="/v4.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="v4.css" media="screen,projection" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -24,10 +24,10 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
-  <meta property="og:url" content="https://fluid.js.org" />
+  <meta property="og:url" content="https://fluid.jottocraft.com" />
   <meta property="og:title" content="Fluid UI" />
   <meta property="og:description" content="Simple CSS with a dark mode" />
-  <meta property="og:image" content="https://fluid.js.org/logo.png" />
+  <meta property="og:image" content="https://fluid.jottocraft.com/logo.png" />
 
   <meta charset="utf-8">
   <title>Fluid UI</title>
@@ -42,7 +42,27 @@
 
 <body>
 
-  <div style="display: none;" class="sidebar acrylicMaterial">
+  <div style="display: none;" class="navbar">
+    <img src="https://fluid.jottocraft.com/icon.svg" />
+    <h4>Fluid UI</h4>
+    
+    <div class="items">
+      <div class="navitem">
+        <i class="material-icons">star</i>
+        <span>Nav item 1</span>
+      </div>
+      <div class="navitem">
+        <i class="material-icons">star</i>
+        <span>Nav item 2</span>
+      </div>
+      <div class="navitem">
+        <i class="material-icons">star</i>
+        <span>Nav item 3</span>
+      </div>
+    </div>
+ </div>
+
+  <div style="display: none;" class="sidebar">
     <h4 style="color: #57e2d6;">
       Teleport</h4>
     <img class="logo" src="https://tp.js.org/favicon.png" />
@@ -78,7 +98,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
   <script>
     fluidThemes = [
-      ["midnight", "water", "tome"], ["rainbow"]
+      ["midnight", "water", "tome"]
     ]
   </script>
 
@@ -149,7 +169,7 @@
 
     .screenDemo {
       padding: 20px;
-      border: 2px solid var(--secText);
+      border: 2px solid var(--elements);
       border-radius: 10px;
       margin: 20px;
     }
@@ -170,7 +190,7 @@
       title: "Fluid UI Demo Effects",
       description: "Demo effects from the Fluid UI demo site",
       author: "jottocraft",
-      domain: "fluid.js.org"
+      domain: "fluid.jottocraft.com"
     }
     if (fluid.get("pref-chroma") == 'true') {
       fluid.chroma.init(chromaProfile, function () {
@@ -372,13 +392,12 @@
 
     <div class="center">
       <div class="title">
-        <img src="/icon.png" />
+        <img src="icon.svg" />
         <h1>Fluid UI</h1>
       </div>
       <h5 style="font-size: 25px;" class="ver logo"><a id="showver" herf="#install" class="prerelease"
-          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.3</a><a
+          style="vertical-align: middle; font-weight: bold; font-size: 22px; letter-spacing: 0.2px;">v3.9.4</a><a
           href="#install"><span id="betatag" style="margin-left: 10px;display:none;" class="badge"></span></a></h5>
-      <h5 class="holidaytheme" style="color: red;display: none;">Happy holidays</h5>
       <br />
       <div style="margin-bottom: 100px;" class="nav links">
         <ul style="white-space: normal; margin: 0px;">
@@ -413,7 +432,7 @@
     <div class="section">
       <div class="header">
         <i class="material-icons">keyboard</i>
-        <h2>Input</h2>
+        <h3>Input</h3>
       </div>
       <div class="body">
         <a name="input-text"></a>
@@ -421,15 +440,24 @@
           input</h5>
         <p>You can add an icon by putting an icon directly before the input element, then adding the inputIcon class to
           both the input and the icon. If your input has margin, it will need to be added to the icon as well. You can
-          add the "noshadow" class to an input or textarea to remove the shadow effect. You can also add the "shadow"
-          class to make it always show the shadow effect.</p>
+          add the "filled" class to an input to show the filled style with shadow effects. For filled inputs, you can
+          add the "noshadow" class to remove the shadow effect. You can also add the "shadow" class to make it always
+          show the shadow effect. Use the default input style for forms or other areas with lots of inputs and buttons
+          and use the filled style for standalone inputs, like a search box.</p>
         <i class="inputIcon material-icons">search</i>
         <input class="inputIcon" placeholder="Search" />
+
+        <i class="inputIcon material-icons">search</i>
+        <input class="inputIcon filled" placeholder="Search" />
         <br />
         <pre><code class="prettyprint">&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
-&#x3C;input class=&#x22;inputIcon&#x22; placeholder=&#x22;Search&#x22; /&#x3E;</code></pre>
+&#x3C;input class=&#x22;inputIcon&#x22; placeholder=&#x22;Search&#x22; /&#x3E;
+
+&lt;!-- filled input style --&gt;
+&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
+&#x3C;input class=&#x22;inputIcon filled&#x22; placeholder=&#x22;Search&#x22; /&#x3E;</code></pre>
         <br /><br /><br />
-        <textarea></textarea>
+        <textarea placeholder="Textarea"></textarea>
         <br />
         <br />
         <code class="prettyprint">&lt;textarea&gt;&lt;/textarea&gt;</code>
@@ -439,8 +467,8 @@
           Dropdowns</h5>
         <p>Add an icon by placing a span next to a material icon instead of text. You can add the "outline" class to
           make the button use an outline instead of a background, acting as a secondary button. You can add the "small"
-          class to a button to make it smaller.</p>
-        <p>Dropdowns in Fluid do not need any special CSS and are styled the same as Fluid UI buttons. Dropdowns also
+          class to a button to make it smaller. You can also add the "primary" class to use the theme color.</p>
+        <p>Dropdowns in Fluid do not need any special HTML and are styled the same as Fluid UI buttons. Dropdowns also
           support the outline and small classes, but do not support other button features such as button rows or context
           menus.</p>
         <p>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class
@@ -448,17 +476,18 @@
           inline-block.</p>
         <br />
         <code
-          class="prettyprint">&lt;div class="btn"&gt;&lt;i class="material-icons"&gt;star&lt;/i&gt; Demo Button&lt;/div&gt;</code>
+          class="prettyprint">&lt;button class="btn"&gt;&lt;i class="material-icons"&gt;star&lt;/i&gt; Demo Button&lt;/button&gt;</code>
         <br />
         <div style="display: inline-block;">
-          <button class="btn"><i class="material-icons">arrow_forward</i>Continue</button>
+          <button class="btn primary"><i class="material-icons">arrow_forward</i>Continue</button>
+          <button class="btn outline"><i class="material-icons">arrow_forward</i>Continue</button>
           <div class="list contextmenu">
             <div class="item"><i class="material-icons">star_border</i>Item 1</div>
             <div class="item"><i class="material-icons">star_border</i>Item 2</div>
             <div class="item"><i class="material-icons">star_border</i>Item 3</div>
           </div>
         </div>
-        <button class="btn outline"><i class="material-icons">close</i>Cancel</button>
+        <button class="btn"><i class="material-icons">close</i>Cancel</button>
         <br /><br />
         <button class="btn small">Small button</button>
         <br /><br />
@@ -482,6 +511,65 @@
         <br /><br />
         <pre><code class="prettyprint">&lt;div class="switch"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;div class="label"&gt;Demo switch&lt;/div&gt;</code></pre>
+        <br /><br /><br />
+        <a name="input-checkboxes"></a>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">check_box</i>Checkboxes
+          & Radio Buttons</h5>
+        <p>Checkboxes work the same way as switches in FLuid UI. Fluid UI will automatically toggle the active class
+          when clicked and they can be used for boolean user preferences.</p>
+        <p>Radio buttons work the same way as button rows in Fluid UI. Fluid UI automatically manages the active class
+          when clicked and they can be used for multiple choice user preferences.</p>
+        <br />
+
+        <div>
+          <div onclick="fluid.set('pref-boxA')" class="checkbox pref-boxA"><i class="material-icons">check</i></div>
+          <div class="label">Demo checkbox A</div>
+        </div>
+
+        <br />
+
+        <div>
+          <div onclick="fluid.set('pref-boxB')" class="checkbox pref-boxB active"><i class="material-icons">check</i>
+          </div>
+          <div class="label">Demo checkbox B</div>
+        </div>
+
+        <br /> <br />
+
+        <pre><code class="prettyprint">&lt;div&gt;
+  &lt;div class=&quot;checkbox&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
+  &lt;div class=&quot;label&quot;&gt;Demo checkbox A&lt;/div&gt; 
+&lt;/div&gt;</code></pre>
+
+        <br /><br /> <br />
+
+        <div class="radio pref-demoRadio">
+          <div>
+            <div onclick="fluid.set('pref-demoRadio', 'opA')" class="checkbox active opA"><span class="circle"></span>
+            </div>
+            <div class="label">Demo radio button A</div>
+          </div>
+
+          <div>
+            <div onclick="fluid.set('pref-demoRadio', 'opB')" class="checkbox opB"><span class="circle"></span></div>
+            <div class="label">Demo radio button B</div>
+          </div>
+        </div>
+
+        <br /> <br />
+
+        <pre><code class="prettyprint">&lt;div class=&quot;radio&quot;&gt; 
+  &lt;div&gt; 
+    &lt;div class=&quot;checkbox active&quot;&gt;&lt;span class=&quot;circle&quot;&gt;&lt;/span&gt;&lt;/div&gt; 
+    &lt;div class=&quot;label&quot;&gt;Demo radio button A&lt;/div&gt; 
+  &lt;/div&gt; 
+
+  &lt;div&gt; 
+    &lt;div class=&quot;checkbox&quot;&gt;&lt;span class=&quot;circle&quot;&gt;&lt;/span&gt;&lt;/div&gt; 
+    &lt;div class=&quot;label&quot;&gt;Demo radio button B&lt;/div&gt; 
+  &lt;/div&gt; 
+&lt;/div&gt;</code></pre>
+
         <br /><br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
             class="material-icons">radio_button_checked</i>Button row</h5>
@@ -522,32 +610,42 @@
         <a name="input-prefs"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">settings</i>Handling
           User Preferences & Settings</h5>
-        <p>Creating additional settings in your website can be painful. You have to find space for the switch, and when
-          you do, you have to ensure the switch always represents the setting, even if it is changed elsewhere. This can
-          add up to a lot of unnessasary code. With Fluid UI v4, there are 3 new functions to make settings and
+        <p>Adding settings in your website can be annoying. You have to load a switch, make sure the switch is toggled
+          correctly, make sure that code can check for that setting, then make sure that everything updates properly
+          when the setting is changed. This can add up to a lot of extra code. With Fluid UI v4, there are 3 new
+          functions to make settings and
           preferences easier to manage.</p>
         <p>The name of the setting can be any string starting with "pref-". Your setting's name is used as a CSS class
-          for
-          elements on your page that represent the setting
-          (like a switch or button for a boolean, or a button row or list for multiple choice)</p>
-        <p><i>The button row demos above also act as preferences demos. Prefrence changes sync across tabs, so if a user
-            has multiple tabs of your site open and changes a prefrence on one of them, it will apply to all tabs.</i>
+          for elements on your page that represent the setting
+          (like a switch, checkbox, or button for a boolean, or a button row or radio buttons for multiple choices)</p>
+        <p><i>The button row demos, switch demo, checkbox demo, and radio button demo above all also act as preferences
+            demos. Prefrence changes sync instantly to all UI elements and across tabs.</i>
         </p>
         <br />
         <p>Setting a preference (If the prefrence is a boolean, call fluid.set without a value to toggle it)</p>
         <code class="prettyprint">fluid.set([setting string], [value string])</code>
         <br />
-        <p>Getting a preference</p>
+        <p>Getting a preference. If the preference is true by default, check if this is equal to "false". If it's false
+          by default, check if this is equal to "true".</p>
         <code class="prettyprint">fluid.get([setting string])</code>
         <br />
         <p>Listening to a preference change (use event.detail for the new value)</p>
         <code class="prettyprint">document.addEventListener(pref-[setting string], [callback function])</code>
         <br />
-        <p>If your value is a boolean, you can use a switch to represent the setting. When using an element to represent
+        <p>If your value is a boolean, you can use a switch, button, or checkbox to represent the setting. When using an
+          element to represent
           a setting, add the setting string to the class list. The default value should be represented with the active
           class for true and no active class for false.</p>
-        <code
-          class="prettyprint">&lt;div class="switch [setting]"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="label"&gt;My new setting&lt;/div&gt;</code>
+        <pre><code class="prettyprint">&lt;!-- switch --&gt;
+&lt;div onclick=&quot;fluid.set([setting string])&quot; class="switch [setting string]"&gt;&lt;span class="head"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class="label"&gt;My new setting&lt;/div&gt;
+
+&lt;!-- checkbox --&gt;
+&lt;div&gt;
+  &lt;div onclick=&quot;fluid.set([setting string])&quot; class=&quot;checkbox [setting string]&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
+  &lt;div class=&quot;label&quot;&gt;Demo checkbox A&lt;/div&gt; 
+&lt;/div&gt;
+</code></pre>
         <br />
         <p>If your value is a string, you can use a button row to represent the setting. When using an element to
           represent a setting, add the setting string to the button row's class list, and the value string to each of
@@ -680,12 +778,8 @@
           want to enable. Custom themes should be objects with the name and id properties, with the theme's display name
           and themeID, and optionally a material icon string in the icon property. There is no way to disable the
           default light/dark/auto themes page. All theme selectors must include at least light, dark, and auto.</p>
-        <p>The rainbow theme selector can be
-          enabled by adding "rainbow" the array of a page (adding "rainbow" to a page causes that page to show rainbow
-          themes only. You cannot mix the rainbow themes page with other custom themes). Note that the rainbow themes
-          are intended to be used for fun and are not officially supported.</p>
         <p>Add this code before loading fluid.js to specify what themes you want to be shown in the theme selector</p>
-        <code class="prettyprint">fluidThemes = [ [ "midnight", "nitro", "tome" ], [ "rainbow" ] ]</code>
+        <code class="prettyprint">fluidThemes = [ [ "midnight", "nitro", "tome" ] ]</code>
         <br /><br />
         <div class="btns row themeSelector"></div>
         <code class="prettyprint">&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
@@ -837,7 +931,7 @@
         </div>
         <br />
         <div id="demoWallContainer"
-          style="height: 600px; background-image: url('https://i.imgur.com/cn1qcVA.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
+          style="height: 600px; background-image: url('https://i.imgur.com/73vMibt.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
           <div id="acrylicDemoWindow"
             style="margin: 200px 0px; padding: 40px; display: inline-block; border-radius: 10px; font-weight: bold; cursor: move; color: var(--text); z-index: 10;"
             class="acrylicMaterial">This element uses Fluid UI Acrylic<br />You can drag this and change themes to see
@@ -851,7 +945,7 @@
             $("#acrylicDemoWindow").draggable();
           })
           var demoWall = 0;
-          var demoWalls = ["https://i.imgur.com/cn1qcVA.jpg", "https://i.imgur.com/d8gklDZ.jpg", "https://i.imgur.com/LxT56De.jpg", "https://i.imgur.com/gELuC4p.jpg", "https://i.imgur.com/73vMibt.jpg", "https://i.imgur.com/esS5C8x.jpg"]
+          var demoWalls = ["https://i.imgur.com/73vMibt.jpg", "https://i.imgur.com/esS5C8x.jpg", "https://i.imgur.com/cn1qcVA.jpg", "https://i.imgur.com/d8gklDZ.jpg", "https://i.imgur.com/LxT56De.jpg", "https://i.imgur.com/gELuC4p.jpg"]
           function changeDemoWall() {
             demoWall++;
             if (demoWall == demoWalls.length) demoWall = 0;
@@ -870,9 +964,6 @@
       <div class="body">
         <p><b>Navigation elements in Fluid UI are highly experimental. Each site has different needs for its navigation,
             and Fluid UI's options are limited. Navigation elements listed below are not fully supported.</b></p>
-        <p style="color: red; font-size: 18px;"><b>Toolbars and Navbars have been disabled in Fluid UI v4
-            beta 1 and continue to be disabled in Fluid UI v4 beta 3. They are being reworked and will return in the
-            next release of Fluid UI (v4 beta 4).</b></p>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">folder</i>Breadcrumbs
         </h5>
@@ -884,91 +975,48 @@
           <i class="material-icons">keyboard_arrow_right</i>
           <span class="active">Calendar</span>
         </div>
-        <br /> <br />
-        <p>
-          Fluid UI also offers simple navigation bars. You can add the active class to any one of these to show that it
-          is active. Add the active class to the nav div itself to automatically give buttons the active class.
+          <br /><br />
+        <br />
+        <a name="nav-navbar"></a>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">maximize</i>Navbar
+        </h5>
+        <p>Navbars are used for showing links and take up the entire top of the screen. Navbars are sticky and use Fluid UI Acrylic by default.</p>
+        <button onclick="$('body').toggleClass('hasNavbar'); $('.navbar').toggle();" class="btn">Toggle
+          navbar</button>
+        <pre>
+    <code class="prettyprint">&lt;div class=&quot;navbar&quot;&gt; 
+  &lt;img src=&quot;https://fluid.jottocraft.com/icon.svg&quot; /&gt; 
+  &lt;h4&gt;Fluid UI&lt;/h4&gt; 
+  
+  &lt;div class=&quot;items&quot;&gt; 
+    &lt;div class=&quot;navitem&quot;&gt; 
+      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
+      &lt;span&gt;Nav item 1&lt;/span&gt; 
+    &lt;/div&gt; 
+    
+    &lt;div class=&quot;navitem&quot;&gt; 
+      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
+      &lt;span&gt;Nav item 2&lt;/span&gt; 
+    &lt;/div&gt; 
+    
+    &lt;div class=&quot;navitem&quot;&gt; 
+      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
+      &lt;span&gt;Nav item 3&lt;/span&gt; 
+    &lt;/div&gt; 
+  &lt;/div&gt; 
+&lt;/div&gt;</code></pre>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
+            class="material-icons">vertical_split</i>Sidebar</h5>
+        <p>Try out the sidebar demo. When using the sidebar, add the "hasSidebar" class to the body element to make
+          sure everything is padded correctly. Place the sidebar right after the
+
+          &lt;body&gt; tag. Sidebars can be collapsed by the user by default. Collapsed sidebars only show the icon.
         </p>
-        <p style="margin-top: 0;">You can add text in either navigation bar style for clarity by putting a span next to
-          the icon. See the navbar style for an example.
-          <br /><br />
-          <a name="nav-toolbar"></a>
-          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">tab</i>Toolbar</h5>
-          <p>Toolbars are small and simple (The default navigation on this site is a toolbar)</p>
-          <pre>
-          <code class="prettyprint">&lt;div class=&quot;nav right&quot;&gt;
-        &lt;ul&gt;
-            &lt;li class=&quot;active&quot;&gt;
-            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
-            &lt;/li&gt;
-
-            &lt;li&gt;
-            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;help&lt;/i&gt;&lt;/a&gt;
-            &lt;/li&gt;
-
-            &lt;li&gt;
-            &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
-&lt;/div&gt;</code>
-</pre>
-          <p>
-            You can also move it to the left by changing its class:
-          </p>
-          <pre>
-<code class="prettyprint">&lt;!-- Left alignment --&gt;
-&lt;div class=&quot;nav left&quot;&gt;</code>
-</pre>
-          <br />
-          <p>
-            You can make the navigation sticky (always stays at the top no matter where the user is scrolled) by adding
-            the sticky class:
-          </p>
-          <pre>
-<code class="prettyprint">&lt;!-- Sticky nav --&gt;
-&lt;div class=&quot;nav right sticky&quot;&gt;</code>
-</pre>
-          <br />
-          <a name="nav-navbar"></a>
-          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">maximize</i>Navbar
-          </h5>
-          <p>Navbars take up the entire top of the page and let you add your own title and logo</p>
-          <pre>
-    <code class="prettyprint">&lt;div class=&quot;nav navbar&quot;&gt;
-   &lt;img src=&quot;https://fluid.js.org/icon.png&quot; /&gt;
-   &lt;h4&gt;Fluid UI&lt;/h4&gt;
-    &lt;ul class=&quot;right&quot;&gt;
-        &lt;li class=&quot;active&quot;&gt;
-        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;info&lt;/i&gt;&lt;/a&gt;
-        &lt;/li&gt;
-
-        &lt;li&gt;
-        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;help&lt;/i&gt;&lt;/a&gt;
-        &lt;/li&gt;
-
-        &lt;li&gt;
-        &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;material-icons left&quot;&gt;build&lt;/i&gt;&lt;/a&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;</code>
-</pre>
-          <div style="display:none;">
-            <br />
-            <p>Click the button to toggle the style of the navigation on this site</p>
-            <button onclick="toggleNavbarStyle()" class="btn">Try</button>
-          </div>
-          <br /><br />
-          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-              class="material-icons">vertical_split</i>Sidebar</h5>
-          <p>Try out the sidebar demo. When using the sidebar, add the "hasSidebar" class to the body element to make
-            sure everything is padded correctly. Place the sidebar right after the
-
-            &lt;body&gt; tag. Sidebars can be collapsed by the user by default. Collapsed sidebars only show the icon.
-          </p>
-          <button onclick="$('body').toggleClass('hasSidebar'); $('.sidebar').toggle();" class="btn">Toggle
-            sidebar</button>
-          <br /><br />
-          <pre><code class="prettyprint">&lt;div class=&quot;sidebar acrylicMaterial&quot;&gt;
+        <button onclick="$('body').toggleClass('hasSidebar'); $('.sidebar').toggle();" class="btn">Toggle
+          sidebar</button>
+        <br /><br />
+        <pre><code class="prettyprint">&lt;div class=&quot;sidebar acrylicMaterial&quot;&gt;
     &lt;h4&gt;Teleport&lt;/h4&gt;
     &lt;img class=&quot;logo&quot; src=&quot;https://tp.js.org/favicon.png&quot; /&gt;
       
@@ -983,53 +1031,53 @@
       &lt;i class=&quot;material-icons&quot;&gt;keyboard_arrow_left&lt;/i&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-          <br />
-          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web</i>Screens</h5>
-          <p>Fluid UI Screens is a flexible way to manage multiple different screens on the same page. You can define a
-            function that will load each screen, then use Fluid UI to change screens. Fluid UI will save the screen in
-            the URL so that it will show the screen on reload and so the user can bookmark the screen. Fluid UI screens
-            also supports the browser back button.</p>
-          <p><b>Screen names and the screen ID parameter cannot include slashes (/) or periods (.)</b></p>
-          <br />
-          <p>Define a screen:</p>
-          <pre><code class="prettyprint">fluid.screens.folderScreen = function(id, entry) {
+        <br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web</i>Screens</h5>
+        <p>Fluid UI Screens is a flexible way to manage multiple different screens on the same page. You can define a
+          function that will load each screen, then use Fluid UI to change screens. Fluid UI will save the screen in
+          the URL so that it will show the screen on reload and so the user can bookmark the screen. Fluid UI screens
+          also supports the browser back button.</p>
+        <p><b>Screen names and the screen ID parameter cannot include slashes (/) or periods (.)</b></p>
+        <br />
+        <p>Define a screen:</p>
+        <pre><code class="prettyprint">fluid.screens.folderScreen = function(id, entry) {
   //screens have an optional ID for whatever the screen is showing (in this example, the ID would be the ID of the folder the user is navigated to)
   //the screen ID must be a string and able to fit into the URL
   //the entry parameter is a boolean specifying whether this screen is the first to load on the page
 
   //code that will show this screen
 };</code></pre>
-          <br />
-          <p>Define the default screen:</p>
-          <pre><code class="prettyprint">fluid.defaultScreen = "homeScreen";</code></pre>
-          <br />
-          <p>Open a screen:</p>
-          <pre><code class="prettyprint">fluid.screen("folderScreen", "folder18232372");</code></pre>
-          <br />
-          <p>When your site is done loading and you want to show the user the screen from the URL or the default screen,
-            run fluid.screen with no parameters:</p>
-          <pre><code class="prettyprint">fluid.screen();</code></pre>
-          <br /><br />
-          <p>Screens Demo</p>
-          <p>Try moving between screens, using your browser's back button, and reloading</p>
-          <div class="row">
-            <button onclick="fluid.screen('screenA')" class="btn">Show screen A (defualt)</button>
-            <button onclick="fluid.screen('screenB')" class="btn">Show screen B</button>
-            <button onclick="fluid.screen('screenC', '1234')" class="btn">Show screen C (with parameter)</button>
-          </div>
-          <br />
-          <div style="display: none;" class="screenDemo screenA">
-            <h5>This is screen A (default)</h5>
-          </div>
-          <div style="display: none;" class="screenDemo screenB">
-            <h5>This is screen B</h5>
-          </div>
-          <div style="display: none;" class="screenDemo screenC">
-            <h5>This is screen C</h5>
-            <p>Screen parameter: <span>N/A</span></p>
-          </div>
-          <br />
-          <pre><code class="prettyprint">//make sure you define screens after loading the Fluid UI script
+        <br />
+        <p>Define the default screen:</p>
+        <pre><code class="prettyprint">fluid.defaultScreen = "homeScreen";</code></pre>
+        <br />
+        <p>Open a screen:</p>
+        <pre><code class="prettyprint">fluid.screen("folderScreen", "folder18232372");</code></pre>
+        <br />
+        <p>When your site is done loading and you want to show the user the screen from the URL or the default screen,
+          run fluid.screen with no parameters:</p>
+        <pre><code class="prettyprint">fluid.screen();</code></pre>
+        <br /><br />
+        <p>Screens Demo</p>
+        <p>Try moving between screens, using your browser's back button, and reloading</p>
+        <div class="row">
+          <button onclick="fluid.screen('screenA')" class="btn">Show screen A (defualt)</button>
+          <button onclick="fluid.screen('screenB')" class="btn">Show screen B</button>
+          <button onclick="fluid.screen('screenC', '1234')" class="btn">Show screen C (with parameter)</button>
+        </div>
+        <br />
+        <div style="display: none;" class="screenDemo screenA">
+          <h5>This is screen A (default)</h5>
+        </div>
+        <div style="display: none;" class="screenDemo screenB">
+          <h5>This is screen B</h5>
+        </div>
+        <div style="display: none;" class="screenDemo screenC">
+          <h5>This is screen C</h5>
+          <p>Screen parameter: <span>N/A</span></p>
+        </div>
+        <br />
+        <pre><code class="prettyprint">//make sure you define screens after loading the Fluid UI script
 
 fluid.screens.screenA = () => {
   $(".screenDemo").hide();
@@ -1049,52 +1097,52 @@ fluid.screens.screenC = (param) => {
 
 fluid.defaultScreen = "screenA";
 fluid.screen(); //load initial screen</code></pre>
-          <script>
-            fluid.screens.screenA = () => {
-              $(".screenDemo").hide();
-              $(".screenDemo.screenA").show();
-            }
-            fluid.screens.screenB = () => {
-              $(".screenDemo").hide();
-              $(".screenDemo.screenB").show();
-            }
-            fluid.screens.screenC = (param) => {
-              $(".screenDemo").hide();
-              $(".screenDemo.screenC p span").text(param);
-              $(".screenDemo.screenC").show();
-            }
-            fluid.defaultScreen = "screenA";
-            fluid.screen();
-          </script>
-          <br /><br />
-          <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">border_left</i>Side
-            navigation</h5>
-          <p>Use side navigation for cards with a lot of content. Cards using side navigation must have a fixed height.
-          </p>
-          <br />
-          <div style="height: 650px;" class="card withnav">
-            <div class="sidenav">
-              <div class="title">
-                <h5>Teleport 3</h5>
-                <p>by jottocraft</p>
-              </div>
-              <div class="item active">
-                <i class="material-icons">settings</i> Controls
-              </div>
-              <div class="item">
-                <i class="material-icons">folder</i> Chips
-              </div>
-              <div class="item">
-                <i class="material-icons">devices</i> Devices
-              </div>
-              <div class="item">
-                <i class="material-icons">info</i> About
-              </div>
+        <script>
+          fluid.screens.screenA = () => {
+            $(".screenDemo").hide();
+            $(".screenDemo.screenA").show();
+          }
+          fluid.screens.screenB = () => {
+            $(".screenDemo").hide();
+            $(".screenDemo.screenB").show();
+          }
+          fluid.screens.screenC = (param) => {
+            $(".screenDemo").hide();
+            $(".screenDemo.screenC p span").text(param);
+            $(".screenDemo.screenC").show();
+          }
+          fluid.defaultScreen = "screenA";
+          fluid.screen();
+        </script>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">border_left</i>Side
+          navigation</h5>
+        <p>Use side navigation for cards with a lot of content. Cards using side navigation must have a fixed height.
+        </p>
+        <br />
+        <div style="height: 650px;" class="card withnav">
+          <div class="sidenav">
+            <div class="title">
+              <h5>Teleport 3</h5>
+              <p>by jottocraft</p>
             </div>
-            <div class="content">
-              <p>If putting side navigation into a card, make sure that the card has the "withnav" class, and make sure
-                that the card is a fixed height. Add the content div next to the side nav for proper padding.</p>
-              <pre>
+            <div class="item active">
+              <i class="material-icons">settings</i> Controls
+            </div>
+            <div class="item">
+              <i class="material-icons">folder</i> Chips
+            </div>
+            <div class="item">
+              <i class="material-icons">devices</i> Devices
+            </div>
+            <div class="item">
+              <i class="material-icons">info</i> About
+            </div>
+          </div>
+          <div class="content">
+            <p>If putting side navigation into a card, make sure that the card has the "withnav" class, and make sure
+              that the card is a fixed height. Add the content div next to the side nav for proper padding.</p>
+            <pre>
   <code class="prettyprint">
 &lt;div style="height: 650px;" class="card withnav"&gt;
   &lt;div class="sidenav"&gt;
@@ -1121,8 +1169,8 @@ fluid.screen(); //load initial screen</code></pre>
 &lt;/div&gt;
   </code>
 </pre>
-            </div>
           </div>
+        </div>
 
       </div>
     </div>
@@ -1238,9 +1286,65 @@ fluid.screen(); //load initial screen</code></pre>
         <code class="prettyprint">fluid.toast(title, text [, icon] [, icon color])</code>
         <br />
         <button onclick="fluid.toast('Demo Toast', 'This is a demo', 'picture_in_picture')" class="btn">Try</button>
+        <a name="splash-alerts"></a>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
+            class="material-icons">info</i>Alert Components</h5>
+        <p>Use alert components to show info, warning, error, or success messages as a component. You can also omit the alert type to show a generic alert.</p>
+        <br />
+
+        <div class="alert">
+          <div class="header">
+            <h5><i class="material-icons">info</i> Generic alert</h5>
+          </div>
+
+          <p>This is a generic alert!</p>
+        </div>
+        
+        <div class="alert info">
+          <div class="header">
+            <h5><i class="material-icons">info</i> Important info</h5>
+          </div>
+
+          <p>This is some important information!</p>
+        </div>
+
+        <div class="alert warning">
+          <div class="header">
+            <h5><i class="material-icons">warning</i> Warning message</h5>
+          </div>
+
+          <p>This is a warning message!</p>
+        </div>
+
+        <div class="alert error">
+          <div class="header">
+            <h5><i class="material-icons">error</i> Error message</h5>
+          </div>
+
+          <p>This is an error message!</p>
+        </div>
+
+        <div class="alert success">
+          <div class="header">
+            <h5><i class="material-icons">check</i> Success message</h5>
+          </div>
+
+          <p>This is a success message!</p>
+        </div>
+
+        <pre><code class="prettyprint">&lt;!-- The alert type in the class can be omitted for a generic alert. The alert header is optional. --&gt;
+&lt;div class=&quot;alert {info|warning|error|success}&quot;&gt; 
+  &lt;div class=&quot;header&quot;&gt; 
+    &lt;h5&gt;&lt;i class=&quot;material-icons&quot;&gt;info&lt;/i&gt; Generic alert&lt;/h5&gt; 
+  &lt;/div&gt; 
+  
+  &lt;p&gt;This is a generic alert!&lt;/p&gt; 
+&lt;/div&gt;</code></pre>
+
         <br /><br />
         <a name="splash-alerts"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alerts
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alert Popups
         </h5>
         <p>Fluid UI has native alerts and also supports <a href="https://sweetalert.js.org/">Sweetalert</a></p>
         <code class="prettyprint">fluid.alert(title, body [, icon] [, actions array])</code>
@@ -1268,24 +1372,6 @@ fluid.screen(); //load initial screen</code></pre>
         <h3>Layout</h3>
       </div>
       <div class="body">
-        <div style="text-align: center;">
-          <img src="../icon.png" style="
-                      width:  20%;
-                      vertical-align: middle;
-                      max-width: 150px;
-                      ">
-          <h2 style="
-                      display: inline-block;
-                      vertical-align: middle;
-                      margin: 0px 50px;
-                  ">+</h2><img src="https://i.imgur.com/z3GVEa4.png" style="
-                      width:  20%;
-                      vertical-align: middle;
-                      max-width: 150px;
-                      border-radius: 50%;
-                      ">
-        </div>
-        <br /></br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">hdr_strong</i>Fluid UI +
           Skeleton CSS</h5>
         <p>Fluid UI uses components from Skeleton CSS. Skeleton enables amazing experiences with
@@ -1297,7 +1383,7 @@ fluid.screen(); //load initial screen</code></pre>
             href="http://getskeleton.com/#grid">here</a>.</p>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">code</i>Open-Source</h5>
-        <p>Fluid UI's code is Open Source on <a href="https://github.com/jottocraft/fluid">GitHub</a>
+        <p>Fluid UI's code is open-source on <a href="https://github.com/jottocraft/fluid">GitHub</a>
         </p>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">public</i>Browser
@@ -1305,17 +1391,17 @@ fluid.screen(); //load initial screen</code></pre>
         <p>Fluid UI is designed for small independently created websites. Fluid UI is not designed for compatibility and
           accessibility.</p>
         <p>Fluid UI <b>requires</b> the following:
-          <ul>
-            <li>JavaScript-enabled</li>
-            <li>CSS variable support</li>
-            <li>All versions of Internet Explorer are NOT supported</li>
-          </ul>
-          <p>Ideally, browsers should also be:</p>
-          <ul>
-            <li>A major modern browser</li>
-            <li>No version released more than 3 years ago</li>
-            <li>Chromium-based browsers work best</li>
-          </ul>
+        <ul>
+          <li>JavaScript-enabled</li>
+          <li>CSS variable support</li>
+          <li>All versions of Internet Explorer are NOT supported</li>
+        </ul>
+        <p>Ideally, browsers should also be:</p>
+        <ul>
+          <li>A major modern browser</li>
+          <li>No version released more than 3 years ago</li>
+          <li>Chromium-based browsers work best</li>
+        </ul>
         </p>
       </div>
     </div>
@@ -1387,12 +1473,13 @@ fluid.screen(); //load initial screen</code></pre>
     <br /><br /><br /><br />
 
     <div style="text-align: center; padding: 50px 0px;">
-      <img style="height: 80px; vertical-align: middle;" src="https://i.imgur.com/2geYYiz.png" />
+      <img style="height: 45px; margin-right: 20px; vertical-align: middle;"
+        src="https://cdn.jottocraft.com/images/footerImage.png" />
       <h5 style="display: inline-block; vertical-align: middle;">jottocraft</h5>
       <p>(c) jottocraft 2017-2020. All rights reserved.&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid">source
           code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
     </div>
-    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.3 (04042020)</p>
+    <p style="text-align:center; color: var(--secText);">Pre-release flight v3.9.4 (06102020)</p>
     <br /><br />
   </div>
   <div class="container">
