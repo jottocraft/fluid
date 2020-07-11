@@ -1,5 +1,5 @@
 /*!
-Fluid UI Elements v3.9.4
+Fluid UI Elements v4.0.0
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
 
@@ -101,7 +101,7 @@ Skeleton CSS components (c) 2014 Dave Gamache
 /* Dark theme */
 
 body.dark, .themeWindow.darkBox {
-  /* --background: #57e2af; */
+  --background: #151515;
   --elements: #262626;
   --elementText: white;
   --darker: #303030;

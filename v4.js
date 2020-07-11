@@ -1,5 +1,5 @@
 /*!
-Fluid UI JavaScript Modules v3.9.4
+Fluid UI JavaScript Modules v4.0.0
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
