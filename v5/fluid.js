@@ -1,14 +1,13 @@
 /*!
-Fluid UI JavaScript Modules v5 beta 1
+Fluid UI JavaScript Modules v5 beta 2
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
-Licenced under the GNU General Public License v2.0 (https://github.com/jottocraft/fluid/blob/master/LICENSE)
+Licenced under the MIT License (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
 
 //Define global Fluid UI JS object
 window.fluid = {
   screens: {},
   externalScreens: {},
-  contextMenuOpen: false,
   dst: new Date().getTimezoneOffset() < Math.max(new Date(new Date().getFullYear(), 0, 1).getTimezoneOffset(), new Date(new Date().getFullYear(), 6, 1).getTimezoneOffset()),
   currentTheme: null,
   includedThemes: ["midnight", "tome"],
@@ -30,10 +29,9 @@ window.fluid = {
         switchHead: "#cccccc", //Switch head color
 
         inputColor: "#2d2935", //Color for input elements (like text boxes)
-        blocks: "#1a1721", //Color for block elements
-        
-        sidebarBorder: "#655d6f", //Outline color used for main sidebar item
-        sidebarActive: "#55476b", //Color used for selected sidebar item
+
+        navbar: "#211e29", //Outline color used for main sidebar item
+        sidebarActive: "#3c324c", //Color used for selected sidebar item
 
         cards: "#14101b", //Color used for cards
 
@@ -42,6 +40,7 @@ window.fluid = {
 
         elementHighlight: "#ffffff12", //Color used for highlight effects on elements. Should be at 5-10% opacity.
         acrylic: "#282333cc", //Color used for acrylic (transparent) elements. Should have enough contrast to make its contents clearly visible (around 85% opacity). Must also be visible over the page background color.
+        mediumAcrylic: "#28233380", //Color used for acrylic (transparent) elements. Basically the same as acrylic, but slightly less transparent (around 50% opacity).
         lightAcrylic: "#28233366", //Color used for elements that are usually outlined when a background image is set. Should be more transparent and easily distinguishable from normal acrylic.
         backgroundTint: "#18161db3" //Background tint color used when a background image is set. Should be at about 60-70% opacity.
       }
@@ -63,10 +62,9 @@ window.fluid = {
         switchHead: "#ffffff",
 
         inputColor: "#1b1b1b",
-        blocks: "#040404",
-        
-        sidebarBorder: "#353535",
-        sidebarActive: "#292929",
+
+        navbar: "#0a0a0a",
+        sidebarActive: "#0e0e0e",
 
         cards: "#0e0e0e",
 
@@ -74,8 +72,9 @@ window.fluid = {
         themeText: "#ffffff",
 
         elementHighlight: "#ffffff12",
-        acrylic: "#000000cc",
-        lightAcrylic: "#00000066",
+        acrylic: "#060606cc",
+        mediumAcrylic: "#06060680",
+        lightAcrylic: "#06060666",
         backgroundTint: "#000000b3"
       }
     }
@@ -132,7 +131,6 @@ window.matchMedia("(prefers-color-scheme: dark)").addListener(function (e) {
 
 //Listen for window resize
 window.onresize = function (event) {
-  fluid.exitContextMenu(true);
   if (window.innerWidth <= 900) {
     $("body").addClass("collapsedSidebar");
   } else {
@@ -296,7 +294,7 @@ fluid.theme = function (requestedTheme, temporary) {
 }
 
 fluid.themeMenu = function () {
-  fluid.generateWrapper();
+  fluid.generateOverlay();
   $("#themeMenu").html(`
     <i onclick="fluid.cards.close('#themeMenu')" class="material-icons close">close</i>
 
@@ -465,8 +463,8 @@ fluid.onLoad = function () {
     }
   }
 
-  //generate wrapper
-  fluid.generateWrapper();
+  //generate overlay
+  fluid.generateOverlay();
 
   fluid.init();
 }
@@ -518,12 +516,29 @@ fluid.init = function () {
     })
   }
 
-  $(".btns:not(.themeSelector) .btn:not(.manual):not([init='true']), .list.select .item:not(.manual):not([init='true']), .sidenav .item:not(.manual):not([init='true']), .sidebar .item:not(.manual):not([init='true']), .radio .checkbox:not([init='true'])").click(function (event) {
+  for (var i = 0; i < $(".sidebar .group").length; i++) {
+    var group = $($(".sidebar .group")[i]);
+    if (group.attr("id") && window.localStorage.getItem("fluidSidebar-" + group.attr("id"))) {
+      //Sidebar collapsed state pref
+      if (window.localStorage.getItem("fluidSidebar-" + group.attr("id")) == "open") {
+        group.addClass("open");
+      } else if (window.localStorage.getItem("fluidSidebar-" + group.attr("id")) == "closed") {
+        group.removeClass("open");
+      }
+    }
+  }
+
+  $(".btns:not(.themeSelector) .btn:not(.manual):not([init='true']), .list.select .item:not(.manual):not([init='true']), .sidenav .item:not(.manual):not([init='true']), .sidebar .item:not(.group .name):not(.manual):not([init='true']), .radio .checkbox:not([init='true'])").click(function (event) {
     if (!($(this).parent().attr("class") || "").includes("pref-") && !($(this).parents(".radio").attr("class") || "").includes("pref-")) {
       //not a pref
       if ($(this).parent().hasClass("multiple")) {
+        //Multiple selection mode
         $(this).toggleClass("active")
-      } else if ($(this).parents(".radio")[0]) {
+      } else if ($(this).parents(".sidebar").length) {
+        //Sidebar
+        $(this).parents(".sidebar").find(".item:not(.group .name)").removeClass("active");
+        $(this).addClass("active");
+      } else if ($(this).parents(".radio").length) {
         //radio button
         $(this).parent().siblings().children(".checkbox").removeClass("active")
         $(this).addClass("active")
@@ -534,6 +549,22 @@ fluid.init = function () {
     }
     $(this).attr("init", "true")
   });
+
+  $(".sidebar .group .name").click(function () {
+    $(this).parent().toggleClass("open");
+
+    if ($(this).parent().attr("id")) {
+      if ($(this).parent().hasClass("open")) {
+        window.localStorage.setItem("fluidSidebar-" + $(this).parent().attr("id"), "open");
+      } else {
+        window.localStorage.setItem("fluidSidebar-" + $(this).parent().attr("id"), "closed");
+      }
+    }
+  })
+
+  $(".navbar .profile").click(function () {
+    if ($(".card.profileMenu").length) fluid.cards(".card.profileMenu");
+  })
 
   $(".sidebar .collapse:not([init='true'])").click(function () {
     $('body').toggleClass('collapsedSidebar');
@@ -559,21 +590,6 @@ fluid.init = function () {
     }
   });
 
-  $("#activecontextmenu:not([init='true'])").contextmenu(function (event) {
-    event.preventDefault();
-    $(this).attr("init", "true")
-  });
-
-  $(".btn:not([init='true']), .nav a:not([init='true']), .nav li:not([init='true'])").contextmenu(function (event) {
-    fluid.contextMenu(event.target, event)
-    $(this).attr("init", "true")
-  });
-
-  $(".contextmenu.list .item:not([init='true'])").click(function (event) {
-    fluid.exitContextMenu(false);
-    $(this).attr("init", "true")
-  });
-
   $("div.nav.active li:not([init='true'])").click(function (event) {
     $(this).siblings().removeClass("active")
     $(this).addClass("active")
@@ -589,14 +605,20 @@ fluid.init = function () {
     $(this).parent().toggleClass("collapsed");
     $(this).attr("init", "true")
   });
+}
 
-  if (fluid.expBeh) {
-    //experimental behavior
-    $(".list .item:not([init='true']), a:not([init='true'])").contextmenu(function (event) {
-      event.preventDefault(); fluid.bounceBack(event.target);
-      $(this).attr("init", "true")
-    });
-  }
+fluid.login = function (profile) {
+  fluid.account = profile;
+  $(".profileMenu .person .profileImage, .navbar .profile .profileImage").css("background-image", "url('" + profile.imageURL + "')");
+  $(".profileMenu .person .profileImage, .navbar .profile .profileImage").html("");
+  $(".profileMenu .person .info .name").text(profile.name);
+}
+
+fluid.logout = function () {
+  fluid.account = null;
+  $(".profileMenu .person .profileImage, .navbar .profile .profileImage").css("background-image", "");
+  $(".profileMenu .person .profileImage, .navbar .profile .profileImage").html('<i class="material-icons">account_circle</i>');
+  $(".profileMenu .person .info .name").text("Logged out");
 }
 
 fluid.screen = function (requestedID, param, isBack) {
@@ -803,112 +825,50 @@ fluid.chroma.static = function (color, exKeyboard) {
   static("/keypad");
 }
 
-fluid.contextMenu = function (target, event) {
-  var element = target
-  if ($(element).children("a").length == 1) element = $(element).children("a").children("i").get(0);
-  if ($(element).siblings(".contextmenu").length == 1) {
-    if (event) event.preventDefault();
-    if (!fluid.contextMenuOpen) {
-      $(element).addClass("outOfContext")
-      document.body.style.overflow = "hidden";
-      $("body").css("padding-right", "5px");
-      fluid.contextMenuOpen = true;
-      fluid.generateWrapper();
-
-      var bodyRect = document.body.getBoundingClientRect(),
-        elemRect = element.getBoundingClientRect(),
-        left = elemRect.left - bodyRect.left - 5,
-        top = elemRect.top - bodyRect.top;
-
-      $("#activecontextmenu").css("left", left)
-      $("#activecontextmenu").css("top", top)
-      $("#activecontextmenu").css("display", "inline-block")
-      $("#activecontextmenu").css("background", "transparent")
-      $(element).parent().css("height", $(element).parent().height());
-      $(element).parent().css("width", $(element).parent().width());
-      $(element).parent().css("vertical-align", "middle");
-      if ($(element).hasClass("material-icons")) {
-        $(element).parent().parent().css("width", "44px")
-        $(element).parent().parent().css("height", "44px")
-        $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.exitContextMenu(true);");
-      } else {
-        $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.exitContextMenu(false);");
-      }
-      $(element).parent().addClass("contextMenuSource")
-      if ($(element).hasClass("active")) { $(element).css("background-color", "#207bdf") } else {
-        if ($("body").hasClass("outline")) {
-          if ($("body").hasClass("dark")) { $(element).css("border", "1px solid #16181a") } else { $(element).css("border", "1px solid #dddddd") }
-        }
-        else { if ($("body").hasClass("dark")) { element.style = "background-color: var(--darker, #16181a);"; } else { element.style = "background-color: var(--darker, #dddddd);"; } }
-      }
-      $(element).siblings(".contextmenu").css("display", "inline-block");
-      $(element).siblings(".contextmenu").css("margin-left", "-20px")
-      $(element).siblings(".contextmenu").css("margin-right", "10px")
-      $(element).parent().children().appendTo("#activecontextmenu");
-      $("#activecontextmenu").css("width", $("body").width() - Number($("#activecontextmenu").css("left").slice(0, -2)))
-      if ($(element).siblings('.contextmenu').css("right").charAt(0) == "-") {
-        $(element).siblings('.contextmenu').css("right", 0)
-        $(element).siblings(".contextmenu").css("margin-top", $(element).height() + 3)
-      } else {
-        $(element).siblings(".contextmenu").css("margin-top", $(element).height())
-      }
-      fluid.blur();
-    }
-  } else {
-    if (fluid.expBeh) {
-      event.preventDefault();
-      fluid.bounceBack(element);
-    }
-  }
-}
-
 $(document).ready(function () {
   if (fluid.config.autoLoad) {
     fluid.onLoad();
   }
 });
 
-fluid.exitContextMenu = function (force) {
-  if (fluid.contextMenuOpen) {
-    fluid.unblur();
-    $("#activecontextmenu").children(".contextmenu").css("display", "none");
-    if (force) { wait = 0; } else { wait = 300; }
-    setTimeout(function () {
-      $("#activecontextmenu").children().appendTo(".contextMenuSource")
-      $(".contextMenuSource").children(".btn, i").css("background-color", "");
-      $(".contextMenuSource").children(".btn, i").css("border", "");
-      $(".contextMenuSource").children(".btn, i").removeClass("outOfContext")
-      $(".contextMenuSource").css("height", "");
-      $("#pagewrapper, .sidebar, .navbar").attr("onclick", "");
-      $(".contextMenuSource").removeClass("contextMenuSource")
-      fluid.contextMenuOpen = false;
-      document.body.style.overflow = "";
-      $("body").css("padding-right", "");
-    }, wait);
-  }
-}
-
-fluid.bounceBack = function (ele) {
-  if (!fluid.contextMenuOpen) {
-    fluid.contextMenuOpen = true;
-
-    fluid.blur();
-    document.body.style.overflow = "hidden";
-    $("body").css("padding-right", "5px");
-    setTimeout(function () {
-      fluid.unblur();
-      document.body.style.overflow = "";
-      $("body").css("padding-right", "");
-    }, 200)
-  }
-}
-
 fluid.blur = function () {
-  $("#pagewrapper, .sidebar, .navbar").addClass("blur")
+  function getScrollbarWidth() {
+
+    // Creating invisible container
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+    outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+    document.body.appendChild(outer);
+
+    // Creating inner element and placing it in the container
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+
+    // Calculating difference between container's full width and the child width
+    const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+    // Removing temporary elements from the DOM
+    outer.parentNode.removeChild(outer);
+
+    return scrollbarWidth;
+
+  }
+
+  $("body").css("--scrollbarWidth", getScrollbarWidth() + "px");
+  $("body").addClass("disableOverflow");
+  $("#fluidUIOverlay").removeClass("hidden").addClass("visible");
 }
 
 fluid.unblur = function () {
-  $("#pagewrapper, .sidebar, .navbar").removeClass("blur")
+  if (!$("#fluidUIOverlay").hasClass("hidden") && $("#fluidUIOverlay").hasClass("visible")) {
+    $("#fluidUIOverlay").removeClass("visible");
+    $("body").removeClass("disableOverflow");
+
+    setTimeout(function () {
+      if (!$("#fluidUIOverlay").hasClass("visible")) $("#fluidUIOverlay").addClass("hidden");
+    }, 400)
+  }
 }
 
 /* Cards */
@@ -916,20 +876,15 @@ menuopen = false;
 fluid.cards = function (element, stayOpen) {
   var focus = $(element).hasClass('focus');
   if (focus) {
-    fluid.generateWrapper();
-    $(element).css("top", "50px");
+    fluid.generateOverlay();
     if (menuopen) {
       fluid.cards.close(".focus");
       fluid.blur();
-      document.body.style.overflow = "hidden"
-      $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
       if (stayOpen !== "stayOpen") { setTimeout(function () { $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.card.close('" + element + "');"); }, 100) }
     } else {
       fluid.blur();
-      document.body.style.overflow = "hidden"
-      $("body").css("padding-right", "5px");
       $(element).addClass('container');
       $(element).removeClass('close');
       if (stayOpen !== "stayOpen") { setTimeout(function () { $("#pagewrapper, .sidebar, .navbar").attr("onclick", "fluid.cards.close('.focus');"); }, 100) }
@@ -949,7 +904,7 @@ fluid.modal = function (element) {
   fluid.cards(element, true)
 }
 fluid.toast = function (title, text, icon, color) {
-  fluid.generateWrapper();
+  fluid.generateOverlay();
   $("#activeAlert").hide();
   $("#activeAlert").html(`<div class="toast">
    <i style="color: ` + (color ? color : "var(--text)") + `" class="material-icons">` + icon + `</i>
@@ -967,9 +922,12 @@ fluid.alert = function (title, body, icon, actions, color) {
     title = "Alert";
     icon = "notifications";
   }
-  fluid.generateWrapper();
-  $("#activeAlert").hide();
-  $("#activeAlert").html(`<div class="card alert">
+
+  //Generate overlay
+  fluid.generateOverlay();
+
+  $("#activeAlert").remove();
+  $("#fluidUIOverlay").append(`<div id="activeAlert" class="card alert">
   <i class="material-icons close" onclick="fluid.exitAlert()">close</i>
 
    <i style="color: ` + (color ? color : "var(--text)") + `" class="material-icons">` + icon + `</i>
@@ -977,62 +935,67 @@ fluid.alert = function (title, body, icon, actions, color) {
    <div class="body">
     <div>` + body + `</div>
    </div>
-   ` + (actions ? `<div class="footer">` + actions.map((action) => {
-    return `<button onclick="fluid.exitAlert();` + (action.action || "") + `" class="btn">
+   ` + (actions ? `<div class="footer">` + actions.map((action, key) => {
+    return `<button class="btn ${key}">
      ` + (action.icon ? `<i class="material-icons">` + action.icon + `</i> ` : "") + action.name + `
      </button>`
   }).join("") + `</div>` : "") + `
-  </div>`)
-  fluid.wrapperBlur = $("#pagewrapper").hasClass("blur");
+  </div>`);
+
+  //Add onclick listeners
+  if (actions) {
+    actions.forEach((action, key) => {
+      $("#activeAlert .footer .btn." + key).click(() => {
+        fluid.exitAlert();
+        if (action.action) action.action();
+      })
+    });
+  }
+
   fluid.blur();
   $('.card.focus:not(.close)').addClass("blur");
-  if (fluid.wrapperBlur) {
-    $("#activeAlert").show();
-  } else {
-    $("#activeAlert").show("fade");
-  }
 }
+
 fluid.exitToast = function () {
   $("#activeAlert").hide("fade");
 }
+
 fluid.exitAlert = function () {
-  if (fluid.wrapperBlur) {
-    $("#activeAlert").hide();
-  } else {
-    $("#activeAlert").hide("fade");
-    fluid.unblur();
-  }
+  $("#activeAlert").remove();
+  if (!$('.card.focus:not(.close)').length) fluid.unblur();
   $('.card.focus:not(.close)').removeClass("blur");
 }
+
 fluid.cards.close = function (element) {
-  $(element).addClass('close');
+  $(element || ".card.focus:not(.close)").addClass('close');
   fluid.unblur();
-  document.body.style.overflow = ""
-  $("body").css("padding-right", "");
   $("#pagewrapper, .sidebar, .navbar").attr("onclick", "");
   menuopen = false;
 }
-fluid.generateWrapper = function () {
-  if (!$("#pagewrapper").length) {
-    $("body").wrapInner("<div id='pagewrapper'></div>");
-    $("#pagewrapper").after(`<div style="position: fixed; left: 0px; width: 100%; z-index: 99999;"><div id='focuscardwrapper' class='container'></div></div>`);
-    $("#pagewrapper").after("<div id='activecontextmenu' style='position:absolute'></div>");
-    $("#pagewrapper").after("<div id='themeMenu' class='focus card close' style='z-index: 15; height: 100vh;'></div>");
-    $("#pagewrapper").after("<div id='activeAlert' style='z-index: 99;'></div>");
-    $("#pagewrapper").after("<div id='splashscreen' style='display:none;margin-top: 100px;' class='container'><h1 style='font-size:5rem;' id='splashscreenname'></h1><div id='splashscreencnt'></div></div>");
-    $(".card.focus").appendTo("#focuscardwrapper");
-    $(".splash").appendTo("#splashscreencnt");
-    $(".sidebar").appendTo("body");
-    $(".navbar").appendTo("body");
+
+fluid.generateOverlay = function () {
+  if (!$("#fluidUIOverlay").length) {
+    $("body").prepend(`<div class="hidden" id="fluidUIOverlay"></div>`);
+    $(".card.focus").appendTo("#fluidUIOverlay");
+    $(".card.profileMenu").appendTo("#fluidUIOverlay");
+    $("#fluidUIOverlay").append("<div id='themeMenu' class='focus card close' style='height: 100%;'></div>");
+
+    $("#fluidUIOverlay").click(function (e) {
+      if (e.target !== this) return;
+      fluid.cards.close();
+      fluid.exitAlert();
+    })
   }
 }
+
 fluid.splash = function (element) {
-  document.body.style.overflow = "hidden";
+  $("body").addClass("disableOverflow");
   $(element).show();
 }
+
 fluid.unsplash = function () {
-  document.body.style.overflow = "";
   $(".splashScreen").hide();
+  $("body").removeClass("disableOverflow");
 }
 
 /* Fluid Commands */
@@ -1040,18 +1003,13 @@ fluid.unsplash = function () {
 var allowedKeys = {
   38: 'up',
   40: 'down',
-  119: 'f8'
+  119: 'f8',
+  120: 'f9'
 };
 var darkOverride = ['up', 'up', 'down', 'down', 'f8'];
 var darkOverridePosition = 0;
-
-var allowedKeysAuto = {
-  38: 'up',
-  40: 'down',
-  118: 'f7'
-};
-var autoOverride = ['up', 'up', 'down', 'down', 'f7'];
-var autoOverridePosition = 0;
+var imageOverride = ['up', 'up', 'down', 'down', 'f9'];
+var imageOverridePosition = 0;
 
 
 
@@ -1068,16 +1026,19 @@ document.addEventListener('keydown', function (e) {
     darkOverridePosition = 0;
   }
 
-  var key = allowedKeysAuto[e.keyCode];
-  var requiredKey = autoOverride[autoOverridePosition];
+  var requiredKey = imageOverride[imageOverridePosition];
   if (key == requiredKey) {
-    autoOverridePosition++;
-    if (autoOverridePosition == autoOverride.length) {
-      fluid.theme("auto");
-      autoOverridePosition = 0;
+    imageOverridePosition++;
+    if (imageOverridePosition == imageOverride.length) {
+      if (window.localStorage.getItem("fluidThemeImageURL") && !fluid.currentThemeImage) {
+        fluid.theme("image." + window.localStorage.getItem("fluidThemeImageURL"));
+      } else {
+        fluid.theme("image.");
+      }
+      imageOverridePosition = 0;
     }
   } else {
-    autoOverridePosition = 0;
+    imageOverridePosition = 0;
   }
 
 });

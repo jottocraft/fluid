@@ -26,6 +26,7 @@
       author: "jottocraft",
       domain: "fluid.jottocraft.com"
     }
+
     if (window.localStorage.getItem("pref-chroma") == 'true') {
       fluid.chroma.init(chromaProfile, function () {
         fluid.chroma.themeLink = true;
@@ -69,70 +70,12 @@
 
 <body class="hasSidebar">
 
-  <div style="display: none;" class="navbar">
-    <img src="https://fluid.jottocraft.com/icon.svg" />
-    <h4>Fluid UI</h4>
-
-    <div class="items">
-      <div class="navitem">
-        <i class="material-icons">star</i>
-        <span>Nav item 1</span>
-      </div>
-      <div class="navitem">
-        <i class="material-icons">star</i>
-        <span>Nav item 2</span>
-      </div>
-      <div class="navitem">
-        <i class="material-icons">star</i>
-        <span>Nav item 3</span>
-      </div>
-    </div>
-  </div>
-
-  <div id="mainbar" class="sidebar">
-    <div class="bigLogo">
-      <img src="https://fluid.jottocraft.com/icon.svg">
-      <h4>Fluid UI</h4>
-      <p>v5 <span class="badge">beta 1</span></p>
-    </div>
-
-    <img class="logo" src="https://fluid.jottocraft.com/icon.svg" />
-
-    <div class="items">
-      <div onclick="$('html,body').scrollTop($('a[name=input]').offset().top);" class="item input">
-        <div class="icon"><i class="material-icons">keyboard</i></div> <span class="label">Input & Forms</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=dark]').offset().top);" class="item dark">
-        <div class="icon"><i class="material-icons">format_paint</i></div> <span class="label">Themes</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=nav]').offset().top);" class="item nav">
-        <div class="icon"><i class="material-icons">navigation</i></div> <span class="label">Navigation</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=cards]').offset().top);" class="item cards">
-        <div class="icon"><i class="material-icons">layers</i></div> <span class="label">Groups</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=layout]').offset().top);" class="item layout">
-        <div class="icon"><i class="material-icons">view_quilt</i></div> <span class="label">Layout</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=alerts]').offset().top);" class="item alerts">
-        <div class="icon"><i class="material-icons">notifications</i></div> <span class="label">Alerts</span>
-      </div>
-      <div onclick="$('html,body').scrollTop($('a[name=install]').offset().top);" class="item install">
-        <div class="icon"><i class="material-icons">code</i></div> <span class="label">Install</span>
-      </div>
-    </div>
-
-    <div class="collapse">
-      <i class="material-icons"></i>
-    </div>
-  </div>
-
   <script>
     var order = ["input", "dark", "nav", "cards", "layout", "alerts", "install"];
     function updateScroll() {
       var scroll = $(window).scrollTop();
       for (var i = order.length - 1; i >= 0; i--) {
-        if (scroll >= $("a[name=" + order[i] + "]").offset().top) {
+        if (scroll >= ($("a[name=" + order[i] + "]").offset().top - 32)) {
           $("#mainbar .item:not(." + order[i] + ")").removeClass("active");
           $("#mainbar .item." + order[i] + "").addClass("active");
           return;
@@ -149,7 +92,127 @@
       --icons: "Material Icons Round"
     }
   </style>
-  <br /><br />
+
+  <div class="card close focus profileMenu">
+    <div class="person">
+      <div class="profileImage">
+        <i class="material-icons">account_circle</i>
+      </div>
+      <div class="info">
+        <h5 class="name">Logged out</h5>
+        <p>Some other profile text</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="item">
+        <i class="material-icons">star</i>
+        <span class="label">Sample action</span>
+      </div>
+      <div class="item">
+        <i class="material-icons">star</i>
+        <span class="label">Sample action</span>
+      </div>
+      <div class="item">
+        <i class="material-icons">star</i>
+        <span class="label">Sample action</span>
+      </div>
+      <div class="divider"></div>
+      <div class="item">
+        <i class="material-icons">exit_to_app</i>
+        <span class="label">Logout</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: none;" class="navbar">
+    <div class="logo">
+      <img src="https://fluid.jottocraft.com/icon.svg" />
+      <h4>Fluid UI</h4>
+    </div>
+
+    <div class="items">
+      <div class="navitem active">
+        <i class="material-icons">star</i>
+        <span>Nav item 1 (Active)</span>
+      </div>
+      <div class="navitem">
+        <i class="material-icons">star</i>
+        <span>Nav item 2</span>
+      </div>
+      <div class="navitem">
+        <i class="material-icons">star</i>
+        <span>Nav item 3</span>
+      </div>
+    </div>
+
+    <div class="profile">
+      <div class="profileImage">
+        <i class="material-icons">account_circle</i>
+      </div>
+    </div>
+  </div>
+
+  <div id="mainbar" class="sidebar">
+    <div class="title">
+      <img src="https://fluid.jottocraft.com/icon.svg">
+      <h4>Fluid UI</h4>
+      <p>v5 <span class="badge">beta 2</span></p>
+    </div>
+
+    <div class="items">
+      <div onclick="$('html,body').scrollTop($('a[name=input]').offset().top);" class="item input">
+        <i class="material-icons">keyboard</i> <span class="label">Input & Forms</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=dark]').offset().top);" class="item dark">
+        <i class="material-icons">format_paint</i> <span class="label">Themes</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=nav]').offset().top);" class="item nav">
+        <i class="material-icons">navigation</i> <span class="label">Navigation</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=cards]').offset().top);" class="item cards">
+        <i class="material-icons">layers</i> <span class="label">Groups</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=layout]').offset().top);" class="item layout">
+        <i class="material-icons">view_quilt</i> <span class="label">Layout</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=alerts]').offset().top);" class="item alerts">
+        <i class="material-icons">notifications</i> <span class="label">Alerts</span>
+      </div>
+      <div onclick="$('html,body').scrollTop($('a[name=install]').offset().top);" class="item install">
+        <i class="material-icons">code</i> <span class="label">Install</span>
+      </div>
+
+      <div style="display: none;" id="sideCat-demoGroup" class="group fluidUIGroupDemo">
+        <div class="name item">
+          <i class="material-icons"></i> <span class="label">Demo Group</span>
+        </div>
+
+        <div class="items">
+          <div class="item">
+            <i class="material-icons">star</i> <span class="label">Group item 1</span>
+          </div>
+
+          <div class="item">
+            <i class="material-icons">star</i> <span class="label">Group item 2</span>
+          </div>
+
+          <div class="item">
+            <i class="material-icons">star</i> <span class="label">Group item 3</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: none;" class="item fluidUIGroupDemo">
+        <i class="material-icons">star</i> <span class="label">Demo item</span>
+      </div>
+    </div>
+
+    <div class="collapse">
+      <i class="material-icons"></i>
+    </div>
+  </div>
+
   <div class="container">
 
     <a name="input"></a>
@@ -198,9 +261,6 @@
         <p>Dropdowns in Fluid do not need any special HTML and are styled the same as Fluid UI buttons. Dropdowns also
           support the outline and small classes, but do not support other button features such as button rows or context
           menus.</p>
-        <p>A context menu (experimental) can be added a supported element by putting a list with the contextmenu class
-          next to it. It is reccommended that you wrap your button in a div element with the display property set to
-          inline-block.</p>
         <br />
         <code
           class="prettyprint">&lt;button class="btn"&gt;&lt;i class="material-icons"&gt;star&lt;/i&gt; Demo Button&lt;/button&gt;</code>
@@ -208,11 +268,6 @@
         <div style="display: inline-block;">
           <button class="btn primary"><i class="material-icons">arrow_forward</i>Continue</button>
           <button class="btn outline"><i class="material-icons">arrow_forward</i>Continue</button>
-          <div class="list contextmenu">
-            <div class="item"><i class="material-icons">star_border</i>Item 1</div>
-            <div class="item"><i class="material-icons">star_border</i>Item 2</div>
-            <div class="item"><i class="material-icons">star_border</i>Item 3</div>
-          </div>
         </div>
         <button class="btn"><i class="material-icons">close</i>Cancel</button>
         <br /><br />
@@ -622,31 +677,20 @@
         <div class="row">
           <button onclick="$('body').toggleClass('disableAcrylic'); $(this).toggleClass('active');" class="btn">Disable
             Acrylic</button>
-          <button onclick="$('body').toggleClass('sampleBgImage'); $(this).toggleClass('active');" class="btn">Show a
-            background image</button>
         </div>
         <br />
         <div id="demoWallContainer"
-          style="height: 600px; background-image: url('https://i.imgur.com/73vMibt.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
+          style="height: 600px; background-image: url('https://i.imgur.com/Mbs2s1P.jpg'); background-size:     cover;   background-repeat:   no-repeat; background-position: center center; border-radius: 20px; padding: 20px; text-align: center;">
           <div id="acrylicDemoWindow"
             style="margin: 200px 0px; padding: 40px; display: inline-block; border-radius: 10px; font-weight: bold; cursor: move; color: var(--text); z-index: 10;"
             class="acrylicMaterial">This element uses Fluid UI Acrylic<br />You can drag this and change themes to see
             how the color changes.<br />Browsers that do not support Acrylic will not see the blur effect.</div>
-          <button onclick="changeDemoWall();" class="acrylicMaterial"
-            style="position: absolute; right: 10px; margin-top: 525px;">Change Wallpaper</button>
         </div>
 
         <script>
           $(document).ready(function () {
             $("#acrylicDemoWindow").draggable();
           })
-          var demoWall = 0;
-          var demoWalls = ["https://i.imgur.com/73vMibt.jpg", "https://i.imgur.com/esS5C8x.jpg", "https://i.imgur.com/cn1qcVA.jpg", "https://i.imgur.com/d8gklDZ.jpg", "https://i.imgur.com/LxT56De.jpg", "https://i.imgur.com/gELuC4p.jpg"]
-          function changeDemoWall() {
-            demoWall++;
-            if (demoWall == demoWalls.length) demoWall = 0;
-            $("#demoWallContainer").css("background-image", "url('" + demoWalls[demoWall] + "')")
-          }
         </script>
       </div>
     </div>
@@ -676,57 +720,145 @@
         <a name="nav-navbar"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">maximize</i>Navbar
         </h5>
-        <p>Navbars are used for showing links and take up the entire top of the screen. Navbars are sticky and use Fluid
-          UI Acrylic by default.</p>
+        <p>Navbars work great for top-level navigation and navigating between pages. For navigating between content on
+          the same page, try using a sidebar.</p>
+        <p>Navbars and sidebars can be used together with no additional code changes.</p>
         <button onclick="$('body').toggleClass('hasNavbar'); $('.navbar').toggle();" class="btn">Toggle
           navbar</button>
         <pre>
-    <code class="prettyprint">&lt;div class=&quot;navbar&quot;&gt; 
-  &lt;img src=&quot;https://fluid.jottocraft.com/icon.svg&quot; /&gt; 
-  &lt;h4&gt;Fluid UI&lt;/h4&gt; 
-  
-  &lt;div class=&quot;items&quot;&gt; 
-    &lt;div class=&quot;navitem&quot;&gt; 
-      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
-      &lt;span&gt;Nav item 1&lt;/span&gt; 
-    &lt;/div&gt; 
-    
-    &lt;div class=&quot;navitem&quot;&gt; 
-      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
-      &lt;span&gt;Nav item 2&lt;/span&gt; 
-    &lt;/div&gt; 
-    
-    &lt;div class=&quot;navitem&quot;&gt; 
-      &lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt; 
-      &lt;span&gt;Nav item 3&lt;/span&gt; 
-    &lt;/div&gt; 
-  &lt;/div&gt; 
+    <code class="prettyprint">&lt;div class="navbar"&gt;
+  &lt;div class="logo"&gt;
+    &lt;img src="https://fluid.jottocraft.com/icon.svg" /&gt;
+    &lt;h4&gt;My Site&lt;/h4&gt;
+  &lt;/div&gt;
+
+  &lt;div class="items"&gt;
+    &lt;div class="navitem active"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span&gt;Nav item 1 (Active)&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="navitem"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span&gt;Nav item 2&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="navitem"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span&gt;Nav item 3&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="profile"&gt;
+    &lt;div class="profileImage"&gt;
+      &lt;i class="material-icons"&gt;account_circle&lt;/i&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <br />
+        <p>The profile element in the navbar also supports a new Fluid UI profile menu. You can change the profile shown
+          in the profile menu by calling fluid.login and fluid.logout (experimental)</p>
+        <br />
+        <button onclick="if (!fluid.account) { fluid.login({ name: 'Sample profile', imageURL: 'https://fluid.jottocraft.com/logo.png' }) } else { fluid.logout() }">Toggle profile demo</button>
+        <pre><code class="prettyprint">//Login
+fluid.login({
+  name: {string},
+  imageURL: {string}
+});
+
+//Logout
+fluid.logout();</code></pre>
+        <br />
+        <pre>
+            <code class="prettyprint">&lt;div class="card close focus profileMenu"&gt;
+  &lt;div class="person"&gt;
+    &lt;div class="profileImage"&gt;
+      &lt;i class="material-icons"&gt;account_circle&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class="info"&gt;
+      &lt;h5 class="name"&gt;Logged out&lt;/h5&gt;
+      &lt;p&gt;Some other profile text&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="actions"&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span class="label"&gt;Sample action&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span class="label"&gt;Sample action&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;span class="label"&gt;Sample action&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="divider"&gt;&lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;exit_to_app&lt;/i&gt;
+      &lt;span class="label"&gt;Logout&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
             class="material-icons">vertical_split</i>Sidebar</h5>
-        <p>Try out the sidebar demo. When using the sidebar, add the "hasSidebar" class to the body element to make
-          sure everything is padded correctly. Place the sidebar right after the
-
-          &lt;body&gt; tag. Sidebars can be collapsed by the user by default. Collapsed sidebars only show the icon.
-        </p>
-        <button onclick="$('body').toggleClass('hasSidebar'); $('.sidebar').toggle();" class="btn">Toggle
-          sidebar</button>
+        <p>The navigation on this site is a sidebar. Sidebars should be used to navigate between content on the same
+          page or navigate between a large quantity of pages. See the navbar section above for navigating between a
+          small amount of pages.</p>
+        <p>Sidebars support collapsing and item groups. In order for Fluid UI to save the sidebar group collapsed state,
+          you'll need to add a unique ID to every group.</p>
+        <p>Navbars and sidebars can be used together with no additional code changes.</p>
+        <button onclick="$('.fluidUIGroupDemo').toggle();" class="btn">Toggle sidebar group demo</button>
         <br /><br />
-        <pre><code class="prettyprint">&lt;div class=&quot;sidebar acrylicMaterial&quot;&gt;
-    &lt;h4&gt;Teleport&lt;/h4&gt;
-    &lt;img class=&quot;logo&quot; src=&quot;https://tp.js.org/favicon.png&quot; /&gt;
-      
-    &lt;div class=&quot;items&quot;&gt;
-      &lt;div class=&quot;item main&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;home&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Home&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Create&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;item&quot;&gt;&lt;div class=&quot;icon&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;edit&lt;/i&gt;&lt;/div&gt; &lt;span class=&quot;label&quot;&gt;Edit&lt;/span&gt;&lt;/div&gt;
+        <pre><code class="prettyprint">&lt;div class="sidebar"&gt;
+  &lt;div class="title"&gt;
+    &lt;img src="https://fluid.jottocraft.com/icon.svg"&gt;
+    &lt;h4&gt;My Site&lt;/h4&gt;
+  &lt;/div&gt;
+
+  &lt;div class="items"&gt;
+
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 1&lt;/span&gt;
     &lt;/div&gt;
-      
-    &lt;div class=&quot;collapse&quot;&gt;
-      &lt;i class=&quot;material-icons&quot;&gt;keyboard_arrow_left&lt;/i&gt;
+
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 2&lt;/span&gt;
     &lt;/div&gt;
+
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 3&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class="item"&gt;
+      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 4&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div id="sampleGroup" class="group"&gt;
+      &lt;div class="name item"&gt;
+        &lt;i class="material-icons"&gt;&lt;/i&gt; &lt;span class="label"&gt;Sample group&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class="items"&gt;
+        &lt;div class="item"&gt;
+          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 1&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class="item"&gt;
+          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 2&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class="item"&gt;
+          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 3&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    
+  &lt;/div&gt;
+
+  &lt;div class="collapse"&gt;
+    &lt;i class="material-icons"&gt;&lt;/i&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web</i>Screens</h5>
@@ -887,7 +1019,7 @@ fluid.screen(); //load initial screen</code></pre>
           any styling (default), as a card, or as a clickable element depending on the use case.</p>
         <br /><br />
         <p>Status blocks</p>
-        <div class="grid flex">
+        <div style="--size: 200px;" class="grid flex">
           <div class="block status">
             <h2 class="main">12</h2>
             <h5 class="bottom"><i class="material-icons">folder</i> Folders</h5>
@@ -919,7 +1051,7 @@ fluid.screen(); //load initial screen</code></pre>
         </div>
         <br /><br /><br />
         <p>Info blocks</p>
-        <div class="grid flex">
+        <div style="--size: 400px;" class="grid flex">
           <div class="block info">
             <div class="status">
               <i class="main material-icons">folder</i>
@@ -964,24 +1096,10 @@ fluid.screen(); //load initial screen</code></pre>
             </div>
             <div class="content">
               <h4>A lot of text</h4>
-              <p>This block has a max width of 400px and a max height of 200px, so plenty of text can be displayed
-                without making the block massive.
+              <p>This block has a max width of 400px and a max height of 200px. When displaying a lot of text in a
+                block,
+                make sure to restrict both the max width and the max height.
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh. Fringilla ut
-                morbi tincidunt augue. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Et netus et
-                malesuada fames ac turpis egestas.
-              </p>
-            </div>
-          </div>
-          <div class="block info">
-            <div class="status">
-              <i class="main material-icons">text_fields</i>
-            </div>
-            <div class="content">
-              <h4>A lot of text</h4>
-              <p>Since this block has no fixed width, it will handle text overflow the same way as any other HTML
-                element. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et
                 dolore magna aliqua. Aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh. Fringilla ut
                 morbi tincidunt augue. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Et netus et
                 malesuada fames ac turpis egestas.
@@ -991,7 +1109,7 @@ fluid.screen(); //load initial screen</code></pre>
         </div>
         <br /><br /><br />
         <p>Image blocks</p>
-        <div class="grid flex">
+        <div style="--size: 340px;" class="grid flex">
           <div class="block image">
             <div class="status">
               <div style="--image: url('https://i.imgur.com/0Co2HJ1.jpg');" class="image"></div>
@@ -1218,7 +1336,7 @@ fluid.screen(); //load initial screen</code></pre>
           of the page. The example below has an image, but the header can be used without one. Each site should only
           have one header per page.</p>
         <div class="header">
-          <img src="https://mspoweruser.com/wp-content/uploads/2018/11/windowslight.jpg" class="main" />
+          <img src="https://i.imgur.com/Mbs2s1P.jpg" class="main" />
           <div class="card">
             <h1>Fluid UI</h1>
             <h5>By jottocraft</h5>
@@ -1230,7 +1348,52 @@ fluid.screen(); //load initial screen</code></pre>
             </div>
           </div>
         </div>
-
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">table_view</i>Tables
+        </h5>
+        <p>Fluid UI includes basic styling for HTML tables and support for the active class on table rows</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item</th>
+              <th>Item</th>
+              <th>Item</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+            <tr class="active">
+              <th>2</th>
+              <td>Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td>Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td>Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+            <tr>
+              <th>5</th>
+              <td>Item</td>
+              <td>Item</td>
+              <td>Item</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <br /><br />
@@ -1328,14 +1491,13 @@ fluid.screen(); //load initial screen</code></pre>
           action buttons shown on the alert. Each action will close the alert before running the action. An action
           should have the following properties:</p>
         <ul>
-          <li>String name: The name of the action as it should be shown to the user</li>
-          <li>String icon (optional): The material icon for the action</li>
-          <li>String action (optional): The HTML onclick parameter for the action button. For a close button, leave this
-            blank.</li>
+          <li>name {string}: The name of the action</li>
+          <li>[icon] {string}: The icon of the action</li>
+          <li>[action] {function}: The function to run when this action is clicked</li>
         </ul>
         <br />
         <button
-          onclick="fluid.alert('Demo Alert', 'This is a demo alert', 'notifications', [{name: 'Cancel', action: 'alert(`Cancel pressed`)'}, {name: 'OK', action: 'alert(`OK pressed`)'}])"
+          onclick="fluid.alert('Demo Alert', 'This is a demo alert', 'notifications', [{name: 'Cancel', action: () => alert(`Cancel pressed`)}, {name: 'OK', action: () => alert(`OK pressed`)}])"
           class="btn">Try</button>
       </div>
     </div>
