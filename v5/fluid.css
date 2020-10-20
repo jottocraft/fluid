@@ -1,5 +1,5 @@
 /*!
-Fluid UI Elements v5 beta 2
+Fluid UI Elements v5 beta 3
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the MIT License (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
@@ -75,7 +75,7 @@ Licenced under the MIT License (https://github.com/jottocraft/fluid/blob/master/
   --mediumAcrylic: rgb(236 236 236 / 50%);
   --lightAcrylic: rgb(255 255 255 / 40%);
   --acrylicBorder: #2d2d2d3d;
-  --backgroundTint: #ffffffb3;
+  --backgroundTint: #ffffffcc;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -87,27 +87,27 @@ Licenced under the MIT License (https://github.com/jottocraft/fluid/blob/master/
     --lightText: #c4c4c4;
     --secText: #808080;
   
-    --elements: #262626;
+    --elements: #2b2b2b;
     --elementText: white;
-    --elementHover: #303030;
+    --elementHover: #3c3c3c;
     --switchHead: #cccccc;
     
-    --inputColor: #242424;
-    
-    --navbar: #252525f2;
-    --sidebarActive: #2b2b2b;
+    --inputColor: #1b1b1b;
   
-    --cards: #191919;
-    
+    --navbar: #232323f2;
+    --sidebarActive: #2f2f2f;
+  
+    --cards: #1d1d1d;
+  
     --theme: #133e61;
     --themeText: #f1f9ff;
   
     --highlight: #ffffff12;
-    --acrylic: rgb(31 31 31 / 86%);
-    --mediumAcrylic: rgb(31 31 31 / 50%);
-    --lightAcrylic: rgb(21 21 21 / 40%);
+    --acrylic: rgb(27 27 27 / 86%);
+    --mediumAcrylic: rgb(27 27 27 / 50%);
+    --lightAcrylic: rgb(37 37 37 / 40%);
     --acrylicBorder: #ffffff14;
-    --backgroundTint: #151515b3;
+    --backgroundTint: #151515cc;
   }
 }
 
@@ -120,27 +120,27 @@ body.dark, .themeWindow.darkBox {
   --lightText: #c4c4c4;
   --secText: #808080;
 
-  --elements: #262626;
+  --elements: #2b2b2b;
   --elementText: white;
-  --elementHover: #303030;
+  --elementHover: #3c3c3c;
   --switchHead: #cccccc;
   
-  --inputColor: #242424;
-  
-  --navbar: #252525f2;
-  --sidebarActive: #2b2b2b;
+  --inputColor: #1b1b1b;
 
-  --cards: #191919;
-  
+  --navbar: #232323f2;
+  --sidebarActive: #2f2f2f;
+
+  --cards: #1d1d1d;
+
   --theme: #133e61;
   --themeText: #f1f9ff;
 
   --highlight: #ffffff12;
-  --acrylic: rgb(31 31 31 / 86%);
-  --mediumAcrylic: rgb(31 31 31 / 50%);
-  --lightAcrylic: rgb(21 21 21 / 40%);
+  --acrylic: rgb(27 27 27 / 86%);
+  --mediumAcrylic: rgb(27 27 27 / 50%);
+  --lightAcrylic: rgb(37 37 37 / 40%);
   --acrylicBorder: #ffffff14;
-  --backgroundTint: #151515b3;
+  --backgroundTint: #151515cc;
 }
 
 /* Background images */
@@ -435,8 +435,8 @@ img.emoji {
   backdrop-filter: blur(32px);
   background-blend-mode: multiply;
   background-color: var(--lightAcrylic);
-  transition: background-color 0.4s, backdrop-filter 0.4s;
-  animation: fadeOutOverlay 0.4s;
+  transition: background-color 0.2s, backdrop-filter 0.2s;
+  animation: fadeOutOverlay 0.2s;
   opacity: 0;
   padding: 50px 0px;
 }
@@ -451,7 +451,7 @@ img.emoji {
 
 #fluidUIOverlay.visible {
   display: block;
-  animation: fadeInOverlay 0.4s;
+  animation: fadeInOverlay 0.2s;
   opacity: 1;
 }
 
@@ -567,7 +567,7 @@ button, select {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  transition: background-color 0.4s, border 0.4s;
+  transition: background-color 0.2s, border 0.2s;
   color: var(--elementText);
   user-select: none;
   vertical-align: middle;
@@ -576,6 +576,11 @@ button, select {
   letter-spacing: 0.9px;
   background-color: var(--elements);
   border: 2px solid transparent;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: auto !important;
 }
 
 button.outline, select.outline {
@@ -604,16 +609,16 @@ button i, select i {
   line-height: inherit;
 }
 
-button:not(.active):not(.outline):not(.primary):hover {
+button:not(.active):not(.outline):not(.primary):hover:not(:disabled) {
   background-color: var(--elementHover);
   border-color: var(--highlight);
 }
 
-button.outline:not(.active):hover {
+button.outline:not(.active):hover:not(:disabled) {
   border-color: var(--elementHover);
 }
 
-button.primary:not(.active):hover {
+button.primary:not(.active):hover:not(:disabled) {
   border-color: var(--highlight);
 }
 
@@ -651,7 +656,7 @@ button.small, select.small {
 
 .btns button {
   margin: 0;
-  transition: background-color 0.4s, border 0.4s, color 0.4s, box-shadow 0.4s;
+  transition: background-color 0.2s, border 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 /* Small button row */
@@ -862,7 +867,7 @@ body.showThemeWindows .themeSelector .arrow i {
   letter-spacing: 0.9px;
   padding: 15px 10px;
   border-radius: var(--cardRadius);
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
   margin: 3px 0px;
 }
 
@@ -883,6 +888,7 @@ code {
   box-shadow: var(--lightShadow) !important;
   overflow: auto;
   border-radius: var(--cardRadius);
+  background: var(--acrylic);
 }
 
 code * {
@@ -1043,10 +1049,15 @@ input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):no
   outline: none;
   height: 44px;
   margin-bottom: 20px;
-  transition: border 0.4s, box-shadow 0.4s;
+  transition: border 0.2s, box-shadow 0.2s;
   color: var(--text);
   border: 2px solid var(--elements);
   background: inherit;
+}
+
+input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]):disabled, textarea:disabled {
+  opacity: 0.5;
+  background: var(--elementHover) !important;
 }
 
 input:not([type=submit]):not([type=color]):not([type=range]):not([type=file]):not([type=checkbox]):not([type=button]):not([type=radio]):not([type=reset]).filled {
@@ -1111,13 +1122,13 @@ textarea {
   height: 25px;
   cursor: pointer;
   vertical-align: middle;
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
   box-shadow: none;
   background-color: var(--elements);
 }
 
 .switch .head {
-  transition: background-color 0.4s, margin 0.4s;
+  transition: background-color 0.2s, margin 0.2s;
   border-radius: var(--elementRadius);
   display: inline-block;
   background-color: var(--switchHead);
@@ -1185,7 +1196,7 @@ textarea {
   height: 25px;
   cursor: pointer;
   vertical-align: middle;
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
   box-shadow: none;
   background-color: var(--elements);
   text-align: center;
@@ -1301,8 +1312,9 @@ body.hasNavbar .sidebar .items {
 .sidebar .items {
   text-align: center;
   margin-top: 32px;
-  max-height: 100%;
+  height: 100%;
   overflow: auto;
+  position: relative;
 }
 
 .sidebar .item {
@@ -1314,6 +1326,17 @@ body.hasNavbar .sidebar .items {
   border-radius: calc(var(--elementRadius) - 2px);
   white-space: nowrap;
   overflow: hidden;
+}
+
+.sidebar .item.footer {
+  color: var(--lightText);
+  position: absolute;
+  bottom: 0px;
+  display: block;
+}
+
+body.collapsedSidebar .sidebar .item.footer {
+  width: calc(100% - 20px);
 }
 
 .sidebar .item.main {
@@ -1568,11 +1591,11 @@ body.disableOverflow .navbar {
   line-height: 32px;
   margin: 2px 4px;
   color: var(--secText);
+  transition: color 0.2s;
 }
 
 .navbar .navitem.active {
   color: var(--text);
-  transition: color 0.4s;
 }
 
 .navbar .navitem.active span, .navbar .navitem.active i {
@@ -1932,7 +1955,7 @@ body:not(.dark) .alert:not(.card) {
   cursor: pointer;
   padding: 18px;
   border: 2px solid transparent;
-  transition: background-color 0.4s, border-color 0.4s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .block.clickable button {
@@ -2109,7 +2132,7 @@ table.table th, table.table td {
 }
 
 table.table tr {
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
 }
 
 table.table tr.active {
@@ -2139,49 +2162,70 @@ table.table tr *:last-child {
 
 /* Sections / Headers
 --------------------------------------------------  */
-
-.header img {
+.headerArea {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 400px;
-  object-fit: cover;
   border-radius: var(--cardRadius);
+}
+
+.headerArea img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   box-shadow: var(--lightShadow);
+  position: absolute;
 }
 
-.header .card {
-  max-width: 650px;
-  margin: 0 auto;
-  margin-top: -180px;
-  padding: 36px;
-  }
-
-.header .card h1 {
-  font-size: 48px;
-  margin: 0px;
-  margin-bottom: 10px;
+.headerArea .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: var(--backgroundTint);
 }
 
-.header .card h5 {
-  margin: 0px;
+.headerArea .content p {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 20px 10px;
   color: var(--lightText);
 }
 
-.header .card p {
+.headerArea .content p span {
+  font-size: 16px;
+  font-weight: bold;
+  vertical-align: middle;
+  text-shadow: 2px 2px 20px var(--background);
+  display: inline-block;
+}
+
+.headerArea .content p i {
   margin: 0px;
-  margin-top: 18px;
-  color: var(--secText);
 }
 
-.header .btns {
-  width: 100%;
-  text-align: center;
-  display: flex;
-  background: none;
-  margin-top: 20px;
+.headerArea .content .btns {
+  background: transparent;
 }
 
-.header .btns button {
-  flex-grow: 1;
+.headerArea .content .btns button {
+  color: var(--text) !important;
+}
+
+.headerArea .content .btns button.active {
+  background: var(--backgroundTint) !important;
+  backdrop-filter: blur(10px);
+}
+
+.headerArea h1 {
+  margin: 0px;
+  text-shadow: 2px 2px 20px var(--background);
 }
 
 .section {
@@ -2414,6 +2458,15 @@ body.dark .swal-title, body.dark .swal-text {
 
 body.dark .swal-modal {
   background-color: var(--elements);
+}
+
+body.pizzapizza {
+  --background: #fb651b;
+  --text: black;
+  --cards: #fb651b;
+  --theme: #ff9865;
+  --themeText: #ffffff;
+  --backgroundTint: #fb651bb3;
 }
 
 /* Thank you for using Fluid UI :) */

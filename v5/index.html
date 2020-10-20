@@ -19,21 +19,6 @@
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
-  <script>
-    chromaProfile = {
-      title: "Fluid UI Demo Effects",
-      description: "Demo effects from the Fluid UI demo site",
-      author: "jottocraft",
-      domain: "fluid.jottocraft.com"
-    }
-
-    if (window.localStorage.getItem("pref-chroma") == 'true') {
-      fluid.chroma.init(chromaProfile, function () {
-        fluid.chroma.themeLink = true;
-        fluid.theme();
-      })
-    }
-  </script>
   <script type="text/javascript" src="fluid.js"></script>
 
   <link rel="shortcut icon" href="../favicon.png" type="image/png">
@@ -157,7 +142,7 @@
     <div class="title">
       <img src="https://fluid.jottocraft.com/icon.svg">
       <h4>Fluid UI</h4>
-      <p>v5 <span class="badge">beta 2</span></p>
+      <p>v5 <span class="badge">beta 3</span></p>
     </div>
 
     <div class="items">
@@ -210,7 +195,7 @@
 
     <div class="collapse">
       <i class="material-icons"></i>
-    </div>
+  </div>
   </div>
 
   <div class="container">
@@ -491,48 +476,44 @@
         <p>Fluid UI includes the themes listed below (note that auto and system both show up as "Auto" in the UI. The
           user can change which version they want to use by clicking the more button in the theme selector):</p>
         <ul>
+          <li>Automatic (system-theme, default) (ID: "system")</li>
           <li>Automatic (time-based) (ID: "auto")</li>
-          <li>Automatic (system-based) (ID: "system")</li>
           <li>Light (ID: "light")</li>
           <li>Dark (ID: "dark")</li>
           <li>Midnight Black (ID: "midnight")</li>
-          <li>Tome (ID: "tome")</li>
+          <li>Tome (dark purple) (ID: "tome")</li>
         </ul>
         <br />
         <p>Get the current theme (When using the auto theme, this will return the theme that was automatically chosen)
         </p>
-        <code class="prettyprint">fluid.theme()</code>
+        <code class="prettyprint">fluid.theme();</code>
+        <br />
+        <p>Set the current theme
+        </p>
+        <code class="prettyprint">fluid.theme([theme ID]);</code>
         <br /><br />
         <a name="dark-auto"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
             class="material-icons">brightness_auto</i>Time-based auto theme</h5>
-        <p>By default, Fluid UI uses the time-based auto theme if the user's system theme is light or unset and the
-          system-based auto theme if the user's system theme is dark.</p>
-        <p style="margin-bottom: 0px;"><i>During Standard
-            Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Light
-            theme: 6AM - 5PM&nbsp;&nbsp;&nbsp;&nbsp;Dark theme: 6PM - 5AM</i>
-          <br /><i>During Daylight Savings Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Light theme: 5AM -
-            6PM&nbsp;&nbsp;&nbsp;&nbsp;Dark theme: 7PM - 4AM</i></p>
-        <p>JavaScript function</p>
-        <code class="prettyprint">fluid.theme("auto");</code>
+        <p>Fluid UI includes a time-based auto theme, which chooses if a light or dark theme should be used based on the
+          time.</p>
+        <p style="margin-bottom: 0px;"><i>Light
+            theme: 6AM - 7PM&nbsp;&nbsp;&nbsp;&nbsp;Dark theme: 7PM - 6AM</i></p>
         <br />
         <p>Click the try button below to try the time-based auto theme. Note that this theme is enabled by default if
           you have your system theme unset or in light mode.</p>
         <button onclick="fluid.theme('auto');" class="btn ">Try</button>
         <br /><br />
         <a name="dark-manual"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Changing the
-          theme</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Setting the
+          default theme</h5>
         <p>You can set the default theme using the fluidConfig object</p>
         <pre><code class="prettyprint">fluidConfig = {
   config: {
     defaultTheme: {string}, //The themeID to use by default
+    lockTheme: {boolean} //If this is true, Fluid UI will only allow the default theme to be used (default: false)
   }
 }</code></pre>
-        <br /><br />
-        <p>You can change the current theme using the fluid.theme function. The first parameter is the theme ID to set,
-          and the second parameter is an optional boolean that will skip saving the theme preference when true.</p>
-        <code class="prettyprint">fluid.theme(theme ID, [override theme saving]);</code>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
             class="material-icons">arrow_drop_down_circle</i>Theme Selector</h5>
@@ -622,39 +603,6 @@
             </ul>
           </li>
         </ul>
-        <br /><br />
-        <h5><img style="margin: -5px 5px 0px 0px; vertical-align: middle; width: 24px !important;"
-            src="https://i.imgur.com/FLwviAM.png" class="material-icons" />Razer Chroma</h5>
-        <p>Fluid UI supports static effects on Razer Chroma-enabled keyboards, mice, headsets, mousepads, keypads, and
-          Chroma connect / Chroma link devices. Fluid UI also supports detailed lighting effects on Razer Chroma-enabled
-          keyboards. You can set fluid.chroma.themeLink to true to show the user's current Fluid UI theme on all
-          supported chroma devices, which is the only included chroma effect in Fluid UI. You can make your own static
-          and detailed keyboard effects to deepen your site's chroma integration.</p>
-        <br />
-        <pre>
-<code class="prettyprint">fluid.chroma.init({
-  title: [name of your website or web app (string)],
-  description: [description of your website or web app (string)],
-  author: [author name (string)]
-}, function() {
-  //You can automatically reflect your user's theme with Chroma by uncommenting the line below
-  //Ideally, you would also run fluid.theme() after to ensure that the user's current theme is shown without having to change themes.
-  //fluid.chroma.themeLink = true;
-
-  //Set a static theme
-  fluid.chroma.static([color (rgb or hex string)]);
-
-  //Or set a more complex theme
-  //See the CHROMA_CUSTOM section at https://assets.razerzone.com/dev_portal/REST/html/md__r_e_s_t_external_03_8keyboard.html for more details
-  fluid.chroma.effect([color (rgb or hex string)], [2D array (6x22) of colors for each key on the keyboard]);
-})
-</code>
-        </pre>
-        <p>Demo: Click the button below to enable Razer Chroma, then try changing themes to see the keyboard lighting
-          change.</p>
-        <button
-          onclick="if (fluid.get('pref-chroma') == 'true') { fluid.set('pref-chroma', false); fluid.chroma.disable(); } else { $('body').css('cursor', 'progress'); fluid.chroma.init(chromaProfile, () => { fluid.set('pref-chroma', true); fluid.chroma.themeLink = true; fluid.theme(); $('body').css('cursor', 'default'); alert('Chroma effects enabled') }) }"
-          class="btn pref-chroma">Enable Chroma Effects</button>
         <pre id="acrylicSection"></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">texture</i>Fluid UI
@@ -754,21 +702,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br />
-        <p>The profile element in the navbar also supports a new Fluid UI profile menu. You can change the profile shown
-          in the profile menu by calling fluid.login and fluid.logout (experimental)</p>
-        <br />
-        <button onclick="if (!fluid.account) { fluid.login({ name: 'Sample profile', imageURL: 'https://fluid.jottocraft.com/logo.png' }) } else { fluid.logout() }">Toggle profile demo</button>
-        <pre><code class="prettyprint">//Login
-fluid.login({
-  name: {string},
-  imageURL: {string}
-});
-
-//Logout
-fluid.logout();</code></pre>
-        <br />
-        <pre>
-            <code class="prettyprint">&lt;div class="card close focus profileMenu"&gt;
+        <pre><code class="prettyprint">&lt;div class="card close focus profileMenu"&gt;
   &lt;div class="person"&gt;
     &lt;div class="profileImage"&gt;
       &lt;i class="material-icons"&gt;account_circle&lt;/i&gt;
@@ -1335,16 +1269,23 @@ fluid.screen(); //load initial screen</code></pre>
         <p>The header element is used for organizing site's main title, image, date, author, and other info at the top
           of the page. The example below has an image, but the header can be used without one. Each site should only
           have one header per page.</p>
-        <div class="header">
-          <img src="https://i.imgur.com/Mbs2s1P.jpg" class="main" />
-          <div class="card">
+        <div class="headerArea">
+          <img src="https://i.imgur.com/Mbs2s1P.jpg" />
+          <div class="content">
             <h1>Fluid UI</h1>
-            <h5>By jottocraft</h5>
-            <p>7/26/2020</p>
+            <div>
+              <p>
+                <i class="material-icons">person</i> <span>By jottocraft</span>
+              </p>
+              <p>
+                <i class="material-icons">event</i> <span>7/26/2020</span>
+              </p>
+            </div>
             <div class="btns">
-              <button class="btn active">Tab 1</button>
-              <button class="btn">Tab 2</button>
-              <button class="btn">Tab 3</button>
+              <button class="btn active"><i class="material-icons">tab</i> Tab 1</button>
+              <button class="btn"><i class="material-icons">tab</i> Tab 2</button>
+              <button class="btn"><i class="material-icons">tab</i> Tab 3</button>
+              <button class="btn"><i class="material-icons">tab</i> Tab 4</button>
             </div>
           </div>
         </div>
@@ -1414,14 +1355,6 @@ fluid.screen(); //load initial screen</code></pre>
         <br />
         <button onclick="fluid.splash('#demosplash')" class="btn">Try</button>
         <br /><br />
-        <a name="splash-toasts"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">picture_in_picture</i>Toasts</h5>
-        <p>Use fluid.toast, and include a <a href="https://material.io/tools/icons/?style=baseline">material icon
-            string</a> and the toast's message</p>
-        <code class="prettyprint">fluid.toast(title, text [, icon] [, icon color])</code>
-        <br />
-        <button onclick="fluid.toast('Demo Toast', 'This is a demo', 'picture_in_picture')" class="btn">Try</button>
         <a name="splash-alerts"></a>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">info</i>Alert Components
@@ -1484,7 +1417,8 @@ fluid.screen(); //load initial screen</code></pre>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alert
           Popups
         </h5>
-        <p>Fluid UI has native alerts and also supports <a href="https://sweetalert.js.org/">Sweetalert</a></p>
+        <p>Fluid UI has native alerts and also supports <a href="https://sweetalert.js.org/">Sweetalert</a>. The check,
+          info, warning, and error icons all have default colors.</p>
         <code class="prettyprint">fluid.alert(title, body [, icon] [, actions array])</code>
         <br />
         <p>The actions parameter is optional. The actions parameter should be an array of objects representing different
@@ -1497,7 +1431,7 @@ fluid.screen(); //load initial screen</code></pre>
         </ul>
         <br />
         <button
-          onclick="fluid.alert('Demo Alert', 'This is a demo alert', 'notifications', [{name: 'Cancel', action: () => alert(`Cancel pressed`)}, {name: 'OK', action: () => alert(`OK pressed`)}])"
+          onclick="fluid.alert('Demo Alert', 'This is a demo alert', 'info', [{name: 'Cancel', action: () => alert(`Cancel pressed`)}, {name: 'OK', action: () => alert(`OK pressed`)}])"
           class="btn">Try</button>
       </div>
     </div>
