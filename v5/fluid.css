@@ -1,5 +1,5 @@
 /*!
-Fluid UI Elements v5 beta 3
+Fluid UI Elements v5 beta 3-r1
 Copyright (c) 2017-2020 jottocraft. All rights reserved.
 Licenced under the MIT License (https://github.com/jottocraft/fluid/blob/master/LICENSE)
  */
@@ -2358,7 +2358,7 @@ animation-timing-function: linear;
 .splashScreen {
   display: none;
   position: fixed;
-  z-index: 99999;
+  z-index: 800;
   top: 0px;
   left: 0px;
   width: 100%;
