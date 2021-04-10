@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="shortcut icon" href="https://fluid-old.jottocraft.com/favicon.png" type="image/png">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/src/fluid.css" media="screen,projection" />
+
+    <!--OpenGraph -->
+    <meta property="og:url" content="https://fluid-old.jottocraft.com" />
+    <meta property="og:title" content="Fluid UI" />
+    <meta property="og:description" content="Simple CSS with a dark mode" />
+    <meta property="og:image" content="https://fluid-old.jottocraft.com/logo.png" />
+
+    <title>Fluid UI</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Simple CSS with a dark mode">
+    <meta name="author" content="jottocraft">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script async src="https://cdn.jottocraft.com/fluid/assets/tinycolor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/src/fluid.js"></script>
+
+    <style>
+        /* Header */
+        #header {
+            color: var(--elementText);
+            padding: 100px 10px;
+            padding-bottom: 120px;
+            margin-bottom: 125px;
+            text-align: center;
+        }
+
+        #header h1 {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 68px;
+        }
+
+        .title img {
+            height: 98px;
+            vertical-align: middle;
+            margin-right: 22px;
+        }
+
+        #header .title {
+            margin-bottom: 40px;
+        }
+
+        /* Content Blocks */
+        .displayBlock {
+            overflow: hidden;
+            margin-bottom: 200px;
+            padding: 20px;
+            float: none !important;
+        }
+
+        .container .displayBlock .description>*:nth-child(1) {
+            margin-top: 0px;
+        }
+
+        .container .displayBlock .description>*:nth-last-child(1) {
+            margin-bottom: 0px;
+        }
+
+        .container .displayBlock .description p {
+            font-size: 20px;
+            color: var(--lightText);
+        }
+
+        /* Large content blocks */
+        .container .displayBlock:not(.small)>img {
+            width: 28%;
+            max-width: 250px;
+        }
+
+        .container .displayBlock:not(.small)>.description {
+            overflow: hidden;
+        }
+
+        .container .displayBlock:not(.small):nth-child(odd)>img,
+        .container .displayBlock.left:not(.small):nth-child(even)>img {
+            float: left;
+            margin-right: 48px;
+            margin-left: 0;
+        }
+
+        .container .displayBlock:not(.small):nth-child(even)>img,
+        .container .displayBlock.right:not(.small):nth-child(odd)>img {
+            float: right;
+            margin-left: 48px;
+            margin-right: 0;
+        }
+
+        .container .displayBlock:not(.small) .description h3 {
+            font-size: 2.6rem;
+        }
+
+        /* Small content blocks */
+        .container .displayBlock.small .description h3 {
+            font-size: 2.2rem;
+        }
+
+        .container .displayBlock.small {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .container .displayBlock.small img {
+            height: 150px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="header">
+        <div class="content">
+            <div class="title">
+                <img style="filter: grayscale(1);" src="/icon.svg" />
+                <h1>Fluid UI</h1>
+            </div>
+            <div class="row">
+                <button id="dtpsInstallBtn" onclick="window.location.href = '/docs';" class="btn"><i
+                        class="fluid-icon">description</i> Documentation</button>
+                <button id="dtpsInstallBtn" onclick="window.location.href = '/docs/reference';" class="btn"><i
+                        class="fluid-icon">account_tree</i> JSDoc</button>
+                <button class="btn outline"
+                    onclick="window.location.href = 'https://github.com/jottocraft/fluid-old';"><i
+                        class="fluid-icon">code</i> Source code</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="displayBlock left">
+            <img src="assets/warning.svg" />
+            <div class="description">
+                <h3>Deprecation Notice</h3>
+                <p>The current Fluid UI codebase is deprecated and will no longer receive any feature updates. Critical
+                    security and bugfix updates may still be made available when needed.</p>
+                <p>Because of this, the existing codebase has moved to the <a
+                        href="https://github.com/jottocraft/fluid-old">jottocraft/fluid-old</a>
+                    GitHub repository, and code that previously wasn't published has been added. Additionally, the
+                    entire project, including all 150+ changes made within its
+                    lifetime, is now freely available in the public domain as-is under the <a
+                        href="https://github.com/jottocraft/fluid-old/blob/master/LICENSE">unlicense</a>.</p>
+                <p>If you have any questions or concerns about the future of Fluid UI, please contact me at <a
+                        href="mailto:hello@jottocraft.com">hello@jottocraft.com</a>.</p>
+            </div>
+        </div>
+        <div style="--size: 400px;" class="grid samesize">
+            <div class="displayBlock small item">
+                <img style="filter: grayscale(1);" src="assets/colors.svg" />
+                <div class="description">
+                    <h3>Dark mode</h3>
+                    <p>Fluid UI includes an easy to use dark mode and has support for custom themes</p>
+                </div>
+            </div>
+
+            <div class="displayBlock small item">
+                <img style="filter: grayscale(1);" src="assets/design.svg" />
+                <div class="description">
+                    <h3>Modern components</h3>
+                    <p>Fluid UI has a modern design and many built-in functions to make things easier</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+    <div style="text-align: center; margin: 50px 0px;">
+        <img style="height: 45px; margin-right: 20px; vertical-align: middle;"
+            src="https://cdn.jottocraft.com/images/footerImage.png" />
+        <h5 style="display: inline-block; vertical-align: middle;">jottocraft</h5>
+        <p>Made by jottocraft 2017-2021&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid-old">source
+                code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid-old/blob/master/LICENSE">license</a>
+        </p>
+    </div>
+
+
+</body>
+
+</html>

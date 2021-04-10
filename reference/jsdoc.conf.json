@@ -1,0 +1,13 @@
+{
+    "sourceType": "script",
+    "templates": {
+        "systemName": "Fluid UI Docs",
+        "systemSummary": "Reference documentation for the latest version of Fluid UI",
+        "systemLogo": "./www/favicon.png",
+        "systemColor": "#2aa079",
+        "copyright": "Made by jottocraft 2017-2021&nbsp;&nbsp;<a href=\"https://github.com/jottocraft/fluid-old\">source code</a>&nbsp;&nbsp;<a href=\"https://github.com/jottocraft/fluid-old/blob/master/LICENSE\">license</a>",
+        "favicon": "./www/favicon.png",
+        "collapseSymbols": false,
+        "footer": "<img style='height: 32px; margin: 10px 0px;' src='https://cdn.jottocraft.com/images/footerImage.png' />"
+    }
+}

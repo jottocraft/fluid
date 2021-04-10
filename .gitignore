@@ -15,12 +15,11 @@
 *.min.css
 *.min.js
 tmp
+build
+cdn
+Setup.exe
 
-#Studio Archive
-studio/fluid-studio.zip
-studio/Setup.exe
-studio/builds
-studio
+.vscode
 
 #jsorg archive
 jsorg

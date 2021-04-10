@@ -19,9 +19,9 @@
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
-  <script type="text/javascript" src="fluid.js"></script>
+  <script type="text/javascript" src="/src/fluid.js"></script>
 
-  <link rel="shortcut icon" href="../favicon.png" type="image/png">
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Extended" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -29,25 +29,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 
-  <link type="text/css" rel="stylesheet" href="fluid.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/src/fluid.css" media="screen,projection" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark">
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=css"></script>
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!--OpenGraph -->
-  <meta property="og:url" content="https://fluid.jottocraft.com" />
+  <meta property="og:url" content="https://fluid-old.jottocraft.com" />
   <meta property="og:title" content="Fluid UI" />
   <meta property="og:description" content="Simple CSS with a dark mode" />
-  <meta property="og:image" content="https://fluid.jottocraft.com/logo.png" />
+  <meta property="og:image" content="https://fluid-old.jottocraft.com/logo.png" />
 
   <meta charset="utf-8">
   <title>Fluid UI</title>
   <meta name="description" content="Simple CSS with a dark mode">
   <meta name="author" content="jottocraft">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 
 </head>
@@ -78,10 +77,10 @@
     }
   </style>
 
-  <div class="card close focus profileMenu">
+  <div class="card profileMenu">
     <div class="person">
       <div class="profileImage">
-        <i class="material-icons">account_circle</i>
+        <i class="fluid-icon">account_circle</i>
       </div>
       <div class="info">
         <h5 class="name">Logged out</h5>
@@ -91,20 +90,20 @@
 
     <div class="actions">
       <div class="item">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span class="label">Sample action</span>
       </div>
       <div class="item">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span class="label">Sample action</span>
       </div>
       <div class="item">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span class="label">Sample action</span>
       </div>
       <div class="divider"></div>
       <div class="item">
-        <i class="material-icons">exit_to_app</i>
+        <i class="fluid-icon">exit_to_app</i>
         <span class="label">Logout</span>
       </div>
     </div>
@@ -112,89 +111,89 @@
 
   <div style="display: none;" class="navbar">
     <div class="logo">
-      <img src="https://fluid.jottocraft.com/icon.svg" />
+      <img src="https://fluid-old.jottocraft.com/icon.svg" />
       <h4>Fluid UI</h4>
     </div>
 
     <div class="items">
       <div class="navitem active">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span>Nav item 1 (Active)</span>
       </div>
       <div class="navitem">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span>Nav item 2</span>
       </div>
       <div class="navitem">
-        <i class="material-icons">star</i>
+        <i class="fluid-icon">star</i>
         <span>Nav item 3</span>
       </div>
     </div>
 
     <div class="profile">
       <div class="profileImage">
-        <i class="material-icons">account_circle</i>
+        <i class="fluid-icon">account_circle</i>
       </div>
     </div>
   </div>
 
   <div id="mainbar" class="sidebar">
     <div class="title">
-      <img src="https://fluid.jottocraft.com/icon.svg">
+      <img style="filter:grayscale(1);" src="https://fluid-old.jottocraft.com/icon.svg">
       <h4>Fluid UI</h4>
-      <p>v5 <span class="badge">beta 3</span></p>
+      <p>v5.0.0 <span class="badge">deprecated</span></p>
     </div>
 
     <div class="items">
       <div onclick="$('html,body').scrollTop($('a[name=input]').offset().top);" class="item input">
-        <i class="material-icons">keyboard</i> <span class="label">Input & Forms</span>
+        <i class="fluid-icon">keyboard</i> <span class="label">Input & Forms</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=dark]').offset().top);" class="item dark">
-        <i class="material-icons">format_paint</i> <span class="label">Themes</span>
+        <i class="fluid-icon">format_paint</i> <span class="label">Themes</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=nav]').offset().top);" class="item nav">
-        <i class="material-icons">navigation</i> <span class="label">Navigation</span>
+        <i class="fluid-icon">navigation</i> <span class="label">Navigation</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=cards]').offset().top);" class="item cards">
-        <i class="material-icons">layers</i> <span class="label">Groups</span>
+        <i class="fluid-icon">layers</i> <span class="label">Groups</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=layout]').offset().top);" class="item layout">
-        <i class="material-icons">view_quilt</i> <span class="label">Layout</span>
+        <i class="fluid-icon">view_quilt</i> <span class="label">Layout</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=alerts]').offset().top);" class="item alerts">
-        <i class="material-icons">notifications</i> <span class="label">Alerts</span>
+        <i class="fluid-icon">notifications</i> <span class="label">Alerts</span>
       </div>
       <div onclick="$('html,body').scrollTop($('a[name=install]').offset().top);" class="item install">
-        <i class="material-icons">code</i> <span class="label">Install</span>
+        <i class="fluid-icon">code</i> <span class="label">Install</span>
       </div>
 
       <div style="display: none;" id="sideCat-demoGroup" class="group fluidUIGroupDemo">
         <div class="name item">
-          <i class="material-icons"></i> <span class="label">Demo Group</span>
+          <i class="fluid-icon"></i> <span class="label">Demo Group</span>
         </div>
 
         <div class="items">
           <div class="item">
-            <i class="material-icons">star</i> <span class="label">Group item 1</span>
+            <i class="fluid-icon">star</i> <span class="label">Group item 1</span>
           </div>
 
           <div class="item">
-            <i class="material-icons">star</i> <span class="label">Group item 2</span>
+            <i class="fluid-icon">star</i> <span class="label">Group item 2</span>
           </div>
 
           <div class="item">
-            <i class="material-icons">star</i> <span class="label">Group item 3</span>
+            <i class="fluid-icon">star</i> <span class="label">Group item 3</span>
           </div>
         </div>
       </div>
 
       <div style="display: none;" class="item fluidUIGroupDemo">
-        <i class="material-icons">star</i> <span class="label">Demo item</span>
+        <i class="fluid-icon">star</i> <span class="label">Demo item</span>
       </div>
     </div>
 
     <div class="collapse">
-      <i class="material-icons"></i>
+      <i class="fluid-icon"></i>
   </div>
   </div>
 
@@ -203,12 +202,12 @@
     <a name="input"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">keyboard</i>
+        <i class="fluid-icon">keyboard</i>
         <h2>Input</h2>
       </div>
       <div class="body">
         <a name="input-text"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">text_fields</i>Text
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">text_fields</i>Text
           input</h5>
         <p>You can add an icon by putting an icon directly before the input element, then adding the inputIcon class to
           both the input and the icon. If your input has margin, it will need to be added to the icon as well. You can
@@ -217,19 +216,19 @@
           show the shadow effect. Use the default input style for forms or other areas with lots of inputs and buttons
           and use the filled style for standalone inputs, like a search box.</p>
         <div style="display: inline-block;">
-          <i class="inputIcon material-icons">search</i>
+          <i class="inputIcon fluid-icon">search</i>
           <input class="inputIcon" placeholder="Search" />
         </div>
         <div style="display: inline-block;">
-          <i class="inputIcon material-icons">search</i>
+          <i class="inputIcon fluid-icon">search</i>
           <input class="inputIcon filled" placeholder="Search" />
         </div>
         <br />
-        <pre><code class="prettyprint">&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
+        <pre><code class="prettyprint">&#x3C;i class=&#x22;inputIcon fluid-icon&#x22;&#x3E;search&#x3C;/i&#x3E;
 &#x3C;input class=&#x22;inputIcon&#x22; placeholder=&#x22;Search&#x22; /&#x3E;
 
 &lt;!-- filled input style --&gt;
-&#x3C;i class=&#x22;inputIcon material-icons&#x22;&#x3E;search&#x3C;/i&#x3E;
+&#x3C;i class=&#x22;inputIcon fluid-icon&#x22;&#x3E;search&#x3C;/i&#x3E;
 &#x3C;input class=&#x22;inputIcon filled&#x22; placeholder=&#x22;Search&#x22; /&#x3E;</code></pre>
         <br /><br /><br />
         <textarea placeholder="Textarea"></textarea>
@@ -238,7 +237,7 @@
         <code class="prettyprint">&lt;textarea&gt;&lt;/textarea&gt;</code>
         <br /><br />
         <a name="input-buttons"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">touch_app</i>Buttons &
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">touch_app</i>Buttons &
           Dropdowns</h5>
         <p>Add an icon by placing a span next to a material icon instead of text. You can add the "outline" class to
           make the button use an outline instead of a background, acting as a secondary button. You can add the "small"
@@ -248,13 +247,13 @@
           menus.</p>
         <br />
         <code
-          class="prettyprint">&lt;button class="btn"&gt;&lt;i class="material-icons"&gt;star&lt;/i&gt; Demo Button&lt;/button&gt;</code>
+          class="prettyprint">&lt;button class="btn"&gt;&lt;i class="fluid-icon"&gt;star&lt;/i&gt; Demo Button&lt;/button&gt;</code>
         <br />
         <div style="display: inline-block;">
-          <button class="btn primary"><i class="material-icons">arrow_forward</i>Continue</button>
-          <button class="btn outline"><i class="material-icons">arrow_forward</i>Continue</button>
+          <button class="btn primary"><i class="fluid-icon">arrow_forward</i>Continue</button>
+          <button class="btn outline"><i class="fluid-icon">arrow_forward</i>Continue</button>
         </div>
-        <button class="btn"><i class="material-icons">close</i>Cancel</button>
+        <button class="btn"><i class="fluid-icon">close</i>Cancel</button>
         <br /><br />
         <button class="btn small">Small button</button>
         <br /><br />
@@ -266,7 +265,7 @@
         </select>
         <br /><br /><br />
         <a name="input-switches"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">toggle_on</i>Switches &
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">toggle_on</i>Switches &
           Sliders</h5>
         <p>Fluid UI will automatically toggle the active class on the switch when clicked</p>
         <p>Sliders are just standard HTML sliders with the slider class added</p>
@@ -280,7 +279,7 @@
 &lt;div class="label"&gt;Demo switch&lt;/div&gt;</code></pre>
         <br /><br /><br />
         <a name="input-checkboxes"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">check_box</i>Checkboxes
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">check_box</i>Checkboxes
           & Radio Buttons</h5>
         <p>Checkboxes work the same way as switches in FLuid UI. Fluid UI will automatically toggle the active class
           when clicked and they can be used for boolean user preferences.</p>
@@ -289,14 +288,14 @@
         <br />
 
         <div>
-          <div onclick="fluid.set('pref-boxA')" class="checkbox pref-boxA"><i class="material-icons">check</i></div>
+          <div onclick="fluid.set('pref-boxA')" class="checkbox pref-boxA"><i class="fluid-icon">check</i></div>
           <div class="label">Demo checkbox A</div>
         </div>
 
         <br />
 
         <div>
-          <div onclick="fluid.set('pref-boxB')" class="checkbox pref-boxB active"><i class="material-icons">check</i>
+          <div onclick="fluid.set('pref-boxB')" class="checkbox pref-boxB active"><i class="fluid-icon">check</i>
           </div>
           <div class="label">Demo checkbox B</div>
         </div>
@@ -304,7 +303,7 @@
         <br /> <br />
 
         <pre><code class="prettyprint">&lt;div&gt;
-  &lt;div class=&quot;checkbox&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
+  &lt;div class=&quot;checkbox&quot;&gt;&lt;i class=&quot;fluid-icon&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
   &lt;div class=&quot;label&quot;&gt;Demo checkbox A&lt;/div&gt; 
 &lt;/div&gt;</code></pre>
 
@@ -339,7 +338,7 @@
 
         <br /><br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">radio_button_checked</i>Button row</h5>
+            class="fluid-icon">radio_button_checked</i>Button row</h5>
         <p>Buttons can be placed on rows to create a selector. Plus, they handle the active class with no additional
           code required! If you want to handle the active class yourself, you can add the "manual" class to the buttons.
           This also works for lists, sidenavs, and sidebars. You can add the active class to the default button, and
@@ -375,7 +374,7 @@
 </pre>
         <br />
         <a name="input-prefs"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">settings</i>Handling
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">settings</i>Handling
           User Preferences & Settings</h5>
         <p>Adding settings in your website can be annoying. You have to load a switch, make sure the switch is toggled
           correctly, make sure that code can check for that setting, then make sure that everything updates properly
@@ -407,7 +406,7 @@
 
 &lt;!-- checkbox --&gt;
 &lt;div&gt;
-  &lt;div onclick=&quot;fluid.set([setting string])&quot; class=&quot;checkbox [setting string]&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
+  &lt;div onclick=&quot;fluid.set([setting string])&quot; class=&quot;checkbox [setting string]&quot;&gt;&lt;i class=&quot;fluid-icon&quot;&gt;check&lt;/i&gt;&lt;/div&gt; 
   &lt;div class=&quot;label&quot;&gt;Demo checkbox A&lt;/div&gt; 
 &lt;/div&gt;
 </code></pre>
@@ -428,7 +427,7 @@
           the setting. Remember to call fluid.init to add the event listeners if you add an element representing a
           setting after the page loads.</p>
         <br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">mood</i>Emoji</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">mood</i>Emoji</h5>
         <p>Fluid UI automatically parses emoji on your site on load into Twitter emoji 🙂. Add the "notwemoji" class to
           the body if you want to use native emoji instead.</p>
         <code class="prettyprint">&lt;body class=&quot;notwemoji&quot;&gt;</code>
@@ -438,21 +437,21 @@
         <br /><br />
         <a name="input-lists"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">format_list_bulleted</i>Lists</h5>
+            class="fluid-icon">format_list_bulleted</i>Lists</h5>
         <p>If you want it to act as a select element list, you can add the "select" class, and handle the clicks. This
           will cause it to act the same as a button row (see above). You can also add the "multiple" class in addition
           the the select class to make it work like checkboxes.</p>
         <br />
         <div class="list select multiple">
-          <div class="item"><i class="material-icons">star_border</i>Item 1</div>
-          <div class="item"><i class="material-icons">star_border</i>Item 2</div>
-          <div class="item"><i class="material-icons">star_border</i>Item 3</div>
+          <div class="item"><i class="fluid-icon">star_border</i>Item 1</div>
+          <div class="item"><i class="fluid-icon">star_border</i>Item 2</div>
+          <div class="item"><i class="fluid-icon">star_border</i>Item 3</div>
         </div>
         <br />
         <pre><code class="prettyprint">&lt;div class=&quot;list select multiple&quot;&gt;
-  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 1&lt;/div&gt;
-  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 2&lt;/div&gt;
-  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;star&lt;/i&gt;Item 3&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;fluid-icon&quot;&gt;star&lt;/i&gt;Item 1&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;fluid-icon&quot;&gt;star&lt;/i&gt;Item 2&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;&lt;i class=&quot;fluid-icon&quot;&gt;star&lt;/i&gt;Item 3&lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </div>
@@ -460,7 +459,7 @@
     <a name="dark"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">format_paint</i>
+        <i class="fluid-icon">format_paint</i>
         <h2>Themes</h2>
       </div>
       <div class="body">
@@ -494,7 +493,7 @@
         <br /><br />
         <a name="dark-auto"></a>
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">brightness_auto</i>Time-based auto theme</h5>
+            class="fluid-icon">brightness_auto</i>Time-based auto theme</h5>
         <p>Fluid UI includes a time-based auto theme, which chooses if a light or dark theme should be used based on the
           time.</p>
         <p style="margin-bottom: 0px;"><i>Light
@@ -505,7 +504,7 @@
         <button onclick="fluid.theme('auto');" class="btn ">Try</button>
         <br /><br />
         <a name="dark-manual"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Setting the
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">build</i>Setting the
           default theme</h5>
         <p>You can set the default theme using the fluidConfig object</p>
         <pre><code class="prettyprint">fluidConfig = {
@@ -516,7 +515,7 @@
 }</code></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">arrow_drop_down_circle</i>Theme Selector</h5>
+            class="fluid-icon">arrow_drop_down_circle</i>Theme Selector</h5>
         <p>The theme selector is a built-in theme selection UI element. The theme selector shows the auto, light, and
           dark themes with a more button to open the theme menu card. The theme menu card shows the entire theme list
           with the color themes and additional settings for changing the auto theme version and background image.</p>
@@ -532,10 +531,11 @@
 }</code></pre>
         <br /><br />
         <p>Theme selector demo</p>
-        <div class="btns row themeSelector"></div>
-        <code class="prettyprint">&lt;div class=&quot;btns row themeSelector&quot;&gt;&lt;/div&gt;</code>
+        <div class="themeSelectionUI"></div>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">color_lens</i>Custom
+        <code class="prettyprint">&lt;div class=&quot;themeSelectionUI&quot;&gt;&lt;/div&gt;</code>
+        <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">color_lens</i>Custom
           themes
         </h5>
         <p>Custom themes in Fluid UI are set using the fluidConfig variable. For details about the colors set by custom
@@ -556,7 +556,7 @@
         <br />
         <pre id="acrylicSection"></pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">star_border</i>Icons
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">star_border</i>Icons
         </h5>
         <p>Fluid UI uses Google Material Icons. You can choose any icon from <a
             href="https://material.io/resources/icons">this website</a> to use in Fluid UI. Material Icons come in 5
@@ -564,7 +564,7 @@
           See the list below for how to change the icon style.
         </p>
         <ul>
-          <li><i style="font-family: 'Material Icons Extended'" class="material-icons">featured_video</i> "Material
+          <li><i style="font-family: 'Material Icons Extended'" class="fluid-icon">featured_video</i> "Material
             Icons Extended" (Default)
             <ul>
               <li>This icon set uses the default filled Material Icon style and includes all of the icons from the
@@ -572,7 +572,7 @@
               <li>This icon set is enabled by default</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Outlined'" class="material-icons">featured_video</i> "Material
+          <li><i style="font-family: 'Material Icons Outlined'" class="fluid-icon">featured_video</i> "Material
             Icons Outlined"
             <ul>
               <li>This is the icon set used on this site. To use this icon set, remove the Material Icons Extended
@@ -582,7 +582,7 @@
                 href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"&gt;</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Round'" class="material-icons">featured_video</i> "Material Icons
+          <li><i style="font-family: 'Material Icons Round'" class="fluid-icon">featured_video</i> "Material Icons
             Round"
             <ul>
               <li>To use this icon set, remove the Material Icons Extended
@@ -592,7 +592,7 @@
                 href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"&gt;</li>
             </ul>
           </li>
-          <li><i style="font-family: 'Material Icons Sharp'" class="material-icons">featured_video</i> "Material Icons
+          <li><i style="font-family: 'Material Icons Sharp'" class="fluid-icon">featured_video</i> "Material Icons
             Sharp"
             <ul>
               <li>To use this icon set, remove the Material Icons Extended
@@ -605,7 +605,7 @@
         </ul>
         <pre id="acrylicSection"></pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">texture</i>Fluid UI
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">texture</i>Fluid UI
           Acrylic
         </h5>
         <p>Fluid UI now has a transparency effects with Fluid UI Acrylic. Acrylic is enabled by default on cards with
@@ -646,27 +646,27 @@
     <a name="nav"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">navigation</i>
+        <i class="fluid-icon">navigation</i>
         <h2>Navigation</h2>
       </div>
       <div class="body">
         <p><b>Navigation elements in Fluid UI are highly experimental. Each site has different needs for its navigation,
             and Fluid UI's options are limited. Navigation elements listed below are not fully supported.</b></p>
         <br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">folder</i>Breadcrumbs
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">folder</i>Breadcrumbs
         </h5>
         <br />
         <div class="directory">
           <span>Home</span>
-          <i class="material-icons">keyboard_arrow_right</i>
+          <i class="fluid-icon">keyboard_arrow_right</i>
           <span>Documents</span>
-          <i class="material-icons">keyboard_arrow_right</i>
+          <i class="fluid-icon">keyboard_arrow_right</i>
           <span class="active">Calendar</span>
         </div>
         <br /><br />
         <br />
         <a name="nav-navbar"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">maximize</i>Navbar
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">maximize</i>Navbar
         </h5>
         <p>Navbars work great for top-level navigation and navigating between pages. For navigating between content on
           the same page, try using a sidebar.</p>
@@ -676,28 +676,28 @@
         <pre>
     <code class="prettyprint">&lt;div class="navbar"&gt;
   &lt;div class="logo"&gt;
-    &lt;img src="https://fluid.jottocraft.com/icon.svg" /&gt;
+    &lt;img src="https://fluid-old.jottocraft.com/icon.svg" /&gt;
     &lt;h4&gt;My Site&lt;/h4&gt;
   &lt;/div&gt;
 
   &lt;div class="items"&gt;
     &lt;div class="navitem active"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span&gt;Nav item 1 (Active)&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="navitem"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span&gt;Nav item 2&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="navitem"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span&gt;Nav item 3&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 
   &lt;div class="profile"&gt;
     &lt;div class="profileImage"&gt;
-      &lt;i class="material-icons"&gt;account_circle&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;account_circle&lt;/i&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -705,7 +705,7 @@
         <pre><code class="prettyprint">&lt;div class="card close focus profileMenu"&gt;
   &lt;div class="person"&gt;
     &lt;div class="profileImage"&gt;
-      &lt;i class="material-icons"&gt;account_circle&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;account_circle&lt;/i&gt;
     &lt;/div&gt;
     &lt;div class="info"&gt;
       &lt;h5 class="name"&gt;Logged out&lt;/h5&gt;
@@ -715,27 +715,27 @@
 
   &lt;div class="actions"&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span class="label"&gt;Sample action&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span class="label"&gt;Sample action&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt;
       &lt;span class="label"&gt;Sample action&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class="divider"&gt;&lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;exit_to_app&lt;/i&gt;
+      &lt;i class="fluid-icon"&gt;exit_to_app&lt;/i&gt;
       &lt;span class="label"&gt;Logout&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">vertical_split</i>Sidebar</h5>
+            class="fluid-icon">vertical_split</i>Sidebar</h5>
         <p>The navigation on this site is a sidebar. Sidebars should be used to navigate between content on the same
           page or navigate between a large quantity of pages. See the navbar section above for navigating between a
           small amount of pages.</p>
@@ -746,44 +746,44 @@
         <br /><br />
         <pre><code class="prettyprint">&lt;div class="sidebar"&gt;
   &lt;div class="title"&gt;
-    &lt;img src="https://fluid.jottocraft.com/icon.svg"&gt;
+    &lt;img src="https://fluid-old.jottocraft.com/icon.svg"&gt;
     &lt;h4&gt;My Site&lt;/h4&gt;
   &lt;/div&gt;
 
   &lt;div class="items"&gt;
 
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 1&lt;/span&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 1&lt;/span&gt;
     &lt;/div&gt;
 
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 2&lt;/span&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 2&lt;/span&gt;
     &lt;/div&gt;
 
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 3&lt;/span&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 3&lt;/span&gt;
     &lt;/div&gt;
 
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 4&lt;/span&gt;
+      &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Sample item 4&lt;/span&gt;
     &lt;/div&gt;
 
     &lt;div id="sampleGroup" class="group"&gt;
       &lt;div class="name item"&gt;
-        &lt;i class="material-icons"&gt;&lt;/i&gt; &lt;span class="label"&gt;Sample group&lt;/span&gt;
+        &lt;i class="fluid-icon"&gt;&lt;/i&gt; &lt;span class="label"&gt;Sample group&lt;/span&gt;
       &lt;/div&gt;
 
       &lt;div class="items"&gt;
         &lt;div class="item"&gt;
-          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 1&lt;/span&gt;
+          &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 1&lt;/span&gt;
         &lt;/div&gt;
 
         &lt;div class="item"&gt;
-          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 2&lt;/span&gt;
+          &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 2&lt;/span&gt;
         &lt;/div&gt;
 
         &lt;div class="item"&gt;
-          &lt;i class="material-icons"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 3&lt;/span&gt;
+          &lt;i class="fluid-icon"&gt;star&lt;/i&gt; &lt;span class="label"&gt;Group item 3&lt;/span&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -791,11 +791,11 @@
   &lt;/div&gt;
 
   &lt;div class="collapse"&gt;
-    &lt;i class="material-icons"&gt;&lt;/i&gt;
+    &lt;i class="fluid-icon"&gt;&lt;/i&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">web</i>Screens</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">web</i>Screens</h5>
         <p>Fluid UI Screens is a flexible way to manage multiple different screens on the same page. You can define a
           function that will load each screen, then use Fluid UI to change screens. Fluid UI will save the screen in
           the URL so that it will show the screen on reload and so the user can bookmark the screen. Fluid UI screens
@@ -878,7 +878,7 @@ fluid.screen(); //load initial screen</code></pre>
           fluid.screen();
         </script>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">border_left</i>Side
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">border_left</i>Side
           navigation</h5>
         <p>Use side navigation for cards with a lot of content. Cards using side navigation must have a fixed height.
         </p>
@@ -890,16 +890,16 @@ fluid.screen(); //load initial screen</code></pre>
               <p>by jottocraft</p>
             </div>
             <div class="item active">
-              <i class="material-icons">settings</i> Controls
+              <i class="fluid-icon">settings</i> Controls
             </div>
             <div class="item">
-              <i class="material-icons">folder</i> Chips
+              <i class="fluid-icon">folder</i> Chips
             </div>
             <div class="item">
-              <i class="material-icons">devices</i> Devices
+              <i class="fluid-icon">devices</i> Devices
             </div>
             <div class="item">
-              <i class="material-icons">info</i> About
+              <i class="fluid-icon">info</i> About
             </div>
           </div>
           <div class="content">
@@ -914,16 +914,16 @@ fluid.screen(); //load initial screen</code></pre>
       &lt;p&gt;by jottocraft&lt;/p&gt;
     &lt;/div&gt;
     &lt;div class="item active"&gt;
-      &lt;i class="material-icons"&gt;settings&lt;/i&gt; Controls
+      &lt;i class="fluid-icon"&gt;settings&lt;/i&gt; Controls
     &lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;folder&lt;/i&gt; Chips
+      &lt;i class="fluid-icon"&gt;folder&lt;/i&gt; Chips
     &lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;devices&lt;/i&gt; Devices
+      &lt;i class="fluid-icon"&gt;devices&lt;/i&gt; Devices
     &lt;/div&gt;
     &lt;div class="item"&gt;
-      &lt;i class="material-icons"&gt;info&lt;/i&gt; About
+      &lt;i class="fluid-icon"&gt;info&lt;/i&gt; About
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="content"&gt;
@@ -941,12 +941,12 @@ fluid.screen(); //load initial screen</code></pre>
     <a name="cards"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">layers</i>
+        <i class="fluid-icon">layers</i>
         <h2>Groups</h2>
       </div>
       <div class="body">
         <a name="cards-blocks"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">dashboard</i>Blocks
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">dashboard</i>Blocks
         </h5>
         <p>Blocks are a new way of displaying and organizing information in Fluid UI v5. There are several different
           block types that should be used depending on the information being displayed. Blocks can be displayed without
@@ -956,31 +956,31 @@ fluid.screen(); //load initial screen</code></pre>
         <div style="--size: 200px;" class="grid flex">
           <div class="block status">
             <h2 class="main">12</h2>
-            <h5 class="bottom"><i class="material-icons">folder</i> Folders</h5>
+            <h5 class="bottom"><i class="fluid-icon">folder</i> Folders</h5>
           </div>
           <div class="block status card">
             <h2 class="main">251</h2>
-            <h5 class="bottom"><i class="material-icons">insert_drive_file</i> Files</h5>
+            <h5 class="bottom"><i class="fluid-icon">insert_drive_file</i> Files</h5>
           </div>
           <div class="block status">
             <h2 class="main">4</h2>
-            <h5 class="bottom"><i class="material-icons">people</i> Users</h5>
+            <h5 class="bottom"><i class="fluid-icon">people</i> Users</h5>
           </div>
           <div class="block status clickable">
             <h2 class="main">8</h2>
-            <h5 class="bottom"><i class="material-icons">download</i> Downloads</h5>
+            <h5 class="bottom"><i class="fluid-icon">download</i> Downloads</h5>
           </div>
           <div class="block status">
             <h2 class="main">6</h2>
-            <h5 class="bottom"><i class="material-icons">cloud_upload</i> Uploads</h5>
+            <h5 class="bottom"><i class="fluid-icon">cloud_upload</i> Uploads</h5>
           </div>
           <div class="block status">
-            <i class="main material-icons">check</i>
+            <i class="main fluid-icon">check</i>
             <h5 class="bottom">No errors</h5>
           </div>
           <div class="block status">
             <h2 class="main">60%</h2>
-            <h5 class="bottom"><i class="material-icons">hourglass_empty</i> Loading...</h5>
+            <h5 class="bottom"><i class="fluid-icon">hourglass_empty</i> Loading...</h5>
           </div>
         </div>
         <br /><br /><br />
@@ -988,9 +988,9 @@ fluid.screen(); //load initial screen</code></pre>
         <div style="--size: 400px;" class="grid flex">
           <div class="block info">
             <div class="status">
-              <i class="main material-icons">folder</i>
-              <i class="info material-icons">people</i>
-              <i class="info material-icons">star</i>
+              <i class="main fluid-icon">folder</i>
+              <i class="info fluid-icon">people</i>
+              <i class="info fluid-icon">star</i>
             </div>
             <div class="content">
               <h4>Secret Folder</h4>
@@ -1001,11 +1001,11 @@ fluid.screen(); //load initial screen</code></pre>
           </div>
           <div class="block info card">
             <div class="status">
-              <img src="https://fluid.jottocraft.com/logo.png" class="main" />
+              <img src="https://fluid-old.jottocraft.com/logo.png" class="main" />
             </div>
             <div class="content">
               <h4>Fluid UI</h4>
-              <p>Latest version: v5.0.0-beta1</p>
+              <p>Latest version: v5.0.0-beta.4</p>
             </div>
           </div>
           <div class="block info clickable">
@@ -1016,7 +1016,7 @@ fluid.screen(); //load initial screen</code></pre>
           </div>
           <div class="block info">
             <div class="status">
-              <i class="main material-icons">folder_shared</i>
+              <i class="main fluid-icon">folder_shared</i>
             </div>
             <div class="content">
               <h4>New files shared</h4>
@@ -1026,7 +1026,7 @@ fluid.screen(); //load initial screen</code></pre>
           </div>
           <div style="max-width: 400px; max-height: 200px;" class="block info">
             <div class="status">
-              <i class="main material-icons">text_fields</i>
+              <i class="main fluid-icon">text_fields</i>
             </div>
             <div class="content">
               <h4>A lot of text</h4>
@@ -1046,35 +1046,35 @@ fluid.screen(); //load initial screen</code></pre>
         <div style="--size: 340px;" class="grid flex">
           <div class="block image">
             <div class="status">
-              <div style="--image: url('https://i.imgur.com/0Co2HJ1.jpg');" class="image"></div>
-              <i class="acrylicMaterial material-icons">attach_money</i>
+              <div style="--image: url('/logo.png');" class="image"></div>
+              <i class="acrylicMaterial fluid-icon">attach_money</i>
             </div>
             <div class="content">
-              <h4>Expensive House</h4>
-              <p>This could be a use case for blocks in Fluid UI</p>
+              <h4>Block Title</h4>
+              <p>Block description text</p>
               <button class="small">Buy</button>
               <button class="small">Ignore</button>
             </div>
           </div>
           <div class="block image card">
             <div class="status">
-              <div style="--image: url('https://i.imgur.com/0Co2HJ1.jpg');" class="image"></div>
-              <i class="acrylicMaterial material-icons">layers</i>
+              <div style="--image: url('/logo.png');" class="image"></div>
+              <i class="acrylicMaterial fluid-icon">layers</i>
             </div>
             <div class="content">
-              <h4>Expensive House</h4>
-              <p>This could be a use case for blocks in Fluid UI</p>
+              <h4>Block Title</h4>
+              <p>Block description text</p>
               <button class="small">Buy</button>
               <button class="small">Ignore</button>
             </div>
           </div>
           <div class="block image clickable">
             <div class="status">
-              <div style="--image: url('https://i.imgur.com/0Co2HJ1.jpg');" class="image"></div>
-              <i class="acrylicMaterial material-icons">mouse</i>
+              <div style="--image: url('/logo.png');" class="image"></div>
+              <i class="acrylicMaterial fluid-icon">mouse</i>
             </div>
             <div class="content">
-              <h4>Expensive House</h4>
+              <h4>Block Title</h4>
               <p>Clickable blocks can't have buttons in them</p>
             </div>
           </div>
@@ -1082,7 +1082,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <br /><br /><br /><br />
         <a name="cards-cards"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">layers</i>Cards</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">layers</i>Cards</h5>
         <p>Note that cards do not work on mobile and can cause lag
           if you use too many of them. Avoid putting a card in a card.</p>
         <pre>
@@ -1119,29 +1119,26 @@ fluid.screen(); //load initial screen</code></pre>
         </code>
         <br /><br />
         <div class="row">
-          <button onclick="fluid.cards('#card')" class="btn ">Card demo</button>
           <button onclick="fluid.cards('#focuscard')" class="btn ">Focused card demo</button>
         </div>
-        <br />
-        <div id="card" class="card close">
+        <div id="focuscard" class="focus card close">
           <h3>This is a card!</h3>
           <br />
           Hello World!
           <br /><br />
           <button class="btn " onclick="fluid.cards.close('#card');">Go away</button>
         </div>
-        <br /><br /><br />
       </div>
     </div>
     <br /><br />
     <a name="layout"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">view_quilt</i>
+        <i class="fluid-icon">view_quilt</i>
         <h2>Layout</h2>
       </div>
       <div class="body">
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">grid_on</i>Responsive
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">grid_on</i>Responsive
           Grids</h5>
         <p>Fluid UI includes 3 different responsive grids for different use cases. They all support an unlimited number
           of items and have 10px of space between items.</p>
@@ -1217,7 +1214,13 @@ fluid.screen(); //load initial screen</code></pre>
 &lt;/div&gt;</code></pre>
         <br /><br />
         <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
-            class="material-icons">hourglass_empty</i>Progress bars</h5>
+          class="fluid-icon">format_size</i>Typography</h5>
+      <p>Normal text with a <a href="#">link</a></p>
+      <p style="color: var(--lightText);">Slightly less important text</p>
+      <p style="color: var(--secText);">Secondary text</p>
+      <br /><br />
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;"
+            class="fluid-icon">hourglass_empty</i>Progress bars</h5>
         <p>Indeterminate progress bar</p>
         <div class="progress">
           <div class="indeterminate"></div>
@@ -1235,7 +1238,7 @@ fluid.screen(); //load initial screen</code></pre>
   &lt;div style="width: 50%;" class="bar"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">blur_on</i>Shimmer</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">blur_on</i>Shimmer</h5>
         <p>Shimmer can be added to an element by adding the "shimmer" class or by adding the "shimmerParent" class to
           its parent.</p>
         <div class="shimmerParent">
@@ -1249,14 +1252,14 @@ fluid.screen(); //load initial screen</code></pre>
   &lt;button&gt;Sample button&lt;/button&gt;     
 &lt;/div&gt;</code></pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">subject</i>Loading
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">subject</i>Loading
           screen</h5>
         <p>Fluid UI includes a loading screen layout</p>
         <button onclick="fluid.splash('#loadingDemo')">Show</button>
         <pre><code class="prettyprint">&lt;div class="splashScreen loadingScreen"&gt;
 
   &lt;div&gt;
-    &lt;img src="https://fluid.jottocraft.com/icon.png" /&gt;
+    &lt;img src="https://fluid-old.jottocraft.com/icon.png" /&gt;
     &lt;h1&gt;Fluid UI&lt;/h1&gt;
   &lt;/div&gt;
    
@@ -1265,7 +1268,7 @@ fluid.screen(); //load initial screen</code></pre>
 
 &lt;/div&gt;</code></pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">title</i>Header</h5>
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">title</i>Header</h5>
         <p>The header element is used for organizing site's main title, image, date, author, and other info at the top
           of the page. The example below has an image, but the header can be used without one. Each site should only
           have one header per page.</p>
@@ -1275,22 +1278,22 @@ fluid.screen(); //load initial screen</code></pre>
             <h1>Fluid UI</h1>
             <div>
               <p>
-                <i class="material-icons">person</i> <span>By jottocraft</span>
+                <i class="fluid-icon">person</i> <span>By jottocraft</span>
               </p>
               <p>
-                <i class="material-icons">event</i> <span>7/26/2020</span>
+                <i class="fluid-icon">event</i> <span>7/26/2020</span>
               </p>
             </div>
             <div class="btns">
-              <button class="btn active"><i class="material-icons">tab</i> Tab 1</button>
-              <button class="btn"><i class="material-icons">tab</i> Tab 2</button>
-              <button class="btn"><i class="material-icons">tab</i> Tab 3</button>
-              <button class="btn"><i class="material-icons">tab</i> Tab 4</button>
+              <button class="btn active"><i class="fluid-icon">tab</i> Tab 1</button>
+              <button class="btn"><i class="fluid-icon">tab</i> Tab 2</button>
+              <button class="btn"><i class="fluid-icon">tab</i> Tab 3</button>
+              <button class="btn"><i class="fluid-icon">tab</i> Tab 4</button>
             </div>
           </div>
         </div>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">table_view</i>Tables
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">table_view</i>Tables
         </h5>
         <p>Fluid UI includes basic styling for HTML tables and support for the active class on table rows</p>
         <table class="table">
@@ -1341,12 +1344,12 @@ fluid.screen(); //load initial screen</code></pre>
     <a name="alerts"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">notifications</i>
+        <i class="fluid-icon">notifications</i>
         <h2>Alerts</h2>
       </div>
       <div class="body">
         <a name="splash-splash"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">fullscreen</i>Splash
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">fullscreen</i>Splash
           Screens</h5>
         <p>Show your div as a splash screen with fluid.splash()</p>
         <code class="prettyprint">&lt;div class=&quot;splashScreen&quot;&gt;</code>
@@ -1357,7 +1360,7 @@ fluid.screen(); //load initial screen</code></pre>
         <br /><br />
         <a name="splash-alerts"></a>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">info</i>Alert Components
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">info</i>Alert Components
         </h5>
         <p>Use alert components to show info, warning, error, or success messages as a component. You can also omit the
           alert type to show a generic alert.</p>
@@ -1365,7 +1368,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <div class="alert">
           <div class="header">
-            <h5><i class="material-icons">info</i> Generic alert</h5>
+            <h5><i class="fluid-icon">info</i> Generic alert</h5>
           </div>
 
           <p>This is a generic alert</p>
@@ -1373,7 +1376,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <div class="alert info">
           <div class="header">
-            <h5><i class="material-icons">info</i> Important info</h5>
+            <h5><i class="fluid-icon">info</i> Important info</h5>
           </div>
 
           <p>This is some important information</p>
@@ -1381,7 +1384,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <div class="alert warning">
           <div class="header">
-            <h5><i class="material-icons">warning</i> Warning message</h5>
+            <h5><i class="fluid-icon">warning</i> Warning message</h5>
           </div>
 
           <p>This is a warning message</p>
@@ -1389,7 +1392,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <div class="alert error">
           <div class="header">
-            <h5><i class="material-icons">error</i> Error message</h5>
+            <h5><i class="fluid-icon">error</i> Error message</h5>
           </div>
 
           <p>This is an error message</p>
@@ -1397,7 +1400,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <div class="alert success">
           <div class="header">
-            <h5><i class="material-icons">check</i> Success message</h5>
+            <h5><i class="fluid-icon">check</i> Success message</h5>
           </div>
 
           <p>This is a success message</p>
@@ -1406,7 +1409,7 @@ fluid.screen(); //load initial screen</code></pre>
         <pre><code class="prettyprint">&lt;!-- The alert type in the class can be omitted for a generic alert. The alert header is optional. --&gt;
 &lt;div class=&quot;alert {info|warning|error|success}&quot;&gt; 
   &lt;div class=&quot;header&quot;&gt; 
-    &lt;h5&gt;&lt;i class=&quot;material-icons&quot;&gt;info&lt;/i&gt; Generic alert&lt;/h5&gt; 
+    &lt;h5&gt;&lt;i class=&quot;fluid-icon&quot;&gt;info&lt;/i&gt; Generic alert&lt;/h5&gt; 
   &lt;/div&gt; 
   
   &lt;p&gt;This is a generic alert!&lt;/p&gt; 
@@ -1414,7 +1417,7 @@ fluid.screen(); //load initial screen</code></pre>
 
         <br /><br />
         <a name="splash-alerts"></a>
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">notifications</i>Alert
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">notifications</i>Alert
           Popups
         </h5>
         <p>Fluid UI has native alerts and also supports <a href="https://sweetalert.js.org/">Sweetalert</a>. The check,
@@ -1439,11 +1442,11 @@ fluid.screen(); //load initial screen</code></pre>
     <a name="install"></a>
     <div class="section">
       <div class="header">
-        <i class="material-icons">code</i>
+        <i class="fluid-icon">code</i>
         <h2>Install</h2>
       </div>
       <div class="body">
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">public</i>Browser
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">public</i>Browser
           Requirements</h5>
         <p>Fluid UI is designed for small independently created websites. Fluid UI is not designed for compatibility and
           accessibility.</p>
@@ -1460,16 +1463,16 @@ fluid.screen(); //load initial screen</code></pre>
           <li>Chromium-based browsers work best</li>
         </ul>
         </p>
-        <br /><br />
-        <div style="text-align:left; padding: 20px 30px;" class="card">
-          <h4 style="font-weight: bold; letter-spacing: 0.5px;" class="relver">Get the latest release</h4>
-          <p>Fluid UI is distributed on GitHub Releases. </p>
-          <br />
-          <button onclick="window.open('https://github.com/jottocraft/fluid/releases/latest')" class="outline"><i
-              class="material-icons">download</i> Get the latest release</button>
+        <br />
+        <div class="alert warning"> 
+          <div class="header"> 
+            <h5><i class="fluid-icon">warning</i> Fluid UI is deprecated</h5> 
+          </div> 
+          
+          <p>Fluid UI should not be used in any new projects. Read the deprecation notice at <a href="https://fluid-old.jottocraft.com">fluid-old.jottocraft.com</a>.</p> 
         </div>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">build</i>Install Fluid
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">build</i>Install Fluid
           UI</h5>
         <p>Click the download button on the card above to download Fluid UI. Code below assumes Fluid UI is in the
           /fluid directory</p>
@@ -1483,14 +1486,14 @@ fluid.screen(); //load initial screen</code></pre>
         <pre>
           <code class="prettyprint">&lt;!-- Fluid UI --&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&#x3C;meta name=&#x22;color-scheme&#x22; content=&#x22;light dark&#x22;&#x3E;
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons+Extended&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/fluid/fluid.css&quot; media=&quot;screen,projection&quot;/&gt;
-&lt;script async src=&quot;https://cdn.jottocraft.com/fluid/assets/tinycolor.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;/fluid/fluid.js&quot;&gt;&lt;/script&gt;</code>
         </pre>
         <br /><br />
-        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="material-icons">cloud</i>Fluid UI CDN
+        <h5><i style="margin: -5px 5px 0px 0px; vertical-align: middle;" class="fluid-icon">cloud</i>Fluid UI CDN
         </h5>
         <p>The Fluid UI CDN is for testing sites with the latest version of Fluid UI. The Fluid UI CDN may serve a
           version of Fluid UI that is not stable and can update without notice. Use the Fluid UI CDN at
@@ -1505,9 +1508,9 @@ fluid.screen(); //load initial screen</code></pre>
         <pre>
           <code class="prettyprint">&lt;!-- Fluid UI --&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+&#x3C;meta name=&#x22;color-scheme&#x22; content=&#x22;light dark&#x22;&#x3E;
 &lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons+Extended&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://cdn.jottocraft.com/fluid/v5.min.css&quot; media=&quot;screen,projection&quot;/&gt;
-&lt;script async src=&quot;https://cdn.jottocraft.com/fluid/assets/tinycolor.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://cdn.jottocraft.com/fluid/v5.min.js&quot;&gt;&lt;/script&gt;</code>
         </pre>
@@ -1519,10 +1522,10 @@ fluid.screen(); //load initial screen</code></pre>
       <img style="height: 45px; margin-right: 20px; vertical-align: middle;"
         src="https://cdn.jottocraft.com/images/footerImage.png" />
       <h5 style="display: inline-block; vertical-align: middle;">jottocraft</h5>
-      <p>(c) jottocraft 2017-2020. All rights reserved.&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid">source
-          code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid/blob/master/LICENSE">license</a></p>
+      <p>Made by jottocraft 2017-2021&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid-old">source
+          code</a>&nbsp;&nbsp;<a href="https://github.com/jottocraft/fluid-old/blob/master/LICENSE">license</a></p>
       <br /><br />
-      <p>Prerelease flight 07262020</p>
+      <p>Deprecated 2021/04/10</p>
     </div>
     <br /><br />
   </div>
@@ -1542,7 +1545,7 @@ fluid.screen(); //load initial screen</code></pre>
           </div>
         </div>
         <div class="right footer">
-          <a href="https://github.com/jottocraft/fluid/releases" class="btn outline">Releases</a>
+          <a href="https://github.com/jottocraft/fluid-old/releases" class="btn outline">Releases</a>
           <a onclick="fluid.cards.close('#vmodal')" class="btn">Ok</a>
         </div>
       </div>
@@ -1556,7 +1559,7 @@ fluid.screen(); //load initial screen</code></pre>
     </div>
     <div id="loadingDemo" class="splashScreen loadingScreen">
       <div>
-        <img src="https://fluid.jottocraft.com/icon.png" />
+        <img src="https://fluid-old.jottocraft.com/icon.png" />
         <h1>Fluid UI</h1>
       </div>
       <div class="progress">
